@@ -1,0 +1,210 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSplitRow: $CcContentRow {
+  styles [
+    "split-row",
+  ]
+
+  [content]
+  Box box {
+    hexpand: true;
+    homogeneous: true;
+    spacing: 3;
+
+    Box default_option_box {
+      accessible-role: radio;
+      orientation: vertical;
+      can-focus: true;
+      focusable: true;
+      receives-default: true;
+
+      accessibility {
+        labelled-by: default_option_title;
+        described-by: default_option_subtitle;
+      }
+
+      styles [
+        "activatable",
+        "card",
+      ]
+
+      EventControllerMotion {
+        enter => $on_option_focus_enter_cb(default_option_mask);
+        leave => $on_option_focus_leave_cb(default_option_mask);
+      }
+
+      GestureClick {
+        released => $on_option_released_cb(default_option_box);
+      }
+
+      Adw.Bin {
+        margin-top: 9;
+        margin-bottom: 9;
+        margin-start: 9;
+        margin-end: 9;
+
+        styles [
+          "background",
+          "frame",
+        ]
+
+        Picture default_option_picture {
+          hexpand: true;
+          halign: center;
+          margin-top: 6;
+          margin-bottom: 6;
+          margin-start: 6;
+          margin-end: 6;
+          height-request: 128;
+
+          paintable: $CcMaskPaintable default_option_mask {
+            follow-accent: true;
+          };
+        }
+      }
+
+      Box {
+        margin-start: 15;
+        margin-bottom: 9;
+
+        Adw.Bin default_checkbutton_image {
+          css-name: "radio";
+          can-target: false;
+          valign: center;
+          halign: center;
+        }
+
+        Box {
+          valign: center;
+          margin-start: 6;
+          orientation: vertical;
+
+          styles [
+            "title",
+          ]
+
+          Label default_option_title {
+            use-underline: true;
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.default-option-title;
+
+            styles [
+              "title",
+            ]
+          }
+
+          Label default_option_subtitle {
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.default-option-subtitle;
+
+            styles [
+              "subtitle",
+            ]
+          }
+        }
+      }
+    }
+
+    Box alternative_option_box {
+      accessible-role: radio;
+      orientation: vertical;
+      can-focus: true;
+      focusable: true;
+      receives-default: true;
+
+      accessibility {
+        labelled-by: alternative_option_title;
+        described-by: alternative_option_subtitle;
+      }
+
+      styles [
+        "activatable",
+        "card",
+      ]
+
+      EventControllerMotion {
+        enter => $on_option_focus_enter_cb(alternative_option_mask);
+        leave => $on_option_focus_leave_cb(alternative_option_mask);
+      }
+
+      GestureClick {
+        released => $on_option_released_cb(alternative_option_box);
+      }
+
+      Adw.Bin {
+        margin-top: 9;
+        margin-bottom: 9;
+        margin-start: 9;
+        margin-end: 9;
+
+        styles [
+          "background",
+          "frame",
+        ]
+
+        Picture alternative_option_picture {
+          hexpand: true;
+          halign: center;
+          margin-top: 6;
+          margin-bottom: 6;
+          margin-start: 6;
+          margin-end: 6;
+          height-request: 128;
+
+          paintable: $CcMaskPaintable alternative_option_mask {
+            follow-accent: true;
+          };
+        }
+      }
+
+      Box {
+        margin-start: 15;
+        margin-bottom: 9;
+
+        Adw.Bin alternative_checkbutton_image {
+          css-name: "radio";
+          can-target: false;
+          valign: center;
+        }
+
+        Box {
+          valign: center;
+          margin-start: 6;
+          orientation: vertical;
+
+          styles [
+            "title",
+          ]
+
+          Label alternative_option_title {
+            use-underline: true;
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.alternative-option-title;
+
+            styles [
+              "title",
+            ]
+          }
+
+          Label alternative_option_subtitle {
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.alternative-option-subtitle;
+
+            styles [
+              "subtitle",
+            ]
+          }
+        }
+      }
+    }
+  }
+}

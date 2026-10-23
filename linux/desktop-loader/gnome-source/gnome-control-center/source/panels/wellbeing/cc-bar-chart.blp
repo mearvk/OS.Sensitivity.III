@@ -1,0 +1,12 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2024 GNOME Foundation, Inc.
+ */
+using Gtk 4.0;
+
+template $CcBarChart: Widget {
+  focusable: true;
+  overflow: hidden;
+  activate-cursor-bar => $activate_cursor_bar_cb();
+  move-cursor => $move_cursor_cb();
+}

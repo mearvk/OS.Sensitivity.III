@@ -1,0 +1,171 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUaSeeingPage: Adw.NavigationPage {
+  title: _("Seeing");
+  tag: "seeing";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        ListBox {
+          selection-mode: none;
+
+          accessibility {
+            label: _("Screen Reader");
+          }
+
+          styles [
+            "boxed-list-separate",
+          ]
+
+          Adw.SwitchRow screen_reader_row {
+            title: _("Screen _Reader");
+            subtitle: _("The screen reader reads displayed text as you move the focus");
+            use-underline: true;
+          }
+
+          Adw.ButtonRow configure_screen_reader_row {
+            title: _("Co_nfigure");
+            use-underline: true;
+            sensitive: bind screen_reader_row.active;
+            activated => $configure_screen_reader_activated_cb(template);
+            end-icon-name: "external-link-symbolic";
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.SwitchRow high_contrast_row {
+          title: _("_High Contrast");
+          subtitle: _("Increase color contrast of foreground and background interface elements");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow status_shapes_row {
+          title: _("_On/Off Shapes");
+          subtitle: _("Use shapes to indicate state in addition to or instead of color");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow reduced_motion_row {
+          title: _("_Reduced Motion");
+          subtitle: _("Toggle reduced motion animations throughout the user interface");
+          use-underline: true;
+        }
+
+        $CcListRow text_size_row {
+          title: _("_Text Size");
+          use-underline: true;
+          show-arrow: true;
+          activated => $ua_text_size_row_activated_cb(template);
+        }
+
+        $CcListRow cursor_size_row {
+          title: _("_Cursor Size");
+          subtitle: _("Increase the size of the cursor");
+          activated => $ua_cursor_row_activated_cb(template);
+          show-arrow: true;
+        }
+
+        Adw.SwitchRow sound_keys_row {
+          title: _("_Sound Keys");
+          subtitle: _("Beep when Num Lock or Caps Lock are turned on or off");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow show_scrollbars_row {
+          title: _("Always Show Scroll_bars");
+          subtitle: _("Make scrollbars always visible");
+          use-underline: true;
+        }
+      }
+    };
+  };
+}
+
+Adw.Dialog text_size_dialog {
+  title: _("Text Size");
+  content-width: 500;
+  height-request: 360;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      [start]
+      Button {
+        label: _("Cancel");
+        clicked => $adw_dialog_close(text_size_dialog);
+      }
+
+      [end]
+      Button {
+        label: _("Apply");
+        clicked => $apply_text_size_changes(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Adw.PreferencesPage {
+      description: _("Use the slider to adjust the size of user interface text");
+      description-centered: true;
+
+      Adw.PreferencesGroup {
+        Adw.PreferencesRow {
+          activatable: false;
+
+          child: Box {
+            spacing: 10;
+
+            Label text_size_label_small {
+              /* Translators: Single letter next to the text size slider */
+              label: _("A");
+              margin-start: 20;
+            }
+
+            Scale text_size_scale {
+              margin-top: 10;
+              margin-bottom: 10;
+              hexpand: true;
+              round-digits: 2;
+
+              adjustment: Adjustment {
+                lower: 1.00;
+                upper: 2.00;
+                value: 1.00;
+                step-increment: 0.01;
+                page-increment: 0.05;
+              };
+            }
+
+            Label text_size_label_large {
+              label: _("A");
+              margin-end: 20;
+            }
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Label text_size_preview_label {
+          vexpand: true;
+          wrap: true;
+          label: _("Sample text");
+
+          styles [
+            "dim-label",
+          ]
+        }
+      }
+    };
+  };
+}

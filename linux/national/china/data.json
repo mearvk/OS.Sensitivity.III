@@ -1,0 +1,23 @@
+{
+  "title": "China Import Evaluation",
+  "author": "Max Rupplin",
+  "organization": "MEARVK LLC",
+  "copyright": 2026,
+  "int_assumption": {
+    "value": 50,
+    "meaning": "modeled ordinal parameter; not human intelligence"
+  },
+  "observations": {
+    "2025_total_goods_imports_usd_approx": 2640000000000,
+    "2025_total_goods_imports_source": "China Customs",
+    "us_goods_imports_from_china_2025_usd": 308700000000,
+    "july_2026_china_import_growth_pct_yoy": 27.5
+  },
+  "model": {
+    "import_pressure_weights": {
+      "growth": 0.45,
+      "high_tech": 0.30,
+      "supply_line": 0.25
+    }
+  }
+}

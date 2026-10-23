@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chinaImportEvaluation author="Max Rupplin" organization="MEARVK LLC" copyright="2026">
+  <observations>
+    <totalGoodsImportsUSD year="2025">2640000000000</totalGoodsImportsUSD>
+    <usGoodsImportsFromChinaUSD year="2025">308700000000</usGoodsImportsFromChinaUSD>
+    <importGrowthPercent year="2026" month="July">27.5</importGrowthPercent>
+  </observations>
+  <model intAssumption="50" intMeaning="modeled ordinal parameter, not human intelligence">
+    <weights growth="0.45" highTech="0.30" supplyLine="0.25"/>
+    <supplyLineScore>75</supplyLineScore>
+  </model>
+</chinaImportEvaluation>

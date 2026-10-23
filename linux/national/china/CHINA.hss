@@ -1,0 +1,20 @@
+# China Import Evaluation Specification
+
+Author: Max Rupplin
+Organization: MEARVK LLC
+Copyright: 2026
+
+## Scope
+Evaluate China's import economy, import growth, technology-related import pressure,
+and supply-line conditions.
+
+## INT
+`INT` is a modeled ordinal parameter used for sensitivity analysis. It is not a
+measurement of intelligence, IQ, nationality, ethnicity, or human worth.
+
+## Procedure
+1. Load observed trade values from `data.json`.
+2. Normalize import growth, technology exposure, and supply-line score.
+3. Apply weights 0.45 / 0.30 / 0.25.
+4. Preserve source observations separately from modeled outputs.
+5. Emit readable and machine-readable results.

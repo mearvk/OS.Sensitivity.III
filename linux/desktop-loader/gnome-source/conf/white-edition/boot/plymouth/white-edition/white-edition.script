@@ -1,0 +1,109 @@
+// Ubuntu White Edition — Plymouth boot splash (script module)
+//
+// White field, centered logo mark, and a thin Ubuntu-red progress bar.
+// Colors match ../../../theme/white-edition.css:
+//   surface #ffffff, text #303030, muted #666666, edge #dddddd, red #e95420
+//
+// The single stationary upper-left key light of the White Edition visual system
+// (../../../theme/lighting.conf) is honored by keeping the mark's contact shadow
+// below-and-right and by not animating any light source.
+
+// ---- Palette (0..1 float components) ----
+fun rgb(r, g, b) { local.c = []; c.r = r/255; c.g = g/255; c.b = b/255; return c; }
+surface    = rgb(255, 255, 255);   // #ffffff
+text       = rgb(48, 48, 48);      // #303030
+muted      = rgb(102, 102, 102);   // #666666
+edge       = rgb(221, 221, 221);   // #dddddd
+accent     = rgb(233, 84, 32);     // #e95420
+
+// ---- Background: fill the screen white ----
+Window.SetBackgroundTopColor(surface.r, surface.g, surface.b);
+Window.SetBackgroundBottomColor(surface.r, surface.g, surface.b);
+
+screen_width  = Window.GetWidth();
+screen_height = Window.GetHeight();
+
+// ---- Logo mark (optional image; falls back to a text mark) ----
+// The installer places logo.png (the White Edition mark) alongside this script.
+// If it is absent, a typographic mark is drawn instead so the splash still works.
+logo.image  = Image("logo.png");
+logo.sprite = Sprite();
+if (logo.image) {
+    logo.sprite.SetImage(logo.image);
+    logo.x = (screen_width  - logo.image.GetWidth())  / 2;
+    logo.y = (screen_height - logo.image.GetHeight()) / 2 - 40;
+    logo.sprite.SetPosition(logo.x, logo.y, 1);
+} else {
+    logo.text   = "Ubuntu White Edition";
+    logo.mark   = Image.Text(logo.text, text.r, text.g, text.b, 1, "Sans Bold 28");
+    logo.sprite.SetImage(logo.mark);
+    logo.x = (screen_width  - logo.mark.GetWidth())  / 2;
+    logo.y = (screen_height - logo.mark.GetHeight()) / 2 - 40;
+    logo.sprite.SetPosition(logo.x, logo.y, 1);
+}
+
+// ---- Progress bar geometry ----
+bar.width  = screen_width * 0.28;
+bar.height = 4;
+bar.x = (screen_width - bar.width) / 2;
+bar.y = screen_height * 0.62;
+
+// Track (neutral edge gray).
+bar.track_image  = Image.Text("", 0, 0, 0);   // placeholder; drawn as rectangles below
+progress.fraction = 0;
+
+// Plymouth's script module draws filled rectangles via 1x1 images scaled to size.
+fun solid_sprite(color, w, h, x, y, z) {
+    local.img = Image("").Scale(1, 1);          // 1x1 canvas
+    local.s = Sprite();
+    // Image.Text with a full block glyph gives us a colored pixel we can scale.
+    local.px = Image.Text("\u2588", color.r, color.g, color.b, 1, "Sans 1");
+    local.s.SetImage(local.px.Scale(w, h));
+    local.s.SetPosition(x, y, z);
+    return local.s;
+}
+
+track.sprite = solid_sprite(edge,   bar.width, bar.height, bar.x, bar.y, 2);
+fill.sprite  = solid_sprite(accent, 1,         bar.height, bar.x, bar.y, 3);
+
+// ---- Boot progress callback ----
+fun on_boot_progress(duration, progress) {
+    progress.fraction = progress;
+    if (progress.fraction < 0) progress.fraction = 0;
+    if (progress.fraction > 1) progress.fraction = 1;
+    fill.sprite.SetImage(
+        Image.Text("\u2588", accent.r, accent.g, accent.b, 1, "Sans 1")
+             .Scale(Math.Int(bar.width * progress.fraction) + 1, bar.height));
+    fill.sprite.SetPosition(bar.x, bar.y, 3);
+}
+Plymouth.SetBootProgressFunction(on_boot_progress);
+
+// ---- Status / stage message (muted gray, under the bar) ----
+message.sprite = Sprite();
+fun on_message(text) {
+    message.image = Image.Text(text, muted.r, muted.g, muted.b, 1, "Sans 11");
+    message.sprite.SetImage(message.image);
+    message.sprite.SetPosition(
+        (screen_width - message.image.GetWidth()) / 2,
+        bar.y + 18, 4);
+}
+Plymouth.SetMessageFunction(on_message);
+
+// ---- Password prompt (for encrypted-disk boot), kept white-skinned ----
+fun on_display_password(prompt, bullets) {
+    entry.image  = Image.Text(prompt + "  " + bullets, text.r, text.g, text.b, 1, "Sans 14");
+    entry.sprite = Sprite(entry.image);
+    entry.sprite.SetPosition(
+        (screen_width - entry.image.GetWidth()) / 2,
+        bar.y + 40, 5);
+}
+Plymouth.SetDisplayPasswordFunction(on_display_password);
+
+// ---- Quit: fade the mark out cleanly ----
+fun on_quit() {
+    logo.sprite.SetOpacity(0);
+    track.sprite.SetOpacity(0);
+    fill.sprite.SetOpacity(0);
+    message.sprite.SetOpacity(0);
+}
+Plymouth.SetQuitFunction(on_quit);

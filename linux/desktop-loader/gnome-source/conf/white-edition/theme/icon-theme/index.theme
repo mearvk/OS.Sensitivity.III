@@ -1,0 +1,23 @@
+[Icon Theme]
+Name=Ubuntu-White
+Comment=Ubuntu White Edition desktop icon theme
+Inherits=hicolor
+Directories=scalable/places,scalable/apps,scalable/actions
+
+[scalable/places]
+Size=48
+MinSize=16
+MaxSize=256
+Type=Scalable
+
+[scalable/apps]
+Size=48
+MinSize=16
+MaxSize=256
+Type=Scalable
+
+[scalable/actions]
+Size=48
+MinSize=16
+MaxSize=256
+Type=Scalable

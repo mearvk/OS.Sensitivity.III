@@ -1,0 +1,36 @@
+# Ubuntu White Edition — GRUB defaults drop-in
+#
+# Installed to /etc/default/grub.d/05_white_edition in the target root. These
+# settings make the White Edition GRUB theme render and select the White Edition
+# entry by default. They are sourced by Ubuntu's /etc/default/grub mechanism, so
+# they override the stock defaults without editing the main grub file.
+#
+# After installing this file the build host must run `update-grub` (or
+# grub-mkconfig -o /boot/grub/grub.cfg) inside the target root so the settings
+# take effect in the generated grub.cfg.
+
+# Boot the first (White Edition) entry by default.
+GRUB_DEFAULT=0
+
+# Show the menu briefly so the White Edition presentation is visible, but do not
+# stall an unattended boot.
+GRUB_TIMEOUT=5
+GRUB_TIMEOUT_STYLE=menu
+
+# Load the White Edition graphical theme. The installer copies the theme to
+# /boot/grub/themes/white-edition/ in the target root.
+GRUB_THEME=/boot/grub/themes/white-edition/theme.txt
+
+# Ensure a graphical mode so the theme renders instead of falling back to the
+# plain text menu. 'auto' lets GRUB pick the best available mode; the payload is
+# kept so the graphical framebuffer carries into the kernel/Plymouth handoff.
+GRUB_GFXMODE=auto
+GRUB_GFXPAYLOAD_LINUX=keep
+
+# White Edition boots quietly into the Plymouth splash. 'splash' activates
+# Plymouth; the White Edition Plymouth theme supplies the actual splash.
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+
+# Do not show a distracting background image behind the themed menu; the theme
+# paints a solid white desktop-color itself.
+GRUB_BACKGROUND=""

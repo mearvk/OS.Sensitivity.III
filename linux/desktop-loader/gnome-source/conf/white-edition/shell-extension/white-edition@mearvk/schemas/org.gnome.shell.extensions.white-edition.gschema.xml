@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <enum id="org.gnome.shell.extensions.white-edition.start-menu-alignment">
+    <value nick="left" value="0"/>
+    <value nick="center" value="1"/>
+    <value nick="right" value="2"/>
+  </enum>
+
+  <enum id="org.gnome.shell.extensions.white-edition.start-button-logo">
+    <value nick="circle-of-friends" value="0"/>
+    <value nick="mono-accent" value="1"/>
+    <value nick="focus-ring" value="2"/>
+  </enum>
+
+  <schema id="org.gnome.shell.extensions.white-edition"
+          path="/org/gnome/shell/extensions/white-edition/">
+    <key name="start-menu-alignment"
+         enum="org.gnome.shell.extensions.white-edition.start-menu-alignment">
+      <default>'left'</default>
+      <summary>Start menu popup alignment</summary>
+      <description>Horizontal anchoring of the Start menu popup. The Start button itself always stays at the left of the panel. Only the popup moves: left opens near the button, center opens over the primary monitor work area, right opens against the right edge.</description>
+    </key>
+
+    <key name="start-button-logo"
+         enum="org.gnome.shell.extensions.white-edition.start-button-logo">
+      <default>'circle-of-friends'</default>
+      <summary>Start button logo</summary>
+      <description>Which Ubuntu-themed logo is drawn on the fixed left-of-panel Start button. circle-of-friends is an accent mark on a light chip, mono-accent is a restrained monochrome glyph with an accent dot, and focus-ring is an outline mark with an accent focus ring.</description>
+    </key>
+  </schema>
+</schemalist>

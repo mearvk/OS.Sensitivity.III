@@ -1,0 +1,369 @@
+# Lao translation for glib-networking.
+# Copyright (C) 2025 glib-networking's COPYRIGHT HOLDER
+# This file is distributed under the same license as the glib-networking package.
+# bone NI <bounkirdni@gmail.com>,  2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glib-networking master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/glib-networking/issues\n"
+"POT-Creation-Date: 2025-09-10 15:09+0000\n"
+"PO-Revision-Date: 2025-09-10 15:09+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Lao <lo@li.org>\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: proxy/libproxy/glibproxyresolver.c:165
+msgid "Proxy resolver internal error."
+msgstr "ຂໍ້ຜິດພາດພາຍໃນຂອງໂຕແກ້ໄຂ Proxy."
+
+#: tls/base/gtlsconnection-base.c:616 tls/base/gtlsinputstream.c:78
+#: tls/base/gtlsinputstream.c:141 tls/base/gtlsoutputstream.c:78
+#: tls/base/gtlsoutputstream.c:143
+msgid "Connection is closed"
+msgstr "ການເຊື່ອມຕໍ່ຖືກປິດແລ້ວ"
+
+#. Cannot perform a blocking operation during a handshake on the
+#. * same thread that triggered the handshake. The only way this can
+#. * occur is if the application is doing something weird in its
+#. * accept-certificate callback. Allowing a blocking op would stall
+#. * the handshake (forever, if there's no timeout). Even a close
+#. * op would deadlock here.
+#.
+#: tls/base/gtlsconnection-base.c:690
+msgid "Cannot perform blocking operation during TLS handshake"
+msgstr "ບໍ່ສາມາດດຳເນີນການປະຕິບັດງານແບບຂັດຂວາງໃນລະຫວ່າງການຈັບມື TLS ໄດ້"
+
+#: tls/base/gtlsconnection-base.c:755 tls/base/gtlsconnection-base.c:1303
+#: tls/openssl/gtlsconnection-openssl.c:373
+msgid "Socket I/O timed out"
+msgstr "Socket I/O ໝົດເວລາ"
+
+#: tls/base/gtlsconnection-base.c:929
+msgid "Server required TLS certificate"
+msgstr "ເຊີບເວີຕ້ອງການໃບຢັ້ງຢືນ TLS"
+
+#: tls/base/gtlsconnection-base.c:1519
+#, c-format
+msgid "Handshake is not finished, no channel binding information yet"
+msgstr "ການຈັບມືຍັງບໍ່ສຳເລັດ, ຍັງບໍ່ມີຂໍ້ມູນການຜູກຊ່ອງສັນຍານເທື່ອ"
+
+#: tls/base/gtlsconnection-base.c:1598
+msgid "Peer does not support safe renegotiation"
+msgstr "ຄູ່ສື່ສານບໍ່ຮອງຮັບການຕໍ່ຮອງໃໝ່ທີ່ປອດໄພ"
+
+#: tls/base/gtlsconnection-base.c:1746 tls/gnutls/gtlsconnection-gnutls.c:490
+#: tls/openssl/gtlsconnection-openssl.c:209
+#: tls/openssl/gtlsconnection-openssl.c:852
+msgid "Unacceptable TLS certificate"
+msgstr "ໃບຢັ້ງຢືນ TLS ບໍ່ເປັນທີ່ຍອມຮັບ"
+
+#: tls/base/gtlsconnection-base.c:2218
+#, c-format
+msgid "Receive flags are not supported"
+msgstr "ບໍ່ຮອງຮັບທຸງການຮັບ"
+
+#: tls/base/gtlsconnection-base.c:2365
+#, c-format
+msgid "Send flags are not supported"
+msgstr "ບໍ່ຮອງຮັບທຸງການສົ່ງ"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:297
+#: tls/openssl/gtlscertificate-openssl.c:318
+#, c-format
+msgid "Failed to import PKCS #12: %s"
+msgstr "ລົ້ມເຫຼວໃນການນຳເຂົ້າ PKCS #12: %s"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:520
+#: tls/openssl/gtlscertificate-openssl.c:537
+#, c-format
+msgid "Could not parse DER certificate: %s"
+msgstr "ບໍ່ສາມາດວິເຄາະໃບຢັ້ງຢືນ DER ໄດ້: %s"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:541
+#: tls/openssl/gtlscertificate-openssl.c:561
+#, c-format
+msgid "Could not parse PEM certificate: %s"
+msgstr "ບໍ່ສາມາດວິເຄາະໃບຢັ້ງຢືນ PEM ໄດ້: %s"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:564
+#: tls/openssl/gtlscertificate-openssl.c:585
+#, c-format
+msgid "Could not parse DER private key: %s"
+msgstr "ບໍ່ສາມາດວິເຄາະຄີສ່ວນຕົວ DER ໄດ້: %s"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:587
+#: tls/openssl/gtlscertificate-openssl.c:609
+#, c-format
+msgid "Could not parse PEM private key: %s"
+msgstr "ບໍ່ສາມາດວິເຄາະຄີສ່ວນຕົວ PEM ໄດ້: %s"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:613
+#, c-format
+msgid "Could not import PKCS #11 certificate URI: %s"
+msgstr "ບໍ່ສາມາດນຳເຂົ້າ URI ໃບຢັ້ງຢືນ PKCS #11 ໄດ້: %s"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:657
+#: tls/openssl/gtlscertificate-openssl.c:647
+msgid "No certificate data provided"
+msgstr "ບໍ່ມີຂໍ້ມູນໃບຢັ້ງຢືນໃຫ້"
+
+#: tls/gnutls/gtlscertificate-gnutls.c:981
+#: tls/gnutls/gtlsconnection-gnutls.c:1057
+#, c-format
+msgid "Cannot verify peer identity of unexpected type %s"
+msgstr "ບໍ່ສາມາດກວດສອບໂຕຕົນຂອງຄູ່ສື່ສານປະເພດທີ່ບໍ່ຄາດຄິດ %s ໄດ້"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:213
+#: tls/gnutls/gtlsconnection-gnutls.c:223
+msgid "Could not create TLS connection:"
+msgstr "ບໍ່ສາມາດສ້າງການເຊື່ອມຕໍ່ TLS ໄດ້:"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:243
+#: tls/openssl/gtlsclientconnection-openssl.c:560
+#: tls/openssl/gtlsserverconnection-openssl.c:455
+#, c-format
+msgid "Could not create TLS connection: %s"
+msgstr "ບໍ່ສາມາດສ້າງການເຊື່ອມຕໍ່ TLS ໄດ້: %s"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:434
+#: tls/gnutls/gtlsconnection-gnutls.c:445
+#: tls/gnutls/gtlsconnection-gnutls.c:459
+#: tls/openssl/gtlsconnection-openssl.c:176
+#, c-format
+msgid "Peer failed to perform TLS handshake: %s"
+msgstr "ຄູ່ສື່ສານລົ້ມເຫຼວໃນການຈັບມື TLS: %s"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:467
+#: tls/openssl/gtlsconnection-openssl.c:246
+msgid "TLS connection closed unexpectedly"
+msgstr "ການເຊື່ອມຕໍ່ TLS ຖືກປິດຢ່າງບໍ່ຄາດຄິດ"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:482
+#: tls/openssl/gtlsconnection-openssl.c:201
+msgid "TLS connection peer did not send a certificate"
+msgstr "ຄູ່ສື່ສານຂອງການເຊື່ອມຕໍ່ TLS ບໍ່ໄດ້ສົ່ງໃບຢັ້ງຢືນ"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:498
+#, c-format
+msgid "Peer sent fatal TLS alert: %s"
+msgstr "ຄູ່ສື່ສານໄດ້ສົ່ງການແຈ້ງເຕືອນ TLS ທີ່ຮ້າຍແຮງ: %s"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:508
+msgid "Protocol version downgrade attack detected"
+msgstr "ກວດພົບການໂຈມຕີເພື່ອຫຼຸດເວີຊັນຂອງໂປຣໂຕຄໍ"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:517
+#, c-format
+msgid "Message is too large for DTLS connection; maximum is %u byte"
+msgstr "ຂໍ້ຄວາມໃຫຍ່ເກີນໄປສຳລັບການເຊື່ອມຕໍ່ DTLS; ຂະໜາດສູງສຸດແມ່ນ %u ໄບຕ໌"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:526
+msgid "The operation timed out"
+msgstr "ການດຳເນີນງານໝົດເວລາ"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:878
+#, c-format
+msgid "Error performing TLS handshake: %s"
+msgstr "ເກີດຂໍ້ຜິດພາດໃນການຈັບມື TLS: %s"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:981
+#: tls/openssl/gtlsconnection-openssl.c:630
+msgid "Error performing TLS handshake"
+msgstr "ເກີດຂໍ້ຜິດພາດໃນການຈັບມື TLS"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1156
+#, c-format
+msgid ""
+"Empty channel binding data indicates a bug in the TLS library implementation"
+msgstr "ຂໍ້ມູນການຜູກຊ່ອງສັນຍານທີ່ວ່າງເປົ່າສະແດງເຖິງບັກໃນການຈັດຕັ້ງປະຕິບັດໄລບຣາຣີ TLS"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1174
+#, c-format
+msgid "Channel binding type is not implemented in the TLS library"
+msgstr "ປະເພດການຜູກຊ່ອງສັນຍານບໍ່ໄດ້ຖືກຈັດຕັ້ງປະຕິບັດໃນໄລບຣາຣີ TLS"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1178
+#, c-format
+msgid "Channel binding data is not yet available"
+msgstr "ຂໍ້ມູນການຜູກຊ່ອງສັນຍານຍັງບໍ່ພ້ອມໃຊ້ງານ"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1230
+#: tls/openssl/gtlsconnection-openssl.c:827
+#, c-format
+msgid "Requested channel binding type is not implemented"
+msgstr "ປະເພດການຜູກຊ່ອງສັນຍານທີ່ຮ້ອງຂໍບໍ່ໄດ້ຖືກຈັດຕັ້ງປະຕິບັດ"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1251
+#: tls/gnutls/gtlsconnection-gnutls.c:1311
+#: tls/openssl/gtlsconnection-openssl.c:845
+#: tls/openssl/gtlsconnection-openssl.c:941
+msgid "Error reading data from TLS socket"
+msgstr "ເກີດຂໍ້ຜິດພາດໃນການອ່ານຂໍ້ມູນຈາກ TLS socket"
+
+#. flags
+#: tls/gnutls/gtlsconnection-gnutls.c:1333
+#: tls/gnutls/gtlsconnection-gnutls.c:1396
+#: tls/openssl/gtlsconnection-openssl.c:1020
+msgid "Error writing data to TLS socket"
+msgstr "ເກີດຂໍ້ຜິດພາດໃນການຂຽນຂໍ້ມູນໃສ່ TLS socket"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1366
+#, c-format
+msgid "Message of size %lu byte is too large for DTLS connection"
+msgstr "ຂໍ້ຄວາມຂະໜາດ %lu ໄບຕ໌ໃຫຍ່ເກີນໄປສຳລັບການເຊື່ອມຕໍ່ DTLS"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1368
+#, c-format
+msgid "(maximum is %u byte)"
+msgstr "(ສູງສຸດແມ່ນ %u ໄບຕ໌)"
+
+#: tls/gnutls/gtlsconnection-gnutls.c:1415
+#, c-format
+msgid "Error performing TLS close: %s"
+msgstr "ເກີດຂໍ້ຜິດພາດໃນການປິດ TLS: %s"
+
+#: tls/gnutls/gtlsdatabase-gnutls.c:92
+#, c-format
+msgid "Failed to allocate credentials: %s"
+msgstr "ລົ້ມເຫຼວໃນການຈັດສັນຂໍ້ມູນຢັ້ງຢືນ: %s"
+
+#: tls/gnutls/gtlsdatabase-gnutls.c:594
+msgid ""
+"Failed to load system trust store: GnuTLS was not configured with a system "
+"trust"
+msgstr "ລົ້ມເຫຼວໃນການໂຫຼດບ່ອນເກັບຄວາມເຊື່ອຖືຂອງລະບົບ: GnuTLS ບໍ່ໄດ້ຖືກຕັ້ງຄ່າດ້ວຍຄວາມເຊື່ອຖືຂອງລະບົບ"
+
+#: tls/gnutls/gtlsdatabase-gnutls.c:599 tls/openssl/gtlsdatabase-openssl.c:381
+#, c-format
+msgid "Failed to load system trust store: %s"
+msgstr "ລົ້ມເຫຼວໃນການໂຫຼດບ່ອນເກັບຄວາມເຊື່ອຖືຂອງລະບົບ: %s"
+
+#: tls/gnutls/gtlsdatabase-gnutls.c:605
+#, c-format
+msgid ""
+"System trust contains zero trusted certificates; please investigate your "
+"GnuTLS configuration"
+msgstr "ແຫຼ່ງທີ່ເຊື່ອຖືຂອງລະບົບບໍ່ມີໃບຢັ້ງຢືນທີ່ເຊື່ອຖືໄດ້; ກະລຸນາກວດສອບການຕັ້ງຄ່າ GnuTLS ຂອງທ່ານ"
+
+#: tls/gnutls/gtlsdatabase-gnutls.c:621
+#, c-format
+msgid "Failed to initialize trust list: %s"
+msgstr "ລົ້ມເຫຼວໃນການຕັ້ງຄ່າເລີ່ມຕົ້ນລາຍການທີ່ເຊື່ອຖື: %s"
+
+#: tls/gnutls/gtlsfiledatabase-gnutls.c:153
+#: tls/openssl/gtlsfiledatabase-openssl.c:456
+#, c-format
+msgid "Failed to populate trust list from %s: %s"
+msgstr "ລົ້ມເຫຼວໃນການເພີ່ມຂໍ້ມູນລາຍການທີ່ເຊື່ອຖືຈາກ %s: %s"
+
+#: tls/gnutls/gtlsserverconnection-gnutls.c:120
+#: tls/openssl/gtlsserverconnection-openssl.c:172
+msgid "Certificate has no private key"
+msgstr "ໃບຢັ້ງຢືນບໍ່ມີຄີສ່ວນຕົວ"
+
+#: tls/openssl/gtlsclientconnection-openssl.c:388
+#: tls/openssl/gtlsserverconnection-openssl.c:299
+#, c-format
+msgid "Could not set TLS cipher list: %s"
+msgstr "ບໍ່ສາມາດຕັ້ງຄ່າລາຍການລະຫັດເຂົ້າລະຫັດ TLS ໄດ້: %s"
+
+#: tls/openssl/gtlsclientconnection-openssl.c:416
+#: tls/openssl/gtlsserverconnection-openssl.c:327
+#, c-format
+msgid "Could not set MAX protocol to %d: %s"
+msgstr "ບໍ່ສາມາດຕັ້ງຄ່າໂປຣໂຕຄໍສູງສຸດເປັນ %d ໄດ້: %s"
+
+#: tls/openssl/gtlsclientconnection-openssl.c:505
+#: tls/openssl/gtlsserverconnection-openssl.c:390
+#, c-format
+msgid "Could not create TLS context: %s"
+msgstr "ບໍ່ສາມາດສ້າງ TLS context ໄດ້: %s"
+
+#: tls/openssl/gtlsconnection-openssl.c:217
+msgid "Unacceptable TLS certificate authority"
+msgstr "ຜູ້ອອກໃບຢັ້ງຢືນ TLS ບໍ່ເປັນທີ່ຍອມຮັບ"
+
+#: tls/openssl/gtlsconnection-openssl.c:225
+msgid "Digest too big for RSA key"
+msgstr "ຂໍ້ມູນສະຫຼຸບໃຫຍ່ເກີນໄປສຳລັບຄີ RSA"
+
+#: tls/openssl/gtlsconnection-openssl.c:234
+msgid "Secure renegotiation is disabled"
+msgstr "ການຕໍ່ຮອງໃໝ່ທີ່ປອດໄພຖືກປິດໃຊ້ງານ"
+
+#: tls/openssl/gtlsconnection-openssl.c:268
+#, c-format
+msgid "%s: The connection is broken"
+msgstr "%s: ການເຊື່ອມຕໍ່ຂາດ"
+
+#: tls/openssl/gtlsconnection-openssl.c:676
+msgid "The request is invalid."
+msgstr "ຄຳຮ້ອງຂໍບໍ່ຖືກຕ້ອງ."
+
+#: tls/openssl/gtlsconnection-openssl.c:699
+msgid "Channel binding data tls-unique is not available"
+msgstr "ຂໍ້ມູນການຜູກຊ່ອງສັນຍານ tls-unique ບໍ່ພ້ອມໃຊ້ງານ"
+
+#: tls/openssl/gtlsconnection-openssl.c:722
+msgid "X.509 Certificate is not available on the connection"
+msgstr "ບໍ່ມີໃບຢັ້ງຢືນ X.509 ໃນການເຊື່ອມຕໍ່ນີ້"
+
+#: tls/openssl/gtlsconnection-openssl.c:731
+msgid "Unable to obtain certificate signature algorithm"
+msgstr "ບໍ່ສາມາດເອົາອະກໍຣິທຶມລາຍເຊັນຂອງໃບຢັ້ງຢືນໄດ້"
+
+#: tls/openssl/gtlsconnection-openssl.c:751
+msgid ""
+"Current X.509 certificate uses unknown or unsupported signature algorithm"
+msgstr "ໃບຢັ້ງຢືນ X.509 ປະຈຸບັນໃຊ້ອະກໍຣິທຶມລາຍເຊັນທີ່ບໍ່ຮູ້ຈັກ ຫຼື ບໍ່ຮອງຮັບ"
+
+#: tls/openssl/gtlsconnection-openssl.c:769
+msgid "Failed to generate X.509 certificate digest"
+msgstr "ລົ້ມເຫຼວໃນການສ້າງຂໍ້ມູນສະຫຼຸບຂອງໃບຢັ້ງຢືນ X.509"
+
+#: tls/openssl/gtlsconnection-openssl.c:800
+msgid "TLS Connection does not support TLS-Exporter feature"
+msgstr "ການເຊື່ອມຕໍ່ TLS ບໍ່ຮອງຮັບຄຸນສົມບັດ TLS-Exporter"
+
+#: tls/openssl/gtlsconnection-openssl.c:803
+msgid "Unexpected error while exporting keying data"
+msgstr "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຄາດຄິດໃນຂະນະທີ່ກຳລັງສົ່ງອອກຂໍ້ມູນຄີ"
+
+#: tls/openssl/gtlsconnection-openssl.c:1081
+msgid "Error performing TLS close"
+msgstr "ເກີດຂໍ້ຜິດພາດໃນການປິດ TLS"
+
+#: tls/openssl/gtlsdatabase-openssl.c:174
+msgid "Could not get trust settings for certificate"
+msgstr "ບໍ່ສາມາດເອົາການຕັ້ງຄ່າຄວາມເຊື່ອຖືສຳລັບໃບຢັ້ງຢືນໄດ້"
+
+#: tls/openssl/gtlsdatabase-openssl.c:261
+msgid "Could not retrieve certificates"
+msgstr "ບໍ່ສາມາດດຶງເອົາໃບຢັ້ງຢືນໄດ້"
+
+#: tls/openssl/gtlsdatabase-openssl.c:358
+msgid "Could not get root certificate store"
+msgstr "ບໍ່ສາມາດເອົາບ່ອນເກັບໃບຢັ້ງຢືນຫຼັກໄດ້"
+
+#: tls/openssl/gtlsdatabase-openssl.c:365
+msgid "Could not get CA certificate store"
+msgstr "ບໍ່ສາມາດເອົາບ່ອນເກັບໃບຢັ້ງຢືນ CA ໄດ້"
+
+#: tls/openssl/gtlsdatabase-openssl.c:430
+msgid "Could not create CA store"
+msgstr "ບໍ່ສາມາດສ້າງບ່ອນເກັບ CA ໄດ້"
+
+#: tls/openssl/gtlsserverconnection-openssl.c:184
+#, c-format
+msgid "There is a problem with the certificate: %s"
+msgstr "ມີບັນຫາກັບໃບຢັ້ງຢືນ: %s"
+
+#: tls/openssl/gtlsserverconnection-openssl.c:193
+#, c-format
+msgid "There is a problem with the certificate private key: %s"
+msgstr "ມີບັນຫາກັບຄີສ່ວນຕົວຂອງໃບຢັ້ງຢືນ: %s"

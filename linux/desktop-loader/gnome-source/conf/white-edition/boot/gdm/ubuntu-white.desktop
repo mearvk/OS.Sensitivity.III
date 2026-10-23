@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ubuntu White
+Comment=Ubuntu White Edition desktop — white-skinned GNOME session
+Exec=/usr/bin/gnome-session --session=ubuntu-white
+TryExec=/usr/bin/gnome-session
+Type=Application
+DesktopNames=ubuntu-white:GNOME
+X-GDM-SessionRegisters=true
+X-Ubuntu-White-Edition=true

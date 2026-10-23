@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Ubuntu White Edition
+Description=White Edition boot splash — white field, centered mark, Ubuntu-red progress
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/white-edition
+ScriptFile=/usr/share/plymouth/themes/white-edition/white-edition.script

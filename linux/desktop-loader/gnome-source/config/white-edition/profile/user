@@ -1,0 +1,4 @@
+# Ubuntu White Edition GNOME dconf profile.
+# The user database remains writable; local provides distribution defaults.
+user-db:user
+system-db:local

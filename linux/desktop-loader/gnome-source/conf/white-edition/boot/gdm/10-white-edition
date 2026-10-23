@@ -1,0 +1,32 @@
+# Ubuntu White Edition — GDM greeter dconf defaults.
+#
+# Installed to /etc/dconf/db/gdm.d/10-white-edition in the target root and
+# compiled with `dconf update`. GDM runs under its own dconf profile ("gdm"),
+# so these keys style the LOGIN GREETER — the screen shown before any user
+# session starts — without affecting user sessions.
+#
+# These are greeter defaults, not locks. They keep the greeter white-skinned so
+# the presentation is continuous from the Plymouth splash into login.
+
+[org/gnome/desktop/interface]
+color-scheme='prefer-light'
+icon-theme='Ubuntu-White'
+# A light, high-legibility greeter consistent with the desktop session.
+cursor-theme='Adwaita'
+
+[org/gnome/desktop/background]
+# Solid White Edition surface behind the greeter rather than a photographic
+# wallpaper, matching the white boot chain. picture-uri is cleared so the solid
+# color shows; the installer may point these at a White Edition asset instead.
+picture-uri=''
+picture-uri-dark=''
+primary-color='#ffffff'
+secondary-color='#ffffff'
+color-shading-type='solid'
+
+[org/gnome/login-screen]
+# Keep the login screen clean and on-brand.
+banner-message-enable=true
+banner-message-text='Ubuntu White Edition'
+disable-user-list=false
+logo=''

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Launcher/Rocket — Rounded square tile, white/silver, Ubuntu ring + rocket -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.2" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" 
+        stroke="#C8D0D8" stroke-width="1.5"/>
+  
+  <g filter="url(#emboss)">
+    <!-- Ubuntu ring (circle of friends) -->
+    <circle cx="64" cy="64" r="36" fill="none" stroke="url(#metal)" stroke-width="7"/>
+    
+    <!-- Three dots on ring -->
+    <circle cx="64" cy="28" r="5.5" fill="url(#metal-light)" stroke="#7A8A98" stroke-width="1"/>
+    <circle cx="33" cy="82" r="5.5" fill="url(#metal-light)" stroke="#7A8A98" stroke-width="1"/>
+    <circle cx="95" cy="82" r="5.5" fill="url(#metal-light)" stroke="#7A8A98" stroke-width="1"/>
+    
+    <!-- Rocket in center -->
+    <!-- Body -->
+    <path d="M 64 40 C 58 48 56 60 56 72 L 72 72 C 72 60 70 48 64 40 Z" 
+          fill="url(#metal-light)" stroke="#6B7B8A" stroke-width="1.5"/>
+    
+    <!-- Nose cone -->
+    <path d="M 64 36 C 60 42 58 46 58 48 L 70 48 C 70 46 68 42 64 36 Z" 
+          fill="url(#metal)" stroke="#6B7B8A" stroke-width="1"/>
+    
+    <!-- Fins -->
+    <path d="M 56 66 L 50 76 L 56 74 Z" fill="url(#metal)" stroke="#6B7B8A" stroke-width="0.8"/>
+    <path d="M 72 66 L 78 76 L 72 74 Z" fill="url(#metal)" stroke="#6B7B8A" stroke-width="0.8"/>
+    
+    <!-- Engine nozzle -->
+    <rect x="59" y="72" width="10" height="5" rx="1" fill="url(#metal)" stroke="#6B7B8A" stroke-width="0.8"/>
+    
+    <!-- Exhaust flames -->
+    <path d="M 61 77 L 64 86 L 67 77" fill="none" stroke="url(#metal-light)" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Porthole/window -->
+    <circle cx="64" cy="56" r="4" fill="url(#metal)" stroke="url(#metal-light)" stroke-width="1.5"/>
+    <circle cx="64" cy="56" r="2" fill="#4A6080" opacity="0.5"/>
+  </g>
+</svg>

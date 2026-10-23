@@ -1,0 +1,775 @@
+/*
+ * JDesk "Cool White" — Original Theme
+ * Copyright (C) 2026 MEARVK LLC
+ * Author: Maximilian Eric Alexander Rupplin von Keffikon
+ *
+ * An original cool-white theme for the JDesk desktop environment.
+ * Clean, icy, elegant. Subtle blue-white tones with frosted glass accents.
+ *
+ * Signature feature: Circular white window control buttons with subtle
+ * inner shadows and colored hover states — inspired by organic, pearl-like
+ * surfaces rather than flat rectangles.
+ *
+ * This is the default JDesk theme. Cool to the touch.
+ *
+ * Place: /opt/jdesk/themes/cool-white.css
+ */
+
+/* ==========================================================================
+ * Root Variables — Cool White Palette
+ * ==========================================================================
+ * Cool white: not warm cream, not sterile hospital. An icy clarity —
+ * like morning light on snow. Blue undertones throughout.
+ */
+.root {
+    /* Backgrounds: cool whites with blue cast */
+    -jdesk-bg:              #FAFCFF;     /* Faintest blue-white (desktop) */
+    -jdesk-surface:         #F2F5FA;     /* Frosted panel surface */
+    -jdesk-surface-raised:  #FFFFFF;     /* Elevated cards: pure white */
+    -jdesk-surface-glass:   rgba(242, 245, 250, 0.85); /* Frosted glass */
+
+    /* Accent: cool steel blue */
+    -jdesk-primary:         #4A90D9;     /* Steel blue accent */
+    -jdesk-primary-light:   #7AB3E8;     /* Lighter variant (hover) */
+    -jdesk-primary-dim:     #3A7BC8;     /* Darker (pressed) */
+
+    /* Text: cool near-black and grey */
+    -jdesk-text:            #1B2433;     /* Cool dark blue-black */
+    -jdesk-text-secondary:  #5C6B7A;     /* Cool medium grey */
+    -jdesk-text-tertiary:   #8E9BAA;     /* Subtle labels */
+
+    /* Borders: icy silver */
+    -jdesk-border:          #D8E0EA;     /* Cool silver border */
+    -jdesk-border-light:    #E8EEF5;     /* Lighter dividers */
+
+    /* States */
+    -jdesk-hover:           #E8EEF5;     /* Cool hover — faint blue */
+    -jdesk-active:          #DCE4EF;     /* Cool pressed */
+    -jdesk-selected:        #E0ECFA;     /* Selected item — blue tint */
+
+    /* Semantic colors */
+    -jdesk-error:           #DC4C4C;     /* Warm red (contrast on cool bg) */
+    -jdesk-success:         #3BA55D;     /* Cool green */
+    -jdesk-warning:         #E8A838;     /* Warm amber */
+    -jdesk-info:            #4A90D9;     /* Same as primary */
+
+    /* Window controls — the signature circular buttons */
+    -jdesk-control-bg:      #FFFFFF;     /* Button fill: pure white */
+    -jdesk-control-border:  #D0D8E4;     /* Button ring: cool silver */
+    -jdesk-control-shadow:  rgba(0, 0, 0, 0.06); /* Inner pearl shadow */
+    -jdesk-control-size:    13px;        /* Circle diameter */
+
+    /* Close/minimize/maximize hover colors */
+    -jdesk-close-hover:     #FF5F56;     /* Coral red */
+    -jdesk-minimize-hover:  #FFBD2E;     /* Amber gold */
+    -jdesk-maximize-hover:  #27C93F;     /* Fresh green */
+
+    /* Shadow and depth */
+    -jdesk-shadow-sm:       rgba(30, 50, 80, 0.06);  /* Subtle cool shadow */
+    -jdesk-shadow-md:       rgba(30, 50, 80, 0.10);  /* Medium elevation */
+    -jdesk-shadow-lg:       rgba(30, 50, 80, 0.16);  /* High elevation */
+
+    /* Geometry */
+    -jdesk-radius:          10px;        /* Slightly rounder than standard */
+    -jdesk-radius-sm:       6px;
+    -jdesk-radius-lg:       14px;
+
+    /* Typography */
+    -jdesk-font:            'Inter', 'SF Pro Display', system-ui, sans-serif;
+    -jdesk-font-mono:       'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    -jdesk-font-size:       13px;
+    -jdesk-font-size-sm:    11px;
+    -jdesk-font-size-lg:    15px;
+    -jdesk-font-size-title: 18px;
+
+    /* Animation */
+    -jdesk-transition:      180ms;
+}
+
+/* ==========================================================================
+ * Desktop Surface
+ * ==========================================================================
+ * Subtle radial gradient: slightly brighter center, cooler edges.
+ * Feels like looking into clean air.
+ */
+.jdesk-desktop {
+    -fx-background-color: radial-gradient(
+        center 50% 40%, radius 80%,
+        #FAFCFF 0%,
+        #F4F7FC 60%,
+        #EDF1F8 100%
+    );
+}
+
+/* ==========================================================================
+ * Window Frame — Cool White with Frosted Glass Title Bar
+ * ========================================================================== */
+.jdesk-frame {
+    -fx-background-color: -jdesk-surface-raised;
+    -fx-border-color: -jdesk-border;
+    -fx-border-width: 1;
+    -fx-border-radius: -jdesk-radius;
+    -fx-background-radius: -jdesk-radius;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-md, 20, 0, 0, 5);
+}
+
+.jdesk-frame:focused {
+    -fx-border-color: derive(-jdesk-primary, 40%);
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-lg, 24, 0, 0, 6);
+}
+
+/* ==========================================================================
+ * Title Bar — Frosted, Minimal, Elegant
+ * ========================================================================== */
+.jdesk-titlebar {
+    -fx-background-color: -jdesk-surface-glass;
+    -fx-border-color: transparent transparent -jdesk-border-light transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 12 0 14;
+    -fx-pref-height: 38;
+    -fx-max-height: 38;
+    -fx-background-radius: -jdesk-radius -jdesk-radius 0 0;
+}
+
+.jdesk-titlebar .label {
+    -fx-text-fill: -jdesk-text;
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-family: -jdesk-font;
+    -fx-font-weight: 500;
+    -fx-opacity: 0.85;
+}
+
+/* Unfocused: title fades to secondary */
+.jdesk-frame:unfocused .jdesk-titlebar .label {
+    -fx-text-fill: -jdesk-text-tertiary;
+    -fx-font-weight: 400;
+}
+
+/* ==========================================================================
+ * ★ SIGNATURE FEATURE: Circular White Window Controls
+ * ==========================================================================
+ * Three pearl-like circles in the title bar.
+ * At rest: white circles with subtle border and inner shadow (like pearls).
+ * On hover: each fills with its semantic color (close=red, min=amber, max=green).
+ * Symbols appear only on hover.
+ *
+ * Inspired by macOS traffic lights but reimagined as cool white pearls.
+ */
+.jdesk-window-control {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-control-bg, 2%) 0%,
+            derive(-jdesk-control-bg, -3%) 100%
+        );
+    -fx-background-radius: 50%;
+    -fx-border-color: -jdesk-control-border;
+    -fx-border-radius: 50%;
+    -fx-border-width: 1;
+    -fx-min-width: 13;
+    -fx-min-height: 13;
+    -fx-max-width: 13;
+    -fx-max-height: 13;
+    -fx-pref-width: 13;
+    -fx-pref-height: 13;
+    -fx-padding: 0;
+    -fx-text-fill: transparent;   /* Hide symbol at rest */
+    -fx-font-size: 8px;
+    -fx-font-weight: 900;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-effect: innershadow(gaussian, -jdesk-control-shadow, 3, 0, 0, 1);
+}
+
+/* === Close Button (leftmost) === */
+.jdesk-close {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-control-bg, 2%) 0%,
+            derive(-jdesk-control-bg, -3%) 100%
+        );
+}
+
+.jdesk-close:hover {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-close-hover, 8%) 0%,
+            -jdesk-close-hover 100%
+        );
+    -fx-border-color: derive(-jdesk-close-hover, -15%);
+    -fx-text-fill: rgba(80, 0, 0, 0.75);  /* Dark × symbol appears */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.12), 2, 0, 0, 0.5);
+}
+
+.jdesk-close:pressed {
+    -fx-background-color: derive(-jdesk-close-hover, -12%);
+    -fx-border-color: derive(-jdesk-close-hover, -25%);
+    -fx-text-fill: rgba(60, 0, 0, 0.9);
+}
+
+/* === Minimize Button (middle) === */
+.jdesk-minimize {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-control-bg, 2%) 0%,
+            derive(-jdesk-control-bg, -3%) 100%
+        );
+}
+
+.jdesk-minimize:hover {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-minimize-hover, 8%) 0%,
+            -jdesk-minimize-hover 100%
+        );
+    -fx-border-color: derive(-jdesk-minimize-hover, -15%);
+    -fx-text-fill: rgba(80, 50, 0, 0.75);  /* Dark ─ symbol appears */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.12), 2, 0, 0, 0.5);
+}
+
+.jdesk-minimize:pressed {
+    -fx-background-color: derive(-jdesk-minimize-hover, -12%);
+    -fx-border-color: derive(-jdesk-minimize-hover, -25%);
+}
+
+/* === Maximize Button (rightmost) === */
+.jdesk-maximize {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-control-bg, 2%) 0%,
+            derive(-jdesk-control-bg, -3%) 100%
+        );
+}
+
+.jdesk-maximize:hover {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-maximize-hover, 8%) 0%,
+            -jdesk-maximize-hover 100%
+        );
+    -fx-border-color: derive(-jdesk-maximize-hover, -15%);
+    -fx-text-fill: rgba(0, 60, 0, 0.75);   /* Dark □ symbol appears */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.12), 2, 0, 0, 0.5);
+}
+
+.jdesk-maximize:pressed {
+    -fx-background-color: derive(-jdesk-maximize-hover, -12%);
+    -fx-border-color: derive(-jdesk-maximize-hover, -25%);
+}
+
+/* === When parent frame is unfocused: controls become more muted === */
+.jdesk-frame:unfocused .jdesk-window-control {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: -jdesk-border-light;
+    -fx-effect: none;
+    -fx-opacity: 0.6;
+}
+
+/* === Control button container spacing === */
+.jdesk-controls-box {
+    -fx-spacing: 7;
+    -fx-padding: 0 2 0 0;
+    -fx-alignment: center;
+}
+
+/* ==========================================================================
+ * Panel / Taskbar — Bottom Bar
+ * ========================================================================== */
+.jdesk-panel {
+    -fx-background-color: -jdesk-surface-glass;
+    -fx-border-color: -jdesk-border-light transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 4 16;
+    -fx-pref-height: 48;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-sm, 6, 0, 0, -2);
+}
+
+.jdesk-panel-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: -jdesk-radius-sm;
+    -fx-padding: 5 10;
+    -fx-cursor: hand;
+}
+
+.jdesk-panel-item:hover {
+    -fx-background-color: -jdesk-hover;
+}
+
+.jdesk-panel-item:active {
+    -fx-background-color: -jdesk-selected;
+    -fx-border-color: transparent transparent -jdesk-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.jdesk-panel-item .label {
+    -fx-font-size: -jdesk-font-size-sm;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text-secondary;
+}
+
+.jdesk-panel-item:active .label {
+    -fx-text-fill: -jdesk-primary;
+    -fx-font-weight: 500;
+}
+
+/* Panel clock */
+.jdesk-panel-clock {
+    -fx-font-size: -jdesk-font-size-sm;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text-secondary;
+    -fx-font-weight: 500;
+}
+
+/* ==========================================================================
+ * Desktop Icons — Frosted cells
+ * ========================================================================== */
+.jdesk-icon-cell {
+    -fx-background-color: transparent;
+    -fx-background-radius: -jdesk-radius;
+    -fx-padding: 10;
+    -fx-alignment: center;
+}
+
+.jdesk-icon-cell:hover {
+    -fx-background-color: rgba(74, 144, 217, 0.06);  /* Very faint blue */
+    -fx-border-color: rgba(74, 144, 217, 0.15);
+    -fx-border-radius: -jdesk-radius;
+    -fx-border-width: 1;
+}
+
+.jdesk-icon-cell:selected {
+    -fx-background-color: -jdesk-selected;
+    -fx-border-color: -jdesk-primary;
+    -fx-border-radius: -jdesk-radius;
+    -fx-border-width: 1;
+}
+
+.jdesk-icon-cell .label {
+    -fx-font-size: -jdesk-font-size-sm;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-max-width: 80;
+    /* Text shadow for readability over wallpaper */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.9), 2, 0, 0, 0);
+}
+
+/* ==========================================================================
+ * Context Menu — Frosted Glass Dropdown
+ * ========================================================================== */
+.jdesk-context-menu {
+    -fx-background-color: -jdesk-surface-glass;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: -jdesk-radius;
+    -fx-background-radius: -jdesk-radius;
+    -fx-padding: 5 0;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-lg, 16, 0, 0, 5);
+}
+
+.jdesk-context-menu .menu-item {
+    -fx-padding: 7 18;
+    -fx-background-color: transparent;
+    -fx-background-radius: -jdesk-radius-sm;
+}
+
+.jdesk-context-menu .menu-item:hover {
+    -fx-background-color: -jdesk-selected;
+}
+
+.jdesk-context-menu .menu-item .label {
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text;
+}
+
+.jdesk-context-menu .menu-item .shortcut {
+    -fx-text-fill: -jdesk-text-tertiary;
+    -fx-font-size: -jdesk-font-size-sm;
+}
+
+.jdesk-context-menu .separator {
+    -fx-padding: 4 12;
+    -fx-border-color: -jdesk-border-light;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* ==========================================================================
+ * Notifications — Slide-in cards
+ * ========================================================================== */
+.jdesk-notification {
+    -fx-background-color: -jdesk-surface-raised;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: -jdesk-radius;
+    -fx-background-radius: -jdesk-radius;
+    -fx-padding: 14 18;
+    -fx-max-width: 380;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-lg, 20, 0, 0, 8);
+}
+
+.jdesk-notification .title {
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-weight: 600;
+    -fx-text-fill: -jdesk-text;
+    -fx-font-family: -jdesk-font;
+}
+
+.jdesk-notification .body {
+    -fx-font-size: -jdesk-font-size-sm;
+    -fx-text-fill: -jdesk-text-secondary;
+    -fx-font-family: -jdesk-font;
+}
+
+.jdesk-notification .timestamp {
+    -fx-font-size: 10px;
+    -fx-text-fill: -jdesk-text-tertiary;
+}
+
+/* ==========================================================================
+ * Dialogs / Modals
+ * ========================================================================== */
+.jdesk-dialog-overlay {
+    -fx-background-color: rgba(27, 36, 51, 0.25);  /* Cool dark scrim */
+}
+
+.jdesk-dialog {
+    -fx-background-color: -jdesk-surface-raised;
+    -fx-border-radius: -jdesk-radius-lg;
+    -fx-background-radius: -jdesk-radius-lg;
+    -fx-padding: 28;
+    -fx-min-width: 340;
+    -fx-max-width: 520;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-lg, 30, 0, 0, 10);
+}
+
+.jdesk-dialog .title {
+    -fx-font-size: -jdesk-font-size-title;
+    -fx-font-weight: 600;
+    -fx-text-fill: -jdesk-text;
+    -fx-font-family: -jdesk-font;
+}
+
+.jdesk-dialog .body {
+    -fx-font-size: -jdesk-font-size;
+    -fx-text-fill: -jdesk-text-secondary;
+    -fx-font-family: -jdesk-font;
+    -fx-line-spacing: 3;
+}
+
+/* ==========================================================================
+ * Buttons — Cool White Primary & Secondary
+ * ========================================================================== */
+.jdesk-button {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-jdesk-primary, 5%) 0%,
+            -jdesk-primary 100%
+        );
+    -fx-text-fill: white;
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-family: -jdesk-font;
+    -fx-font-weight: 500;
+    -fx-padding: 8 18;
+    -fx-background-radius: -jdesk-radius-sm;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-sm, 4, 0, 0, 2);
+}
+
+.jdesk-button:hover {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            -jdesk-primary-light 0%,
+            -jdesk-primary 100%
+        );
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-md, 6, 0, 0, 3);
+}
+
+.jdesk-button:pressed {
+    -fx-background-color: -jdesk-primary-dim;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-sm, 2, 0, 0, 1);
+}
+
+.jdesk-button-secondary {
+    -fx-background-color: -jdesk-surface-raised;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: -jdesk-radius-sm;
+    -fx-background-radius: -jdesk-radius-sm;
+    -fx-text-fill: -jdesk-text;
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-family: -jdesk-font;
+    -fx-font-weight: 500;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+}
+
+.jdesk-button-secondary:hover {
+    -fx-background-color: -jdesk-hover;
+    -fx-border-color: -jdesk-primary;
+}
+
+.jdesk-button-secondary:pressed {
+    -fx-background-color: -jdesk-active;
+}
+
+/* ==========================================================================
+ * Text Fields / Inputs
+ * ========================================================================== */
+.jdesk-text-field {
+    -fx-background-color: -jdesk-surface-raised;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: -jdesk-radius-sm;
+    -fx-background-radius: -jdesk-radius-sm;
+    -fx-padding: 8 12;
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text;
+    -fx-prompt-text-fill: -jdesk-text-tertiary;
+}
+
+.jdesk-text-field:focused {
+    -fx-border-color: -jdesk-primary;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, derive(-jdesk-primary, 70%), 6, 0, 0, 0);
+}
+
+/* ==========================================================================
+ * Scrollbar — Slim, translucent
+ * ========================================================================== */
+.jdesk-scrollbar .track {
+    -fx-background-color: transparent;
+}
+
+.jdesk-scrollbar .thumb {
+    -fx-background-color: rgba(92, 107, 122, 0.25);
+    -fx-background-radius: 4;
+    -fx-min-width: 6;
+    -fx-pref-width: 6;
+}
+
+.jdesk-scrollbar .thumb:hover {
+    -fx-background-color: rgba(92, 107, 122, 0.45);
+    -fx-pref-width: 8;
+}
+
+.jdesk-scrollbar .thumb:pressed {
+    -fx-background-color: rgba(92, 107, 122, 0.6);
+}
+
+/* Hide scrollbar arrows */
+.jdesk-scrollbar .increment-button,
+.jdesk-scrollbar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+
+/* ==========================================================================
+ * Tooltip — Clean white pill
+ * ========================================================================== */
+.jdesk-tooltip {
+    -fx-background-color: -jdesk-surface-raised;
+    -fx-text-fill: -jdesk-text;
+    -fx-font-size: -jdesk-font-size-sm;
+    -fx-font-family: -jdesk-font;
+    -fx-padding: 5 10;
+    -fx-background-radius: 5;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-md, 8, 0, 0, 3);
+}
+
+/* ==========================================================================
+ * Alt+Tab Window Switcher — Frosted dark panel
+ * ========================================================================== */
+.jdesk-switcher {
+    -fx-background-color: rgba(27, 36, 51, 0.88);
+    -fx-background-radius: -jdesk-radius-lg;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 30, 0, 0, 10);
+}
+
+.jdesk-switcher-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: -jdesk-radius;
+    -fx-padding: 10;
+}
+
+.jdesk-switcher-item:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-border-color: -jdesk-primary;
+    -fx-border-radius: -jdesk-radius;
+    -fx-border-width: 2;
+}
+
+.jdesk-switcher-item .label {
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-size: -jdesk-font-size-sm;
+    -fx-font-family: -jdesk-font;
+}
+
+/* ==========================================================================
+ * Tab Bar (for JDesk native apps like Terminal, Settings)
+ * ========================================================================== */
+.jdesk-tab-bar {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: transparent transparent -jdesk-border-light transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 8;
+}
+
+.jdesk-tab {
+    -fx-background-color: transparent;
+    -fx-padding: 10 16;
+    -fx-cursor: hand;
+}
+
+.jdesk-tab .label {
+    -fx-text-fill: -jdesk-text-secondary;
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-family: -jdesk-font;
+    -fx-font-weight: 500;
+}
+
+.jdesk-tab:hover {
+    -fx-background-color: -jdesk-hover;
+    -fx-background-radius: -jdesk-radius-sm -jdesk-radius-sm 0 0;
+}
+
+.jdesk-tab:selected {
+    -fx-border-color: transparent transparent -jdesk-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.jdesk-tab:selected .label {
+    -fx-text-fill: -jdesk-primary;
+}
+
+/* ==========================================================================
+ * Sidebar (JDesk Settings, File Manager)
+ * ========================================================================== */
+.jdesk-sidebar {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: transparent -jdesk-border-light transparent transparent;
+    -fx-border-width: 0 1 0 0;
+    -fx-pref-width: 220;
+    -fx-padding: 8 0;
+}
+
+.jdesk-sidebar-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: -jdesk-radius-sm;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.jdesk-sidebar-item:hover {
+    -fx-background-color: -jdesk-hover;
+}
+
+.jdesk-sidebar-item:selected {
+    -fx-background-color: -jdesk-selected;
+}
+
+.jdesk-sidebar-item .label {
+    -fx-text-fill: -jdesk-text;
+    -fx-font-size: -jdesk-font-size;
+    -fx-font-family: -jdesk-font;
+}
+
+.jdesk-sidebar-item:selected .label {
+    -fx-text-fill: -jdesk-primary;
+    -fx-font-weight: 500;
+}
+
+/* ==========================================================================
+ * Terminal (JDesk built-in terminal)
+ * ========================================================================== */
+.jdesk-terminal {
+    -fx-background-color: #1B2433;   /* Dark cool background for contrast */
+    -fx-font-family: -jdesk-font-mono;
+    -fx-font-size: 13px;
+    -fx-padding: 8 12;
+}
+
+.jdesk-terminal .text {
+    -fx-fill: #D4DCE8;              /* Cool light text */
+}
+
+.jdesk-terminal .cursor {
+    -fx-fill: -jdesk-primary;
+    -fx-opacity: 0.8;
+}
+
+.jdesk-terminal .selection {
+    -fx-fill: rgba(74, 144, 217, 0.3);
+}
+
+/* ==========================================================================
+ * Status Indicators
+ * ========================================================================== */
+.jdesk-badge {
+    -fx-background-color: -jdesk-error;
+    -fx-background-radius: 50%;
+    -fx-min-width: 8;
+    -fx-min-height: 8;
+    -fx-max-width: 8;
+    -fx-max-height: 8;
+}
+
+.jdesk-badge-count {
+    -fx-background-color: -jdesk-error;
+    -fx-background-radius: 10;
+    -fx-padding: 1 5;
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-font-weight: 700;
+}
+
+/* Online/offline dots */
+.jdesk-status-online  { -fx-background-color: -jdesk-success; -fx-background-radius: 50%; }
+.jdesk-status-away    { -fx-background-color: -jdesk-warning; -fx-background-radius: 50%; }
+.jdesk-status-offline { -fx-background-color: -jdesk-text-tertiary; -fx-background-radius: 50%; }
+
+/* ==========================================================================
+ * Progress Bar
+ * ========================================================================== */
+.jdesk-progress .track {
+    -fx-background-color: -jdesk-hover;
+    -fx-background-radius: 3;
+    -fx-pref-height: 6;
+}
+
+.jdesk-progress .bar {
+    -fx-background-color:
+        linear-gradient(to right,
+            -jdesk-primary 0%,
+            -jdesk-primary-light 100%
+        );
+    -fx-background-radius: 3;
+}
+
+/* ==========================================================================
+ * Toggle Switch
+ * ========================================================================== */
+.jdesk-toggle .track {
+    -fx-background-color: -jdesk-active;
+    -fx-background-radius: 12;
+    -fx-pref-width: 40;
+    -fx-pref-height: 22;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+}
+
+.jdesk-toggle:selected .track {
+    -fx-background-color: -jdesk-primary;
+    -fx-border-color: -jdesk-primary-dim;
+}
+
+.jdesk-toggle .thumb {
+    -fx-background-color: -jdesk-surface-raised;
+    -fx-background-radius: 50%;
+    -fx-pref-width: 18;
+    -fx-pref-height: 18;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow-sm, 3, 0, 0, 1);
+}

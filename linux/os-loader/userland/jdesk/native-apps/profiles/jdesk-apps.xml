@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  JDesk Native Application Resource Profiles
+  Loaded by JVM Memory Proxy via jvm-config.xml integration.
+
+  Each profile defines resource budgets for desktop applications launched
+  under java -memory-guard. The JDesk launcher references these by name
+  in .jdesk-app manifest files.
+
+  Copyright (C) 2026 MEARVK LLC
+  Author: Maximilian Eric Alexander Rupplin von Keffikon
+  License: GPL-2.0
+-->
+<jvm-config version="1">
+  <memory-proxy enabled="true">
+
+    <!-- ===================================================================
+         Default budget (for unknown/unregistered applications)
+         =================================================================== -->
+    <default-budget>
+      <ram soft="512m" hard="2g"/>
+      <disk-write-rate soft="100m" hard="500m"/>
+      <disk-read-rate soft="200m" hard="1g"/>
+      <file-descriptors soft="256" hard="1024"/>
+      <cpu-window seconds="10" soft="8" hard="10"/>
+      <threads soft="64" hard="256"/>
+      <children soft="8" hard="32"/>
+    </default-budget>
+
+    <!-- ===================================================================
+         Writer (LibreOffice Writer) — Word Processor
+         Moderate memory, moderate I/O, low thread count.
+         Large documents may spike RAM; 2 GB ceiling is generous.
+         =================================================================== -->
+    <application profile="writer">
+      <ram soft="512m" hard="2g"/>
+      <disk-write-rate soft="100m" hard="200m"/>
+      <disk-read-rate soft="200m" hard="500m"/>
+      <file-descriptors soft="128" hard="512"/>
+      <cpu-window seconds="10" soft="8" hard="10"/>
+      <threads soft="16" hard="32"/>
+      <children soft="4" hard="8"/>
+    </application>
+
+    <!-- ===================================================================
+         IDE (IntelliJ IDEA + JDesk GUI) — Full Development Environment
+         Full IntelliJ IDEA feature parity: 13 menus, 130+ actions,
+         9 tool windows, debug panel, all refactorings, VCS/Git,
+         breadcrumbs, bookmarks, code folding, split editors.
+         High memory (IntelliJ indexing + JVM + language servers),
+         heavy I/O (project indexing, build output, VCS operations),
+         many threads (LSP, build, debug, terminal, Git processes).
+         =================================================================== -->
+    <application profile="ide">
+      <ram soft="2g" hard="4g"/>
+      <disk-write-rate soft="200m" hard="500m"/>
+      <disk-read-rate soft="500m" hard="1g"/>
+      <file-descriptors soft="512" hard="2048"/>
+      <cpu-window seconds="10" soft="9" hard="10"/>
+      <threads soft="64" hard="128"/>
+      <children soft="16" hard="48"/>
+    </application>
+
+    <!-- ===================================================================
+         Browser (Chromium) — Web Browser
+         High memory (multi-process architecture, one per tab), moderate I/O,
+         many threads (renderer processes, GPU, network).
+         =================================================================== -->
+    <application profile="browser">
+      <ram soft="1g" hard="4g"/>
+      <disk-write-rate soft="100m" hard="200m"/>
+      <disk-read-rate soft="200m" hard="500m"/>
+      <file-descriptors soft="512" hard="2048"/>
+      <cpu-window seconds="10" soft="9" hard="10"/>
+      <threads soft="128" hard="256"/>
+      <children soft="32" hard="64"/>
+    </application>
+
+    <!-- ===================================================================
+         Terminal — JDesk Terminal Emulator
+         Low memory, minimal I/O, few threads.
+         The terminal itself is lightweight; child processes it spawns
+         inherit their own governance budgets.
+         =================================================================== -->
+    <application profile="terminal">
+      <ram soft="64m" hard="256m"/>
+      <disk-write-rate soft="20m" hard="50m"/>
+      <disk-read-rate soft="50m" hard="100m"/>
+      <file-descriptors soft="64" hard="256"/>
+      <cpu-window seconds="10" soft="5" hard="10"/>
+      <threads soft="8" hard="16"/>
+      <children soft="8" hard="16"/>
+    </application>
+
+    <!-- ===================================================================
+         Files (PCManFM-Qt) — File Manager
+         Low-moderate memory, moderate read I/O (directory listings,
+         thumbnail generation), minimal writes.
+         =================================================================== -->
+    <application profile="files">
+      <ram soft="128m" hard="512m"/>
+      <disk-write-rate soft="50m" hard="100m"/>
+      <disk-read-rate soft="200m" hard="500m"/>
+      <file-descriptors soft="128" hard="512"/>
+      <cpu-window seconds="10" soft="4" hard="10"/>
+      <threads soft="8" hard="16"/>
+      <children soft="4" hard="8"/>
+    </application>
+
+    <!-- ===================================================================
+         Settings — JDesk Settings (built-in Java)
+         Minimal resources. Pure UI with occasional config file writes.
+         =================================================================== -->
+    <application profile="settings">
+      <ram soft="64m" hard="128m"/>
+      <disk-write-rate soft="10m" hard="20m"/>
+      <disk-read-rate soft="20m" hard="50m"/>
+      <file-descriptors soft="32" hard="64"/>
+      <cpu-window seconds="10" soft="2" hard="10"/>
+      <threads soft="4" hard="8"/>
+      <children soft="2" hard="4"/>
+    </application>
+
+    <!-- ===================================================================
+         VSCodium — Lightweight Code Editor
+         Open-source VS Code build (Electron + Node). Moderate memory,
+         moderate I/O, fewer threads than IntelliJ (no full JVM indexer).
+         Desktop icon alongside IntelliJ for quick edits.
+         =================================================================== -->
+    <application profile="vscodium">
+      <ram soft="1g" hard="3g"/>
+      <disk-write-rate soft="150m" hard="300m"/>
+      <disk-read-rate soft="300m" hard="700m"/>
+      <file-descriptors soft="256" hard="1024"/>
+      <cpu-window seconds="10" soft="8" hard="10"/>
+      <threads soft="32" hard="64"/>
+      <children soft="12" hard="32"/>
+    </application>
+
+    <!-- ===================================================================
+         Windows App (generic PE via Wine)
+         Wine adds overhead: extra memory for Win32 subsystem, extra threads
+         for wineserver, extra fds for registry hive files.
+         =================================================================== -->
+    <application profile="windows-app">
+      <ram soft="1g" hard="3g"/>
+      <disk-write-rate soft="100m" hard="300m"/>
+      <disk-read-rate soft="200m" hard="500m"/>
+      <file-descriptors soft="256" hard="1024"/>
+      <cpu-window seconds="10" soft="8" hard="10"/>
+      <threads soft="64" hard="128"/>
+      <children soft="8" hard="32"/>
+    </application>
+
+    <!-- ===================================================================
+         macOS App (generic Mach-O via Darling)
+         Darling translation adds moderate overhead.
+         =================================================================== -->
+    <application profile="macos-app">
+      <ram soft="1g" hard="3g"/>
+      <disk-write-rate soft="100m" hard="300m"/>
+      <disk-read-rate soft="200m" hard="500m"/>
+      <file-descriptors soft="256" hard="1024"/>
+      <cpu-window seconds="10" soft="8" hard="10"/>
+      <threads soft="64" hard="128"/>
+      <children soft="8" hard="32"/>
+    </application>
+
+    <!-- ===================================================================
+         Kali Tools — Security / Penetration Testing
+         High memory (Metasploit, hashcat GPU buffers), heavy I/O (wordlists,
+         packet captures), many threads (parallel scans, brute-force).
+         =================================================================== -->
+    <application profile="kali-security">
+      <ram soft="512m" hard="2g"/>
+      <disk-write-rate soft="200m" hard="500m"/>
+      <disk-read-rate soft="500m" hard="1g"/>
+      <file-descriptors soft="256" hard="1024"/>
+      <cpu-window seconds="10" soft="9" hard="10"/>
+      <threads soft="64" hard="128"/>
+      <children soft="16" hard="48"/>
+    </application>
+
+    <!-- ===================================================================
+         Alerts — route to JDesk panel and observer circuit
+         =================================================================== -->
+    <alerts>
+      <notify method="observer-circuit" level="2"/>
+      <notify method="chat" target="ops-team"/>
+      <notify method="jdesk-panel" target="status-bar"/>
+    </alerts>
+
+  </memory-proxy>
+</jvm-config>

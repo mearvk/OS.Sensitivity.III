@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<!--
+  Galactic Cherry Marvell Edition 98 - Desktop Wallpapers
+  GNOME/GTK background properties for desktop settings integration.
+  Copyright (C) 2026 MEARVK LLC
+-->
+<wallpapers>
+  <wallpaper deleted="false">
+    <name>Galactic Cherry (Default)</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/galactic-cherry-default.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#1a0033</pcolor>
+    <scolor>#1a0033</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Cherry Dawn</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/cherry-dawn.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#1a0a2e</pcolor>
+    <scolor>#1a0a2e</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Galaxy Core</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/galaxy-core.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#000011</pcolor>
+    <scolor>#000011</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Cherry Blossom Night</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/cherry-blossom-night.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0a0020</pcolor>
+    <scolor>#0a0020</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Minimal Dark</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/minimal-dark.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#1a1a2e</pcolor>
+    <scolor>#1a1a2e</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Aurora Cherry</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/aurora-cherry.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#000814</pcolor>
+    <scolor>#000814</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Moonlit Ocean</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/moonlit-ocean.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0f0c29</pcolor>
+    <scolor>#0f0c29</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Cherry Light</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/cherry-light.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#fef9f4</pcolor>
+    <scolor>#fef9f4</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Cherry Nebula</name>
+    <filename>/usr/share/backgrounds/galactic-cherry/cherry-nebula.svg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#050510</pcolor>
+    <scolor>#050510</scolor>
+  </wallpaper>
+</wallpapers>

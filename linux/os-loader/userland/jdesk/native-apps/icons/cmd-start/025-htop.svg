@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Htop — Colorful bar chart monitor -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <linearGradient id="bar-cpu" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7A9AB0"/>
+      <stop offset="100%" style="stop-color:#5A7A90"/>
+    </linearGradient>
+    <linearGradient id="bar-mem" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8AAA8A"/>
+      <stop offset="100%" style="stop-color:#6A8A6A"/>
+    </linearGradient>
+    <linearGradient id="bar-swap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#AA8A7A"/>
+      <stop offset="100%" style="stop-color:#8A6A5A"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Colorful bar chart monitor -->
+  <g filter="url(#emboss)">
+    <!-- Monitor frame -->
+    <rect x="26" y="28" width="76" height="64" rx="4" ry="4" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Screen area -->
+    <rect x="30" y="32" width="68" height="56" rx="2" ry="2" fill="#2A3A48"/>
+    <!-- CPU meters (horizontal bars) -->
+    <rect x="34" y="36" width="4" height="5" fill="#8A9AA8"/>
+    <rect x="40" y="36" width="38" height="5" rx="1" fill="url(#bar-cpu)"/>
+    <rect x="34" y="43" width="4" height="5" fill="#8A9AA8"/>
+    <rect x="40" y="43" width="28" height="5" rx="1" fill="url(#bar-cpu)"/>
+    <rect x="34" y="50" width="4" height="5" fill="#8A9AA8"/>
+    <rect x="40" y="50" width="48" height="5" rx="1" fill="url(#bar-cpu)"/>
+    <rect x="34" y="57" width="4" height="5" fill="#8A9AA8"/>
+    <rect x="40" y="57" width="18" height="5" rx="1" fill="url(#bar-cpu)"/>
+    <!-- Memory bar -->
+    <rect x="34" y="65" width="4" height="5" fill="#8A9AA8"/>
+    <rect x="40" y="65" width="44" height="5" rx="1" fill="url(#bar-mem)"/>
+    <!-- Swap bar -->
+    <rect x="34" y="72" width="4" height="5" fill="#8A9AA8"/>
+    <rect x="40" y="72" width="12" height="5" rx="1" fill="url(#bar-swap)"/>
+    <!-- Process list lines -->
+    <line x1="34" y1="81" x2="92" y2="81" stroke="#5A7A8A" stroke-width="1" opacity="0.6"/>
+    <line x1="34" y1="85" x2="88" y2="85" stroke="#5A7A8A" stroke-width="1" opacity="0.4"/>
+    <!-- Monitor stand -->
+    <rect x="54" y="92" width="20" height="4" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <rect x="48" y="96" width="32" height="4" rx="2" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1"/>
+  </g>
+</svg>

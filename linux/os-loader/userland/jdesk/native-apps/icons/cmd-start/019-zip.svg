@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Zip — Zipper on folder -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Folder with zipper -->
+  <g filter="url(#emboss)">
+    <!-- Folder tab -->
+    <path d="M30,40 L30,36 C30,34 32,32 34,32 L54,32 L58,38 L60,40 Z" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Folder body -->
+    <rect x="28" y="40" width="72" height="52" rx="4" ry="4" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Zipper track (center) -->
+    <line x1="64" y1="40" x2="64" y2="92" stroke="#4A5A68" stroke-width="2"/>
+    <!-- Zipper teeth left -->
+    <line x1="60" y1="46" x2="64" y2="48" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="54" x2="64" y2="56" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="62" x2="64" y2="64" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="70" x2="64" y2="72" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="78" x2="64" y2="80" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Zipper teeth right -->
+    <line x1="68" y1="48" x2="64" y2="50" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="68" y1="56" x2="64" y2="58" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="68" y1="64" x2="64" y2="66" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="68" y1="72" x2="64" y2="74" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="68" y1="80" x2="64" y2="82" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round"/>
+    <!-- Zipper pull -->
+    <rect x="61" y="84" width="6" height="8" rx="2" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+  </g>
+</svg>

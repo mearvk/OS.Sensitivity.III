@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Go — Gopher-like mascot simplified -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Gopher simplified -->
+  <g filter="url(#emboss)">
+    <!-- Body -->
+    <ellipse cx="64" cy="70" rx="24" ry="28" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Head -->
+    <circle cx="64" cy="44" r="18" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Eyes -->
+    <circle cx="57" cy="40" r="6" fill="#FFFFFF" stroke="#6B7B8A" stroke-width="1"/>
+    <circle cx="71" cy="40" r="6" fill="#FFFFFF" stroke="#6B7B8A" stroke-width="1"/>
+    <circle cx="58" cy="40" r="3" fill="#4A5A68"/>
+    <circle cx="72" cy="40" r="3" fill="#4A5A68"/>
+    <!-- Ears -->
+    <circle cx="48" cy="32" r="5" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <circle cx="80" cy="32" r="5" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <!-- Smile -->
+    <path d="M58,50 Q64,55 70,50" fill="none" stroke="#6B7B8A" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Feet -->
+    <ellipse cx="54" cy="96" rx="7" ry="4" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <ellipse cx="74" cy="96" rx="7" ry="4" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1"/>
+  </g>
+</svg>

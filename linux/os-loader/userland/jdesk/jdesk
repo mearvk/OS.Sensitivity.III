@@ -1,0 +1,129 @@
+#!/bin/bash
+# =============================================================================
+# jdesk — JDesk Desktop Environment Launcher
+# Copyright (C) 2026 MEARVK LLC
+#
+# Usage:
+#   jdesk              Start JDesk (full-screen if no other WM running)
+#   jdesk --windowed   Start in a window (for testing inside existing desktop)
+#   jdesk --help       Show usage
+# =============================================================================
+
+set -e
+
+JDESK_HOME="${JDESK_HOME:-/opt/jdesk}"
+JDESK_SRC="$(cd "$(dirname "$0")" && pwd)"
+JDESK_CLASS="us.mearvk.jdesk.JDeskApplication"
+
+# JavaFX module path — try system install first, then bundled
+if [ -d "/usr/share/openjfx/lib" ]; then
+    FX_PATH="/usr/share/openjfx/lib"
+elif [ -d "/usr/lib/jvm/javafx-sdk/lib" ]; then
+    FX_PATH="/usr/lib/jvm/javafx-sdk/lib"
+else
+    FX_PATH=""
+fi
+
+# Java binary
+JAVA="${JAVA_HOME:-/usr}/bin/java"
+if [ ! -x "$JAVA" ]; then
+    JAVA="$(which java 2>/dev/null || true)"
+fi
+
+if [ -z "$JAVA" ] || [ ! -x "$JAVA" ]; then
+    echo "[JDesk] ERROR: Java not found. Install OpenJDK 17+."
+    exit 1
+fi
+
+# Build classpath
+CP=""
+# Check for compiled jar
+if [ -f "$JDESK_HOME/lib/jdesk.jar" ]; then
+    CP="$JDESK_HOME/lib/jdesk.jar"
+# Development mode: use source tree classes
+elif [ -d "$JDESK_SRC/classes" ]; then
+    CP="$JDESK_SRC/classes"
+fi
+
+# Compile from source if no classes exist
+if [ -z "$CP" ] || [ ! -d "$JDESK_SRC/classes" -a ! -f "$JDESK_HOME/lib/jdesk.jar" ]; then
+    echo "[JDesk] Compiling from source..."
+    mkdir -p "$JDESK_SRC/classes"
+
+    JAVAC_ARGS="--release 17"
+    if [ -n "$FX_PATH" ]; then
+        JAVAC_ARGS="$JAVAC_ARGS --module-path $FX_PATH --add-modules javafx.controls,javafx.graphics,javafx.web"
+    fi
+
+    # Find all Java sources
+    SOURCES=$(find "$JDESK_SRC/src" -name "*.java" 2>/dev/null)
+    if [ -z "$SOURCES" ]; then
+        echo "[JDesk] ERROR: No source files found in $JDESK_SRC/src/"
+        exit 1
+    fi
+
+    javac $JAVAC_ARGS -sourcepath "$JDESK_SRC/src" -d "$JDESK_SRC/classes" $SOURCES
+    echo "[JDesk] Compiled successfully."
+    CP="$JDESK_SRC/classes"
+fi
+
+# Determine mode
+MODE=""
+for arg in "$@"; do
+    case "$arg" in
+        --windowed|-w)  MODE="--windowed" ;;
+        --help|-h)
+            echo "JDesk — Galactic Cherry Marvell Edition 98"
+            echo ""
+            echo "Usage: jdesk [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  --windowed, -w    Run in a window (inside existing desktop)"
+            echo "  --help, -h        Show this help"
+            echo ""
+            echo "Environment:"
+            echo "  JDESK_HOME        JDesk installation directory (default: /opt/jdesk)"
+            echo "  JAVA_HOME         Java installation directory"
+            echo ""
+            exit 0
+            ;;
+    esac
+done
+
+# If no explicit mode and we're inside a desktop session, default to windowed
+if [ -z "$MODE" ]; then
+    if [ -n "$XDG_CURRENT_DESKTOP" ] || [ -n "$DESKTOP_SESSION" ]; then
+        MODE="--windowed"
+        echo "[JDesk] Detected existing desktop session — running windowed."
+        echo "[JDesk] Use Ctrl+F to toggle full-screen."
+    fi
+fi
+
+# Build Java command
+JAVA_ARGS=""
+if [ -n "$FX_PATH" ]; then
+    JAVA_ARGS="--module-path $FX_PATH --add-modules javafx.controls,javafx.graphics,javafx.swing,javafx.web"
+fi
+
+# Additional JVM flags
+JVM_FLAGS="-Dprism.order=sw"  # Software rendering fallback for Wayland
+JVM_FLAGS="$JVM_FLAGS -Djava.awt.headless=false"
+JVM_FLAGS="$JVM_FLAGS -Djavafx.verbose=false"
+
+# Wayland/X11 detection
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    # JavaFX works better with XWayland
+    export GDK_BACKEND=x11
+    JVM_FLAGS="$JVM_FLAGS -Djdk.gtk.version=3"
+    echo "[JDesk] Wayland detected — using XWayland bridge."
+fi
+
+echo "═══════════════════════════════════════════════════════════════"
+echo "  JDesk — Starting"
+echo "  Theme:  Cool White"
+echo "  Mode:   ${MODE:-full-screen}"
+echo "  Java:   $($JAVA -version 2>&1 | head -1)"
+echo "  JavaFX: ${FX_PATH:-system classpath}"
+echo "═══════════════════════════════════════════════════════════════"
+
+exec "$JAVA" $JVM_FLAGS $JAVA_ARGS -cp "$CP" "$JDESK_CLASS" $MODE "$@"

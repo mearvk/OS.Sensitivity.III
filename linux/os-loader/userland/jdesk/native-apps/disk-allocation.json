@@ -1,0 +1,105 @@
+{
+  "title": "JDesk Native Application Disk Allocation",
+  "version": "1.0",
+  "date": "2026-08-10",
+  "author": "MEARVK LLC",
+
+  "allocation": {
+    "initial_estimate_mb": 2048,
+    "final_allocation_mb": 3072,
+    "increased": true,
+    "increase_reason": "2 GB insufficient for all three OS native stacks (Linux + Wine + Darling) plus native applications with headroom for updates",
+
+    "breakdown": {
+      "linux_natives": {
+        "total_mb": 877,
+        "applications": [
+          {"name": "LibreOffice Writer", "format": "ELF", "size_mb": 350, "notes": "Word processor with full ODF/OOXML support"},
+          {"name": "VSCodium", "format": "ELF", "size_mb": 300, "notes": "Open-source VS Code (Electron-based IDE)"},
+          {"name": "Chromium", "format": "ELF", "size_mb": 180, "notes": "Web browser (also used by Dave headless)"},
+          {"name": "PCManFM-Qt", "format": "ELF", "size_mb": 45, "notes": "Lightweight file manager"},
+          {"name": "JDesk Terminal", "format": "ELF+Java", "size_mb": 2, "notes": "Built-in terminal emulator"}
+        ]
+      },
+      "wine_runtime": {
+        "total_mb": 400,
+        "purpose": "Win32/Win64 API translation layer for Windows PE binaries",
+        "version": "Wine 9.x+",
+        "includes": ["ntdll.dll.so", "kernel32.dll.so", "user32.dll.so", "gdi32.dll.so", "wineserver"]
+      },
+      "darling_runtime": {
+        "total_mb": 300,
+        "purpose": "macOS API translation layer for Mach-O binaries",
+        "version": "Darling (latest)",
+        "includes": ["dyld", "libSystem.B.dylib", "CoreFoundation", "AppKit stubs"]
+      },
+      "windows_app_space": {
+        "total_mb": 450,
+        "purpose": "Reserved for user-installed Windows .exe applications"
+      },
+      "macos_app_space": {
+        "total_mb": 350,
+        "purpose": "Reserved for user-installed macOS applications"
+      },
+      "metadata_icons": {
+        "total_mb": 50,
+        "includes": ["SVG icons", ".jdesk-app manifests", "Memory Proxy profiles", "app registry"]
+      },
+      "headroom": {
+        "total_mb": 550,
+        "purpose": "Updates, temporary files, cache, growth"
+      }
+    },
+
+    "total_calculated_mb": 2977,
+    "total_rounded_mb": 3072,
+    "total_gb": 3
+  },
+
+  "format_support": {
+    "ELF": {
+      "execution": "direct",
+      "overhead": "none",
+      "memory_proxy": true,
+      "platforms": ["Linux x86_64", "Linux i386"]
+    },
+    "PE": {
+      "execution": "wine",
+      "overhead": "~200 MB base Wine memory",
+      "memory_proxy": true,
+      "notes": "Memory Proxy wraps the Wine process; Windows binary runs inside Wine",
+      "platforms": ["Windows x64", "Windows x86"]
+    },
+    "Mach-O": {
+      "execution": "darling",
+      "overhead": "~150 MB base Darling memory",
+      "memory_proxy": true,
+      "notes": "Darling is less mature than Wine. CLI tools work well; GUI apps are experimental.",
+      "platforms": ["macOS x86_64", "macOS arm64 (via Rosetta-like translation)"]
+    },
+    "Script": {
+      "execution": "direct (interpreter dispatch via shebang)",
+      "overhead": "interpreter dependent",
+      "memory_proxy": true
+    }
+  },
+
+  "desktop_icons_at_startup": [
+    {"position": [0, 0], "app": "Settings", "icon": "settings.svg", "category": "system"},
+    {"position": [1, 0], "app": "Terminal", "icon": "terminal.svg", "category": "system"},
+    {"position": [2, 0], "app": "IDE", "icon": "ide.svg", "category": "development"},
+    {"position": [3, 0], "app": "VSCodium", "icon": "vscodium.svg", "category": "development"},
+    {"position": [4, 0], "app": "Browser", "icon": "browser.svg", "category": "internet"},
+    {"position": [0, 1], "app": "Writer", "icon": "writer.svg", "category": "office"},
+    {"position": [1, 1], "app": "Files", "icon": "files.svg", "category": "system"},
+    {"position": [2, 1], "app": "Software", "icon": "software.svg", "category": "system"},
+    {"position": [3, 1], "app": "Launcher", "icon": "launcher.svg", "category": "system"},
+    {"position": [4, 1], "app": "Kali", "icon": "kali.svg", "category": "security"}
+  ],
+
+  "verdict": {
+    "2gb_sufficient": false,
+    "reason": "Linux natives alone consume 877 MB. Wine (400 MB) and Darling (300 MB) push past 1.5 GB before any Windows/macOS user applications. With headroom for updates and temporary files, 3 GB is the minimum viable allocation for tri-platform support.",
+    "recommendation": "Set base file allocation to 3 GB for /opt/jdesk/apps/"
+  }
+}

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: mysql — Dolphin with cylinder database -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Dolphin (simplified) -->
+  <path d="M30 50 Q34 30 50 32 Q58 28 62 34 Q66 30 68 36 Q72 34 70 40 Q74 42 70 46 Q66 52 56 50 Q48 52 42 54 Q36 56 32 54 Q28 52 30 50 Z" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" filter="url(#emboss)"/>
+  <!-- Dolphin eye -->
+  <circle cx="48" cy="40" r="2" fill="#6B7B8A"/>
+  <!-- Dolphin fin -->
+  <path d="M50 34 Q54 26 58 30" fill="none" stroke="url(#metal)" stroke-width="1.5"/>
+  <!-- Database cylinder -->
+  <ellipse cx="80" cy="68" rx="20" ry="8" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="2"/>
+  <rect x="60" y="68" width="40" height="30" fill="url(#metal-light)" stroke="none"/>
+  <line x1="60" y1="68" x2="60" y2="98" stroke="url(#metal)" stroke-width="2"/>
+  <line x1="100" y1="68" x2="100" y2="98" stroke="url(#metal)" stroke-width="2"/>
+  <ellipse cx="80" cy="98" rx="20" ry="8" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="2"/>
+  <!-- Middle ellipse line -->
+  <ellipse cx="80" cy="82" rx="20" ry="6" fill="none" stroke="url(#metal)" stroke-width="1" opacity="0.6"/>
+</svg>

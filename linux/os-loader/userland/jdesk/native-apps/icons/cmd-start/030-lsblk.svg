@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: lsblk — Rounded square tile, white/silver, stacked disks tree -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Top disk (parent) -->
+  <ellipse cx="48" cy="38" rx="18" ry="6" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" filter="url(#emboss)"/>
+  <rect x="30" y="38" width="36" height="10" fill="url(#metal-light)" stroke="none"/>
+  <ellipse cx="48" cy="48" rx="18" ry="6" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5"/>
+  <line x1="30" y1="38" x2="30" y2="48" stroke="url(#metal)" stroke-width="1.5"/>
+  <line x1="66" y1="38" x2="66" y2="48" stroke="url(#metal)" stroke-width="1.5"/>
+  <!-- Tree lines -->
+  <line x1="48" y1="48" x2="48" y2="60" stroke="url(#metal)" stroke-width="2"/>
+  <line x1="48" y1="60" x2="42" y2="60" stroke="url(#metal)" stroke-width="2"/>
+  <line x1="42" y1="60" x2="42" y2="68" stroke="url(#metal)" stroke-width="2"/>
+  <line x1="48" y1="60" x2="80" y2="60" stroke="url(#metal)" stroke-width="2"/>
+  <line x1="80" y1="60" x2="80" y2="68" stroke="url(#metal)" stroke-width="2"/>
+  <!-- Child disk left -->
+  <ellipse cx="42" cy="72" rx="14" ry="5" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.2" filter="url(#emboss)"/>
+  <rect x="28" y="72" width="28" height="8" fill="url(#metal-light)" stroke="none"/>
+  <ellipse cx="42" cy="80" rx="14" ry="5" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.2"/>
+  <line x1="28" y1="72" x2="28" y2="80" stroke="url(#metal)" stroke-width="1.2"/>
+  <line x1="56" y1="72" x2="56" y2="80" stroke="url(#metal)" stroke-width="1.2"/>
+  <!-- Child disk right -->
+  <ellipse cx="80" cy="72" rx="14" ry="5" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.2" filter="url(#emboss)"/>
+  <rect x="66" y="72" width="28" height="8" fill="url(#metal-light)" stroke="none"/>
+  <ellipse cx="80" cy="80" rx="14" ry="5" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.2"/>
+  <line x1="66" y1="72" x2="66" y2="80" stroke="url(#metal)" stroke-width="1.2"/>
+  <line x1="94" y1="72" x2="94" y2="80" stroke="url(#metal)" stroke-width="1.2"/>
+  <!-- Sub-child from right -->
+  <line x1="80" y1="80" x2="80" y2="88" stroke="url(#metal)" stroke-width="1.5"/>
+  <ellipse cx="80" cy="92" rx="12" ry="4" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1" filter="url(#emboss)"/>
+  <rect x="68" y="92" width="24" height="6" fill="url(#metal-light)" stroke="none"/>
+  <ellipse cx="80" cy="98" rx="12" ry="4" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1"/>
+  <line x1="68" y1="92" x2="68" y2="98" stroke="url(#metal)" stroke-width="1"/>
+  <line x1="92" y1="92" x2="92" y2="98" stroke="url(#metal)" stroke-width="1"/>
+</svg>

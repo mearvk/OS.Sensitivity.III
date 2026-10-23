@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Terminal — Rounded square tile, white/silver, embossed $_ prompt -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="screen-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5A6A78"/>
+      <stop offset="100%" style="stop-color:#3A4A58"/>
+    </linearGradient>
+    <linearGradient id="metal-frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#C8D0D8"/>
+      <stop offset="100%" style="stop-color:#98A8B4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" 
+        stroke="#C8D0D8" stroke-width="1.5"/>
+  
+  <!-- Monitor frame (metallic border) -->
+  <rect x="24" y="28" width="80" height="64" rx="6" ry="6" 
+        fill="url(#metal-frame)" stroke="#8A98A4" stroke-width="1.5" filter="url(#emboss)"/>
+  
+  <!-- Screen (dark interior) -->
+  <rect x="28" y="32" width="72" height="56" rx="4" ry="4" fill="url(#screen-bg)"/>
+  
+  <!-- Terminal prompt: $_ -->
+  <text x="38" y="68" font-family="'Courier New', monospace" font-size="28" 
+        font-weight="bold" fill="#D8E0E8" opacity="0.9">$_</text>
+  
+  <!-- Cursor blink line -->
+  <rect x="76" y="52" width="3" height="22" fill="#A8C8E8" opacity="0.7"/>
+  
+  <!-- Monitor stand -->
+  <rect x="54" y="94" width="20" height="6" rx="2" fill="url(#metal-frame)" stroke="#8A98A4" stroke-width="0.8"/>
+  <rect x="48" y="100" width="32" height="4" rx="2" fill="url(#metal-frame)" stroke="#8A98A4" stroke-width="0.8"/>
+</svg>

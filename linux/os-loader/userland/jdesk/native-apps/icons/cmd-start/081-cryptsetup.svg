@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Cryptsetup — Padlock with disk -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Disk behind padlock -->
+  <ellipse cx="64" cy="82" rx="26" ry="10" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" filter="url(#emboss)"/>
+  <ellipse cx="64" cy="82" rx="7" ry="3" fill="url(#metal)"/>
+  <!-- Padlock body -->
+  <rect x="46" y="52" width="36" height="28" rx="4" fill="url(#metal)" filter="url(#emboss)"/>
+  <!-- Padlock shackle -->
+  <path d="M52 52 L52 42 C52 34 58 30 64 30 C70 30 76 34 76 42 L76 52" fill="none" stroke="url(#metal-light)" stroke-width="5" stroke-linecap="round"/>
+  <!-- Keyhole -->
+  <circle cx="64" cy="64" r="4" fill="#E8ECF0"/>
+  <rect x="62" y="64" width="4" height="8" rx="1" fill="#E8ECF0"/>
+</svg>

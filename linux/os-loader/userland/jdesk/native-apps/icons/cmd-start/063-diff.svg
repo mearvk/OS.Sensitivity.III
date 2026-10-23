@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: diff — Two documents with delta symbol -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Left document -->
+  <rect x="24" y="30" width="36" height="50" rx="4" ry="4" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="2" filter="url(#emboss)"/>
+  <line x1="30" y1="42" x2="54" y2="42" stroke="#8896A4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="30" y1="50" x2="50" y2="50" stroke="#8896A4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="30" y1="58" x2="54" y2="58" stroke="#8896A4" stroke-width="2" stroke-linecap="round"/>
+  <!-- Right document -->
+  <rect x="68" y="30" width="36" height="50" rx="4" ry="4" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="2" filter="url(#emboss)"/>
+  <line x1="74" y1="42" x2="98" y2="42" stroke="#8896A4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="74" y1="50" x2="94" y2="50" stroke="#8896A4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="74" y1="58" x2="98" y2="58" stroke="#8896A4" stroke-width="2" stroke-linecap="round"/>
+  <!-- Delta symbol -->
+  <path d="M64 86 L52 104 L76 104 Z" fill="none" stroke="url(#metal)" stroke-width="3" stroke-linejoin="round" filter="url(#emboss)"/>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: man — Rounded square tile, white/silver, open book with ? mark -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Left page -->
+  <path d="M 64 40 L 64 96 L 30 90 L 30 34 Z" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="2" stroke-linejoin="round" filter="url(#emboss)"/>
+  <!-- Right page -->
+  <path d="M 64 40 L 64 96 L 98 90 L 98 34 Z" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="2" stroke-linejoin="round" filter="url(#emboss)"/>
+  <!-- Book spine -->
+  <line x1="64" y1="40" x2="64" y2="96" stroke="url(#metal)" stroke-width="2"/>
+  <!-- Text lines on left page -->
+  <line x1="38" y1="50" x2="58" y2="48" stroke="url(#metal)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="38" y1="58" x2="58" y2="56" stroke="url(#metal)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="38" y1="66" x2="56" y2="64" stroke="url(#metal)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="38" y1="74" x2="58" y2="72" stroke="url(#metal)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <!-- Question mark on right page -->
+  <text x="80" y="76" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="url(#metal)" text-anchor="middle" filter="url(#emboss)">?</text>
+</svg>

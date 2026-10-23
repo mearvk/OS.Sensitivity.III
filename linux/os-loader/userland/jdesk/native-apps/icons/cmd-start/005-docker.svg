@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Docker — Container/whale shape -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Whale/container shape -->
+  <g filter="url(#emboss)">
+    <!-- Whale body -->
+    <path d="M28,68 C28,68 30,58 40,56 L40,56 L92,56 C100,56 104,62 104,68 C104,78 96,86 80,86 L44,86 C32,86 28,78 28,68 Z" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Container blocks on whale -->
+    <rect x="42" y="46" width="10" height="10" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <rect x="54" y="46" width="10" height="10" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <rect x="66" y="46" width="10" height="10" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <rect x="54" y="34" width="10" height="10" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <rect x="42" y="58" width="10" height="10" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="0.5" opacity="0.5"/>
+    <rect x="54" y="58" width="10" height="10" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="0.5" opacity="0.5"/>
+    <rect x="66" y="58" width="10" height="10" rx="1" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="0.5" opacity="0.5"/>
+    <!-- Whale eye -->
+    <circle cx="96" cy="64" r="2.5" fill="#4A5A68"/>
+    <!-- Water line -->
+    <path d="M24,82 Q34,78 44,82 Q54,86 64,82 Q74,78 84,82 Q94,86 104,82" fill="none" stroke="url(#light-metal)" stroke-width="2" opacity="0.5"/>
+  </g>
+</svg>

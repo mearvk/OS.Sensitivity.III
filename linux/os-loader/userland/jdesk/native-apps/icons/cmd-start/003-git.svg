@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Git — Branching nodes -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Git branching nodes -->
+  <g filter="url(#emboss)">
+    <!-- Main branch line -->
+    <line x1="50" y1="32" x2="50" y2="96" stroke="url(#dark-metal)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Branch line -->
+    <path d="M50,52 C50,52 60,52 72,42" fill="none" stroke="url(#dark-metal)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M72,42 C72,60 72,68 50,76" fill="none" stroke="url(#dark-metal)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Nodes -->
+    <circle cx="50" cy="32" r="7" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="2"/>
+    <circle cx="50" cy="96" r="7" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="2"/>
+    <circle cx="50" cy="76" r="7" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="2"/>
+    <circle cx="72" cy="42" r="7" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="2"/>
+  </g>
+</svg>

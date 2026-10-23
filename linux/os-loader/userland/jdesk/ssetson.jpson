@@ -1,0 +1,91 @@
+{
+  "schema": "ssetson/1.0",
+  "name": "Ubuntu Determinant Alpha RS — Filesystem Session Configuration",
+  "copyright": "Copyright (C) 2026 MEARVK LLC",
+  "author": "Maximilian Eric Alexander Rupplin von Keffikon",
+
+  "description": "Guiding document for installation programs. Defines where software should be installed based on its relationship to the user.",
+
+  "hierarchies": {
+    "/usr": {
+      "philosophy": "The machine considers this software on behalf of the user.",
+      "meaning": "Programs here are managed by the machine. The user benefits passively. The system installs, updates, and removes these contents without requiring the user's direct involvement.",
+      "managed_by": "apt/dpkg (package system)",
+      "user_involvement": "none — machine acts on user's behalf",
+      "examples": [
+        "coreutils (ls, cp, mv)",
+        "gcc",
+        "system libraries (libc, libssl)",
+        "kernel headers",
+        "system man pages"
+      ],
+      "install_rule": "Only package managers and system scripts write here.",
+      "negamane": true,
+      "permission_class": "system",
+      "survives_reinstall": false
+    },
+
+    "/user": {
+      "philosophy": "Directly for the user, by the user, for the future user.",
+      "meaning": "Binaries, libraries, structs, and organizations that the user actively chose, built, or curated. This is where you build things for the future — for the future version of yourself, for the next project, for what comes next.",
+      "managed_by": "owner (manual / JDesk)",
+      "user_involvement": "direct — user acts on own behalf",
+      "examples": [
+        "personal scripts",
+        "user-compiled tools",
+        "custom libraries",
+        "development projects",
+        "personal structs and data organizations",
+        "future-facing prototypes"
+      ],
+      "install_rule": "Installation programs MUST confirm with the user before writing here. This is the user's personal creative and engineering space.",
+      "negamane": false,
+      "permission_class": "trusted/genius",
+      "survives_reinstall": true
+    },
+
+    "/deck": {
+      "philosophy": "Professional-grade system software that serves the user's professional needs.",
+      "meaning": "Network-aware, security-conscious, performance-critical, or domain-specialized software. Programs here are expected to integrate with Dave AI, respect permission classes, and operate at professional tier.",
+      "managed_by": "owner / JDesk / dedicated installers",
+      "user_involvement": "curated — user selects, system manages lifecycle",
+      "examples": [
+        "MySQL (professional database)",
+        "Professional IDEs",
+        "Artist/creative programs (DAW, image editors, 3D)",
+        "Professional audio tools",
+        "Security software (ClamAV, IDS)",
+        "Scanning systems (vulnerability, compliance)",
+        "Heuristic engines (AI/ML, anomaly detection)",
+        "Network-aware programs (servers, proxies, monitors)"
+      ],
+      "install_rule": "Installation programs should route professional-grade, system-aware software here. Requires elevated permission class.",
+      "negamane": true,
+      "permission_class": "elevated (trusted minimum)",
+      "survives_reinstall": true
+    }
+  },
+
+  "path_order": "/usr/local/bin:/user/local/bin:/user/bin:/deck/local/bin:/deck/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+
+  "decision_matrix": {
+    "question_1": "Is this software managed entirely by the package system with no user curation?",
+    "if_yes_1": "/usr",
+
+    "question_2": "Is this software the user personally chose, built, or is building for their future?",
+    "if_yes_2": "/user",
+
+    "question_3": "Is this professional-grade software that is network-aware, security-focused, or domain-specialized?",
+    "if_yes_3": "/deck",
+
+    "fallback": "/usr (default for uncategorized system packages)"
+  },
+
+  "installer_instructions": {
+    "before_install": "Read this file to determine target hierarchy.",
+    "confirm_user": "If target is /user, ALWAYS confirm with the user.",
+    "check_permissions": "Verify caller has required permission class for target.",
+    "register_with_dave": "If target is /deck, register the installation with Dave AI.",
+    "negamane_check": "If target is /usr or /deck, check NEGAMANE brand before overwriting."
+  }
+}

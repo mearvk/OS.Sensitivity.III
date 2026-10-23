@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: mount — Rounded square tile, white/silver, disk with upward arrow -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Disk body -->
+  <ellipse cx="58" cy="72" rx="28" ry="10" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" filter="url(#emboss)"/>
+  <rect x="30" y="72" width="56" height="18" fill="url(#metal-light)" stroke="none"/>
+  <ellipse cx="58" cy="90" rx="28" ry="10" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5"/>
+  <line x1="30" y1="72" x2="30" y2="90" stroke="url(#metal)" stroke-width="1.5"/>
+  <line x1="86" y1="72" x2="86" y2="90" stroke="url(#metal)" stroke-width="1.5"/>
+  <!-- Upward arrow -->
+  <line x1="82" y1="36" x2="82" y2="62" stroke="url(#metal)" stroke-width="4" stroke-linecap="round" filter="url(#emboss)"/>
+  <polyline points="74,44 82,34 90,44" fill="none" stroke="url(#metal)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#emboss)"/>
+</svg>

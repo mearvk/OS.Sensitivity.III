@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Nano — Pencil on notepad -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Notepad with pencil -->
+  <g filter="url(#emboss)">
+    <!-- Notepad -->
+    <rect x="32" y="30" width="50" height="68" rx="4" ry="4" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Notepad lines -->
+    <line x1="40" y1="44" x2="74" y2="44" stroke="#8A9AA8" stroke-width="1.5" opacity="0.6"/>
+    <line x1="40" y1="54" x2="74" y2="54" stroke="#8A9AA8" stroke-width="1.5" opacity="0.6"/>
+    <line x1="40" y1="64" x2="74" y2="64" stroke="#8A9AA8" stroke-width="1.5" opacity="0.6"/>
+    <line x1="40" y1="74" x2="74" y2="74" stroke="#8A9AA8" stroke-width="1.5" opacity="0.6"/>
+    <line x1="40" y1="84" x2="60" y2="84" stroke="#8A9AA8" stroke-width="1.5" opacity="0.6"/>
+    <!-- Pencil -->
+    <g transform="rotate(-30, 82, 60)">
+      <rect x="78" y="34" width="8" height="52" rx="2" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1"/>
+      <polygon points="78,86 82,96 86,86" fill="#6B7B8A"/>
+      <rect x="78" y="34" width="8" height="8" fill="#8A9AA8" stroke="#6B7B8A" stroke-width="0.5"/>
+    </g>
+  </g>
+</svg>

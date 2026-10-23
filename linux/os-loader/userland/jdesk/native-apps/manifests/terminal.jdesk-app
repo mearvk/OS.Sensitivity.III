@@ -1,0 +1,21 @@
+# JDesk Application Manifest: Terminal
+# JDesk Terminal — built-in Java terminal emulator with JNI PTY
+#
+# Format: Java Properties
+# Loaded by: us.mearvk.jdesk.launcher.NativeAppLauncher
+
+name=Terminal
+binary=/opt/jdesk/apps/terminal/jdesk-terminal
+args=
+icon=/opt/jdesk/icons/terminal.svg
+profile=terminal
+category=system
+desktop=true
+panel=true
+
+# Resource governance (Memory Proxy)
+ram-soft=64m
+ram-hard=256m
+cpu=50
+threads=16
+disk-write=50m

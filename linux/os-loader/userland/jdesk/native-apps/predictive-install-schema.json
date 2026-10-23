@@ -1,0 +1,91 @@
+{
+  "title": "JDesk Predictive Install — Native Registry Schema",
+  "version": "1.0",
+  "date": "2026-08-15",
+  "author": "MEARVK LLC",
+  "license": "GPL-2.0",
+
+  "description": "Registry file maintained by predictive-install.sh. Tracks all installed natives with version, SHA-256, installer ID, install date, and install count. Used for pre-install check-ahead, delete verification, and reinstall decisions.",
+
+  "predictive_model": {
+    "tiers": {
+      "1_essential": {
+        "philosophy": "Always installed first. Small footprint, always used. The system cannot function as a desktop without these.",
+        "apps": ["terminal", "files", "coreutils", "ssh"],
+        "total_mb": 67
+      },
+      "2_productive": {
+        "philosophy": "High utility, moderate size. These are what users sit down to work with every day.",
+        "apps": ["ide", "writer", "git", "curl", "telnet"],
+        "total_mb": 694
+      },
+      "3_connected": {
+        "philosophy": "Internet/network-facing applications. Needed for web work and research.",
+        "apps": ["browser"],
+        "total_mb": 180
+      },
+      "4_extended": {
+        "philosophy": "Large footprint, optional functionality. Installed only if space permits. High value for specific workflows but not daily necessities.",
+        "apps": ["wine", "darling", "gimp", "vlc", "kali"],
+        "total_mb": 1160
+      }
+    },
+    "scoring": {
+      "formula": "score = (utility × probable_use × 100) / size_mb",
+      "utility_range": "1-10 (how useful is this app when you need it)",
+      "probable_use_range": "1-10 (how often will a typical user need it)",
+      "size_mb": "installed disk footprint",
+      "ordering": "Within each tier, highest score installs first (best value per MB)"
+    },
+    "space_behavior": {
+      "scan_before_install": true,
+      "recheck_between_installs": true,
+      "graceful_stop": "If space runs out mid-tier, stop and report what was installed vs skipped",
+      "never_fills_disk": "Always leaves at least 200 MB headroom"
+    }
+  },
+
+  "registry_fields": {
+    "name": "Human-readable application name",
+    "version": "Detected version string from --version or equivalent",
+    "sha256": "SHA-256 of the installed binary (or symlink target)",
+    "size_mb": "Approximate installed size",
+    "binary": "Path to the installed binary or symlink",
+    "tier": "Predictive tier (1-4)",
+    "installer_id": "Identity of the installer tech who ran the install",
+    "install_date": "ISO 8601 timestamp of installation",
+    "install_count": "Number of times this native has been installed (tracks reinstalls)"
+  },
+
+  "check_ahead": {
+    "description": "Before installing any native, the system checks the existing binary",
+    "checks": [
+      "Does the binary exist at the target path?",
+      "Is it a symlink? If so, is the target valid?",
+      "What is the current SHA-256? Does it match the registry?",
+      "What version does it report?",
+      "Who installed it (installer_id from registry)?",
+      "When was it installed?",
+      "Has the binary been modified since install (SHA mismatch)?"
+    ],
+    "decisions": {
+      "sha_matches_and_current": "Skip (already installed and unmodified)",
+      "sha_mismatch": "Warn (binary was modified outside our control)",
+      "version_outdated": "Offer upgrade",
+      "not_in_registry": "Install fresh and register",
+      "force_flag": "Reinstall regardless of current state"
+    }
+  },
+
+  "delete_protocol": {
+    "description": "Safe removal of installed natives",
+    "steps": [
+      "1. Verify the ID exists in our registry",
+      "2. Check if the binary is a symlink (safe to remove) or an actual file",
+      "3. Only remove within /opt/jdesk/apps/ — refuse to touch system paths",
+      "4. Remove from the registry",
+      "5. Log the deletion"
+    ],
+    "safety": "Will not rm -rf outside /opt/jdesk/apps/. System packages (apt) are only unlinked, not purged."
+  }
+}

@@ -1,0 +1,16 @@
+[Unit]
+Description=JDesk EXT4 Virtual Filesystem (Internal Home)
+Documentation=man:mount(8)
+DefaultDependencies=no
+After=local-fs-pre.target
+Before=local-fs.target
+
+[Mount]
+What=/opt/jdesk/vfs/jdesk-ext4.img
+Where=/opt/jdesk/home
+Type=ext4
+Options=loop,rw,noatime,nodiratime
+TimeoutSec=30
+
+[Install]
+WantedBy=local-fs.target

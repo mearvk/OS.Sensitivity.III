@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="aurora-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000814"/>
+      <stop offset="60%" stop-color="#001d3d"/>
+      <stop offset="100%" stop-color="#000a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#aurora-bg)"/>
+  <!-- Aurora bands -->
+  <path d="M0,600 Q500,400 1000,500 Q1500,600 2000,450 Q2500,300 3000,400 Q3500,500 3840,350" fill="none" stroke="#00ff88" stroke-width="60" opacity="0.2" stroke-linecap="round"/>
+  <path d="M0,700 Q600,500 1200,600 Q1800,700 2400,550 Q3000,400 3840,500" fill="none" stroke="#00cc66" stroke-width="40" opacity="0.15" stroke-linecap="round"/>
+  <path d="M0,550 Q400,350 800,450 Q1200,550 1600,400 Q2000,250 2400,350 Q2800,450 3200,300 Q3600,200 3840,300" fill="none" stroke="#44ffaa" stroke-width="30" opacity="0.2" stroke-linecap="round"/>
+  <!-- Pink/cherry aurora (unusual, striking) -->
+  <path d="M0,800 Q700,650 1400,750 Q2100,850 2800,700 Q3500,550 3840,650" fill="none" stroke="#ff6b9d" stroke-width="50" opacity="0.15" stroke-linecap="round"/>
+  <path d="M0,850 Q600,700 1200,800 Q1800,900 2400,750 Q3000,600 3840,700" fill="none" stroke="#ff8fb3" stroke-width="30" opacity="0.1" stroke-linecap="round"/>
+  <!-- Snow/ice ground -->
+  <path d="M0,1800 Q400,1750 800,1780 Q1200,1810 1600,1770 Q2000,1730 2400,1760 Q2800,1790 3200,1750 Q3600,1720 3840,1760" fill="#0a1628" stroke="none"/>
+  <rect x="0" y="1800" width="3840" height="360" fill="#0a1628"/>
+  <!-- Reflections on snow -->
+  <ellipse cx="1920" cy="1900" rx="800" ry="100" fill="#00ff88" opacity="0.03"/>
+  <ellipse cx="1920" cy="1950" rx="600" ry="60" fill="#ff6b9d" opacity="0.02"/>
+  <!-- Stars -->
+  <circle cx="200" cy="100" r="2" fill="white" opacity="0.9"/>
+  <circle cx="600" cy="200" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="1000" cy="80" r="1" fill="white" opacity="0.6"/>
+  <circle cx="1400" cy="150" r="2" fill="white" opacity="0.8"/>
+  <circle cx="1800" cy="50" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="2200" cy="180" r="1" fill="white" opacity="0.7"/>
+  <circle cx="2600" cy="90" r="2" fill="white" opacity="0.8"/>
+  <circle cx="3000" cy="160" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="3400" cy="70" r="1" fill="white" opacity="0.9"/>
+  <circle cx="3700" cy="200" r="2" fill="white" opacity="0.7"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

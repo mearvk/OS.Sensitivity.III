@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: ls — List lines with folder icon -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Small folder icon -->
+  <path d="M28 36 L28 33 Q28 30 31 30 L40 30 L43 34 L28 36 Z" fill="url(#metal)"/>
+  <rect x="28" y="36" width="28" height="20" rx="3" ry="3" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" filter="url(#emboss)"/>
+  <!-- List lines -->
+  <line x1="36" y1="68" x2="92" y2="68" stroke="url(#metal)" stroke-width="3" stroke-linecap="round" filter="url(#emboss)"/>
+  <line x1="36" y1="80" x2="92" y2="80" stroke="url(#metal)" stroke-width="3" stroke-linecap="round" filter="url(#emboss)"/>
+  <line x1="36" y1="92" x2="78" y2="92" stroke="url(#metal)" stroke-width="3" stroke-linecap="round" filter="url(#emboss)"/>
+  <!-- Bullets -->
+  <circle cx="30" cy="68" r="2.5" fill="url(#metal)"/>
+  <circle cx="30" cy="80" r="2.5" fill="url(#metal)"/>
+  <circle cx="30" cy="92" r="2.5" fill="url(#metal)"/>
+</svg>

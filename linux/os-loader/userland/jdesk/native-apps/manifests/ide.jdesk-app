@@ -1,0 +1,137 @@
+# JDesk Application Manifest: IDE
+# Full IntelliJ IDEA feature-parity IDE with JavaFX GUI chrome.
+#
+# JDesk provides the complete IDE surface (all menus, toolbars, tool windows).
+# IntelliJ runs as a governed subprocess providing code intelligence.
+# In standalone mode, the built-in editor handles all basic operations directly.
+#
+# Full IntelliJ Menu Set:
+#   File, Edit, View, Navigate, Code, Refactor, Build, Run, Tools,
+#   Git (VCS), Window, Analyze, Help
+#
+# Toolbar Buttons (matching IntelliJ main toolbar):
+#   Back, Forward, Search Everywhere, Run Configuration dropdown,
+#   Run, Debug, Profile, Run with Coverage, Stop,
+#   Build Project, Commit, Push, Pull, History, Settings
+#
+# Tool Windows:
+#   Terminal, Build, Run, Debug, Problems, TODO,
+#   Version Control (Git), Database, Event Log
+#
+# Editor Features:
+#   - Tabs with modified indicator, close, split (vertical/horizontal)
+#   - Line numbers, code folding, bookmarks, gutter icons
+#   - Navigation bar (breadcrumb trail: package > class > method)
+#   - Find/Replace bar (in-editor), Find in Path, Replace in Path
+#   - Go to Line, Go to Class, Go to File, Go to Symbol
+#   - Duplicate line, delete line, move line up/down
+#   - Toggle line/block comment, reformat code, optimize imports
+#   - Column selection mode, extend/shrink selection
+#   - Word wrap toggle, whitespace display, indent guides
+#
+# Code Intelligence (requires IntelliJ backend):
+#   - Code completion (basic + smart)
+#   - Go to Declaration / Implementation / Super Method
+#   - Type Hierarchy, Call Hierarchy, File Structure
+#   - All refactorings: Rename, Extract Method/Variable/Constant/Field/
+#     Parameter/Interface/Superclass, Inline, Move, Safe Delete,
+#     Change Signature, Pull/Push Members
+#   - Inspections, Code Cleanup, Analyze Dependencies
+#   - Generate (Constructor, Getter, Setter, equals/hashCode, toString)
+#   - Override/Implement Methods, Surround With, Live Templates
+#
+# Run/Debug:
+#   - Run, Debug, Profile, Run with Coverage
+#   - Step Over, Step Into, Step Out, Force Step Into, Run to Cursor
+#   - Resume, Evaluate Expression, Toggle/View Breakpoints
+#   - Auto-detect build system: Maven, Gradle, Make, Cargo, npm
+#   - Build, Rebuild, Clean, Build Artifacts
+#
+# VCS/Git:
+#   - Commit, Push, Pull, Fetch, Update, Merge, Rebase
+#   - Branches, New Branch, Checkout
+#   - Show History, Annotate (Blame), Show Diff
+#   - Compare with Branch, Stash/Unstash, Reset, Rollback
+#
+# Status Bar:
+#   - Git branch, file encoding (UTF-8), line separator (LF),
+#     cursor position (Ln:Col), memory usage indicator,
+#     IntelliJ backend connection status
+#
+# Keyboard Shortcuts (IntelliJ Default keymap):
+#   Ctrl+N        New File / Go to Class
+#   Ctrl+Shift+N  Go to File
+#   Ctrl+O        Open File
+#   Ctrl+Shift+O  Open Project
+#   Ctrl+S        Save
+#   Ctrl+Shift+S  Save All
+#   Ctrl+W        Close Tab
+#   Ctrl+F        Find
+#   Ctrl+H        Replace
+#   Ctrl+Shift+F  Find in Path
+#   Ctrl+Shift+H  Replace in Path
+#   Ctrl+G        Go to Line
+#   Ctrl+E        Recent Files
+#   Ctrl+D        Duplicate Line
+#   Ctrl+Y        Delete Line
+#   Ctrl+/        Toggle Line Comment
+#   Ctrl+Shift+/  Toggle Block Comment
+#   Ctrl+Alt+L    Reformat Code
+#   Ctrl+Alt+O    Optimize Imports
+#   Shift+F6      Rename
+#   Ctrl+Alt+M    Extract Method
+#   Ctrl+Alt+V    Extract Variable
+#   Ctrl+Alt+C    Extract Constant
+#   Ctrl+Alt+N    Inline
+#   Ctrl+F9       Build Project
+#   Shift+F10     Run
+#   Shift+F9      Debug
+#   Ctrl+F2       Stop
+#   F8            Step Over
+#   F7            Step Into
+#   Shift+F8      Step Out
+#   Ctrl+F8       Toggle Breakpoint
+#   Ctrl+K        Commit
+#   Ctrl+Shift+K  Push
+#   Alt+1         Toggle Project
+#   Alt+7         Toggle Structure
+#   Alt+9         Toggle Version Control
+#   Alt+F12       Toggle Terminal
+#   Ctrl+Alt+S    Settings
+#   Ctrl+Shift+A  Find Action
+#   F11           Toggle Bookmark
+#   Shift+Shift   Search Everywhere
+#   Alt+Left      Navigate Back
+#   Alt+Right     Navigate Forward
+#   Ctrl+B        Go to Declaration
+#   Ctrl+Alt+B    Go to Implementation
+#   Alt+Insert    Generate
+#   Ctrl+Space    Code Completion
+#   F2            Next Error
+#   Ctrl+Alt+T    Surround With
+#   Ctrl+J        Insert Live Template
+#
+# Format: Java Properties
+# Loaded by: us.mearvk.jdesk.launcher.NativeAppLauncher
+
+name=IntelliJ
+binary=/opt/intellij/bin/idea.sh
+fallback.1=/opt/idea-IC/bin/idea.sh
+fallback.2=/opt/idea-IU/bin/idea.sh
+fallback.3=/snap/intellij-idea-community/current/bin/idea.sh
+fallback.4=/usr/local/bin/idea
+args=
+icon=/opt/jdesk/icons/intellij.svg
+profile=ide
+category=development
+desktop=true
+panel=true
+jdesk-gui=us.mearvk.jdesk.apps.JDeskIDE
+
+# Resource governance (Memory Proxy)
+ram-soft=2g
+ram-hard=4g
+cpu=90
+threads=128
+disk-write=500m
+children=48

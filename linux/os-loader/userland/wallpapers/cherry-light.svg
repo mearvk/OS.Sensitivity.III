@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="light-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef9f4"/>
+      <stop offset="100%" stop-color="#f8ece4"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#light-bg)"/>
+  <!-- Soft geometric shapes -->
+  <circle cx="600" cy="400" r="300" fill="#ff6b9d" opacity="0.06"/>
+  <circle cx="3200" cy="1700" r="400" fill="#ff8fb3" opacity="0.05"/>
+  <circle cx="1800" cy="1000" r="500" fill="#ffe0eb" opacity="0.08"/>
+  <!-- Cherry blossom branch (light theme) -->
+  <path d="M0,800 Q200,750 400,800 Q600,850 800,780 Q1000,710 1200,750" fill="none" stroke="#8b5e5e" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <path d="M600,850 Q650,900 700,920" fill="none" stroke="#8b5e5e" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <path d="M900,740 Q950,700 1000,690" fill="none" stroke="#8b5e5e" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <!-- Blossoms on branch -->
+  <circle cx="400" cy="780" r="25" fill="#ff8fb3" opacity="0.6"/>
+  <circle cx="450" cy="800" r="20" fill="#ffb3cc" opacity="0.5"/>
+  <circle cx="350" cy="790" r="18" fill="#ff6b9d" opacity="0.5"/>
+  <circle cx="700" cy="820" r="22" fill="#ff8fb3" opacity="0.6"/>
+  <circle cx="750" cy="840" r="18" fill="#ffb3cc" opacity="0.5"/>
+  <circle cx="1000" cy="720" r="20" fill="#ff6b9d" opacity="0.5"/>
+  <circle cx="1050" cy="700" r="16" fill="#ff8fb3" opacity="0.4"/>
+  <circle cx="1150" cy="740" r="24" fill="#ffb3cc" opacity="0.5"/>
+  <!-- Falling petals -->
+  <ellipse cx="500" cy="1000" rx="8" ry="5" fill="#ff8fb3" opacity="0.4" transform="rotate(30 500 1000)"/>
+  <ellipse cx="800" cy="1200" rx="7" ry="4" fill="#ff6b9d" opacity="0.3" transform="rotate(-20 800 1200)"/>
+  <ellipse cx="300" cy="1400" rx="9" ry="5" fill="#ffb3cc" opacity="0.25" transform="rotate(50 300 1400)"/>
+  <ellipse cx="1100" cy="1100" rx="6" ry="4" fill="#ff4d7d" opacity="0.3" transform="rotate(-40 1100 1100)"/>
+  <ellipse cx="650" cy="1500" rx="8" ry="5" fill="#ff8fb3" opacity="0.2" transform="rotate(15 650 1500)"/>
+  <!-- Subtle texture dots -->
+  <circle cx="2000" cy="500" r="1" fill="#8b5e5e" opacity="0.1"/>
+  <circle cx="2500" cy="800" r="1" fill="#8b5e5e" opacity="0.08"/>
+  <circle cx="3000" cy="600" r="1" fill="#8b5e5e" opacity="0.1"/>
+  <circle cx="2800" cy="1000" r="1" fill="#8b5e5e" opacity="0.08"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#8b5e5e" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

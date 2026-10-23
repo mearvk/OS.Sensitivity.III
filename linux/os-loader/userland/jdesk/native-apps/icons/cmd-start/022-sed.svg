@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Sed — Stream with pencil -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Stream with pencil -->
+  <g filter="url(#emboss)">
+    <!-- Stream flowing lines -->
+    <path d="M24,44 C40,44 48,56 64,56 C80,56 88,44 104,44" fill="none" stroke="url(#light-metal)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M24,64 C40,64 48,76 64,76 C80,76 88,64 104,64" fill="none" stroke="url(#light-metal)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M24,84 C40,84 48,96 64,96 C80,96 88,84 104,84" fill="none" stroke="url(#light-metal)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Pencil (editing the stream) -->
+    <g transform="rotate(-45, 64, 56)">
+      <rect x="58" y="36" width="8" height="40" rx="1" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+      <polygon points="58,76 62,84 66,76" fill="#6B7B8A"/>
+      <rect x="58" y="36" width="8" height="6" fill="#8A9AA8" stroke="#6B7B8A" stroke-width="0.5"/>
+    </g>
+    <!-- Edit indicator -->
+    <path d="M56,56 L72,56" stroke="#4A5A68" stroke-width="2" stroke-dasharray="3,2"/>
+  </g>
+</svg>

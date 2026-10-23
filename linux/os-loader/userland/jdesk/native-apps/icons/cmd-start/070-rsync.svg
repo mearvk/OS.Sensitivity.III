@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: rsync — Two folders with sync arrows -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Left folder -->
+  <path d="M22 42 L22 39 Q22 36 25 36 L36 36 L39 40 L22 42 Z" fill="url(#metal)"/>
+  <rect x="22" y="42" width="32" height="24" rx="3" ry="3" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" filter="url(#emboss)"/>
+  <!-- Right folder -->
+  <path d="M74 42 L74 39 Q74 36 77 36 L88 36 L91 40 L74 42 Z" fill="url(#metal)"/>
+  <rect x="74" y="42" width="32" height="24" rx="3" ry="3" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" filter="url(#emboss)"/>
+  <!-- Sync arrows (circular) -->
+  <path d="M46 82 C54 74, 72 74, 82 82" fill="none" stroke="url(#metal)" stroke-width="3" stroke-linecap="round" filter="url(#emboss)"/>
+  <polygon points="82,78 86,84 78,84" fill="url(#metal)"/>
+  <path d="M82 96 C74 104, 56 104, 46 96" fill="none" stroke="url(#metal)" stroke-width="3" stroke-linecap="round" filter="url(#emboss)"/>
+  <polygon points="46,100 42,94 50,94" fill="url(#metal)"/>
+</svg>

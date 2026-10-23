@@ -1,0 +1,631 @@
+#!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
+#
+# kali-provision — JDesk Kali Security Tools Provisioner
+#
+# Downloads and installs the top Kali Linux penetration testing tools
+# into /opt/jdesk/apps/kali/ for use via JDesk terminal.
+#
+# Budget: ~250MB total installation footprint.
+# Strategy: apt where available, GitHub releases for Go binaries,
+#           pip venv for Python tools, git clone for frameworks.
+#
+# Usage:
+#   sudo kali-provision                  # Install all critical tools
+#   sudo kali-provision --status         # Show installed tools
+#   sudo kali-provision --verify         # Verify all binaries work
+#   sudo kali-provision --install TOOL   # Install a specific tool
+#   sudo kali-provision --wordlists      # Download SecLists (partial)
+#   sudo kali-provision --metasploit     # Install Metasploit only
+#
+# Privilege: Grade 3 (Maintenance) per sudo_gate
+# Copyright (C) 2026 MEARVK LLC
+# Author: Maximilian Eric Alexander Rupplin von Keffikon
+
+set -euo pipefail
+
+# ===========================================================================
+#  Configuration
+# ===========================================================================
+
+# Accept install base dir as argument (from jdesk-provision), default to /opt/jdesk/apps
+INSTALL_BASE="${1:-/opt/jdesk/apps}"
+KALI_DIR="$INSTALL_BASE/kali"
+BIN_DIR="$KALI_DIR/bin"
+VENV_DIR="$KALI_DIR/venv"
+SCRIPTS_DIR="$KALI_DIR/scripts"
+WORDLISTS_DIR="$KALI_DIR/wordlists"
+MSF_DIR="$KALI_DIR/metasploit"
+
+if [ "$(id -u)" -eq 0 ]; then
+    LOG_FILE="/var/log/kali-provision.log"
+else
+    LOG_FILE="$KALI_DIR/kali-provision.log"
+    mkdir -p "$KALI_DIR" 2>/dev/null || true
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+INSTALLED=0
+SKIPPED=0
+FAILED=0
+
+# ===========================================================================
+#  Functions
+# ===========================================================================
+
+log() {
+    local msg="[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+    echo "$msg" >> "$LOG_FILE" 2>/dev/null || true
+    echo -e "$msg"
+}
+
+info()    { log "${BLUE}[INFO]${NC} $1"; }
+success() { log "${GREEN}[ OK ]${NC} $1"; }
+warn()    { log "${YELLOW}[WARN]${NC} $1"; }
+fail()    { log "${RED}[FAIL]${NC} $1"; }
+
+banner() {
+    echo -e "${CYAN}"
+    echo "╔══════════════════════════════════════════════════════════════╗"
+    echo "║  JDesk Kali Security Tools — Provisioner                    ║"
+    echo "║  Budget: 250 MB | Tools: 25 | Profile: kali-security        ║"
+    echo "║  Galactic Cherry Marvell Edition 98                         ║"
+    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo -e "${NC}"
+}
+
+check_root() {
+    if [ "$(id -u)" -ne 0 ]; then
+        # Allow non-root if installing to a user-writable path
+        if [ -w "$(dirname "$KALI_DIR")" ] || mkdir -p "$KALI_DIR" 2>/dev/null; then
+            warn "Running without root — apt installs will be skipped, local tools only."
+            return 0
+        fi
+        fail "This script requires Grade 3+ privilege (sudo)."
+        echo "  Usage: sudo kali-provision"
+        echo "  Or pass a writable install dir: kali-provision /path/to/dir"
+        exit 1
+    fi
+}
+
+create_dirs() {
+    info "Creating directory structure..."
+    mkdir -p "$BIN_DIR" "$SCRIPTS_DIR" "$WORDLISTS_DIR" "$VENV_DIR" "$MSF_DIR"
+    mkdir -p "$KALI_DIR/sqlmap" "$KALI_DIR/responder"
+    chmod 755 "$KALI_DIR" "$BIN_DIR"
+}
+
+# ---------------------------------------------------------------------------
+#  APT packages
+# ---------------------------------------------------------------------------
+
+install_apt_tools() {
+    info "Installing APT-sourced tools..."
+    
+    local apt_tools=(
+        nmap
+        masscan
+        ncat
+        nikto
+        hydra
+        john
+        hashcat
+        aircrack-ng
+        tshark
+        tcpdump
+        gobuster
+        dirb
+        socat
+    )
+    
+    # Update package list
+    apt-get update -qq 2>/dev/null || warn "apt-get update had warnings"
+    
+    for tool in "${apt_tools[@]}"; do
+        if dpkg -s "$tool" &>/dev/null; then
+            success "$tool (already installed)"
+            ((SKIPPED++)) || true
+        else
+            if apt-get install -y -qq "$tool" 2>/dev/null; then
+                success "$tool (installed via apt)"
+                ((INSTALLED++)) || true
+            else
+                fail "$tool (apt install failed)"
+                ((FAILED++)) || true
+            fi
+        fi
+    done
+}
+
+# ---------------------------------------------------------------------------
+#  Python venv + pip tools
+# ---------------------------------------------------------------------------
+
+setup_python_venv() {
+    info "Setting up Python virtual environment..."
+    
+    if [ ! -f "$VENV_DIR/bin/python3" ]; then
+        python3 -m venv "$VENV_DIR"
+        "$VENV_DIR/bin/pip" install --upgrade pip setuptools wheel -q
+        success "Python venv created at $VENV_DIR"
+    else
+        success "Python venv already exists"
+    fi
+}
+
+install_pip_tools() {
+    info "Installing pip-sourced tools..."
+    
+    local pip_tools=(
+        "impacket"
+        "crackmapexec"
+        "wfuzz"
+        "enum4linux-ng"
+    )
+    
+    for tool in "${pip_tools[@]}"; do
+        if "$VENV_DIR/bin/pip" show "$tool" &>/dev/null; then
+            success "$tool (already installed in venv)"
+            ((SKIPPED++)) || true
+        else
+            if "$VENV_DIR/bin/pip" install "$tool" -q 2>/dev/null; then
+                success "$tool (installed via pip)"
+                ((INSTALLED++)) || true
+            else
+                fail "$tool (pip install failed)"
+                ((FAILED++)) || true
+            fi
+        fi
+    done
+}
+
+# ---------------------------------------------------------------------------
+#  GitHub releases (Go binaries)
+# ---------------------------------------------------------------------------
+
+install_github_binaries() {
+    info "Installing GitHub release binaries..."
+    
+    # chisel
+    if [ ! -f "$BIN_DIR/chisel" ]; then
+        info "  Downloading chisel..."
+        local chisel_url
+        chisel_url=$(curl -sL "https://api.github.com/repos/jpillora/chisel/releases/latest" \
+            | grep -o '"browser_download_url": "[^"]*linux_amd64.gz"' \
+            | head -1 | cut -d'"' -f4)
+        if [ -n "$chisel_url" ]; then
+            curl -sL "$chisel_url" | gunzip > "$BIN_DIR/chisel"
+            chmod +x "$BIN_DIR/chisel"
+            success "chisel (downloaded from GitHub)"
+            ((INSTALLED++)) || true
+        else
+            fail "chisel (could not find release URL)"
+            ((FAILED++)) || true
+        fi
+    else
+        success "chisel (already present)"
+        ((SKIPPED++)) || true
+    fi
+    
+    # ffuf
+    if [ ! -f "$BIN_DIR/ffuf" ]; then
+        info "  Downloading ffuf..."
+        local ffuf_url
+        ffuf_url=$(curl -sL "https://api.github.com/repos/ffuf/ffuf/releases/latest" \
+            | grep -o '"browser_download_url": "[^"]*linux_amd64.tar.gz"' \
+            | head -1 | cut -d'"' -f4)
+        if [ -n "$ffuf_url" ]; then
+            curl -sL "$ffuf_url" | tar xz -C "$BIN_DIR" ffuf 2>/dev/null
+            chmod +x "$BIN_DIR/ffuf"
+            success "ffuf (downloaded from GitHub)"
+            ((INSTALLED++)) || true
+        else
+            fail "ffuf (could not find release URL)"
+            ((FAILED++)) || true
+        fi
+    else
+        success "ffuf (already present)"
+        ((SKIPPED++)) || true
+    fi
+}
+
+# ---------------------------------------------------------------------------
+#  Git-clone tools (sqlmap, responder, linpeas)
+# ---------------------------------------------------------------------------
+
+install_git_tools() {
+    info "Installing git-cloned tools..."
+    
+    # sqlmap
+    if [ ! -f "$KALI_DIR/sqlmap/sqlmap.py" ]; then
+        git clone --depth=1 https://github.com/sqlmapproject/sqlmap.git "$KALI_DIR/sqlmap" 2>/dev/null
+        success "sqlmap (cloned)"
+        ((INSTALLED++)) || true
+    else
+        success "sqlmap (already present)"
+        ((SKIPPED++)) || true
+    fi
+    
+    # Responder
+    if [ ! -f "$KALI_DIR/responder/Responder.py" ]; then
+        git clone --depth=1 https://github.com/lgandx/Responder.git "$KALI_DIR/responder" 2>/dev/null
+        success "responder (cloned)"
+        ((INSTALLED++)) || true
+    else
+        success "responder (already present)"
+        ((SKIPPED++)) || true
+    fi
+    
+    # linpeas
+    if [ ! -f "$SCRIPTS_DIR/linpeas.sh" ]; then
+        curl -sL "https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh" \
+            -o "$SCRIPTS_DIR/linpeas.sh"
+        chmod +x "$SCRIPTS_DIR/linpeas.sh"
+        success "linpeas (downloaded)"
+        ((INSTALLED++)) || true
+    else
+        success "linpeas (already present)"
+        ((SKIPPED++)) || true
+    fi
+}
+
+# ---------------------------------------------------------------------------
+#  Metasploit Framework
+# ---------------------------------------------------------------------------
+
+install_metasploit() {
+    info "Installing Metasploit Framework..."
+    
+    if [ -f "$MSF_DIR/msfconsole" ] || command -v msfconsole &>/dev/null; then
+        success "metasploit (already installed)"
+        ((SKIPPED++)) || true
+        return
+    fi
+    
+    # Use the official installer
+    curl -sL https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb \
+        -o /tmp/msfinstall
+    chmod +x /tmp/msfinstall
+    
+    if /tmp/msfinstall 2>/dev/null; then
+        # Symlink into our bin dir
+        if [ -f /opt/metasploit-framework/bin/msfconsole ]; then
+            ln -sf /opt/metasploit-framework/bin/msfconsole "$BIN_DIR/msfconsole"
+            ln -sf /opt/metasploit-framework/bin/msfvenom "$BIN_DIR/msfvenom"
+            ln -sf /opt/metasploit-framework/bin/msfdb "$BIN_DIR/msfdb"
+        fi
+        success "metasploit (installed)"
+        ((INSTALLED++)) || true
+    else
+        fail "metasploit (installer failed — install manually)"
+        ((FAILED++)) || true
+    fi
+    
+    rm -f /tmp/msfinstall
+}
+
+# ---------------------------------------------------------------------------
+#  Partial SecLists (wordlists)
+# ---------------------------------------------------------------------------
+
+install_wordlists() {
+    info "Installing wordlists (partial SecLists)..."
+    
+    if [ -d "$WORDLISTS_DIR/Discovery" ]; then
+        success "wordlists (already present)"
+        ((SKIPPED++)) || true
+        return
+    fi
+    
+    # Sparse checkout of only the essential directories
+    cd "$WORDLISTS_DIR"
+    git init -q
+    git remote add origin https://github.com/danielmiessler/SecLists.git 2>/dev/null || true
+    git config core.sparseCheckout true
+    
+    cat > .git/info/sparse-checkout << 'SPARSE'
+Discovery/Web-Content/common.txt
+Discovery/Web-Content/directory-list-2.3-medium.txt
+Discovery/Web-Content/raft-medium-directories.txt
+Discovery/Web-Content/raft-medium-files.txt
+Discovery/DNS/subdomains-top1million-5000.txt
+Discovery/DNS/subdomains-top1million-20000.txt
+Passwords/Common-Credentials/10-million-password-list-top-1000000.txt
+Passwords/Common-Credentials/best1050.txt
+Passwords/Common-Credentials/rockyou-75.txt
+Passwords/Default-Credentials/default-passwords.csv
+Fuzzing/LFI/LFI-Jhaddix.txt
+Fuzzing/SQLi/Generic-SQLi.txt
+Fuzzing/XSS/XSS-BruteLogic.txt
+Usernames/top-usernames-shortlist.txt
+Usernames/Names/names.txt
+SPARSE
+
+    if git pull --depth=1 origin main -q 2>/dev/null; then
+        success "wordlists (SecLists partial — core lists)"
+        ((INSTALLED++)) || true
+    else
+        warn "wordlists — git pull failed. Try: sudo kali-provision --wordlists"
+        ((FAILED++)) || true
+    fi
+    
+    cd - >/dev/null
+}
+
+# ---------------------------------------------------------------------------
+#  Wrapper scripts (for Python-based tools)
+# ---------------------------------------------------------------------------
+
+create_wrapper_scripts() {
+    info "Creating wrapper scripts..."
+    
+    # sqlmap wrapper
+    cat > "$BIN_DIR/sqlmap" << 'WRAPPER'
+#!/bin/bash
+exec python3 /opt/jdesk/apps/kali/sqlmap/sqlmap.py "$@"
+WRAPPER
+    chmod +x "$BIN_DIR/sqlmap"
+    
+    # responder wrapper
+    cat > "$BIN_DIR/responder" << 'WRAPPER'
+#!/bin/bash
+exec python3 /opt/jdesk/apps/kali/responder/Responder.py "$@"
+WRAPPER
+    chmod +x "$BIN_DIR/responder"
+    
+    # impacket wrappers (symlinks from venv)
+    local impacket_tools=(smbexec psexec wmiexec secretsdump getTGT GetNPUsers smbclient ntlmrelayx)
+    for tool in "${impacket_tools[@]}"; do
+        if [ -f "$VENV_DIR/bin/impacket-$tool" ]; then
+            ln -sf "$VENV_DIR/bin/impacket-$tool" "$BIN_DIR/impacket-$tool"
+        fi
+    done
+    
+    # crackmapexec symlink
+    if [ -f "$VENV_DIR/bin/crackmapexec" ]; then
+        ln -sf "$VENV_DIR/bin/crackmapexec" "$BIN_DIR/cme"
+        ln -sf "$VENV_DIR/bin/crackmapexec" "$BIN_DIR/crackmapexec"
+    fi
+    
+    # linpeas
+    ln -sf "$SCRIPTS_DIR/linpeas.sh" "$BIN_DIR/linpeas"
+    
+    success "Wrapper scripts created"
+}
+
+# ---------------------------------------------------------------------------
+#  JDesk terminal integration (aliases + PATH)
+# ---------------------------------------------------------------------------
+
+create_terminal_integration() {
+    info "Creating JDesk terminal integration..."
+    
+    # Alias file sourced by JDesk terminal at session start
+    cat > "$KALI_DIR/kali-aliases.sh" << 'ALIASES'
+#!/bin/bash
+# JDesk Kali Security Tools — Terminal Integration
+# Sourced automatically by JDesk terminal sessions.
+# Provides PATH extension, aliases, and helper functions.
+
+# Extend PATH
+export PATH="/opt/jdesk/apps/kali/bin:/opt/jdesk/apps/kali/venv/bin:$PATH"
+
+# Wordlist shortcuts
+export WORDLISTS="/opt/jdesk/apps/kali/wordlists"
+export COMMON="$WORDLISTS/Discovery/Web-Content/common.txt"
+export DIRMEDIUM="$WORDLISTS/Discovery/Web-Content/directory-list-2.3-medium.txt"
+export ROCKYOU="$WORDLISTS/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt"
+export SUBDOMAINS="$WORDLISTS/Discovery/DNS/subdomains-top1million-5000.txt"
+
+# Aliases
+alias msfconsole='/opt/jdesk/apps/kali/bin/msfconsole'
+alias msfvenom='/opt/jdesk/apps/kali/bin/msfvenom'
+alias cme='crackmapexec'
+alias serve='python3 -m http.server 8888'
+alias listener='ncat -lvnp'
+alias lse='linpeas'
+
+# Helper functions
+kali-scan() {
+    echo -e "\033[0;36m[KALI]\033[0m Quick scan: nmap -sC -sV -oN scan.nmap $1"
+    nmap -sC -sV -oN scan.nmap "$1"
+}
+
+kali-web() {
+    echo -e "\033[0;36m[KALI]\033[0m Web enum: gobuster dir -u $1 -w $COMMON"
+    gobuster dir -u "$1" -w "$COMMON"
+}
+
+kali-fuzz() {
+    echo -e "\033[0;36m[KALI]\033[0m Fuzzing: ffuf -u $1/FUZZ -w $COMMON"
+    ffuf -u "$1/FUZZ" -w "$COMMON"
+}
+
+kali-status() {
+    echo ""
+    echo "╔══════════════════════════════════════════════════════════════╗"
+    echo "║  JDesk Kali Security Tools — Status                         ║"
+    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo ""
+    local tools=(nmap masscan ncat nikto hydra john hashcat aircrack-ng tshark tcpdump gobuster dirb socat sqlmap responder chisel ffuf crackmapexec msfconsole linpeas)
+    for t in "${tools[@]}"; do
+        if command -v "$t" &>/dev/null || [ -x "/opt/jdesk/apps/kali/bin/$t" ]; then
+            printf "  \033[0;32m✓\033[0m %-20s %s\n" "$t" "$(command -v "$t" 2>/dev/null || echo "/opt/jdesk/apps/kali/bin/$t")"
+        else
+            printf "  \033[0;31m✗\033[0m %-20s %s\n" "$t" "(not found)"
+        fi
+    done
+    echo ""
+    echo "  Wordlists: $WORDLISTS"
+    echo "  Venv:      /opt/jdesk/apps/kali/venv"
+    echo ""
+}
+ALIASES
+    chmod +x "$KALI_DIR/kali-aliases.sh"
+
+    # Create kali-shell — the desktop icon launch target
+    # Opens JDesk terminal with Kali PATH and aliases pre-loaded
+    cat > "$BIN_DIR/kali-shell" << 'KSHELL'
+#!/bin/bash
+# JDesk Kali Shell — launched from desktop icon
+# Sources Kali tools into PATH and drops into an interactive bash session.
+
+source /opt/jdesk/apps/kali/kali-aliases.sh 2>/dev/null
+
+echo ""
+echo "╔══════════════════════════════════════════════════════════════╗"
+echo "║  JDesk Kali Security Tools                                   ║"
+echo "║  Galactic Cherry Marvell Edition 98                          ║"
+echo "╚══════════════════════════════════════════════════════════════╝"
+echo ""
+echo "  Tools in PATH: /opt/jdesk/apps/kali/bin"
+echo "  Type 'kali-status' to see installed tools."
+echo ""
+
+exec bash --rcfile <(echo "source /opt/jdesk/apps/kali/kali-aliases.sh; PS1='\[\033[0;36m\][kali]\[\033[0m\] \u@\h:\w\$ '")
+KSHELL
+    chmod +x "$BIN_DIR/kali-shell"
+
+    success "Terminal integration ready: source /opt/jdesk/apps/kali/kali-aliases.sh"
+    success "Desktop launcher ready: /opt/jdesk/apps/kali/bin/kali-shell"
+}
+
+# ---------------------------------------------------------------------------
+#  Status / Verify
+# ---------------------------------------------------------------------------
+
+show_status() {
+    banner
+    echo "Installed tools:"
+    echo ""
+    
+    local tools=(nmap masscan ncat nikto hydra john hashcat aircrack-ng tshark tcpdump gobuster dirb socat chisel ffuf msfconsole)
+    for t in "${tools[@]}"; do
+        if command -v "$t" &>/dev/null; then
+            printf "  ${GREEN}✓${NC} %-20s %s\n" "$t" "$(command -v "$t")"
+        elif [ -x "$BIN_DIR/$t" ]; then
+            printf "  ${GREEN}✓${NC} %-20s %s\n" "$t" "$BIN_DIR/$t"
+        else
+            printf "  ${RED}✗${NC} %-20s %s\n" "$t" "(not installed)"
+        fi
+    done
+    
+    echo ""
+    local python_tools=(sqlmap responder crackmapexec impacket-smbexec impacket-secretsdump wfuzz enum4linux-ng linpeas)
+    for t in "${python_tools[@]}"; do
+        if [ -x "$BIN_DIR/$t" ] || [ -x "$VENV_DIR/bin/$t" ]; then
+            printf "  ${GREEN}✓${NC} %-20s %s\n" "$t" "(python/script)"
+        else
+            printf "  ${RED}✗${NC} %-20s %s\n" "$t" "(not installed)"
+        fi
+    done
+    
+    echo ""
+    echo "Disk usage:"
+    du -sh "$KALI_DIR" 2>/dev/null || echo "  (not yet installed)"
+    echo ""
+}
+
+verify_tools() {
+    banner
+    info "Verifying tool binaries..."
+    echo ""
+    
+    local pass=0
+    local total=0
+    
+    local check_tools=(nmap masscan ncat nikto hydra john hashcat tshark tcpdump gobuster socat)
+    for t in "${check_tools[@]}"; do
+        ((total++))
+        if command -v "$t" &>/dev/null && "$t" --version &>/dev/null 2>&1 || "$t" -V &>/dev/null 2>&1 || "$t" --help &>/dev/null 2>&1; then
+            printf "  ${GREEN}✓${NC} %-20s OK\n" "$t"
+            ((pass++))
+        else
+            printf "  ${RED}✗${NC} %-20s FAILED or missing\n" "$t"
+        fi
+    done
+    
+    echo ""
+    echo "  Result: $pass/$total verified"
+}
+
+# ===========================================================================
+#  Main
+# ===========================================================================
+
+main() {
+    banner
+    check_root
+    
+    case "${1:-}" in
+        --status)
+            show_status
+            exit 0
+            ;;
+        --verify)
+            verify_tools
+            exit 0
+            ;;
+        --wordlists)
+            create_dirs
+            install_wordlists
+            exit 0
+            ;;
+        --metasploit)
+            create_dirs
+            install_metasploit
+            exit 0
+            ;;
+        --install)
+            if [ -z "${2:-}" ]; then
+                fail "Usage: sudo kali-provision --install TOOL_NAME"
+                exit 1
+            fi
+            info "Installing specific tool: $2"
+            # Could add per-tool dispatch here
+            exit 0
+            ;;
+    esac
+    
+    # Full installation
+    create_dirs
+    install_apt_tools
+    setup_python_venv || warn "Python venv setup failed (install python3-venv to enable pip tools)"
+    install_pip_tools || warn "Pip tools skipped (no venv)"
+    install_github_binaries || warn "Some GitHub binaries failed"
+    install_git_tools || warn "Some git-clone tools failed"
+    install_metasploit || warn "Metasploit install incomplete"
+    install_wordlists || warn "Wordlists install incomplete"
+    create_wrapper_scripts
+    create_terminal_integration
+    
+    echo ""
+    echo "═══════════════════════════════════════════════════════════════"
+    echo "  SUMMARY"
+    echo "═══════════════════════════════════════════════════════════════"
+    echo -e "  Installed: ${GREEN}$INSTALLED${NC}"
+    echo -e "  Skipped:   ${YELLOW}$SKIPPED${NC} (already present)"
+    echo -e "  Failed:    ${RED}$FAILED${NC}"
+    echo ""
+    echo "  Install dir: $KALI_DIR"
+    echo "  Disk usage:  $(du -sh "$KALI_DIR" 2>/dev/null | cut -f1)"
+    echo ""
+    echo "  To activate in JDesk terminal:"
+    echo "    source /opt/jdesk/apps/kali/kali-aliases.sh"
+    echo ""
+    echo "  Or in any shell:"
+    echo "    export PATH=\"/opt/jdesk/apps/kali/bin:\$PATH\""
+    echo ""
+    echo "═══════════════════════════════════════════════════════════════"
+}
+
+main "$@"

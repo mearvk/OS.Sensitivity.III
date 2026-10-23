@@ -1,0 +1,21 @@
+# JDesk Application Manifest: Writer (Word Processor)
+# LibreOffice Writer — native ELF binary
+#
+# Format: Java Properties
+# Loaded by: us.mearvk.jdesk.launcher.NativeAppLauncher
+
+name=Writer
+binary=/opt/jdesk/apps/libreoffice/program/soffice
+args=--writer
+icon=/opt/jdesk/icons/writer.svg
+profile=writer
+category=office
+desktop=true
+panel=true
+
+# Resource governance (Memory Proxy)
+ram-soft=512m
+ram-hard=2g
+cpu=80
+threads=32
+disk-write=200m

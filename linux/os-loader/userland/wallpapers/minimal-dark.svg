@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="minimal-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#minimal-bg)"/>
+  <!-- Geometric accent lines -->
+  <line x1="0" y1="1600" x2="3840" y2="1400" stroke="#ff6b9d" stroke-width="1" opacity="0.3"/>
+  <line x1="0" y1="1650" x2="3840" y2="1450" stroke="#ff8fb3" stroke-width="0.5" opacity="0.2"/>
+  <line x1="0" y1="1550" x2="3840" y2="1350" stroke="#ff4d7d" stroke-width="0.5" opacity="0.2"/>
+  <!-- Subtle grid -->
+  <line x1="1920" y1="0" x2="1920" y2="2160" stroke="#ffffff" stroke-width="0.3" opacity="0.05"/>
+  <line x1="0" y1="1080" x2="3840" y2="1080" stroke="#ffffff" stroke-width="0.3" opacity="0.05"/>
+  <!-- Cherry accent circle -->
+  <circle cx="2800" cy="700" r="200" fill="none" stroke="#ff6b9d" stroke-width="2" opacity="0.2"/>
+  <circle cx="2800" cy="700" r="150" fill="none" stroke="#ff8fb3" stroke-width="1" opacity="0.15"/>
+  <circle cx="2800" cy="700" r="100" fill="#ff6b9d" opacity="0.05"/>
+  <!-- Small dots constellation -->
+  <circle cx="2750" cy="650" r="3" fill="#ff8fb3" opacity="0.6"/>
+  <circle cx="2850" cy="680" r="2" fill="#ff6b9d" opacity="0.5"/>
+  <circle cx="2780" cy="750" r="2.5" fill="#ffb3cc" opacity="0.4"/>
+  <circle cx="2820" cy="720" r="2" fill="#ff4d7d" opacity="0.5"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

@@ -1,0 +1,21 @@
+# JDesk Application Manifest: Kali Tools
+# JDesk Kali Security Tools — Terminal launcher for pentest toolkit
+#
+# Format: Java Properties
+# Loaded by: us.mearvk.jdesk.launcher.NativeAppLauncher
+
+name=Kali Tools
+binary=/opt/jdesk/apps/terminal/jdesk-terminal
+args=-e /opt/jdesk/apps/kali/bin/kali-shell
+icon=/opt/jdesk/icons/kali.svg
+profile=kali-security
+category=security
+desktop=true
+panel=true
+
+# Resource governance (Memory Proxy)
+ram-soft=512m
+ram-hard=2g
+cpu=80
+threads=64
+disk-write=200m

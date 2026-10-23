@@ -1,0 +1,30 @@
+# JDesk Application Manifest: VSCodium
+# Open-source VS Code editor — lightweight code editor (ELF binary)
+#
+# VSCodium is the community-driven, telemetry-free build of VS Code.
+# Appears as a separate desktop icon alongside IntelliJ.
+# IntelliJ provides full IDE (13 menus, 130+ actions, debug, refactor).
+# VSCodium provides a fast, lightweight editor for quick edits.
+#
+# Format: Java Properties
+# Loaded by: us.mearvk.jdesk.launcher.NativeAppLauncher
+
+name=VSCodium
+binary=/opt/jdesk/apps/vscodium/bin/codium
+fallback.1=/usr/bin/codium
+fallback.2=/snap/codium/current/bin/codium
+fallback.3=/opt/jdesk/bin/codium
+args=
+icon=/opt/jdesk/icons/vscodium.svg
+profile=vscodium
+category=development
+desktop=true
+panel=true
+
+# Resource governance (Memory Proxy)
+ram-soft=1g
+ram-hard=3g
+cpu=85
+threads=64
+disk-write=300m
+children=32

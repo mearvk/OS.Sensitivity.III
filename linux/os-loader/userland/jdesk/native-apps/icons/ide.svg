@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: IDE/Java — Rounded square tile, white/silver, embossed Java cup -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.2" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" 
+        stroke="#C8D0D8" stroke-width="1.5"/>
+  
+  <!-- Java coffee cup — embossed metallic -->
+  <g filter="url(#emboss)">
+    <!-- Cup body -->
+    <path d="M 44 52 L 44 82 C 44 92 52 98 64 98 C 76 98 84 92 84 82 L 84 52 Z" 
+          fill="url(#metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    
+    <!-- Cup rim -->
+    <ellipse cx="64" cy="52" rx="20" ry="5" fill="url(#metal-light)" stroke="#7A8A98" stroke-width="1"/>
+    
+    <!-- Cup handle -->
+    <path d="M 84 58 C 96 58 96 78 84 78" fill="none" stroke="url(#metal)" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Saucer -->
+    <ellipse cx="64" cy="100" rx="28" ry="6" fill="url(#metal-light)" stroke="#8A98A4" stroke-width="1"/>
+    
+    <!-- Steam wisps -->
+    <path d="M 52 44 C 52 38 56 36 56 30" fill="none" stroke="url(#metal-light)" 
+          stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 64 42 C 64 34 68 32 68 26" fill="none" stroke="url(#metal-light)" 
+          stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 76 44 C 76 38 72 36 72 30" fill="none" stroke="url(#metal-light)" 
+          stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

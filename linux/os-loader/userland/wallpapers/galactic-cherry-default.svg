@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <radialGradient id="nebula1" cx="30%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1a0033"/>
+      <stop offset="40%" stop-color="#0d001a"/>
+      <stop offset="100%" stop-color="#000008"/>
+    </radialGradient>
+    <radialGradient id="nebula2" cx="70%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#330022" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="star" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Deep space background -->
+  <rect width="3840" height="2160" fill="url(#nebula1)"/>
+  <rect width="3840" height="2160" fill="url(#nebula2)"/>
+  <!-- Galactic spiral hint -->
+  <ellipse cx="1400" cy="900" rx="800" ry="400" fill="none" stroke="#2a0044" stroke-width="80" opacity="0.3" transform="rotate(-15 1400 900)"/>
+  <ellipse cx="1400" cy="900" rx="600" ry="300" fill="none" stroke="#1a0033" stroke-width="60" opacity="0.4" transform="rotate(-15 1400 900)"/>
+  <!-- Star field -->
+  <circle cx="200" cy="150" r="2" fill="white" opacity="0.9"/>
+  <circle cx="500" cy="300" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="800" cy="100" r="1" fill="white" opacity="0.6"/>
+  <circle cx="1200" cy="250" r="2.5" fill="white" opacity="0.8"/>
+  <circle cx="1600" cy="180" r="1" fill="white" opacity="0.5"/>
+  <circle cx="2000" cy="400" r="2" fill="white" opacity="0.9"/>
+  <circle cx="2400" cy="150" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="2800" cy="350" r="1" fill="white" opacity="0.6"/>
+  <circle cx="3200" cy="200" r="2" fill="white" opacity="0.8"/>
+  <circle cx="3600" cy="100" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="300" cy="600" r="1" fill="white" opacity="0.5"/>
+  <circle cx="700" cy="800" r="2" fill="white" opacity="0.8"/>
+  <circle cx="1100" cy="700" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="1500" cy="900" r="1" fill="white" opacity="0.4"/>
+  <circle cx="1900" cy="750" r="2.5" fill="white" opacity="0.9"/>
+  <circle cx="2300" cy="650" r="1" fill="white" opacity="0.7"/>
+  <circle cx="2700" cy="850" r="2" fill="white" opacity="0.6"/>
+  <circle cx="3100" cy="700" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="3500" cy="600" r="1" fill="white" opacity="0.5"/>
+  <circle cx="150" cy="1200" r="2" fill="white" opacity="0.7"/>
+  <circle cx="550" cy="1400" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="950" cy="1100" r="1" fill="white" opacity="0.6"/>
+  <circle cx="1350" cy="1300" r="2" fill="white" opacity="0.8"/>
+  <circle cx="1750" cy="1500" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="2150" cy="1200" r="2.5" fill="white" opacity="0.9"/>
+  <circle cx="2550" cy="1400" r="1" fill="white" opacity="0.7"/>
+  <circle cx="2950" cy="1100" r="2" fill="white" opacity="0.6"/>
+  <circle cx="3350" cy="1350" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="3700" cy="1500" r="1" fill="white" opacity="0.9"/>
+  <circle cx="400" cy="1800" r="2" fill="white" opacity="0.6"/>
+  <circle cx="900" cy="1900" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="1400" cy="1750" r="1" fill="white" opacity="0.5"/>
+  <circle cx="1900" cy="1900" r="2" fill="white" opacity="0.9"/>
+  <circle cx="2400" cy="1800" r="2.5" fill="white" opacity="0.7"/>
+  <circle cx="2900" cy="2000" r="1" fill="white" opacity="0.6"/>
+  <circle cx="3400" cy="1850" r="2" fill="white" opacity="0.8"/>
+  <circle cx="3750" cy="1950" r="1.5" fill="white" opacity="0.9"/>
+  <!-- Cherry blossom accent - scattered petals -->
+  <ellipse cx="2800" cy="400" rx="12" ry="8" fill="#ff6b9d" opacity="0.7" transform="rotate(30 2800 400)"/>
+  <ellipse cx="2850" cy="380" rx="10" ry="6" fill="#ff8fb3" opacity="0.6" transform="rotate(-20 2850 380)"/>
+  <ellipse cx="2770" cy="420" rx="11" ry="7" fill="#ff4d7d" opacity="0.5" transform="rotate(45 2770 420)"/>
+  <ellipse cx="3100" cy="1600" rx="14" ry="9" fill="#ff6b9d" opacity="0.6" transform="rotate(-15 3100 1600)"/>
+  <ellipse cx="3150" cy="1580" rx="10" ry="6" fill="#ff8fb3" opacity="0.5" transform="rotate(25 3150 1580)"/>
+  <ellipse cx="600" cy="1700" rx="12" ry="8" fill="#ff6b9d" opacity="0.5" transform="rotate(60 600 1700)"/>
+  <ellipse cx="650" cy="1720" rx="9" ry="5" fill="#ffb3cc" opacity="0.4" transform="rotate(-30 650 1720)"/>
+  <!-- Edition branding (subtle) -->
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

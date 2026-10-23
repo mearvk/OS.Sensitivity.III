@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="5%" stop-color="#ffffcc"/>
+      <stop offset="15%" stop-color="#ffdd66"/>
+      <stop offset="30%" stop-color="#ff8844"/>
+      <stop offset="50%" stop-color="#cc3366"/>
+      <stop offset="70%" stop-color="#6622aa"/>
+      <stop offset="85%" stop-color="#1a0044"/>
+      <stop offset="100%" stop-color="#000011"/>
+    </radialGradient>
+    <filter id="turbulence">
+      <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="3" seed="42"/>
+      <feDisplacementMap in="SourceGraphic" scale="30"/>
+    </filter>
+  </defs>
+  <rect width="3840" height="2160" fill="#000011"/>
+  <!-- Galaxy core -->
+  <ellipse cx="1920" cy="1080" rx="1200" ry="600" fill="url(#core)" opacity="0.8" transform="rotate(-8 1920 1080)"/>
+  <!-- Spiral arms -->
+  <path d="M1920,1080 Q2400,800 2800,900 Q3200,1000 3400,700" fill="none" stroke="#4400aa" stroke-width="80" opacity="0.3" stroke-linecap="round"/>
+  <path d="M1920,1080 Q1440,1360 1040,1260 Q640,1160 440,1460" fill="none" stroke="#4400aa" stroke-width="80" opacity="0.3" stroke-linecap="round"/>
+  <path d="M1920,1080 Q2200,1300 2600,1400 Q3000,1500 3300,1300" fill="none" stroke="#330088" stroke-width="60" opacity="0.25" stroke-linecap="round"/>
+  <path d="M1920,1080 Q1640,860 1240,760 Q840,660 540,860" fill="none" stroke="#330088" stroke-width="60" opacity="0.25" stroke-linecap="round"/>
+  <!-- Dust lanes -->
+  <path d="M1920,1080 Q2300,950 2700,1000" fill="none" stroke="#000022" stroke-width="20" opacity="0.5"/>
+  <path d="M1920,1080 Q1540,1210 1140,1160" fill="none" stroke="#000022" stroke-width="20" opacity="0.5"/>
+  <!-- Star field -->
+  <circle cx="300" cy="200" r="2" fill="white" opacity="0.8"/>
+  <circle cx="600" cy="500" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="100" cy="800" r="1" fill="white" opacity="0.7"/>
+  <circle cx="3500" cy="300" r="2" fill="white" opacity="0.9"/>
+  <circle cx="3700" cy="700" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="3300" cy="100" r="1" fill="white" opacity="0.6"/>
+  <circle cx="200" cy="1800" r="2" fill="white" opacity="0.8"/>
+  <circle cx="500" cy="2000" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="3600" cy="1900" r="2" fill="white" opacity="0.9"/>
+  <circle cx="3400" cy="1700" r="1" fill="white" opacity="0.7"/>
+  <circle cx="150" cy="1400" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="3750" cy="1200" r="2" fill="white" opacity="0.8"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

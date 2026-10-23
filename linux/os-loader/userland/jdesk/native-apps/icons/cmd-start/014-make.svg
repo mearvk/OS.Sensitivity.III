@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Make — Hammer and anvil -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Hammer and anvil -->
+  <g filter="url(#emboss)">
+    <!-- Anvil -->
+    <path d="M34,82 L34,74 C34,72 38,70 44,70 L84,70 C90,70 94,72 94,74 L94,82 Z" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <path d="M40,82 L40,94 L88,94 L88,82 Z" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Anvil horn -->
+    <path d="M34,74 L26,72 C24,72 24,76 26,76 L34,76 Z" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <!-- Hammer handle -->
+    <line x1="64" y1="38" x2="64" y2="66" stroke="url(#light-metal)" stroke-width="5" stroke-linecap="round"/>
+    <!-- Hammer head -->
+    <rect x="46" y="28" width="36" height="14" rx="3" ry="3" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+  </g>
+</svg>

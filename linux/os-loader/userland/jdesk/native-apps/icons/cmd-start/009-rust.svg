@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Rust — Gear with R -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Gear with R -->
+  <g filter="url(#emboss)">
+    <!-- Gear teeth -->
+    <path d="M64,28 L68,28 L70,34 L74,35 L78,30 L82,32 L80,38 L83,41 L89,39 L91,43 L86,47 L87,51 L93,52 L93,56 L87,57 L86,61 L91,65 L89,69 L83,67 L80,70 L82,76 L78,78 L74,73 L70,74 L68,80 L64,80 L62,74 L58,73 L54,78 L50,76 L52,70 L49,67 L43,69 L41,65 L46,61 L45,57 L39,56 L39,52 L45,51 L46,47 L41,43 L43,39 L49,41 L52,38 L50,32 L54,30 L58,35 L62,34 Z" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <!-- Inner circle -->
+    <circle cx="66" cy="54" r="16" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- R letter -->
+    <text x="66" y="61" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#5A6A78" text-anchor="middle">R</text>
+  </g>
+</svg>

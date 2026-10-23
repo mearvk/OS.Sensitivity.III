@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0020"/>
+      <stop offset="50%" stop-color="#1a0a3a"/>
+      <stop offset="100%" stop-color="#2d1545"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#sky)"/>
+  <!-- Cherry blossom tree - main trunk -->
+  <path d="M1920,2160 L1920,1200 Q1900,1100 1850,1000 Q1800,900 1750,850" fill="none" stroke="#3d2020" stroke-width="40" stroke-linecap="round"/>
+  <path d="M1920,1200 Q1950,1100 2000,1000 Q2050,900 2100,850" fill="none" stroke="#3d2020" stroke-width="30" stroke-linecap="round"/>
+  <path d="M1920,1400 Q1850,1300 1780,1250 Q1700,1200 1620,1180" fill="none" stroke="#3d2020" stroke-width="25" stroke-linecap="round"/>
+  <path d="M1920,1400 Q2000,1300 2080,1250 Q2160,1200 2240,1180" fill="none" stroke="#3d2020" stroke-width="25" stroke-linecap="round"/>
+  <path d="M1850,1000 Q1780,950 1700,920 Q1620,900 1540,910" fill="none" stroke="#3d2020" stroke-width="18" stroke-linecap="round"/>
+  <path d="M2000,1000 Q2080,950 2160,920 Q2240,900 2320,910" fill="none" stroke="#3d2020" stroke-width="18" stroke-linecap="round"/>
+  <!-- Blossom clusters - main canopy -->
+  <circle cx="1750" cy="850" r="60" fill="#ff6b9d" opacity="0.8"/>
+  <circle cx="1680" cy="820" r="50" fill="#ff8fb3" opacity="0.7"/>
+  <circle cx="1820" cy="800" r="55" fill="#ff4d7d" opacity="0.6"/>
+  <circle cx="1900" cy="780" r="45" fill="#ffb3cc" opacity="0.7"/>
+  <circle cx="2100" cy="850" r="60" fill="#ff6b9d" opacity="0.8"/>
+  <circle cx="2180" cy="820" r="50" fill="#ff8fb3" opacity="0.7"/>
+  <circle cx="2030" cy="800" r="55" fill="#ff4d7d" opacity="0.6"/>
+  <circle cx="1620" cy="880" r="40" fill="#ff6b9d" opacity="0.6"/>
+  <circle cx="2250" cy="880" r="45" fill="#ffb3cc" opacity="0.6"/>
+  <circle cx="1540" cy="910" r="50" fill="#ff8fb3" opacity="0.5"/>
+  <circle cx="2320" cy="910" r="50" fill="#ff6b9d" opacity="0.5"/>
+  <circle cx="1620" cy="1180" r="45" fill="#ff8fb3" opacity="0.6"/>
+  <circle cx="2240" cy="1180" r="45" fill="#ff6b9d" opacity="0.6"/>
+  <circle cx="1700" cy="1200" r="35" fill="#ffb3cc" opacity="0.5"/>
+  <circle cx="2160" cy="1200" r="35" fill="#ff4d7d" opacity="0.5"/>
+  <!-- Falling petals -->
+  <ellipse cx="1400" cy="1400" rx="8" ry="5" fill="#ff8fb3" opacity="0.7" transform="rotate(45 1400 1400)"/>
+  <ellipse cx="2300" cy="1300" rx="7" ry="4" fill="#ff6b9d" opacity="0.6" transform="rotate(-30 2300 1300)"/>
+  <ellipse cx="1600" cy="1600" rx="9" ry="5" fill="#ffb3cc" opacity="0.5" transform="rotate(60 1600 1600)"/>
+  <ellipse cx="2100" cy="1500" rx="6" ry="4" fill="#ff4d7d" opacity="0.6" transform="rotate(-45 2100 1500)"/>
+  <ellipse cx="1800" cy="1800" rx="8" ry="5" fill="#ff8fb3" opacity="0.4" transform="rotate(20 1800 1800)"/>
+  <ellipse cx="2000" cy="1700" rx="7" ry="4" fill="#ff6b9d" opacity="0.5" transform="rotate(-60 2000 1700)"/>
+  <ellipse cx="1500" cy="1900" rx="9" ry="5" fill="#ffb3cc" opacity="0.3" transform="rotate(35 1500 1900)"/>
+  <ellipse cx="2400" cy="1800" rx="6" ry="4" fill="#ff4d7d" opacity="0.4" transform="rotate(-20 2400 1800)"/>
+  <!-- Stars behind -->
+  <circle cx="300" cy="200" r="2" fill="white" opacity="0.8"/>
+  <circle cx="700" cy="400" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="1100" cy="150" r="1" fill="white" opacity="0.7"/>
+  <circle cx="2700" cy="200" r="2" fill="white" opacity="0.8"/>
+  <circle cx="3100" cy="350" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="3500" cy="150" r="1" fill="white" opacity="0.7"/>
+  <circle cx="500" cy="700" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="3300" cy="600" r="2" fill="white" opacity="0.7"/>
+  <circle cx="400" cy="1000" r="1" fill="white" opacity="0.6"/>
+  <circle cx="3600" cy="900" r="1.5" fill="white" opacity="0.5"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

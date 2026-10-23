@@ -1,0 +1,19 @@
+[Unit]
+Description=JDesk Native Application Provisioner (First Boot)
+Documentation=file:///opt/jdesk/native-apps/README.md
+After=network-online.target mysql.service
+Wants=network-online.target
+ConditionPathExists=!/opt/jdesk/.provisioned
+
+[Service]
+Type=oneshot
+ExecStart=/opt/jdesk/native-apps/jdesk-provision --full
+TimeoutStartSec=600
+StandardOutput=journal+console
+StandardError=journal+console
+
+# Grade 3 (Maintenance) — this is a package install, not a security operation
+# Runs as root for apt access. sudo_gate applies to interactive use.
+
+[Install]
+WantedBy=multi-user.target

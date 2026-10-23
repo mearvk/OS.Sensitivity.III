@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: cURL — Curved arrow download -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Curved arrow download -->
+  <g filter="url(#emboss)">
+    <!-- Curved path -->
+    <path d="M40,38 C40,38 88,32 88,56 C88,70 70,72 64,72" fill="none" stroke="url(#dark-metal)" stroke-width="5" stroke-linecap="round"/>
+    <!-- Arrow pointing down -->
+    <line x1="64" y1="72" x2="64" y2="92" stroke="url(#dark-metal)" stroke-width="5" stroke-linecap="round"/>
+    <polyline points="52,82 64,94 76,82" fill="none" stroke="url(#dark-metal)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Globe hint -->
+    <circle cx="40" cy="38" r="8" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <ellipse cx="40" cy="38" rx="4" ry="8" fill="none" stroke="#6B7B8A" stroke-width="0.8"/>
+    <line x1="32" y1="38" x2="48" y2="38" stroke="#6B7B8A" stroke-width="0.8"/>
+  </g>
+</svg>

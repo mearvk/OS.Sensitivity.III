@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="dawn" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1a0a2e"/>
+      <stop offset="30%" stop-color="#2d1b4e"/>
+      <stop offset="60%" stop-color="#5c2d6e"/>
+      <stop offset="80%" stop-color="#b8446e"/>
+      <stop offset="95%" stop-color="#ff8c6b"/>
+      <stop offset="100%" stop-color="#ffd93d"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="85%" r="20%">
+      <stop offset="0%" stop-color="#ffd93d"/>
+      <stop offset="50%" stop-color="#ff8c6b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#dawn)"/>
+  <rect width="3840" height="2160" fill="url(#sun)"/>
+  <!-- Mountain silhouettes -->
+  <polygon points="0,2160 400,1400 800,1600 1200,1200 1600,1500 2000,1100 2400,1350 2800,1000 3200,1300 3600,1150 3840,1400 3840,2160" fill="#0a0015" opacity="0.9"/>
+  <polygon points="0,2160 300,1600 700,1700 1100,1500 1500,1650 1900,1400 2300,1550 2700,1300 3100,1500 3500,1350 3840,1600 3840,2160" fill="#0f0020" opacity="0.7"/>
+  <!-- Cherry tree silhouette -->
+  <path d="M3000,2160 L3000,1600 Q3000,1500 2950,1450 Q2900,1400 2850,1350 Q2800,1300 2850,1250 Q2900,1200 2950,1150 Q3000,1100 3050,1150 Q3100,1200 3150,1250 Q3200,1300 3150,1350 Q3100,1400 3050,1450 Q3000,1500 3050,1550" fill="#0a0010" opacity="0.8"/>
+  <!-- Cherry blossom clusters on tree -->
+  <circle cx="2900" cy="1200" r="30" fill="#ff6b9d" opacity="0.7"/>
+  <circle cx="2950" cy="1150" r="25" fill="#ff8fb3" opacity="0.6"/>
+  <circle cx="3000" cy="1100" r="35" fill="#ff4d7d" opacity="0.5"/>
+  <circle cx="3050" cy="1170" r="28" fill="#ffb3cc" opacity="0.6"/>
+  <circle cx="3100" cy="1220" r="22" fill="#ff6b9d" opacity="0.7"/>
+  <circle cx="2850" cy="1280" r="20" fill="#ff8fb3" opacity="0.5"/>
+  <circle cx="3150" cy="1300" r="25" fill="#ff4d7d" opacity="0.4"/>
+  <!-- Stars (still visible in pre-dawn) -->
+  <circle cx="500" cy="200" r="2" fill="white" opacity="0.6"/>
+  <circle cx="1200" cy="150" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="1800" cy="300" r="1" fill="white" opacity="0.3"/>
+  <circle cx="2500" cy="100" r="2" fill="white" opacity="0.5"/>
+  <circle cx="800" cy="400" r="1.5" fill="white" opacity="0.3"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

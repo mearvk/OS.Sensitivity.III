@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: NPM — Cube with npm text -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- 3D Cube -->
+  <g filter="url(#emboss)">
+    <!-- Top face -->
+    <polygon points="64,34 92,48 64,62 36,48" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5"/>
+    <!-- Left face -->
+    <polygon points="36,48 64,62 64,90 36,76" fill="url(#metal)" stroke="url(#metal)" stroke-width="1.5"/>
+    <!-- Right face -->
+    <polygon points="92,48 64,62 64,90 92,76" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="1.5" opacity="0.8"/>
+  </g>
+  <!-- npm text -->
+  <text x="64" y="104" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="url(#metal)">npm</text>
+</svg>

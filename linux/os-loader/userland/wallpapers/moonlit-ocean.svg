@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f0c29"/>
+      <stop offset="40%" stop-color="#302b63"/>
+      <stop offset="100%" stop-color="#24243e"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffeedd"/>
+      <stop offset="80%" stop-color="#ffddbb"/>
+      <stop offset="100%" stop-color="#ffcc99" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#ocean)"/>
+  <!-- Moon -->
+  <circle cx="3000" cy="400" r="120" fill="url(#moon)"/>
+  <circle cx="3000" cy="400" r="115" fill="#ffeedd"/>
+  <!-- Moon glow -->
+  <circle cx="3000" cy="400" r="200" fill="#ffeedd" opacity="0.05"/>
+  <circle cx="3000" cy="400" r="300" fill="#ffeedd" opacity="0.02"/>
+  <!-- Ocean -->
+  <rect x="0" y="1400" width="3840" height="760" fill="#0a0a20"/>
+  <!-- Moon reflection on water -->
+  <ellipse cx="3000" cy="1600" rx="80" ry="200" fill="#ffeedd" opacity="0.1"/>
+  <line x1="2950" y1="1450" x2="2970" y2="1500" stroke="#ffeedd" stroke-width="2" opacity="0.3"/>
+  <line x1="3000" y1="1420" x2="3000" y2="1550" stroke="#ffeedd" stroke-width="3" opacity="0.2"/>
+  <line x1="3030" y1="1460" x2="3050" y2="1520" stroke="#ffeedd" stroke-width="2" opacity="0.25"/>
+  <!-- Waves -->
+  <path d="M0,1500 Q200,1480 400,1500 Q600,1520 800,1500 Q1000,1480 1200,1500 Q1400,1520 1600,1500 Q1800,1480 2000,1500 Q2200,1520 2400,1500 Q2600,1480 2800,1500 Q3000,1520 3200,1500 Q3400,1480 3600,1500 Q3800,1520 3840,1500" fill="none" stroke="#3344aa" stroke-width="2" opacity="0.3"/>
+  <path d="M0,1600 Q300,1580 600,1600 Q900,1620 1200,1600 Q1500,1580 1800,1600 Q2100,1620 2400,1600 Q2700,1580 3000,1600 Q3300,1620 3600,1600 Q3840,1580 3840,1600" fill="none" stroke="#2233aa" stroke-width="1.5" opacity="0.2"/>
+  <!-- Cherry blossoms floating on water -->
+  <ellipse cx="800" cy="1550" rx="10" ry="4" fill="#ff8fb3" opacity="0.6" transform="rotate(10 800 1550)"/>
+  <ellipse cx="1200" cy="1620" rx="8" ry="3" fill="#ff6b9d" opacity="0.5" transform="rotate(-15 1200 1620)"/>
+  <ellipse cx="1600" cy="1580" rx="9" ry="4" fill="#ffb3cc" opacity="0.4" transform="rotate(20 1600 1580)"/>
+  <ellipse cx="2200" cy="1650" rx="7" ry="3" fill="#ff4d7d" opacity="0.5" transform="rotate(-5 2200 1650)"/>
+  <ellipse cx="600" cy="1700" rx="10" ry="4" fill="#ff8fb3" opacity="0.3" transform="rotate(30 600 1700)"/>
+  <!-- Stars -->
+  <circle cx="200" cy="200" r="2" fill="white" opacity="0.8"/>
+  <circle cx="500" cy="350" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="900" cy="150" r="1" fill="white" opacity="0.7"/>
+  <circle cx="1300" cy="300" r="2" fill="white" opacity="0.5"/>
+  <circle cx="1700" cy="100" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="2100" cy="250" r="1" fill="white" opacity="0.6"/>
+  <circle cx="2500" cy="150" r="2" fill="white" opacity="0.7"/>
+  <circle cx="3400" cy="200" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="3700" cy="600" r="1" fill="white" opacity="0.5"/>
+  <circle cx="400" cy="800" r="2" fill="white" opacity="0.6"/>
+  <circle cx="1500" cy="700" r="1.5" fill="white" opacity="0.4"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

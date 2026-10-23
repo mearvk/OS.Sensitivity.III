@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Kali Tools — Rounded square tile, white/silver, embossed dragon/pentest motif -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="kali-accent" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90D9"/>
+      <stop offset="100%" style="stop-color:#2C5F8A"/>
+    </linearGradient>
+    <linearGradient id="metal-frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#C8D0D8"/>
+      <stop offset="100%" style="stop-color:#98A8B4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" 
+        stroke="#C8D0D8" stroke-width="1.5"/>
+  
+  <!-- Shield shape (security/pentest motif) -->
+  <path d="M64 24 L96 38 L96 68 C96 88 80 102 64 108 C48 102 32 88 32 68 L32 38 Z" 
+        fill="url(#kali-accent)" stroke="#2C5F8A" stroke-width="1.5" filter="url(#emboss)"/>
+  
+  <!-- Dragon/claw mark inside shield (Kali identity — stylized triple slash) -->
+  <path d="M48 50 L56 80" stroke="#D8E8F8" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  <path d="M58 46 L64 82" stroke="#D8E8F8" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  <path d="M68 50 L76 80" stroke="#D8E8F8" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  
+  <!-- Small terminal cursor at bottom of shield -->
+  <rect x="58" y="88" width="12" height="3" rx="1" fill="#A8D0F0" opacity="0.8"/>
+</svg>

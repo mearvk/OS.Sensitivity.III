@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <defs>
+    <radialGradient id="nebula-center" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6b9d" stop-opacity="0.4"/>
+      <stop offset="30%" stop-color="#cc3366" stop-opacity="0.2"/>
+      <stop offset="60%" stop-color="#4400aa" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <linearGradient id="nebula-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050510"/>
+      <stop offset="50%" stop-color="#0a0a20"/>
+      <stop offset="100%" stop-color="#080818"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#nebula-bg)"/>
+  <!-- Cherry Nebula - central formation -->
+  <ellipse cx="1920" cy="1080" rx="900" ry="600" fill="url(#nebula-center)"/>
+  <!-- Nebula wisps -->
+  <path d="M1200,900 Q1500,800 1800,850 Q2100,900 2400,800 Q2700,700 2800,750" fill="none" stroke="#ff6b9d" stroke-width="40" opacity="0.15" stroke-linecap="round"/>
+  <path d="M1100,1100 Q1400,1200 1700,1150 Q2000,1100 2300,1200 Q2600,1300 2900,1200" fill="none" stroke="#cc3366" stroke-width="50" opacity="0.1" stroke-linecap="round"/>
+  <path d="M1400,1000 Q1700,950 2000,1000 Q2300,1050 2600,980" fill="none" stroke="#ff8fb3" stroke-width="30" opacity="0.12" stroke-linecap="round"/>
+  <!-- Gas clouds -->
+  <ellipse cx="1600" cy="950" rx="200" ry="120" fill="#ff4d7d" opacity="0.08"/>
+  <ellipse cx="2200" cy="1100" rx="250" ry="150" fill="#cc3366" opacity="0.06"/>
+  <ellipse cx="1900" cy="1200" rx="180" ry="100" fill="#ff8fb3" opacity="0.07"/>
+  <!-- Dense star field -->
+  <circle cx="100" cy="80" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="250" cy="200" r="1" fill="white" opacity="0.7"/>
+  <circle cx="400" cy="120" r="2" fill="white" opacity="0.8"/>
+  <circle cx="600" cy="300" r="1" fill="white" opacity="0.6"/>
+  <circle cx="800" cy="180" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="1000" cy="400" r="1" fill="white" opacity="0.5"/>
+  <circle cx="1200" cy="200" r="2" fill="white" opacity="0.8"/>
+  <circle cx="1400" cy="350" r="1" fill="white" opacity="0.7"/>
+  <circle cx="1600" cy="150" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="1800" cy="300" r="1" fill="white" opacity="0.8"/>
+  <circle cx="2000" cy="100" r="2" fill="white" opacity="0.9"/>
+  <circle cx="2200" cy="250" r="1" fill="white" opacity="0.7"/>
+  <circle cx="2400" cy="180" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="2600" cy="350" r="1" fill="white" opacity="0.8"/>
+  <circle cx="2800" cy="150" r="2" fill="white" opacity="0.9"/>
+  <circle cx="3000" cy="280" r="1" fill="white" opacity="0.7"/>
+  <circle cx="3200" cy="100" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="3400" cy="220" r="1" fill="white" opacity="0.8"/>
+  <circle cx="3600" cy="350" r="2" fill="white" opacity="0.9"/>
+  <circle cx="3750" cy="150" r="1" fill="white" opacity="0.7"/>
+  <circle cx="150" cy="600" r="1" fill="white" opacity="0.6"/>
+  <circle cx="350" cy="750" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="550" cy="650" r="1" fill="white" opacity="0.5"/>
+  <circle cx="750" cy="800" r="2" fill="white" opacity="0.7"/>
+  <circle cx="3100" cy="700" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="3300" cy="600" r="1" fill="white" opacity="0.6"/>
+  <circle cx="3500" cy="750" r="2" fill="white" opacity="0.9"/>
+  <circle cx="3700" cy="650" r="1" fill="white" opacity="0.7"/>
+  <circle cx="200" cy="1500" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="450" cy="1700" r="1" fill="white" opacity="0.6"/>
+  <circle cx="700" cy="1600" r="2" fill="white" opacity="0.7"/>
+  <circle cx="3200" cy="1500" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="3500" cy="1700" r="1" fill="white" opacity="0.9"/>
+  <circle cx="3700" cy="1600" r="2" fill="white" opacity="0.7"/>
+  <circle cx="300" cy="2000" r="1" fill="white" opacity="0.6"/>
+  <circle cx="600" cy="1900" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="3400" cy="2000" r="2" fill="white" opacity="0.7"/>
+  <circle cx="3650" cy="1900" r="1" fill="white" opacity="0.9"/>
+  <!-- Bright stars (with glow effect) -->
+  <circle cx="1920" cy="1080" r="3" fill="white" opacity="0.9"/>
+  <circle cx="1920" cy="1080" r="8" fill="white" opacity="0.2"/>
+  <circle cx="2500" cy="500" r="2.5" fill="white" opacity="0.9"/>
+  <circle cx="2500" cy="500" r="6" fill="white" opacity="0.15"/>
+  <circle cx="1300" cy="1400" r="2.5" fill="white" opacity="0.8"/>
+  <circle cx="1300" cy="1400" r="6" fill="white" opacity="0.12"/>
+  <text x="3820" y="2140" font-family="sans-serif" font-size="18" fill="#ffffff" opacity="0.15" text-anchor="end">Galactic Cherry Marvell Edition 98</text>
+</svg>

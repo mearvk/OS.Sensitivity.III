@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Strace — Eye with system call lines -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Eye shape -->
+  <g filter="url(#emboss)">
+    <path d="M28 56 C40 40 56 34 64 34 C72 34 88 40 100 56 C88 72 72 78 64 78 C56 78 40 72 28 56 Z" fill="url(#metal-light)" stroke="url(#metal)" stroke-width="2"/>
+    <!-- Iris -->
+    <circle cx="64" cy="56" r="12" fill="url(#metal)"/>
+    <!-- Pupil -->
+    <circle cx="64" cy="56" r="5" fill="#4A5568"/>
+    <!-- Highlight -->
+    <circle cx="60" cy="52" r="2.5" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+  <!-- System call lines below eye -->
+  <line x1="34" y1="86" x2="62" y2="86" stroke="url(#metal)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="34" y1="94" x2="74" y2="94" stroke="url(#metal-light)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="34" y1="102" x2="56" y2="102" stroke="url(#metal)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Dots indicating more -->
+  <circle cx="68" y="86" r="1.5" fill="url(#metal)"/>
+  <circle cx="74" y="86" r="1.5" fill="url(#metal)"/>
+</svg>

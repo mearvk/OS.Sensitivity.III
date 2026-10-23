@@ -1,0 +1,131 @@
+═══════════════════════════════════════════════════════════════════════════════
+  RMDEDME.BRURG — Installation Program Guidance
+  Ubuntu Determinant Alpha RS
+  Copyright (C) 2026 MEARVK LLC
+  Author: Maximilian Eric Alexander Rupplin von Keffikon
+═══════════════════════════════════════════════════════════════════════════════
+
+PURPOSE
+───────
+This file is read by installation programs to understand WHERE software
+should be placed on this system. Three top-level hierarchies exist.
+Choose correctly.
+
+
+THE THREE HIERARCHIES
+─────────────────────
+
+  /usr    THE MACHINE ACTS ON BEHALF OF THE USER.
+          ─────────────────────────────────────────
+          Software here is what the machine considers necessary for the
+          user's environment to function. The user does not curate /usr.
+          The machine does. Package managers write here. System scripts
+          write here. The user benefits passively.
+
+          WHO WRITES:   apt, dpkg, system scripts
+          WHO READS:    everyone
+          PHILOSOPHY:   the machine serves the user silently
+
+
+  /user   DIRECTLY FOR THE USER. BY THE USER. FOR THE FUTURE USER.
+          ─────────────────────────────────────────────────────────
+          Binaries, libraries, structs, organizations — all placed here
+          by the user's own hand or explicit choice. This is where you
+          build things for the future. For the future version of yourself.
+          For the next project. For what comes next.
+
+          This is NOT the machine acting on your behalf.
+          This is YOU acting on your behalf.
+
+          WHO WRITES:   the user (manual, JDesk, explicit install)
+          WHO READS:    the user, user's programs
+          PHILOSOPHY:   the user builds the future here
+
+
+  /deck   PROFESSIONAL SYSTEM SOFTWARE.
+          ─────────────────────────────
+          Databases. IDEs. Artist programs. Professional audio. Security
+          software. Scanning systems. Heuristics. Network-aware programs.
+          Everything that operates at professional grade — system-aware,
+          network-aware, security-conscious.
+
+          WHO WRITES:   dedicated installers, JDesk, owner with elevated perms
+          WHO READS:    system, network, Dave AI
+          PHILOSOPHY:   professional tools that understand the system
+
+
+DECISION RULES FOR INSTALLERS
+─────────────────────────────
+
+  ASK YOURSELF:
+
+  1. Is this package managed by apt/dpkg with no user curation?
+     → Install to /usr
+
+  2. Is this something the user personally chose, built, or is
+     building for their own future use?
+     → Install to /user
+     → MUST CONFIRM with the user before writing
+
+  3. Is this professional-grade software? (database, IDE, creative
+     tool, audio production, security, scanner, heuristic engine,
+     network server/proxy/monitor)
+     → Install to /deck
+     → Register with Dave AI after installation
+     → Check NEGAMANE brand before overwriting existing files
+
+
+PERMISSION REQUIREMENTS
+───────────────────────
+
+  /usr    System-level permission (root / package manager)
+  /user   Trusted or Genius permission class (owner-operator)
+  /deck   Elevated permission (Trusted minimum, Genius for security tools)
+
+
+NEGAMANE BRAND STATUS
+─────────────────────
+
+  /usr    BRANDED — immutable system entries, do not modify without gate
+  /user   UNBRANDED — owner can modify freely
+  /deck   BRANDED — critical professional tools protected
+
+
+PATH PRIORITY
+─────────────
+
+  /usr/local/bin → /user/local/bin → /user/bin → /deck/local/bin → /deck/bin → /usr/bin → /bin
+
+
+SURVIVAL ACROSS REINSTALL
+─────────────────────────
+
+  /usr    REPLACED on reinstall (machine rebuilds it)
+  /user   PRESERVED (user's work persists)
+  /deck   PRESERVED (professional tools persist)
+
+
+EXAMPLES
+────────
+
+  gcc, ls, cp, libc.so           → /usr/bin, /usr/lib
+  user's personal build script   → /user/bin
+  user's custom data structs     → /user/lib
+  MySQL server                   → /deck/bin
+  ClamAV                         → /deck/bin
+  Professional DAW               → /deck/bin
+  JDesk IDE                      → /deck/bin
+  Network monitor                → /deck/bin
+  Vulnerability scanner          → /deck/bin
+
+
+COMPANION FILES
+───────────────
+
+  ssetson.jpson    Machine-readable version of this guidance (JSON format)
+  FILESYSTEM.md    Full documentation in markdown/FILESYSTEM.md
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  END OF GUIDANCE
+═══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,21 @@
+# JDesk Application Manifest: Browser
+# Chromium — native ELF binary
+#
+# Format: Java Properties
+# Loaded by: us.mearvk.jdesk.launcher.NativeAppLauncher
+
+name=Browser
+binary=/opt/jdesk/apps/chromium/chrome
+args=--no-sandbox --disable-gpu-sandbox
+icon=/opt/jdesk/icons/browser.svg
+profile=browser
+category=internet
+desktop=true
+panel=true
+
+# Resource governance (Memory Proxy)
+ram-soft=1g
+ram-hard=4g
+cpu=90
+threads=256
+disk-write=200m

@@ -1,0 +1,16 @@
+[Unit]
+Description=JDesk NTFS Virtual Filesystem (Cross-Platform Share)
+Documentation=man:ntfs-3g(8)
+DefaultDependencies=no
+After=local-fs-pre.target
+Before=local-fs.target
+
+[Mount]
+What=/opt/jdesk/vfs/jdesk-ntfs.img
+Where=/opt/jdesk/share
+Type=ntfs-3g
+Options=loop,rw,big_writes,noatime,nofail
+TimeoutSec=30
+
+[Install]
+WantedBy=local-fs.target

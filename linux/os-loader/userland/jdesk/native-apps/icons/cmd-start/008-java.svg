@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Java — Coffee cup with steam -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="dark-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="light-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1.5" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1.5" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Coffee cup -->
+  <g filter="url(#emboss)">
+    <!-- Cup body -->
+    <path d="M38,52 L38,86 C38,92 46,96 58,96 L58,96 C70,96 78,92 78,86 L78,52 Z" fill="url(#dark-metal)" stroke="#6B7B8A" stroke-width="1.5"/>
+    <!-- Cup handle -->
+    <path d="M78,58 C88,58 92,64 92,70 C92,76 88,82 78,82" fill="none" stroke="url(#light-metal)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Saucer -->
+    <ellipse cx="58" cy="98" rx="28" ry="5" fill="url(#light-metal)" stroke="#6B7B8A" stroke-width="1"/>
+    <!-- Steam -->
+    <path d="M48,48 C48,42 52,42 52,36" fill="none" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M58,46 C58,40 62,40 62,34" fill="none" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M68,48 C68,42 72,42 72,36" fill="none" stroke="url(#light-metal)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+/*
+ * JDesk Theme: Dark
+ * A dark variant demonstrating user-customizable theming.
+ *
+ * Place in: /opt/jdesk/themes/dark.css
+ * Activate: jdesk-settings --theme dark
+ *
+ * Only the root variables need to change — all components inherit automatically.
+ */
+
+.root {
+    -jdesk-bg:              #1E1E1E;
+    -jdesk-surface:         #2D2D2D;
+    -jdesk-primary:         #569CD6;
+    -jdesk-secondary:       #9CDCFE;
+    -jdesk-text:            #D4D4D4;
+    -jdesk-text-secondary:  #808080;
+    -jdesk-border:          #3E3E3E;
+    -jdesk-hover:           #383838;
+    -jdesk-active:          #454545;
+    -jdesk-error:           #F44747;
+    -jdesk-success:         #6A9955;
+    -jdesk-warning:         #CE9178;
+    -jdesk-shadow:          rgba(0, 0, 0, 0.30);
+    -jdesk-radius:          8px;
+    -jdesk-font:            'Inter', system-ui, -apple-system, sans-serif;
+    -jdesk-font-mono:       'JetBrains Mono', 'Fira Code', monospace;
+    -jdesk-transition:      200ms;
+}

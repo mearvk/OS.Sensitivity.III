@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- JDesk Icon: Systemd — Infinity with S -->
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8ECF0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8C4D0"/>
+      <stop offset="40%" style="stop-color:#8896A4"/>
+      <stop offset="100%" style="stop-color:#6B7B8A"/>
+    </linearGradient>
+    <linearGradient id="metal-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8E0E8"/>
+      <stop offset="100%" style="stop-color:#A8B8C4"/>
+    </linearGradient>
+    <filter id="emboss">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="1" result="blur"/>
+      <feComponentTransfer in="blur" result="shadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Tile background -->
+  <rect x="8" y="8" width="112" height="112" rx="22" ry="22" fill="url(#tile-bg)" stroke="#C8D0D8" stroke-width="1.5"/>
+  <!-- Infinity symbol -->
+  <path d="M34 64 C34 52 42 48 50 48 C58 48 64 54 64 64 C64 54 70 48 78 48 C86 48 94 52 94 64 C94 76 86 80 78 80 C70 80 64 74 64 64 C64 74 58 80 50 80 C42 80 34 76 34 64 Z" fill="none" stroke="url(#metal)" stroke-width="5" stroke-linecap="round" filter="url(#emboss)"/>
+  <!-- S letter centered -->
+  <path d="M58 58 C58 55 60 53 64 53 C68 53 70 55 70 58 C70 61 64 62 64 64 C64 66 64 67 64 68 C64 71 66 73 64 73 C60 73 58 71 58 68" fill="none" stroke="url(#metal-light)" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,367 @@
+/*
+ * JDesk White Theme — Master Stylesheet
+ * Copyright (C) 2026 MEARVK LLC
+ *
+ * This is the ONE theme file for the entire JDesk desktop.
+ * All native programs (GTK, Qt, Wine, terminal, .so services) get
+ * framed by this theme via the WindowCompositor.
+ *
+ * Users can create custom themes by copying this file and changing values.
+ * Place custom themes in: /opt/jdesk/themes/<name>.css
+ * Switch: jdesk-settings --theme <name>
+ *
+ * Base set: WhiteTheme (default), shipped with OS.
+ * Users develop the rest: Dark, Solarized, Nord, custom branding, etc.
+ */
+
+/* ==========================================================================
+ * Root Variables (User-Customizable)
+ * ==========================================================================
+ * Override these to create a new theme without touching any other values.
+ */
+.root {
+    -jdesk-bg:              #FFFFFF;
+    -jdesk-surface:         #F8F9FA;
+    -jdesk-primary:         #1A73E8;
+    -jdesk-secondary:       #5F6368;
+    -jdesk-text:            #202124;
+    -jdesk-text-secondary:  #5F6368;
+    -jdesk-border:          #DADCE0;
+    -jdesk-hover:           #F1F3F4;
+    -jdesk-active:          #E8EAED;
+    -jdesk-error:           #D93025;
+    -jdesk-success:         #1E8E3E;
+    -jdesk-warning:         #F9AB00;
+    -jdesk-shadow:          rgba(0, 0, 0, 0.10);
+    -jdesk-radius:          8px;
+    -jdesk-font:            'Inter', system-ui, -apple-system, sans-serif;
+    -jdesk-font-mono:       'JetBrains Mono', 'Fira Code', monospace;
+    -jdesk-transition:      200ms;
+}
+
+/* ==========================================================================
+ * Desktop Surface
+ * ========================================================================== */
+.jdesk-desktop {
+    -fx-background-color: -jdesk-bg;
+}
+
+/* ==========================================================================
+ * Window Frame (wraps ALL native applications)
+ * ========================================================================== */
+.jdesk-frame {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: -jdesk-border;
+    -fx-border-width: 1;
+    -fx-border-radius: -jdesk-radius;
+    -fx-background-radius: -jdesk-radius;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow, 16, 0, 0, 4);
+}
+
+.jdesk-frame:focused {
+    -fx-border-color: -jdesk-primary;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, derive(-jdesk-primary, 60%), 20, 0, 0, 4);
+}
+
+/* ==========================================================================
+ * Title Bar
+ * ========================================================================== */
+.jdesk-titlebar {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: transparent transparent -jdesk-border transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 8 0 12;
+    -fx-pref-height: 36;
+    -fx-max-height: 36;
+    -fx-background-radius: -jdesk-radius -jdesk-radius 0 0;
+}
+
+.jdesk-titlebar:focused {
+    -fx-border-color: transparent transparent -jdesk-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.jdesk-titlebar .label {
+    -fx-text-fill: -jdesk-text;
+    -fx-font-size: 13px;
+    -fx-font-family: -jdesk-font;
+    -fx-font-weight: 500;
+}
+
+/* Unfocused window: dim the title */
+.jdesk-frame:unfocused .jdesk-titlebar .label {
+    -fx-text-fill: -jdesk-text-secondary;
+}
+
+/* ==========================================================================
+ * Window Control Buttons (minimize, maximize, close)
+ * ========================================================================== */
+.jdesk-window-control {
+    -fx-background-color: transparent;
+    -fx-background-radius: 14;
+    -fx-min-width: 28;
+    -fx-min-height: 28;
+    -fx-max-width: 28;
+    -fx-max-height: 28;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -jdesk-secondary;
+    -fx-cursor: hand;
+}
+
+.jdesk-window-control:hover {
+    -fx-background-color: -jdesk-hover;
+    -fx-text-fill: -jdesk-text;
+}
+
+.jdesk-window-control:pressed {
+    -fx-background-color: -jdesk-active;
+}
+
+/* Close button gets red on hover */
+.jdesk-close:hover {
+    -fx-background-color: -jdesk-error;
+    -fx-text-fill: white;
+}
+
+.jdesk-close:pressed {
+    -fx-background-color: derive(-jdesk-error, -20%);
+    -fx-text-fill: white;
+}
+
+/* ==========================================================================
+ * Panel / Taskbar
+ * ========================================================================== */
+.jdesk-panel {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: -jdesk-border transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 4 12;
+    -fx-pref-height: 48;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow, 4, 0, 0, -2);
+}
+
+.jdesk-panel-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-padding: 4 8;
+    -fx-cursor: hand;
+}
+
+.jdesk-panel-item:hover {
+    -fx-background-color: -jdesk-hover;
+}
+
+.jdesk-panel-item:active {
+    -fx-border-color: transparent transparent -jdesk-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.jdesk-panel-item .label {
+    -fx-font-size: 11px;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text;
+}
+
+/* ==========================================================================
+ * Desktop Icons
+ * ========================================================================== */
+.jdesk-icon-cell {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+    -fx-alignment: center;
+}
+
+.jdesk-icon-cell:hover {
+    -fx-background-color: -jdesk-hover;
+}
+
+.jdesk-icon-cell:selected {
+    -fx-background-color: derive(-jdesk-primary, 85%);
+    -fx-border-color: -jdesk-primary;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+}
+
+.jdesk-icon-cell .label {
+    -fx-font-size: 11px;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-max-width: 80;
+}
+
+/* ==========================================================================
+ * Context Menu (right-click)
+ * ========================================================================== */
+.jdesk-context-menu {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: -jdesk-radius;
+    -fx-background-radius: -jdesk-radius;
+    -fx-padding: 4 0;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow, 12, 0, 0, 4);
+}
+
+.jdesk-context-menu .menu-item {
+    -fx-padding: 6 16;
+    -fx-background-color: transparent;
+}
+
+.jdesk-context-menu .menu-item:hover {
+    -fx-background-color: -jdesk-hover;
+}
+
+.jdesk-context-menu .menu-item .label {
+    -fx-font-size: 13px;
+    -fx-font-family: -jdesk-font;
+    -fx-text-fill: -jdesk-text;
+}
+
+.jdesk-context-menu .separator {
+    -fx-padding: 4 0;
+}
+
+/* ==========================================================================
+ * Notifications
+ * ========================================================================== */
+.jdesk-notification {
+    -fx-background-color: -jdesk-surface;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: -jdesk-radius;
+    -fx-background-radius: -jdesk-radius;
+    -fx-padding: 12 16;
+    -fx-effect: dropshadow(gaussian, -jdesk-shadow, 16, 0, 0, 6);
+    -fx-max-width: 360;
+}
+
+.jdesk-notification .title {
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-text-fill: -jdesk-text;
+}
+
+.jdesk-notification .body {
+    -fx-font-size: 12px;
+    -fx-text-fill: -jdesk-text-secondary;
+}
+
+/* ==========================================================================
+ * Dialogs / Modals
+ * ========================================================================== */
+.jdesk-dialog-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
+
+.jdesk-dialog {
+    -fx-background-color: -jdesk-bg;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 24, 0, 0, 8);
+    -fx-min-width: 320;
+    -fx-max-width: 560;
+}
+
+.jdesk-dialog .title {
+    -fx-font-size: 20px;
+    -fx-font-weight: 500;
+    -fx-text-fill: -jdesk-text;
+}
+
+/* ==========================================================================
+ * Buttons (JDesk native apps only — GTK/Qt keep their own buttons)
+ * ========================================================================== */
+.jdesk-button {
+    -fx-background-color: -jdesk-primary;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-family: -jdesk-font;
+    -fx-font-weight: 500;
+    -fx-padding: 8 16;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.jdesk-button:hover {
+    -fx-background-color: derive(-jdesk-primary, -10%);
+}
+
+.jdesk-button:pressed {
+    -fx-background-color: derive(-jdesk-primary, -20%);
+}
+
+.jdesk-button-secondary {
+    -fx-background-color: transparent;
+    -fx-border-color: -jdesk-border;
+    -fx-border-radius: 4;
+    -fx-text-fill: -jdesk-primary;
+    -fx-font-size: 13px;
+    -fx-font-family: -jdesk-font;
+    -fx-font-weight: 500;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.jdesk-button-secondary:hover {
+    -fx-background-color: -jdesk-hover;
+}
+
+/* ==========================================================================
+ * Scrollbar (minimal style)
+ * ========================================================================== */
+.jdesk-scrollbar .track {
+    -fx-background-color: transparent;
+}
+
+.jdesk-scrollbar .thumb {
+    -fx-background-color: -jdesk-active;
+    -fx-background-radius: 4;
+}
+
+.jdesk-scrollbar .thumb:hover {
+    -fx-background-color: -jdesk-secondary;
+}
+
+/* ==========================================================================
+ * Tooltip
+ * ========================================================================== */
+.jdesk-tooltip {
+    -fx-background-color: -jdesk-text;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-family: -jdesk-font;
+    -fx-padding: 4 8;
+    -fx-background-radius: 4;
+}
+
+/* ==========================================================================
+ * Alt+Tab Window Switcher
+ * ========================================================================== */
+.jdesk-switcher {
+    -fx-background-color: rgba(32, 33, 36, 0.9);
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 24, 0, 0, 8);
+}
+
+.jdesk-switcher-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+}
+
+.jdesk-switcher-item:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: -jdesk-primary;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+}
+
+.jdesk-switcher-item .label {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}

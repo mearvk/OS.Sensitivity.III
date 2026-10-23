@@ -1,0 +1,129 @@
+# JDesk Dependency Crawl — 2026-08-25
+
+```mermaid
+flowchart TD
+    OS[Modern OS]
+    CPU[x86-64 Intel / AMD]
+    JVM[SecureJDK / OpenJDK 28]
+    FX[JavaFX]
+    J[us.mearvk.jdesk.JDeskApplication]
+    UI[Desktop / Apps / Theme / Compositor / Security]
+    JNI[NativeBridge / JNI]
+    H[jdesk.h]
+    L[jdesk native launcher]
+    N[jdesk_linux.c]
+    T[jdesk_test.c]
+    M[Linux Makefile]
+    X[X11 + XRandR + Xinerama + XCursor]
+    C[Native C toolchain]
+    P[Provisioning / installed applications]
+    I[JDesk icons / themes]
+    A[ASYSMA native bootstrap]
+    B[ASYSMA policy + integrity]
+
+    OS --> L
+    OS --> X
+    CPU --> N
+    C --> M
+    X --> N
+    X --> L
+    M --> N
+    M --> JNI
+    M --> T
+    H --> N
+    H --> JNI
+    JVM --> J
+    FX --> J
+    JNI --> J
+    L --> JVM
+    L --> J
+    J --> UI
+    I --> UI
+    P --> UI
+    A --> L
+    A --> B
+    B --> JVM
+```
+
+## Crawl findings
+
+### 1. Repository structure
+
+The JDesk root currently contains a README, `classes`, `icons`, `install-natives.sh`, a `jdesk` launcher, `native`, `native-apps`, `src`, and `themes`. The structure therefore already separates Java-side sources, native code, resources, and installation concerns.
+
+### 2. Java application root
+
+The Java source tree contains `us/mearvk/jdesk/JDeskApplication.java` and major subsystems including `apps`, `compositor`, `security`, and `theme`. This makes JDesk a natural managed payload for the ASYSMA `JAVA` and `NATIVE_THEN_JAVA` entry modes.
+
+### 3. Native layer
+
+The native layer exposes `native/include/jdesk.h` and a Linux implementation directory. The Linux implementation contains a Makefile, native launcher, JNI bridge, Linux implementation, and native test source/binaries.
+
+The existing Makefile builds `libjdesk.so` and a standalone `jdesk-bin` launcher, links X11-family libraries, and expects JDK JNI headers. It currently targets x86-64-v3 and therefore has a CPU baseline stronger than the original ASYSMA conceptual x86-64 baseline.
+
+### 4. Native launcher
+
+`jdesk_launcher.c` is particularly relevant to ASYSMA. It is already designed as a native executable that discovers Java, JavaFX, JDesk installation paths, CPU/display state, and then launches the Java desktop. This is structurally close to the `NATIVE_THEN_JAVA` ASYSMA model.
+
+### 5. External runtime dependencies
+
+The documented Linux path depends on:
+
+- C compiler/toolchain
+- JDK JNI headers
+- Java runtime
+- JavaFX
+- X11
+- XRandR
+- Xinerama
+- XCursor
+- pthread
+- math
+- dynamic-loader facilities
+
+The JDesk README also documents optional or provisioned desktop applications. Those should remain package/application dependencies rather than being made implicit ASYSMA runtime dependencies.
+
+## ASYSMA synthesis
+
+The clean integration is:
+
+```text
+ASYSMA container
+    |
+    +-- manifest
+    +-- integrity
+    +-- policy
+    +-- native launcher/bootstrap
+    +-- Java classes/resources
+    +-- optional native libraries
+             |
+             v
+        JDesk launcher
+             |
+             +--> host profile
+             +--> Java discovery
+             +--> JavaFX discovery
+             +--> JDesk discovery
+             |
+             v
+        SecureJDK 28
+             |
+             v
+        JDeskApplication
+```
+
+## Important compatibility concern
+
+The existing JDesk Makefile uses `-march=x86-64-v3`. That is not equivalent to a universal x86-64 baseline. ASYSMA should therefore declare the required native CPU profile rather than claiming that every x86-64 processor can execute the native payload.
+
+For maximum portability, a future ASYSMA native bootstrap should remain at the agreed baseline and dispatch to an x86-64-v3 optimized JDesk component only after runtime capability detection.
+
+## Security boundary
+
+The native launcher must be treated as executable code, not merely as a Java helper. ASYSMA integrity verification and policy evaluation should occur before launching an untrusted native payload.
+
+The OS remains authoritative for process lifetime, permissions, memory, display access, and termination.
+
+## Status
+
+This crawl documents the dependency network visible in the repository on 2026-08-25. It is an architectural dependency map, not a claim that every external dependency is installed or that every documented platform is currently implemented.

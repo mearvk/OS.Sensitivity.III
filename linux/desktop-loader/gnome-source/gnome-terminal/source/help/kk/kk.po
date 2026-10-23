@@ -1,0 +1,3526 @@
+# Kazakh translation for gnome-terminal.
+# Copyright (C) 2026 gnome-terminal's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-terminal package.
+# Baurzhan Muftakhidinov <baurthefirst@gmail.com>,  2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-terminal gtk3\n"
+"POT-Creation-Date: 2026-02-24 14:00+0000\n"
+"PO-Revision-Date: 2026-02-25 07:02+0500\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <Kazakh>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
+
+#. (itstool) path: credit/name
+#: C/adv-keyboard-shortcuts.page:14 C/app-colors.page:12 C/app-cursor.page:13
+#: C/app-fonts.page:12 C/app-fullscreen.page:12 C/app-terminal-sizes.page:12
+#: C/app-zoom.page:11 C/gs-execute-commands.page:14 C/gs-tabs.page:13
+#: C/index.page:13 C/introduction.page:12 C/overview.page:9 C/pref-bell.page:12
+#: C/pref-custom-exit.page:14 C/pref-custom-command.page:15
+#: C/pref-keyboard-access.page:13 C/pref-login-shell.page:13
+#: C/pref-menubar.page:14 C/pref-profiles.page:12 C/pref-scrolling.page:13
+#: C/prob-reset.page:12 C/txt-copy-paste.page:12 C/txt-links.page:10
+#: C/txt-search.page:12 C/txt-select-text.page:13
+msgid "Sindhu S"
+msgstr "Sindhu S"
+
+#. (itstool) path: credit/years
+#: C/adv-keyboard-shortcuts.page:16 C/adv-keyboard-shortcuts.page:21
+#: C/adv-keyboard-shortcuts.page:26 C/app-colors.page:14 C/app-colors.page:19
+#: C/app-colors.page:24 C/app-cursor.page:15 C/app-cursor.page:20
+#: C/app-cursor.page:25 C/app-fonts.page:14 C/app-fonts.page:19
+#: C/app-fonts.page:24 C/app-fullscreen.page:14 C/app-fullscreen.page:19
+#: C/app-fullscreen.page:24 C/app-terminal-sizes.page:14
+#: C/app-terminal-sizes.page:19 C/app-terminal-sizes.page:24 C/app-zoom.page:13
+#: C/app-zoom.page:18 C/app-zoom.page:23 C/gs-execute-commands.page:16
+#: C/gs-execute-commands.page:26 C/gs-tabs.page:15 C/gs-tabs.page:25
+#: C/index.page:15 C/index.page:20 C/index.page:25 C/introduction.page:14
+#: C/introduction.page:19 C/introduction.page:24 C/overview.page:11
+#: C/overview.page:16 C/pref-bell.page:14 C/pref-bell.page:19
+#: C/pref-bell.page:24 C/pref-custom-exit.page:16 C/pref-custom-exit.page:26
+#: C/pref-custom-command.page:17 C/pref-custom-command.page:27
+#: C/pref-keyboard-access.page:15 C/pref-keyboard-access.page:20
+#: C/pref-keyboard-access.page:25 C/pref-login-shell.page:15
+#: C/pref-login-shell.page:25 C/pref-menubar.page:16 C/pref-menubar.page:21
+#: C/pref-menubar.page:26 C/pref-profiles.page:14 C/pref-profiles.page:24
+#: C/pref-scrolling.page:15 C/prob-reset.page:14 C/prob-reset.page:19
+#: C/txt-copy-paste.page:14 C/txt-copy-paste.page:19 C/txt-copy-paste.page:24
+#: C/txt-links.page:12 C/txt-links.page:17 C/txt-links.page:22
+#: C/txt-search.page:14 C/txt-search.page:19 C/txt-search.page:24
+#: C/txt-select-text.page:15
+msgid "2013"
+msgstr "2013"
+
+#. (itstool) path: credit/name
+#: C/adv-keyboard-shortcuts.page:19 C/app-colors.page:17 C/app-cursor.page:18
+#: C/app-fonts.page:17 C/app-fullscreen.page:17 C/app-terminal-sizes.page:17
+#: C/app-zoom.page:16 C/gs-execute-commands.page:19 C/gs-tabs.page:18
+#: C/index.page:18 C/introduction.page:17 C/overview.page:14 C/pref.page:9
+#: C/pref-bell.page:17 C/pref-custom-exit.page:19 C/pref-custom-command.page:20
+#: C/pref-keyboard-access.page:18 C/pref-login-shell.page:18
+#: C/pref-menubar.page:19 C/pref-profiles.page:17
+#: C/pref-profile-char-width.page:12 C/pref-profile-encoding.page:12
+#: C/pref-scrolling.page:18 C/pref-tab-window.page:14 C/pref-user-input.page:11
+#: C/prob-reset.page:17 C/txt-copy-paste.page:17 C/txt-links.page:15
+#: C/txt-search.page:17 C/txt-select-text.page:18
+msgid "Ekaterina Gerasimova"
+msgstr "Ekaterina Gerasimova"
+
+#. (itstool) path: credit/name
+#: C/adv-keyboard-shortcuts.page:24 C/app-colors.page:22 C/app-cursor.page:23
+#: C/app-fonts.page:22 C/app-fullscreen.page:22 C/app-terminal-sizes.page:22
+#: C/app-zoom.page:21 C/gs-execute-commands.page:24 C/gs-tabs.page:23
+#: C/introduction.page:22 C/pref-bell.page:22 C/pref-custom-exit.page:24
+#: C/pref-custom-command.page:25 C/pref-keyboard-access.page:23
+#: C/pref-login-shell.page:23 C/pref-menubar.page:24 C/pref-profiles.page:22
+#: C/txt-copy-paste.page:22 C/txt-links.page:20 C/txt-search.page:22
+msgid "Michael Hill"
+msgstr "Michael Hill"
+
+#. (itstool) path: info/desc
+#: C/adv-keyboard-shortcuts.page:31
+msgid "View and edit keyboard shortcuts."
+msgstr "Пернетақта жарлықтарын қарау және түзету."
+
+#. (itstool) path: page/title
+#: C/adv-keyboard-shortcuts.page:34
+msgid "Keyboard shortcuts"
+msgstr "Пернетақта жарлықтары"
+
+#. (itstool) path: page/p
+#: C/adv-keyboard-shortcuts.page:36
+msgid ""
+"Keyboard shortcuts are combinations of keys that allow you to perform "
+"actions, such as opening the settings dialog or accessing a feature inside "
+"<app>Terminal</app> quickly. These shortcuts can be modified to suit your "
+"preferences."
+msgstr ""
+"Пернетақта жарлықтары — <app>Терминал</app> ішіндегі баптаулар сұхбат "
+"терезесін ашу немесе мүмкіндікке жылдам қол жеткізу сияқты әрекеттерді "
+"орындауға мүмкіндік беретін пернелер комбинациясы. Бұл жарлықтарды "
+"қалауыңызша өзгертуге болады."
+
+#. (itstool) path: page/p
+#: C/adv-keyboard-shortcuts.page:41
+msgid "To change a keyboard shortcut:"
+msgstr "Пернетақта жарлығын өзгерту үшін:"
+
+#. (itstool) path: item/p
+#: C/adv-keyboard-shortcuts.page:44 C/app-colors.page:46 C/app-colors.page:76
+#: C/app-colors.page:108 C/app-colors.page:177 C/app-cursor.page:41
+#: C/app-fonts.page:46 C/app-fonts.page:70 C/app-fonts.page:115
+#: C/app-terminal-sizes.page:81 C/pref-bell.page:41 C/pref-custom-exit.page:42
+#: C/pref-custom-command.page:48 C/pref-keyboard-access.page:65
+#: C/pref-keyboard-access.page:87 C/pref-login-shell.page:77
+#: C/pref-profile-char-width.page:40 C/pref-profile-encoding.page:38
+#: C/pref-scrolling.page:41 C/pref-scrolling.page:68 C/pref-scrolling.page:93
+#: C/pref-scrolling.page:117 C/pref-scrolling.page:141
+#: C/pref-tab-window.page:56
+msgid ""
+"Press the menu button in the top-right corner of the window and select <gui "
+"style=\"menuitem\">Preferences</gui>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <gui "
+"style=\"menuitem\">Баптаулар</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/adv-keyboard-shortcuts.page:48
+msgid "In the sidebar, select <gui>Shortcuts</gui>."
+msgstr "Бүйірлік панельден <gui>Жарлықтар</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/adv-keyboard-shortcuts.page:51
+msgid "Make sure <gui style=\"checkbox\">Enable shortcuts</gui> is selected."
+msgstr ""
+"<gui style=\"checkbox\">Жарлықтарды іске қосу</gui> таңдалғанына көз "
+"жеткізіңіз."
+
+#. (itstool) path: item/p
+#: C/adv-keyboard-shortcuts.page:54
+msgid "Select the shortcut that you wish to edit by clicking on it."
+msgstr "Түзеткіңіз келетін жарлықты оның үстіне шерту арқылы таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/adv-keyboard-shortcuts.page:57
+msgid ""
+"Once the shortcut is selected, click on the shortcut key combination to edit "
+"it."
+msgstr ""
+"Жарлық таңдалғаннан кейін, оны түзету үшін жарлық пернелер комбинациясына "
+"шертіңіз."
+
+#. (itstool) path: item/p
+#: C/adv-keyboard-shortcuts.page:61
+msgid ""
+"Press your desired shortcut key combination as you would enter it to use it. "
+"The keys that you can use include <key>Alt</key>, <key>Alt Gr</key>, "
+"<key>Ctrl</key>, <key>Shift</key>, <key>Super</key>, number and letter keys."
+msgstr ""
+"Қолданғыңыз келетін жарлық пернелер комбинациясын басыңыз. Қолдануға болатын "
+"пернелерге <key>Alt</key>, <key>Alt Gr</key>, <key>Ctrl</key>, <key>Shift</"
+"key>, <key>Super</key>, сандар мен әріптер пернелері жатады."
+
+#. (itstool) path: note/p
+#: C/adv-keyboard-shortcuts.page:66
+msgid ""
+"Mnemonic key combinations, such as <keyseq><key>Alt</key> <key>F</key></"
+"keyseq> will not work."
+msgstr ""
+"<keyseq><key>Alt</key> <key>F</key></keyseq> сияқты мнемоникалық пернелер "
+"комбинациялары жұмыс істемейді."
+
+#. (itstool) path: item/p
+#: C/adv-keyboard-shortcuts.page:71
+msgid ""
+"Once you have entered your new shortcut, it will automatically be saved and "
+"you should see it in the list next to the corresponding action."
+msgstr ""
+"Жаңа жарлықты енгізгеннен кейін, ол автоматты түрде сақталады және оны "
+"сәйкес әрекеттің қасындағы тізімнен көре аласыз."
+
+#. (itstool) path: note/p
+#: C/adv-keyboard-shortcuts.page:78
+msgid ""
+"To disable a shortcut, edit it and press the <key>Backspace</key> instead of "
+"the new shortcut."
+msgstr ""
+"Жарлықты сөндіру үшін, оны түзету режиміне өтіп, жаңа жарлықтың орнына "
+"<key>Backspace</key> пернесін басыңыз."
+
+#. (itstool) path: section/title
+#: C/adv-keyboard-shortcuts.page:83
+msgid "<gui style=\"menu\">File</gui> shortcuts"
+msgstr "<gui style=\"menu\">Файл</gui> жарлықтары"
+
+#. (itstool) path: section/p
+#: C/adv-keyboard-shortcuts.page:85 C/adv-keyboard-shortcuts.page:118
+#: C/adv-keyboard-shortcuts.page:143 C/adv-keyboard-shortcuts.page:176
+#: C/adv-keyboard-shortcuts.page:209
+msgid "The default shortcuts for options in this section are:"
+msgstr "Бұл бөлімдегі опциялар үшін әдепкі жарлықтар:"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:90 C/adv-keyboard-shortcuts.page:123
+#: C/adv-keyboard-shortcuts.page:148 C/adv-keyboard-shortcuts.page:181
+#: C/adv-keyboard-shortcuts.page:214 C/adv-keyboard-shortcuts.page:287
+msgid "Action"
+msgstr "Әрекет"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:91 C/adv-keyboard-shortcuts.page:124
+#: C/adv-keyboard-shortcuts.page:149 C/adv-keyboard-shortcuts.page:182
+#: C/adv-keyboard-shortcuts.page:215 C/adv-keyboard-shortcuts.page:288
+msgid "Keyboard Shortcut"
+msgstr "Пернетақта жарлығы"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:96
+msgid "New Tab"
+msgstr "Жаңа бет"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:97
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>T</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>T</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:100
+msgid "New Window"
+msgstr "Жаңа терезе"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:101
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>N</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>N</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:104
+msgid "Close Tab"
+msgstr "Бетті жабу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:105
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>W</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>W</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:108
+msgid "Close Window"
+msgstr "Терезені жабу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:109
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>Q</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>Q</key></keyseq>"
+
+#. (itstool) path: section/title
+#: C/adv-keyboard-shortcuts.page:116
+msgid "<gui style=\"menu\">Edit</gui> shortcuts"
+msgstr "<gui style=\"menu\">Түзету</gui> жарлықтары"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:129
+msgid "Copy"
+msgstr "Көшіру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:130
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>C</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>C</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:133
+msgid "Paste"
+msgstr "Кірістіру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:134
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>V</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>V</key></keyseq>"
+
+#. (itstool) path: section/title
+#: C/adv-keyboard-shortcuts.page:141
+msgid "<gui style=\"menu\">View</gui> shortcuts"
+msgstr "<gui style=\"menu\">Көрініс</gui> жарлықтары"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:154
+msgid "Full Screen"
+msgstr "Толық экран"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:155
+msgid "<key>F11</key>"
+msgstr "<key>F11</key>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:158
+msgid "Zoom In"
+msgstr "Үлкейту"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:159
+msgid "<keyseq><key>Ctrl</key><key>+</key></keyseq>"
+msgstr "<keyseq><key>Ctrl</key><key>+</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:162
+msgid "Zoom Out"
+msgstr "Кішірейту"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:163
+msgid "<keyseq><key>Ctrl</key><key>-</key></keyseq>"
+msgstr "<keyseq><key>Ctrl</key><key>-</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:166
+msgid "Normal Size"
+msgstr "Қалыпты өлшем"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:167
+msgid "<keyseq><key>Ctrl</key><key>0</key></keyseq>"
+msgstr "<keyseq><key>Ctrl</key><key>0</key></keyseq>"
+
+#. (itstool) path: section/title
+#: C/adv-keyboard-shortcuts.page:174
+msgid "<gui style=\"menu\">Search</gui> shortcuts"
+msgstr "<gui style=\"menu\">Іздеу</gui> жарлықтары"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:187
+msgid "Find"
+msgstr "Табу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:188
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>F</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>F</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:191
+msgid "Find Next"
+msgstr "Келесіні табу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:192
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>G</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>G</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:195
+msgid "Find Previous"
+msgstr "Алдыңғыны табу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:196
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>H</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>H</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:199
+msgid "Clear Highlight"
+msgstr "Ерекшелеуді тазарту"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:200
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>J</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>J</key></keyseq>"
+
+#. (itstool) path: section/title
+#: C/adv-keyboard-shortcuts.page:207
+msgid "Tab shortcuts"
+msgstr "Беттер жарлықтары"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:220
+msgid "Switch to Previous Tab"
+msgstr "Алдыңғы бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:221
+msgid "<keyseq><key>Ctrl</key><key>Page Up</key></keyseq>"
+msgstr "<keyseq><key>Ctrl</key><key>Page Up</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:224
+msgid "Switch to Next Tab"
+msgstr "Келесі бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:225
+msgid "<keyseq><key>Ctrl</key><key>Page Down</key></keyseq>"
+msgstr "<keyseq><key>Ctrl</key><key>Page Down</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:228
+msgid "Move Tab to the Left"
+msgstr "Бетті солға жылжыту"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:229
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>Page Up</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>Page Up</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:232
+msgid "Move Tab to the Right"
+msgstr "Бетті оңға жылжыту"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:233
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>Page Down</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>Page Down</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:236
+msgid "Switch to Tab 1"
+msgstr "1-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:237
+msgid "<keyseq><key>Alt</key><key>1</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>1</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:240
+msgid "Switch to Tab 2"
+msgstr "2-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:241
+msgid "<keyseq><key>Alt</key><key>2</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>2</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:244
+msgid "Switch to Tab 3"
+msgstr "3-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:245
+msgid "<keyseq><key>Alt</key><key>3</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>3</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:248
+msgid "Switch to Tab 4"
+msgstr "4-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:249
+msgid "<keyseq><key>Alt</key><key>4</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>4</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:252
+msgid "Switch to Tab 5"
+msgstr "5-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:253
+msgid "<keyseq><key>Alt</key><key>5</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>5</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:256
+msgid "Switch to Tab 6"
+msgstr "6-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:257
+msgid "<keyseq><key>Alt</key><key>6</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>6</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:260
+msgid "Switch to Tab 7"
+msgstr "7-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:261
+msgid "<keyseq><key>Alt</key><key>7</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>7</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:264
+msgid "Switch to Tab 8"
+msgstr "8-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:265
+msgid "<keyseq><key>Alt</key><key>8</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>8</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:268
+msgid "Switch to Tab 9"
+msgstr "9-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:269
+msgid "<keyseq><key>Alt</key><key>9</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>9</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:272
+msgid "Switch to Tab 10"
+msgstr "10-бетке ауысу"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:273
+msgid "<keyseq><key>Alt</key><key>0</key></keyseq>"
+msgstr "<keyseq><key>Alt</key><key>0</key></keyseq>"
+
+#. (itstool) path: section/title
+#: C/adv-keyboard-shortcuts.page:280
+msgid "Other"
+msgstr "Басқа"
+
+#. (itstool) path: section/p
+#: C/adv-keyboard-shortcuts.page:282
+msgid "There are also some shortcuts that cannot be edited:"
+msgstr "Сондай-ақ түзетуге болмайтын кейбір жарлықтар бар:"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:293
+msgid "Scroll up by one line"
+msgstr "Бір жолға жоғары айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:294
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>Up</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>Up</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:297
+msgid "Scroll down by one line"
+msgstr "Бір жолға төмен айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:298
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>Down</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>Down</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:301
+msgid "Scroll up by one page"
+msgstr "Бір бетке жоғары айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:302
+msgid "<keyseq><key>Shift</key><key>Page Up</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Page Up</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:305
+msgid "Scroll down by one page"
+msgstr "Бір бетке төмен айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:306
+msgid "<keyseq><key>Shift</key><key>Page Down</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Page Down</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:309
+msgid "Scroll to the top"
+msgstr "Ең басына айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:310
+msgid "<keyseq><key>Shift</key><key>Home</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Home</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:313
+msgid "Scroll to the bottom"
+msgstr "Ең соңына айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:314
+msgid "<keyseq><key>Shift</key><key>End</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>End</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:317
+msgid "Scroll to previous command"
+msgstr "Алдыңғы командаға айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:318
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>Left</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>Left</key></keyseq>"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:321
+msgid "Scroll to next command"
+msgstr "Келесі командаға айналдыру"
+
+#. (itstool) path: td/p
+#: C/adv-keyboard-shortcuts.page:322
+msgid "<keyseq><key>Shift</key><key>Ctrl</key><key>Right</key></keyseq>"
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>Right</key></keyseq>"
+
+#. (itstool) path: info/desc
+#: C/app-colors.page:29
+msgid "Change colors and backgrounds."
+msgstr "Түстерді және фондарды өзгерту."
+
+#. (itstool) path: page/title
+#: C/app-colors.page:33
+msgid "Color schemes"
+msgstr "Түстер схемалары"
+
+#. (itstool) path: page/p
+#: C/app-colors.page:35
+msgid ""
+"If you do not like the default <app>Terminal</app> theme, you may want to "
+"change the colors that are used for the text and background. You can use "
+"colors from your theme, select one of the presets or use a custom scheme."
+msgstr ""
+"Егер сізге әдепкі <app>Терминал</app> темасы ұнамаса, мәтін мен фон үшін "
+"қолданылатын түстерді өзгертуге болады. Темаңыздағы түстерді қолдануға, "
+"дайын жиынтықтардың бірін таңдауға немесе жеке схеманы қолдануға болады."
+
+#. (itstool) path: section/title
+#: C/app-colors.page:40
+msgid "Use colors from your system theme"
+msgstr "Жүйелік тема түстерін қолдану"
+
+#. (itstool) path: section/p
+#: C/app-colors.page:42
+msgid "To use colors from the system theme:"
+msgstr "Жүйелік тема түстерін қолдану үшін:"
+
+#. (itstool) path: item/p
+#: C/app-colors.page:50 C/app-colors.page:80 C/app-colors.page:112
+#: C/app-colors.page:181 C/app-cursor.page:45 C/app-fonts.page:50
+#: C/app-fonts.page:74 C/app-fonts.page:119 C/app-terminal-sizes.page:85
+#: C/pref-bell.page:45 C/pref-custom-exit.page:46 C/pref-custom-command.page:52
+#: C/pref-login-shell.page:81 C/pref-profile-char-width.page:44
+#: C/pref-profile-encoding.page:42 C/pref-scrolling.page:45
+#: C/pref-scrolling.page:72 C/pref-scrolling.page:97 C/pref-scrolling.page:121
+#: C/pref-scrolling.page:145
+msgid ""
+"In the sidebar, select your current profile in the <gui>Profiles</gui> "
+"section."
+msgstr ""
+"Бүйірлік панельдегі <gui>Профильдер</gui> бөлімінен ағымдағы профильді "
+"таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/app-colors.page:54 C/app-colors.page:84 C/app-colors.page:116
+#: C/app-colors.page:185
+msgid "Select <gui style=\"tab\">Colors</gui>."
+msgstr "<gui style=\"tab\">Түстер</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/app-colors.page:57
+msgid ""
+"Check <gui style=\"checkbox\">Use colors from system theme</gui>. The "
+"changes will be applied automatically."
+msgstr ""
+"<gui style=\"checkbox\">Жүйелік тема түстерін қолдану</gui> белгілеңіз. "
+"Өзгерістер автоматты түрде іске асырылады."
+
+#. (itstool) path: section/title
+#: C/app-colors.page:65
+msgid "Built-in schemes"
+msgstr "Кірістірілген схемалар"
+
+#. (itstool) path: section/p
+#: C/app-colors.page:67
+msgid ""
+"You can choose one of the built-in color schemes: <gui>Black on light "
+"yellow</gui>, <gui>Black on white</gui>, <gui>Gray on black</gui>, "
+"<gui>GNOME light</gui>, <gui>GNOME dark</gui>, <gui>Green on black</gui>, "
+"<gui>White on black</gui>, <gui>Tango light</gui>, <gui>Tango dark</gui>, "
+"<gui>Solarized light</gui>, <gui>Solarized dark</gui>. To set any of the "
+"built-in schemes:"
+msgstr ""
+"Кірістірілген түстер схемаларының бірін таңдай аласыз: <gui>Ашық сары "
+"фондағы қара</gui>, <gui>Ақ фондағы қара</gui>, <gui>Қара фондағы сұр</gui>, "
+"<gui>GNOME ашық</gui>, <gui>GNOME қараңғы</gui>, <gui>Қара фондағы жасыл</"
+"gui>, <gui>Қара фондағы ақ</gui>, <gui>Tango ашық</gui>, <gui>Tango қараңғы</"
+"gui>, <gui>Solarized ашық</gui>, <gui>Solarized қараңғы</gui>. Кірістірілген "
+"схемалардың кез келгенін орнату үшін:"
+
+#. (itstool) path: item/p
+#: C/app-colors.page:87
+msgid ""
+"Make sure that <gui style=\"checkbox\">Use colors from system theme</gui> is "
+"unchecked. Choose the desired color scheme from <gui>Built-in schemes</gui>. "
+"Color scheme choices are applied automatically."
+msgstr ""
+"<gui style=\"checkbox\">Жүйелік тема түстерін қолдану</gui> белгіленбегеніне "
+"көз жеткізіңіз. <gui>Кірістірілген схемалар</gui> ішінен қажетті түстер "
+"схемасын таңдаңыз. Схема таңдаулары автоматты түрде іске асырылады."
+
+#. (itstool) path: note/p
+#: C/app-colors.page:92
+msgid ""
+"Applications can choose to use a color from the palette rather than the "
+"specified bold color."
+msgstr ""
+"Қолданбалар көрсетілген жуан түстің орнына палитрадағы түсті қолдануды "
+"таңдай алады."
+
+#. (itstool) path: section/title
+#: C/app-colors.page:101
+msgid "Custom color scheme"
+msgstr "Жеке түстер схемасы"
+
+#. (itstool) path: section/p
+#: C/app-colors.page:103
+msgid ""
+"You can use custom colors for the text and background in <app>Terminal</app>:"
+msgstr ""
+"<app>Терминал</app> ішіндегі мәтін мен фон үшін жеке түстерді қолдануға "
+"болады:"
+
+#. (itstool) path: item/p
+#: C/app-colors.page:119
+msgid ""
+"Make sure that <gui style=\"checkbox\">Use colors from system theme</gui> is "
+"unchecked. Select <gui>Custom</gui> from the <gui>Built-in schemes</gui> "
+"drop-down list."
+msgstr ""
+"<gui style=\"checkbox\">Жүйелік тема түстерін қолдану</gui> белгіленбегеніне "
+"көз жеткізіңіз. <gui>Кірістірілген схемалар</gui> ашылмалы тізімінен "
+"<gui>Жеке</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/app-colors.page:124
+msgid "Click on the color you would like to change."
+msgstr "Өзгерткіңіз келетін түске шертіңіз."
+
+#. (itstool) path: item/p
+#: C/app-colors.page:127
+msgid ""
+"Choose your desired color from the color sample and click <gui "
+"style=\"button\">Select</gui>."
+msgstr ""
+"Түс үлгісінен қажетті түсті таңдап, <gui style=\"button\">Таңдау</gui> "
+"батырмасын басыңыз."
+
+#. (itstool) path: item/p
+#: C/app-colors.page:129
+msgid "You can choose the desired color in the following ways:"
+msgstr "Қажетті түсті келесі жолдармен таңдауға болады:"
+
+#. (itstool) path: item/p
+#: C/app-colors.page:132
+msgid "Input the hexadecimal color code in the input box."
+msgstr "Енгізу өрісіне түстің он алтылық кодын енгізіңіз."
+
+#. (itstool) path: item/p
+#: C/app-colors.page:135
+msgid ""
+"Drag the slider on the left to adjust the colors and click on the desired "
+"color in the color selection area."
+msgstr ""
+"Түстерді реттеу үшін сол жақтағы жүгірткіні жылжытыңыз және түс таңдау "
+"аймағындағы қажетті түске шертіңіз."
+
+#. (itstool) path: item/p
+#: C/app-colors.page:139
+msgid "Your changes will be saved automatically."
+msgstr "Өзгерістеріңіз автоматты түрде сақталады."
+
+#. (itstool) path: note/p
+#: C/app-colors.page:144
+msgid ""
+"You may also alter a color when you have chosen a built-in scheme by "
+"clicking on the color sample block. Once changed, your selection in the "
+"built-in scheme menu will change to <gui>Custom</gui>."
+msgstr ""
+"Сондай-ақ кірістірілген схеманы таңдаған кезде түс үлгісі блогына шерту "
+"арқылы түсті өзгертуге болады. Өзгертілгеннен кейін кірістірілген схемалар "
+"мәзіріндегі таңдауыңыз <gui>Жеке</gui> болып өзгереді."
+
+#. (itstool) path: note/p
+#: C/app-colors.page:150
+msgid ""
+"Traditionally terminal emulators offered a 16 color palette, this is what "
+"you can alter here. <app>Terminal</app> supports an extended set of 256 "
+"colors, but the additional 240 colors cannot be edited here."
+msgstr ""
+"Дәстүрлі терминал эмуляторлары 16 түсті палитраны ұсынады, мұнда соны "
+"өзгертуге болады. <app>Терминал</app> 256 түстен тұратын кеңейтілген "
+"жиынтықты қолдайды, бірақ қосымша 240 түсті мұнда түзету мүмкін емес."
+
+#. (itstool) path: note/p
+#: C/app-colors.page:154
+msgid ""
+"<app>Terminal</app> even offers direct access to over 16 million colors, "
+"this is called “true color” mode."
+msgstr ""
+"<app>Терминал</app> тіпті 16 миллионнан астам түске тікелей қол жеткізуді "
+"ұсынады, бұл «true color» режимі деп аталады."
+
+#. (itstool) path: note/p
+#: C/app-colors.page:157
+msgid ""
+"If the changes you make to the palette do not seem to have an effect, "
+"presumably the contents you see consist of such extended palette colors or "
+"true colors, rather than the 16 base colors."
+msgstr ""
+"Егер палитраға енгізілген өзгерістер әсер етпесе, сіз көріп тұрған мазмұн 16 "
+"негізгі түстен емес, осындай кеңейтілген палитра түстерінен немесе true "
+"color түстерінен тұрады деп болжауға болады."
+
+#. (itstool) path: section/title
+#: C/app-colors.page:165
+msgid "Bright colors for bold text"
+msgstr "Жуан мәтін үшін ашық түстер"
+
+#. (itstool) path: section/p
+#: C/app-colors.page:167
+msgid ""
+"Traditionally terminals didn't clearly separate bold font weight from "
+"intense colors, often both of them were enabled together. Recent "
+"improvements, such as the introduction of true color support, and certain "
+"color schemes (e.g. Solarized) made it desirable to separate the two "
+"concepts, that is, make the brightness independent from the font weight."
+msgstr ""
+"Дәстүрлі терминалдар жуан қаріп салмағын қанық түстерден анық ажыратпайтын, "
+"көбінесе екеуі де бірге қосылатын. True color қолдауы және кейбір түс "
+"схемалары (мысалы, Solarized) сияқты соңғы жақсартулар осы екі ұғымды "
+"ажыратуды, яғни жарықтықты қаріп салмағына тәуелсіз етуді қажет етті."
+
+#. (itstool) path: section/p
+#: C/app-colors.page:173
+msgid "In order to choose your preferred behavior:"
+msgstr "Қажетті әрекетті таңдау үшін:"
+
+#. (itstool) path: item/p
+#: C/app-colors.page:188
+msgid ""
+"Disable <gui>Show bold text in bright colors</gui> for the new default "
+"behavior, the complete separation of color intensity and font weight; or "
+"enable this option for improved backward compatibility."
+msgstr ""
+"Жаңа әдепкі әрекет үшін, яғни түс қанықтығы мен қаріп салмағын толық ажырату "
+"үшін <gui>Жуан мәтінді ашық түстермен көрсету</gui> опциясын сөндіріңіз; "
+"немесе кері үйлесімділікті жақсарту үшін бұл опцияны іске қосыңыз."
+
+#. (itstool) path: info/desc
+#: C/app-cursor.page:30
+msgid "Select different cursor style."
+msgstr "Басқа курсор стилін таңдау."
+
+#. (itstool) path: page/title
+#: C/app-cursor.page:34
+msgid "Change cursor"
+msgstr "Курсорды өзгерту"
+
+#. (itstool) path: page/p
+#: C/app-cursor.page:36
+msgid ""
+"<app>Terminal</app> has three cursors from which to choose. To select your "
+"preferred cursor:"
+msgstr ""
+"<app>Терминал</app> ішінде таңдауға болатын үш курсор бар. Қажетті курсорды "
+"таңдау үшін:"
+
+#. (itstool) path: item/p
+#: C/app-cursor.page:49 C/app-fonts.page:54 C/app-fonts.page:78
+#: C/app-fonts.page:123 C/app-terminal-sizes.page:89 C/pref-bell.page:49
+msgid "Select <gui style=\"tab\">Text</gui>."
+msgstr "<gui style=\"tab\">Мәтін</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/app-cursor.page:52
+msgid ""
+"Choose your desired cursor shape from the drop down list next to <gui>Cursor "
+"shape</gui>. You can choose from the following options:"
+msgstr ""
+"<gui>Курсор пішіні</gui> қасындағы ашылмалы тізімнен қажетті курсор пішінін "
+"таңдаңыз. Келесі опцияларды таңдауға болады:"
+
+#. (itstool) path: item/p
+#: C/app-cursor.page:57
+msgid "<gui>Block</gui>"
+msgstr "<gui>Блок</gui>"
+
+#. (itstool) path: item/p
+#: C/app-cursor.page:61
+msgid "<gui>I-Beam</gui>"
+msgstr "<gui>I-тәрізді</gui>"
+
+#. (itstool) path: item/p
+#: C/app-cursor.page:65
+msgid "<gui>Underline</gui>"
+msgstr "<gui>Астын сызу</gui>"
+
+#. (itstool) path: item/p
+#: C/app-cursor.page:68
+msgid "Upon selection of the cursor, your choice is saved automatically."
+msgstr "Курсорды таңдағаннан кейін таңдауыңыз автоматты түрде сақталады."
+
+#. (itstool) path: info/desc
+#: C/app-fonts.page:29
+msgid "Use system fonts or choose a custom font for your terminal."
+msgstr ""
+"Терминал үшін жүйелік қаріптерді қолданыңыз немесе жеке қаріп таңдаңыз."
+
+#. (itstool) path: page/title
+#: C/app-fonts.page:33
+msgid "Change font and style"
+msgstr "Қаріпті және стильді өзгерту"
+
+#. (itstool) path: page/p
+#: C/app-fonts.page:35
+msgid ""
+"When you work with a lot of <app>Terminal</app> text, you may want to change "
+"the default font to your preference. You have the following options:"
+msgstr ""
+"<app>Терминал</app> мәтінімен көп жұмыс істегенде, әдепкі қаріпті өз "
+"қалауыңыз бойынша өзгерткіңіз келуі мүмкін. Сізде келесі опциялар бар:"
+
+#. (itstool) path: section/title
+#: C/app-fonts.page:40
+msgid "System fixed width font"
+msgstr "Жүйелік бекітілген енді қаріп"
+
+#. (itstool) path: section/p
+#: C/app-fonts.page:42
+msgid "To use system default fonts:"
+msgstr "Жүйенің әдепкі қаріптерін қолдану үшін:"
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:57
+msgid "Unselect <gui style=\"checkbox\">Custom font</gui>."
+msgstr "<gui style=\"checkbox\">Жеке қаріп</gui> белгісін алып тастаңыз."
+
+#. (itstool) path: section/title
+#: C/app-fonts.page:64
+msgid "Set a custom font"
+msgstr "Жеке қаріпті орнату"
+
+#. (itstool) path: section/p
+#: C/app-fonts.page:66
+msgid "To set a custom font and size:"
+msgstr "Жеке қаріпті және оның өлшемін орнату үшін:"
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:81
+msgid "Select <gui style=\"checkbox\">Custom font</gui>."
+msgstr "<gui style=\"checkbox\">Жеке қаріп</gui> белгілеңіз."
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:84
+msgid "Click on the button next to <gui style=\"checkbox\">Custom font</gui>."
+msgstr "<gui style=\"checkbox\">Жеке қаріп</gui> қасындағы батырманы басыңыз."
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:87
+msgid ""
+"Type the name of your desired font into the search field or browse the list "
+"of fonts."
+msgstr ""
+"Іздеу өрісіне қажетті қаріптің атын теріңіз немесе қаріптер тізімін қараңыз."
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:91
+msgid ""
+"Drag the slider that is below the font list to set the font size. "
+"Alternatively, you can type in the font size into the field next to the "
+"slider, or click on <gui style=\"button\">+</gui> to increase font size or "
+"<gui style=\"button\">-</gui> to decrease selected font size."
+msgstr ""
+"Қаріп өлшемін орнату үшін қаріп тізімінің астындағы жүгірткіні жылжытыңыз. "
+"Немесе жүгірткінің қасындағы өріске қаріп өлшемін теріңіз немесе қаріп "
+"өлшемін үлкейту үшін <gui style=\"button\">+</gui> немесе кішірейту үшін "
+"<gui style=\"button\">-</gui> батырмасын басыңыз."
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:97
+msgid ""
+"Click <gui style=\"button\">Select</gui> to apply your changes. To discard "
+"changes and go back to previous dialog, click <gui style=\"button\">Cancel</"
+"gui>."
+msgstr ""
+"Өзгерістерді іске асыру үшін <gui style=\"button\">Таңдау</gui> басыңыз. "
+"Өзгерістерден бас тарту және алдыңғы сұхбат терезесіне қайту үшін <gui "
+"style=\"button\">Бас тарту</gui> басыңыз."
+
+#. (itstool) path: section/title
+#: C/app-fonts.page:106
+msgid "Line spacing and character spacing"
+msgstr "Жоларалық және таңбааралық қашықтық"
+
+#. (itstool) path: section/p
+#: C/app-fonts.page:108
+msgid ""
+"<app>Terminal</app> allows you to pull its characters apart for improved "
+"readability. Line spacing and character spacing can be adjusted from 1.0 "
+"(the regular look) to 2.0 (“double spacing”), including fractional values in "
+"between."
+msgstr ""
+"<app>Терминал</app> оқуға ыңғайлы болу үшін таңбаларды бір-бірінен ажыратуға "
+"мүмкіндік береді. Жоларалық және таңбааралық қашықтықты 1.0-ден (қалыпты "
+"көрініс) 2.0-ге дейін («қос қашықтық»), соның ішінде аралық бөлшек мәндерді "
+"реттеуге болады."
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:126
+msgid "Go to the <gui>Cell spacing</gui> setting."
+msgstr "<gui>Ұяшықтар аралығы</gui> баптауына өтіңіз."
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:129
+msgid ""
+"To set the horizontal character spacing, adjust the multiplier number in "
+"front of <gui>width</gui>."
+msgstr ""
+"Горизонталды таңбааралық қашықтықты орнату үшін <gui>ені</gui> алдындағы "
+"көбейткіш санды реттеңіз."
+
+#. (itstool) path: item/p
+#: C/app-fonts.page:133
+msgid ""
+"To set the line spacing, adjust the multiplier number in front of "
+"<gui>height</gui>."
+msgstr ""
+"Жоларалық қашықтықты орнату үшін <gui>биіктігі</gui> алдындағы көбейткіш "
+"санды реттеңіз."
+
+#. (itstool) path: info/desc
+#: C/app-fullscreen.page:29
+msgid "Enable fullscreen mode."
+msgstr "Толық экран режимін іске қосу."
+
+#. (itstool) path: page/title
+#: C/app-fullscreen.page:32
+msgid "Fullscreen session"
+msgstr "Толық экранды сеанс"
+
+#. (itstool) path: page/p
+#: C/app-fullscreen.page:34
+msgid "Fullscreen mode allows <app>Terminal</app> to use the entire screen."
+msgstr ""
+"Толық экран режимі <app>Терминалға</app> бүкіл экранды қолдануға мүмкіндік "
+"береді."
+
+#. (itstool) path: page/p
+#: C/app-fullscreen.page:36
+msgid ""
+"This mode is useful if you have a device with limited screen space and "
+"intend to work in <app>Terminal</app> for a long duration, or are working "
+"with long lines of terminal output. It temporarily hides the window "
+"decoration, allowing you to view more <link xref=\"pref-"
+"scrolling\">scrollback lines</link> on the screen."
+msgstr ""
+"Бұл режим экран кеңістігі шектеулі құрылғыңыз болса және <app>Терминалда</"
+"app> ұзақ уақыт жұмыс істегіңіз келсе немесе терминал шығысының ұзын "
+"жолдарымен жұмыс істеп жатсаңыз пайдалы. Ол терезе безендірілуін уақытша "
+"жасырып, экранда көбірек <link xref=\"pref-scrolling\">айналдыру жолдарын</"
+"link> көруге мүмкіндік береді."
+
+#. (itstool) path: page/p
+#: C/app-fullscreen.page:42
+msgid "To enable fullscreen mode:"
+msgstr "Толық экран режимін іске қосу үшін:"
+
+#. (itstool) path: item/p
+#: C/app-fullscreen.page:46
+msgid ""
+"Press the menu button in the top-right corner of the window and select <gui "
+"style=\"menuitem\">Full Screen</gui>, or press <key>F11</key>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <gui "
+"style=\"menuitem\">Толық экран</gui> таңдаңыз немесе <key>F11</key> басыңыз."
+
+#. (itstool) path: note/p
+#: C/app-fullscreen.page:52
+msgid ""
+"The menubar will still be visible in fullscreen mode unless you have hidden "
+"it."
+msgstr ""
+"Егер сіз оны жасырмаған болсаңыз, мәзір жолағы толық экран режимінде де "
+"көрініп тұрады."
+
+#. (itstool) path: note/p
+#: C/app-fullscreen.page:57
+msgid ""
+"If you have more than one <app>Terminal</app> tab open, the tab bar will be "
+"visible in the fullscreen mode."
+msgstr ""
+"Егер сізде бірнеше <app>Терминал</app> беті ашық болса, беттер панелі толық "
+"экран режимінде көрінетін болады."
+
+#. (itstool) path: page/p
+#: C/app-fullscreen.page:61
+msgid "To disable fullscreen mode:"
+msgstr "Толық экран режимін сөндіру үшін:"
+
+#. (itstool) path: item/p
+#: C/app-fullscreen.page:65
+msgid ""
+"Right click and select <gui style=\"menuitem\">Leave Full Screen</gui>. "
+"Alternatively, press <key>F11</key>."
+msgstr ""
+"Оң жақпен шертіп, <gui style=\"menuitem\">Толық экраннан шығу</gui> "
+"таңдаңыз. Немесе <key>F11</key> басыңыз."
+
+#. (itstool) path: info/desc
+#: C/app-terminal-sizes.page:29
+msgid "Change the <app>Terminal</app> window size."
+msgstr "<app>Терминал</app> терезесінің өлшемін өзгерту."
+
+#. (itstool) path: page/title
+#: C/app-terminal-sizes.page:33
+msgid "<app>Terminal</app> sizes"
+msgstr "<app>Терминал</app> өлшемдері"
+
+#. (itstool) path: page/p
+#: C/app-terminal-sizes.page:35
+msgid ""
+"If you work with certain command line applications that have minimum "
+"terminal size requirements in order to display correctly, or if you want to "
+"view long lines of terminal output with minimal line breaks on your display, "
+"you may require <app>Terminal</app> windows to be of a particular size."
+msgstr ""
+"Егер сіз дұрыс көрсетілуі үшін терминал өлшеміне минималды талаптары бар "
+"кейбір командалық жол қолданбаларымен жұмыс істесеңіз немесе дисплейіңізде "
+"минималды жол үзілімдерімен терминал шығысының ұзын жолдарын көргіңіз келсе, "
+"сізге <app>Терминал</app> терезелерінің белгілі бір өлшемде болуы қажет "
+"болуы мүмкін."
+
+#. (itstool) path: page/p
+#: C/app-terminal-sizes.page:41
+msgid ""
+"You can change the <app>Terminal</app> window size to some preset values:"
+msgstr ""
+"<app>Терминал</app> терезесінің өлшемін кейбір дайын мәндерге өзгертуге "
+"болады:"
+
+#. (itstool) path: item/p
+#: C/app-terminal-sizes.page:46
+msgid ""
+"Press the menu button in the top-right corner of the window and select <gui "
+"style=\"menuitem\">Advanced</gui>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <gui "
+"style=\"menuitem\">Кеңейтілген</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/app-terminal-sizes.page:50
+msgid "Choose one of the following options:"
+msgstr "Келесі опциялардың бірін таңдаңыз:"
+
+#. (itstool) path: item/p
+#: C/app-terminal-sizes.page:53
+msgid "<gui style=\"menuitem\">80×24</gui>"
+msgstr "<gui style=\"menuitem\">80×24</gui>"
+
+#. (itstool) path: item/p
+#: C/app-terminal-sizes.page:56
+msgid "<gui style=\"menuitem\">80×43</gui>"
+msgstr "<gui style=\"menuitem\">80×43</gui>"
+
+#. (itstool) path: item/p
+#: C/app-terminal-sizes.page:59
+msgid "<gui style=\"menuitem\">132×24</gui>"
+msgstr "<gui style=\"menuitem\">132×24</gui>"
+
+#. (itstool) path: item/p
+#: C/app-terminal-sizes.page:62
+msgid "<gui style=\"menuitem\">132×43</gui>"
+msgstr "<gui style=\"menuitem\">132×43</gui>"
+
+#. (itstool) path: note/p
+#: C/app-terminal-sizes.page:69
+msgid ""
+"If you have enabled <link xref=\"pref-keyboard-access\"><gui>Menu access "
+"keys</gui></link>, you can access this menu by pressing <keyseq><key>Alt</"
+"key><key>T</key></keyseq> and then pressing <key>1</key> to switch the "
+"<app>Terminal</app> window to size <gui>80×24</gui> and so on."
+msgstr ""
+"Егер сізде <link xref=\"pref-keyboard-access\"><gui>Мәзірге қол жеткізу "
+"пернелері</gui></link> іске қосылған болса, бұл мәзірге <keyseq><key>Alt</"
+"key><key>T</key></keyseq> басу арқылы қол жеткізе аласыз, содан кейін "
+"<app>Терминал</app> терезесін <gui>80×24</gui> өлшеміне ауыстыру үшін "
+"<key>1</key> басыңыз және т.с.с."
+
+#. (itstool) path: page/p
+#: C/app-terminal-sizes.page:76
+msgid ""
+"If you require custom size <app>Terminal</app> windows, you can also set the "
+"default window size according to your requirements:"
+msgstr ""
+"Егер сізге <app>Терминал</app> терезелерінің жеке өлшемі қажет болса, "
+"талаптарыңызға сәйкес әдепкі терезе өлшемін де орнатуға болады:"
+
+#. (itstool) path: item/p
+#: C/app-terminal-sizes.page:92
+msgid ""
+"Set <gui>Initial terminal size</gui> by typing the desired number of columns "
+"and rows in the corresponding input boxes. You can also click <gui "
+"style=\"button\">+</gui> to increase or <gui style=\"button\">-</gui> to "
+"decrease the size."
+msgstr ""
+"Сәйкес енгізу өрістеріне бағандар мен жолдардың қажетті санын теру арқылы "
+"<gui>Терминалдың бастапқы өлшемі</gui> мәнін орнатыңыз. Өлшемді үлкейту үшін "
+"<gui style=\"button\">+</gui> немесе кішірейту үшін <gui style=\"button\">-</"
+"gui> батырмасын басуға болады."
+
+#. (itstool) path: info/desc
+#: C/app-zoom.page:28
+msgid "Increase or decrease text size."
+msgstr "Мәтін өлшемін үлкейту немесе кішірейту."
+
+#. (itstool) path: page/title
+#: C/app-zoom.page:32
+msgid "Zoom in and zoom out"
+msgstr "Үлкейту және кішірейту"
+
+#. (itstool) path: page/p
+#: C/app-zoom.page:34
+msgid "To increase <app>Terminal</app> text size:"
+msgstr "<app>Терминал</app> мәтінінің өлшемін үлкейту үшін:"
+
+#. (itstool) path: item/p
+#: C/app-zoom.page:38
+msgid ""
+"Press the menu button in the top-right corner of the window and press <gui "
+"style=\"button\">+</gui>, or press <keyseq><key>Ctrl</key><key>+</key></"
+"keyseq>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <gui "
+"style=\"button\">+</gui> басыңыз немесе <keyseq><key>Ctrl</key><key>+</key></"
+"keyseq> басыңыз."
+
+#. (itstool) path: page/p
+#: C/app-zoom.page:44
+msgid "To decrease <app>Terminal</app> text size:"
+msgstr "<app>Терминал</app> мәтінінің өлшемін кішірейту үшін:"
+
+#. (itstool) path: item/p
+#: C/app-zoom.page:48
+msgid ""
+"Press the menu button in the top-right corner of the window and press <gui "
+"style=\"button\">-</gui>, or press <keyseq><key>Ctrl</key><key>-</key></"
+"keyseq>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <gui "
+"style=\"button\">-</gui> басыңыз немесе <keyseq><key>Ctrl</key><key>-</key></"
+"keyseq> басыңыз."
+
+#. (itstool) path: page/p
+#: C/app-zoom.page:54
+msgid "To restore <app>Terminal</app> text to default size:"
+msgstr "<app>Терминал</app> мәтінін әдепкі өлшемге қайтару үшін:"
+
+#. (itstool) path: item/p
+#: C/app-zoom.page:58
+msgid ""
+"Press the menu button in the top-right corner of the window and press <gui "
+"style=\"button\">100%</gui>, or press <keyseq><key>Ctrl</key><key>0</key></"
+"keyseq>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <gui "
+"style=\"button\">100%</gui> басыңыз немесе <keyseq><key>Ctrl</key><key>0</"
+"key></keyseq> басыңыз."
+
+#. (itstool) path: credit/years
+#: C/gs-execute-commands.page:21 C/gs-tabs.page:20 C/pref-scrolling.page:20
+msgid "2013–2014"
+msgstr "2013–2014"
+
+#. (itstool) path: info/desc
+#: C/gs-execute-commands.page:31
+msgid "Launch programs or run commands using <app>Terminal</app>."
+msgstr ""
+"<app>Терминал</app> арқылы бағдарламаларды іске қосу немесе командаларды "
+"орындау."
+
+#. (itstool) path: page/title
+#: C/gs-execute-commands.page:34
+msgid "Execute a command"
+msgstr "Команданы орындау"
+
+#. (itstool) path: page/p
+#: C/gs-execute-commands.page:36
+msgid ""
+"Any input entered in the <app>Terminal</app> to be executed is referred to "
+"as a <em>command</em>. You can run both command line and graphical user "
+"interface (GUI) programs from the terminal."
+msgstr ""
+"<app>Терминалға</app> орындау үшін енгізілген кез келген мәліметтер "
+"<em>команда</em> деп аталады. Терминалдан командалық жол бағдарламаларын да, "
+"графикалық интерфейсті (GUI) бағдарламаларды да іске қосуға болады."
+
+#. (itstool) path: page/p
+#: C/gs-execute-commands.page:40
+msgid "To execute commands:"
+msgstr "Командаларды орындау үшін:"
+
+#. (itstool) path: item/p
+#: C/gs-execute-commands.page:44
+msgid "Type the command in the <app>Terminal</app> prompt."
+msgstr "Команданы <app>Терминал</app> шақыруына теріңіз."
+
+#. (itstool) path: item/p
+#: C/gs-execute-commands.page:47
+msgid "Press <key>Enter</key> to execute it."
+msgstr "Оны орындау үшін <key>Enter</key> басыңыз."
+
+#. (itstool) path: page/p
+#: C/gs-execute-commands.page:51
+msgid ""
+"If you have a program that ends abruptly without any warning or error, you "
+"may want to run it in <app>Terminal</app>. This will allow the program to "
+"output any error or debugging messages to the <app>Terminal</app> window. "
+"This information can be helpful when filing a bug report."
+msgstr ""
+"Егер сізде ескертусіз немесе қатесіз кенеттен тоқтап қалатын бағдарлама "
+"болса, оны <app>Терминалда</app> іске қосуыңызға болады. Бұл бағдарламаға "
+"кез келген қате немесе жөндеу хабарларын <app>Терминал</app> терезесіне "
+"шығаруға мүмкіндік береді. Бұл ақпарат қате туралы есеп жіберген кезде "
+"пайдалы болуы мүмкін."
+
+#. (itstool) path: note/p
+#: C/gs-execute-commands.page:57
+msgid ""
+"Read about the <link href=\"https://www.gnu.org/software/bash/manual/\">Bash "
+"shell</link> for more information on what you can do in a terminal."
+msgstr ""
+"Терминалда не істеуге болатыны туралы қосымша ақпарат алу үшін <link "
+"href=\"https://www.gnu.org/software/bash/manual/\">Bash қоршамы</link> "
+"туралы оқыңыз."
+
+#. (itstool) path: info/desc
+#: C/gs-tabs.page:30
+msgid "Enable, add, remove and reorder <app>Terminal</app> tabs."
+msgstr ""
+"<app>Терминал</app> беттерін іске қосу, қосу, өшіру және ретін өзгерту."
+
+#. (itstool) path: page/title
+#: C/gs-tabs.page:33
+msgid "Use tabs"
+msgstr "Беттерді қолдану"
+
+#. (itstool) path: page/p
+#: C/gs-tabs.page:35
+msgid ""
+"The tab bar is shown at the top a <app>Terminal</app> window that has "
+"multiple tabs open (it looks like a row of buttons). Click on a tab to "
+"switch to it. You can open multiple tabs to manage your work in "
+"<app>Terminal</app>. This will allow you to multi-task with activities such "
+"as running programs, browsing directories and editing text files in a single "
+"<app>Terminal</app> window."
+msgstr ""
+"Беттер панелі бірнеше беті ашық <app>Терминал</app> терезесінің жоғарғы "
+"жағында көрсетіледі (ол батырмалар қатарына ұқсайды). Бетке ауысу үшін оған "
+"шертіңіз. <app>Терминалдағы</app> жұмысыңызды басқару үшін бірнеше бет ашуға "
+"болады. Бұл бір <app>Терминал</app> терезесінде бағдарламаларды іске қосу, "
+"бумаларды шолу және мәтіндік файлдарды түзету сияқты әрекеттерді бір уақытта "
+"орындауға мүмкіндік береді."
+
+#. (itstool) path: section/title
+#: C/gs-tabs.page:43
+msgid "Open a new tab"
+msgstr "Жаңа бет ашу"
+
+#. (itstool) path: section/p
+#: C/gs-tabs.page:45
+msgid "To open a new tab inside your current <app>Terminal</app> window:"
+msgstr "Ағымдағы <app>Терминал</app> терезесінің ішінде жаңа бет ашу үшін:"
+
+#. (itstool) path: item/p
+#: C/gs-tabs.page:48
+msgid "Press <keyseq><key>Shift</key><key>Ctrl</key><key>T</key></keyseq>."
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>T</key></keyseq> басыңыз."
+
+#. (itstool) path: section/title
+#: C/gs-tabs.page:85
+msgid "Remove a tab"
+msgstr "Бетті өшіру"
+
+#. (itstool) path: section/p
+#: C/gs-tabs.page:87
+msgid ""
+"To close an existing tab inside your current <app>Terminal</app> window:"
+msgstr "Ағымдағы <app>Терминал</app> терезесінің ішіндегі бар бетті жабу үшін:"
+
+#. (itstool) path: item/p
+#: C/gs-tabs.page:92
+msgid "Press <keyseq><key>Shift</key><key>Ctrl</key><key>W</key></keyseq>."
+msgstr "<keyseq><key>Shift</key><key>Ctrl</key><key>W</key></keyseq> басыңыз."
+
+#. (itstool) path: section/p
+#: C/gs-tabs.page:96
+msgid ""
+"Alternatively, you can click on the <gui style=\"button\">×</gui> in the top "
+"right corner of the tab or right click on the tab and select <gui "
+"style=\"menuitem\">Close Terminal</gui>."
+msgstr ""
+"Немесе беттің жоғарғы оң жақ бұрышындағы <gui style=\"button\">×</gui> "
+"белгісіне шертуге немесе бетті оң жақпен шертіп, <gui "
+"style=\"menuitem\">Терминалды жабу</gui> таңдауға болады."
+
+#. (itstool) path: section/title
+#: C/gs-tabs.page:103
+msgid "Reorder tabs"
+msgstr "Беттердің ретін өзгерту"
+
+#. (itstool) path: section/p
+#: C/gs-tabs.page:105
+msgid "To change the ordering of tabs in a window:"
+msgstr "Терезедегі беттердің ретін өзгерту үшін:"
+
+#. (itstool) path: item/p
+#: C/gs-tabs.page:108
+msgid "Click and hold the left mouse button on the tab."
+msgstr "Беттің үстінде тышқанның сол жақ батырмасын басып тұрыңыз."
+
+#. (itstool) path: item/p
+#: C/gs-tabs.page:111
+msgid "Drag the tab to the desired position among the other tabs."
+msgstr "Бетті басқа беттер арасындағы қажетті орынға сүйреңіз."
+
+#. (itstool) path: item/p
+#: C/gs-tabs.page:114
+msgid "Release the mouse button."
+msgstr "Тышқан батырмасын жіберіңіз."
+
+#. (itstool) path: section/p
+#: C/gs-tabs.page:118
+msgid ""
+"The tab will be placed in the position closest to where you released the "
+"tab, immediately beside other open tabs."
+msgstr ""
+"Бет басқа ашық беттердің жанында, сіз оны жіберген жерге ең жақын орынға "
+"орналастырылады."
+
+#. (itstool) path: section/p
+#: C/gs-tabs.page:121
+msgid ""
+"Alternatively, you can reorder a tab by right clicking on a tab and "
+"selecting <gui style=\"menuitem\">Move Terminal Left</gui> to move the tab "
+"to the left or <gui style=\"menuitem\">Move Terminal Right</gui> to move the "
+"tab to the right. This will reorder the tab position by moving it one place "
+"at a time."
+msgstr ""
+"Немесе беттің ретін оны оң жақпен шертіп, бетті солға жылжыту үшін <gui "
+"style=\"menuitem\">Терминалды солға жылжыту</gui> немесе бетті оңға жылжыту "
+"үшін <gui style=\"menuitem\">Терминалды оңға жылжыту</gui> таңдау арқылы "
+"өзгертуге болады. Бұл беттің орнын бір-бірден жылжыту арқылы өзгертеді."
+
+#. (itstool) path: info/title
+#: C/index.page:7
+msgctxt "link:trail"
+msgid "Terminal"
+msgstr "Терминал"
+
+#. (itstool) path: info/title
+#: C/index.page:8
+msgctxt "link"
+msgid "Terminal"
+msgstr "Терминал"
+
+#. (itstool) path: info/title
+#: C/index.page:9
+msgctxt "text"
+msgid "Terminal"
+msgstr "Терминал"
+
+#. (itstool) path: credit/name
+#: C/index.page:23
+msgid "Jim Campbell"
+msgstr "Jim Campbell"
+
+#. (itstool) path: info/desc
+#: C/index.page:30
+msgid "Set up and use the highly customizable GNOME terminal emulator."
+msgstr ""
+"Жоғары деңгейде бапталатын GNOME терминал эмуляторын баптау және қолдану."
+
+#. (itstool) path: page/title
+#: C/index.page:34
+msgid "<_:media-1/> Terminal Help"
+msgstr "<_:media-1/> Терминал көмегі"
+
+#. (itstool) path: section/title
+#: C/index.page:40
+msgid "Getting Started"
+msgstr "Жұмысты бастау"
+
+#. (itstool) path: section/title
+#: C/index.page:44
+msgid "Working With Text"
+msgstr "Мәтінмен жұмыс істеу"
+
+#. (itstool) path: section/title
+#: C/index.page:48
+msgid "Customize Appearance"
+msgstr "Сыртқы түрін баптау"
+
+#. (itstool) path: section/title
+#: C/index.page:52
+msgid "Customize Behavior"
+msgstr "Әрекетті баптау"
+
+#. (itstool) path: section/title
+#: C/index.page:56
+msgid "Advanced Settings"
+msgstr "Кеңейтілген баптаулар"
+
+#. (itstool) path: section/title
+#: C/index.page:60
+msgid "Troubleshooting"
+msgstr "Мәселелерді шешу"
+
+#. (itstool) path: info/desc
+#: C/introduction.page:29
+msgid "Learn about the GNOME terminal emulator."
+msgstr "GNOME терминал эмуляторы туралы біліңіз."
+
+#. (itstool) path: page/title
+#: C/introduction.page:32
+msgid "Introduction"
+msgstr "Кіріспе"
+
+#. (itstool) path: page/p
+#: C/introduction.page:34
+msgid ""
+"<app>Terminal</app> is a terminal emulator application for accessing a UNIX "
+"shell environment which can be used to run programs available on your system."
+msgstr ""
+"<app>Терминал</app> — жүйеңізде қолжетімді бағдарламаларды іске қосу үшін "
+"қолданылатын UNIX қоршам ортасына қол жеткізуге арналған терминал эмуляторы "
+"қолданбасы."
+
+#. (itstool) path: page/p
+#: C/introduction.page:38
+msgid ""
+"<app>Terminal</app> supports escape sequences that control cursor position "
+"and colors."
+msgstr ""
+"<app>Терминал</app> курсор орнын және түстерді басқаратын экрандау "
+"тізбектерін (escape sequences) қолдайды."
+
+#. (itstool) path: figure/title
+#: C/introduction.page:42
+msgid "Terminal"
+msgstr "Терминал"
+
+#. (itstool) path: figure/desc
+#: C/introduction.page:43
+msgid "Screenshot of GNOME <app>Terminal</app>"
+msgstr "GNOME <app>Терминал</app> скриншоты"
+
+#. (itstool) path: figure/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/introduction.page:44
+msgctxt "_"
+msgid ""
+"external ref='figures/gnome-terminal.png' "
+"md5='44213071a02d8e193ef33f6987afa39a'"
+msgstr ""
+"external ref='figures/gnome-terminal.png' "
+"md5='44213071a02d8e193ef33f6987afa39a'"
+
+#. (itstool) path: p/link
+#: C/legal.xml:4
+msgid "Creative Commons Attribution-Share Alike 3.0 Unported License"
+msgstr "Creative Commons Attribution-Share Alike 3.0 Unported License"
+
+#. (itstool) path: p/link
+#: C/legal.xml:6
+msgid "GNU General Public License version 3"
+msgstr "GNU General Public License version 3"
+
+#. (itstool) path: license/p
+#: C/legal.xml:3
+msgid ""
+"This work is licensed under a <_:link-1/> and a <_:link-2/>. It may be "
+"redistributed and/or modified under either license."
+msgstr ""
+"Бұл жұмыс <_:link-1/> және <_:link-2/> бойынша лицензияланған. Ол екі "
+"лицензияның бірі бойынша қайта таратылуы және/немесе өзгертілуі мүмкін."
+
+#. (itstool) path: license/p
+#: C/legal.xml:9
+msgid "GPL 3 statement:"
+msgstr "GPL 3 мәлімдемесі:"
+
+#. (itstool) path: license/p
+#: C/legal.xml:10
+msgid ""
+"This work is free software: you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License version 3 as published by the "
+"Free Software Foundation."
+msgstr ""
+"Бұл жұмыс еркін бағдарламалық қамтама болып табылады: оны Free Software "
+"Foundation жариялаған GNU General Public License 3-нұсқасының шарттарына "
+"сәйкес қайта таратуға және/немесе өзгертуге болады."
+
+#. (itstool) path: license/p
+#: C/legal.xml:14
+msgid ""
+"This work is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE. See the GNU General Public License for more "
+"details."
+msgstr ""
+"Бұл жұмыс пайдалы болады деген үмітпен таратылады, бірақ ЕШҚАНДАЙ КЕПІЛДІК "
+"берілмейді; тіпті САТУҒА ЖАРАМДЫЛЫҚ немесе БЕЛГІЛІ БІР МАҚСАТҚА СӘЙКЕСТІК "
+"туралы жанама кепілдік те берілмейді. Қосымша ақпарат алу үшін GNU General "
+"Public License қараңыз."
+
+#. (itstool) path: license/p
+#: C/legal.xml:19
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see http://www.gnu.org/licenses/."
+msgstr ""
+"Сіз осы бағдарламамен бірге GNU General Public License көшірмесін алуыңыз "
+"керек еді. Егер алмасаңыз, http://www.gnu.org/licenses/ қараңыз."
+
+#. (itstool) path: info/desc
+#: C/overview.page:21
+msgid "What is a terminal?"
+msgstr "Терминал деген не?"
+
+#. (itstool) path: page/title
+#: C/overview.page:24
+msgid "Overview of a terminal"
+msgstr "Терминалға шолу"
+
+#. (itstool) path: page/p
+#: C/overview.page:26
+msgid ""
+"<app>Terminal</app> is a terminal program for <gui>GNOME</gui>. The "
+"following terms and their descriptions will help you to be familiar with "
+"<app>Terminal</app> and its capabilities."
+msgstr ""
+"<app>Терминал</app> — <gui>GNOME</gui> арналған терминал бағдарламасы. "
+"Келесі терминдер мен олардың сипаттамалары <app>Терминалмен</app> және оның "
+"мүмкіндіктерімен танысуға көмектеседі."
+
+#. (itstool) path: item/title
+#: C/overview.page:32
+msgid "A terminal"
+msgstr "Терминал"
+
+#. (itstool) path: item/p
+#: C/overview.page:33
+msgid ""
+"A terminal is a text input point in a computer that is also called the "
+"Command Line Interface (CLI)."
+msgstr ""
+"Терминал — компьютердегі Командалық жол интерфейсі (CLI) деп те аталатын "
+"мәтінді енгізу нүктесі."
+
+#. (itstool) path: item/title
+#: C/overview.page:37
+msgid "Physical terminals"
+msgstr "Физикалық терминалдар"
+
+#. (itstool) path: item/p
+#: C/overview.page:38
+msgid ""
+"IBM 3270, VT100 and many others are hardware terminals that are no longer "
+"produced as physical devices. To emulate these terminals, there are terminal "
+"emulators."
+msgstr ""
+"IBM 3270, VT100 және басқа да көптеген аппараттық терминалдар енді физикалық "
+"құрылғылар ретінде шығарылмайды. Бұл терминалдарды эмуляциялау үшін терминал "
+"эмуляторлары бар."
+
+#. (itstool) path: item/title
+#: C/overview.page:43
+msgid "Terminal emulators"
+msgstr "Терминал эмуляторлары"
+
+#. (itstool) path: item/p
+#: C/overview.page:44
+msgid ""
+"Emulation is the ability of a computer program to imitate another program or "
+"device."
+msgstr ""
+"Эмуляция — компьютерлік бағдарламаның басқа бағдарламаны немесе құрылғыны "
+"имитациялау қабілеті."
+
+#. (itstool) path: item/p
+#: C/overview.page:47
+msgid ""
+"A terminal emulator, also called tty, is a software program that emulates a "
+"video terminal in modern computers that use graphical user interfaces and "
+"provide interactive access to applications that run only in the command line "
+"environments. These applications may be running either on the same machine "
+"or on a different one via <app>telnet</app>, <app>ssh</app>, or <app>dial-"
+"up</app>."
+msgstr ""
+"Tty деп те аталатын терминал эмуляторы — графикалық пайдаланушы "
+"интерфейстерін қолданатын қазіргі заманғы компьютерлерде видеотерминалды "
+"эмуляциялайтын және тек командалық жол орталарында жұмыс істейтін "
+"қолданбаларға интерактивті қол жеткізуді қамтамасыз ететін бағдарламалық "
+"қамтама. Бұл қолданбалар сол машинада немесе <app>telnet</app>, <app>ssh</"
+"app> немесе <app>dial-up</app> арқылы басқа машинада жұмыс істеп тұруы "
+"мүмкін."
+
+#. (itstool) path: item/title
+#: C/overview.page:55
+msgid "VTE"
+msgstr "VTE"
+
+#. (itstool) path: item/p
+#: C/overview.page:56
+msgid ""
+"Virtual Terminal Environment (VTE) is a terminal emulator which emulates a "
+"text terminal inside a graphical user interface (GUI) environment. "
+"<app>Terminal</app> is largely based on the <app>VTE</app>. <app>VTE</app> "
+"has widgets that implement a fully functional terminal emulator."
+msgstr ""
+"Virtual Terminal Environment (VTE) — графикалық пайдаланушы интерфейсі (GUI) "
+"ортасында мәтіндік терминалды эмуляциялайтын терминал эмуляторы. "
+"<app>Терминал</app> негізінен <app>VTE</app>-ге негізделген. <app>VTE</app>-"
+"де толық функционалды терминал эмуляторын іске асыратын виджеттер бар."
+
+#. (itstool) path: item/title
+#: C/overview.page:63
+msgid "Shell"
+msgstr "Қоршам"
+
+#. (itstool) path: item/p
+#: C/overview.page:64
+msgid ""
+"A <em>shell</em> is a program that provides an interface to invoke or "
+"“launch” commands or another program inside a terminal. It also allows you "
+"to view and browse the contents of directories. Popular shells include "
+"<app>bash</app>, <app>zsh</app>, <app>fish</app>."
+msgstr ""
+"<em>Қоршам</em> (shell) — терминал ішінде командаларды немесе басқа "
+"бағдарламаны шақыруға немесе «іске қосуға» арналған интерфейсті қамтамасыз "
+"ететін бағдарлама. Ол сонымен қатар бумалардың мазмұнын көруге және шолуға "
+"мүмкіндік береді. Танымал қоршамдарға <app>bash</app>, <app>zsh</app>, "
+"<app>fish</app> жатады."
+
+#. (itstool) path: item/title
+#: C/overview.page:70
+msgid "Escape Sequences"
+msgstr "Экрандау тізбектері"
+
+#. (itstool) path: item/p
+#: C/overview.page:71
+msgid ""
+"An escape sequence is a series of characters used to change the meaning of "
+"data in a terminal. Escape sequences are used when a computer has only "
+"single channel to send information back and forth. Escape sequences are used "
+"to distinguish if data being sent is a command to be executed or information "
+"to be stored and displayed."
+msgstr ""
+"Экрандау тізбегі (escape sequence) — терминалдағы деректердің мағынасын "
+"өзгерту үшін қолданылатын таңбалар сериясы. Экрандау тізбектері компьютерде "
+"ақпаратты алға-артқа жіберу үшін тек бір арна болған кезде қолданылады. "
+"Экрандау тізбектері жіберілетін деректердің орындалатын команда немесе "
+"сақталатын және көрсетілетін ақпарат екенін ажырату үшін қолданылады."
+
+#. (itstool) path: item/title
+#: C/overview.page:79
+msgid "Prompt"
+msgstr "Шақыру"
+
+#. (itstool) path: item/p
+#: C/overview.page:80
+msgid ""
+"A prompt is also called a <em>command prompt</em>. It is a sequence of "
+"characters used in the command line environment to indicate the readiness of "
+"the shell to accept commands."
+msgstr ""
+"Шақыру (prompt) <em>командалық шақыру</em> деп те аталады. Бұл қоршамның "
+"командаларды қабылдауға дайын екенін көрсету үшін командалық жол ортасында "
+"қолданылатын таңбалар тізбегі."
+
+#. (itstool) path: item/p
+#: C/overview.page:84
+msgid ""
+"A prompt usually ends with the characters <sys>$</sys>, <sys>%</sys>, "
+"<sys>#</sys> or <sys>&gt;</sys> and includes information about the path of "
+"the present working directory. On Unix based systems, it is common for the "
+"prompt to end in a <sys>$</sys> or <sys>#</sys> character depending on the "
+"user role such as <sys>$</sys> for user and <sys>#</sys> for superuser (also "
+"called <sys>root</sys>)."
+msgstr ""
+"Шақыру әдетте <sys>$</sys>, <sys>%</sys>, <sys>#</sys> немесе <sys>&gt;</"
+"sys> таңбаларымен аяқталады және ағымдағы жұмыс бумасының жолы туралы "
+"ақпаратты қамтиды. Unix негізіндегі жүйелерде шақыру пайдаланушы рөліне "
+"байланысты <sys>$</sys> (пайдаланушы үшін) немесе <sys>#</sys> "
+"(суперпайдаланушы немесе <sys>root</sys> үшін) таңбасымен аяқталуы әдеттегі "
+"жағдай."
+
+#. (itstool) path: item/title
+#: C/overview.page:93
+msgid "Command"
+msgstr "Команда"
+
+#. (itstool) path: item/p
+#: C/overview.page:94
+msgid ""
+"An input entered in the prompt to be executed is called a <em>command</em>. "
+"It is a combination of the program name along with any other additional "
+"parameters passed as flags to alter the execution of the program."
+msgstr ""
+"Шақыруда орындау үшін енгізілген мәлімет <em>команда</em> деп аталады. Ол "
+"бағдарлама атауы мен бағдарламаның орындалуын өзгерту үшін жалаушалар "
+"ретінде берілетін кез келген басқа қосымша параметрлердің комбинациясы болып "
+"табылады."
+
+#. (itstool) path: page/title
+#: C/pref.page:18
+msgid "<app>Terminal</app> preferences"
+msgstr "<app>Терминал</app> баптаулары"
+
+#. (itstool) path: section/title
+#: C/pref.page:21
+msgid "Global Preferences"
+msgstr "Глобалды баптаулар"
+
+#. (itstool) path: section/title
+#: C/pref.page:25
+msgid "Manage Profiles"
+msgstr "Профильдерді басқару"
+
+#. (itstool) path: section/title
+#: C/pref.page:29
+msgid "Profile Preferences"
+msgstr "Профиль баптаулары"
+
+#. (itstool) path: info/desc
+#: C/pref-bell.page:29
+msgid "Enable audible notification in <app>Terminal</app>."
+msgstr "<app>Терминалда</app> дыбыстық хабарландыруды іске қосу."
+
+#. (itstool) path: page/title
+#: C/pref-bell.page:33
+msgid "Set audible bell"
+msgstr "Дыбыстық белгіні орнату"
+
+#. (itstool) path: page/p
+#: C/pref-bell.page:35
+msgid ""
+"<app>Terminal</app> can sound an audible bell to indicate events in "
+"<app>Terminal</app> windows and tabs."
+msgstr ""
+"<app>Терминал</app> терезелері мен беттеріндегі оқиғаларды көрсету үшін "
+"<app>Терминал</app> дыбыстық белгі шығара алады."
+
+#. (itstool) path: page/p
+#: C/pref-bell.page:38
+msgid "To be notified of these events:"
+msgstr "Осы оқиғалар туралы хабарландыру алу үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-bell.page:52
+msgid "Select <gui style=\"checkbox\">Terminal bell</gui>"
+msgstr "<gui style=\"checkbox\">Терминал белгісі</gui> таңдаңыз"
+
+#. (itstool) path: note/p
+#: C/pref-bell.page:62
+msgid ""
+"To preview the bell sound that your system produces, press "
+"<keyseq><key>Ctrl</key><key>G</key></keyseq>."
+msgstr ""
+"Жүйеңіз шығаратын белгі дыбысын алдын ала тыңдау үшін <keyseq><key>Ctrl</"
+"key><key>G</key></keyseq> басыңыз."
+
+#. (itstool) path: credit/years
+#: C/pref-custom-exit.page:21 C/pref-custom-command.page:22
+#: C/pref-login-shell.page:20 C/pref-profiles.page:19
+msgid "2013-2014"
+msgstr "2013-2014"
+
+#. (itstool) path: info/desc
+#: C/pref-custom-exit.page:31
+msgid ""
+"Set the behavior of <app>Terminal</app> when a custom command or the default "
+"shell exits."
+msgstr ""
+"Жеке команда немесе әдепкі қоршам жұмысын аяқтаған кездегі <app>Терминал</"
+"app> әрекетін орнату."
+
+#. (itstool) path: page/title
+#: C/pref-custom-exit.page:35
+msgid "Set behavior on command exit"
+msgstr "Команда аяқталған кездегі әрекетті орнату"
+
+#. (itstool) path: page/p
+#: C/pref-custom-exit.page:37
+msgid ""
+"You can set the terminal to exit, restart or remain open when the shell or a "
+"custom command exits:"
+msgstr ""
+"Қоршам немесе жеке команда жұмысын аяқтаған кезде терминалды жабуды, қайта "
+"іске қосуды немесе ашық қалдыруды орнатуға болады:"
+
+#. (itstool) path: item/p
+#: C/pref-custom-exit.page:50 C/pref-custom-command.page:56
+#: C/pref-login-shell.page:85
+msgid "Select <gui style=\"tab\">Command</gui>."
+msgstr "<gui style=\"tab\">Команда</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-custom-exit.page:53
+msgid ""
+"From the <gui>When command exits</gui> drop down list, select one of the "
+"following options:"
+msgstr ""
+"<gui>Команда жұмысын аяқтағанда</gui> ашылмалы тізімінен келесі опциялардың "
+"бірін таңдаңыз:"
+
+#. (itstool) path: item/p
+#: C/pref-custom-exit.page:57
+msgid "<gui>Exit the terminal</gui>"
+msgstr "<gui>Терминалдан шығу</gui>"
+
+#. (itstool) path: item/p
+#: C/pref-custom-exit.page:60
+msgid "<gui>Restart the command</gui>"
+msgstr "<gui>Команданы қайта іске қосу</gui>"
+
+#. (itstool) path: item/p
+#: C/pref-custom-exit.page:63
+msgid "<gui>Hold the terminal open</gui>"
+msgstr "<gui>Терминалды ашық қалдыру</gui>"
+
+#. (itstool) path: item/p
+#: C/pref-custom-exit.page:66
+msgid "The setting will be saved automatically when you select it."
+msgstr "Баптау оны таңдаған кезде автоматты түрде сақталады."
+
+#. (itstool) path: note/p
+#: C/pref-custom-exit.page:71
+msgid ""
+"If you have <link xref=\"pref-custom-command\">set a custom command</link> "
+"that is non-interactive, have set the exit behavior to <gui>Exit the "
+"terminal</gui>, and have set the profile to be the default profile, "
+"<app>Terminal</app> may exit before you can see the output of the command."
+msgstr ""
+"Егер сіз интерактивті емес <link xref=\"pref-custom-command\">жеке команданы "
+"орнатқан</link> болсаңыз, шығу әрекетін <gui>Терминалдан шығу</gui> деп "
+"орнатсаңыз және профильді әдепкі профиль ретінде орнатсаңыз, <app>Терминал</"
+"app> команданың шығысын көріп үлгергенше жабылып қалуы мүмкін."
+
+#. (itstool) path: info/desc
+#: C/pref-custom-command.page:32
+msgid ""
+"Set <app>Terminal</app> to run a command or a different shell on startup."
+msgstr ""
+"<app>Терминалды</app> іске қосылғанда команданы немесе басқа қоршамды "
+"орындауға баптау."
+
+#. (itstool) path: page/title
+#: C/pref-custom-command.page:36
+msgid "Custom commands and shells"
+msgstr "Жеке командалар және қоршамдар"
+
+#. (itstool) path: page/p
+#: C/pref-custom-command.page:38
+msgid ""
+"A <em>shell</em> is software that provides an interface for users of an "
+"operating system to run <em>commands</em>, which can be programs such as "
+"<app>top</app> or a command line shell. The default shell is usually "
+"<app>Bash</app>."
+msgstr ""
+"<em>Қоршам</em> (shell) — операциялық жүйе пайдаланушыларына <app>top</app> "
+"сияқты бағдарламалар немесе командалық жол қоршамы болуы мүмкін "
+"<em>командаларды</em> орындауға арналған интерфейсті қамтамасыз ететін "
+"бағдарламалық қамтама. Әдепкі қоршам әдетте <app>Bash</app> болып табылады."
+
+#. (itstool) path: page/p
+#: C/pref-custom-command.page:43
+msgid ""
+"You can set <app>Terminal</app> to run a command when it starts up instead "
+"of awaiting input from you:"
+msgstr ""
+"<app>Терминалды</app> іске қосылғанда сізден енгізуді күтудің орнына "
+"команданы орындайтындай етіп баптауға болады:"
+
+#. (itstool) path: item/p
+#: C/pref-custom-command.page:59
+msgid "Check <gui>Run a custom command instead of my shell</gui>."
+msgstr "<gui>Менің қоршамымның орнына жеке команданы орындау</gui> белгілеңіз."
+
+#. (itstool) path: item/p
+#: C/pref-custom-command.page:62
+msgid "In the text box, type the command or the desired shell."
+msgstr "Мәтіндік өріске команданы немесе қажетті қоршамды теріңіз."
+
+#. (itstool) path: item/p
+#: C/pref-custom-command.page:63
+msgid ""
+"The command will be passed to the terminal exactly as you write it, "
+"including any arguments that you specify. Environment variables will be "
+"inherited from the terminal as it is a child process of the terminal."
+msgstr ""
+"Команда терминалға дәл сіз жазғандай, көрсетілген кез келген аргументтермен "
+"бірге беріледі. Орта айнымалылары терминалдан мұраға алынады, өйткені бұл "
+"терминалдың ішкі процесі болып табылады."
+
+#. (itstool) path: item/p
+#: C/pref-custom-command.page:68
+msgid ""
+"Open a new <app>Terminal</app> tab or window to see how the custom shell or "
+"command executes."
+msgstr ""
+"Жеке қоршам немесе команда қалай орындалатынын көру үшін жаңа <app>Терминал</"
+"app> бетін немесе терезесін ашыңыз."
+
+#. (itstool) path: page/p
+#: C/pref-custom-command.page:73
+msgid ""
+"You can also <link xref=\"pref-custom-exit\">set the behavior</link> of the "
+"terminal once the command finishes executing."
+msgstr ""
+"Сондай-ақ команда орындалып болғаннан кейін терминалдың <link xref=\"pref-"
+"custom-exit\">әрекетін орнатуға</link> болады."
+
+#. (itstool) path: note/p
+#: C/pref-custom-command.page:77
+msgid ""
+"You may have to enter full path to the command or the shell if the directory "
+"where the command or shell resides is not in the <code>PATH</code> variable "
+"of your system."
+msgstr ""
+"Егер команда немесе қоршам орналасқан бума жүйеңіздің <code>PATH</code> "
+"айнымалысында болмаса, командаға немесе қоршамға дейінгі толық жолды "
+"енгізуіңіз қажет болуы мүмкін."
+
+#. (itstool) path: info/desc
+#: C/pref-keyboard-access.page:30
+msgid "Navigate around <app>Terminal</app> menus using keyboard keys."
+msgstr "Пернетақта пернелері арқылы <app>Терминал</app> мәзірлерінде шарлау."
+
+#. (itstool) path: page/title
+#: C/pref-keyboard-access.page:33
+msgid "Keyboard accessibility"
+msgstr "Пернетақта қолжетімділігі"
+
+#. (itstool) path: note/p
+#: C/pref-keyboard-access.page:37
+msgid ""
+"These keys will only have an effect in windows in which the menubar is set "
+"to be visible."
+msgstr ""
+"Бұл пернелер тек мәзір жолағы көрінетін етіп орнатылған терезелерде ғана "
+"әсер етеді."
+
+#. (itstool) path: note/p
+#: C/pref-keyboard-access.page:39
+msgid ""
+"Right click in the <app>Terminal</app> window and select <gui "
+"style=\"checkbox\">Show Menubar</gui> to display the menubar."
+msgstr ""
+"Мәзір жолағын көрсету үшін <app>Терминал</app> терезесін оң жақпен шертіп, "
+"<gui style=\"checkbox\">Мәзір жолағын көрсету</gui> таңдаңыз."
+
+#. (itstool) path: page/p
+#: C/pref-keyboard-access.page:43
+msgid ""
+"You can navigate the <app>Terminal</app> menu using a combination of keys "
+"that are called <em>mnemonics</em> or a special key that takes you directly "
+"to the first menu in the menubar which is called the <em>menu accelerator "
+"key</em>."
+msgstr ""
+"<app>Терминал</app> мәзірінде <em>мнемоника</em> деп аталатын пернелер "
+"комбинациясын немесе сізді мәзір жолағындағы бірінші мәзірге тікелей "
+"апаратын арнайы пернені (<em>мәзір акселераторы пернесі</em> деп аталады) "
+"қолданып шарлауға болады."
+
+#. (itstool) path: section/title
+#: C/pref-keyboard-access.page:49
+msgid "Mnemonics"
+msgstr "Мнемоника"
+
+#. (itstool) path: section/p
+#: C/pref-keyboard-access.page:51
+msgid ""
+"<app>Terminal</app> menu can be accessed by combining the <key>Alt</key> key "
+"and a letter of the menu item. The letter that you need to use to access the "
+"menu will be underlined when you hold down the <key>Alt</key>."
+msgstr ""
+"<app>Терминал</app> мәзіріне <key>Alt</key> пернесі мен мәзір элементінің "
+"әрпін біріктіру арқылы қол жеткізуге болады. Мәзірге қол жеткізу үшін "
+"қолданылатын әріп <key>Alt</key> пернесін басып тұрғанда асты сызылған күйде "
+"болады."
+
+#. (itstool) path: section/p
+#: C/pref-keyboard-access.page:56
+msgid ""
+"For example, view the <gui style=\"menu\">Edit</gui> menu using "
+"<keyseq><key>Alt</key><key>E</key></keyseq>. Similarly, you can access <gui "
+"style=\"menu\">File</gui> menu using <keyseq><key>Alt</key><key>F</key></"
+"keyseq>."
+msgstr ""
+"Мысалы, <keyseq><key>Alt</key><key>E</key></keyseq> қолданып <gui "
+"style=\"menu\">Түзету</gui> мәзірін көріңіз. Сол сияқты, <keyseq><key>Alt</"
+"key><key>F</key></keyseq> қолданып <gui style=\"menu\">Файл</gui> мәзіріне "
+"қол жеткізуге болады."
+
+#. (itstool) path: section/p
+#: C/pref-keyboard-access.page:61
+msgid "To enable mnemonics:"
+msgstr "Мнемониканы іске қосу үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-keyboard-access.page:69 C/pref-keyboard-access.page:91
+#: C/pref-tab-window.page:60
+msgid "In the sidebar, select <gui>General</gui>."
+msgstr "Бүйірлік панельден <gui>Жалпы</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-keyboard-access.page:72
+msgid "Check <gui style=\"checkbox\">Enable mnemonics</gui>."
+msgstr "<gui style=\"checkbox\">Мнемониканы іске қосу</gui> белгілеңіз."
+
+#. (itstool) path: section/title
+#: C/pref-keyboard-access.page:79
+msgid "Menu accelerator key"
+msgstr "Мәзір акселераторы пернесі"
+
+#. (itstool) path: section/p
+#: C/pref-keyboard-access.page:81
+msgid ""
+"This setting brings up the <gui style=\"menu\">File</gui> menu when the menu "
+"accelerator key is pressed. This key is usually <key>F10</key> by default."
+msgstr ""
+"Бұл баптау мәзір акселераторы пернесі басылғанда <gui style=\"menu\">Файл</"
+"gui> мәзірін шығарады. Әдетте бұл перне әдепкі бойынша <key>F10</key> болып "
+"табылады."
+
+#. (itstool) path: item/p
+#: C/pref-keyboard-access.page:94
+msgid "Check <gui style=\"checkbox\">Enable the menu accelerator key</gui>."
+msgstr ""
+"<gui style=\"checkbox\">Мәзір акселераторы пернесін іске қосу</gui> "
+"белгілеңіз."
+
+#. (itstool) path: info/desc
+#: C/pref-login-shell.page:30
+msgid "Start a login shell in <app>Terminal</app>."
+msgstr "<app>Терминалда</app> кіру қоршамын іске қосу."
+
+#. (itstool) path: page/title
+#: C/pref-login-shell.page:33
+msgid "Login shells"
+msgstr "Кіру қоршамдары"
+
+#. (itstool) path: page/p
+#: C/pref-login-shell.page:35
+msgid ""
+"Shells in UNIX based systems can be started up in login and non-login modes:"
+msgstr ""
+"UNIX негізіндегі жүйелердегі қоршамдар кіру (login) және кіру емес "
+"режимдерінде іске қосылуы мүмкін:"
+
+#. (itstool) path: item/title
+#: C/pref-login-shell.page:40
+msgid "Login shell"
+msgstr "Кіру қоршамы"
+
+#. (itstool) path: item/p
+#: C/pref-login-shell.page:41
+msgid ""
+"A login shell is a shell given to a user upon login into their user account. "
+"This is initiated by using the <cmd>-l</cmd> or <cmd>--login</cmd> option, "
+"or placing a dash as the initial character of the command name, for example "
+"invoking <cmd>bash</cmd> as <cmd>-bash</cmd>."
+msgstr ""
+"Кіру қоршамы (login shell) — пайдаланушыға оның тіркелгісіне кірген кезде "
+"берілетін қоршам. Бұл <cmd>-l</cmd> немесе <cmd>--login</cmd> опциясын "
+"қолдану арқылы немесе команда атауының бірінші таңбасы ретінде сызықшаны қою "
+"арқылы іске қосылады, мысалы <cmd>bash</cmd> бағдарламасын <cmd>-bash</cmd> "
+"ретінде шақыру."
+
+#. (itstool) path: item/title
+#: C/pref-login-shell.page:48
+msgid "Sub shell"
+msgstr "Ішкі қоршам"
+
+#. (itstool) path: item/p
+#: C/pref-login-shell.page:49
+msgid ""
+"Sub shell, also called a non-login shell is a shell started after the login "
+"process without the <cmd>-l</cmd> or <cmd>--login</cmd> option and without "
+"an extra dash before the command name."
+msgstr ""
+"Ішкі қоршам (sub shell), сондай-ақ кіру емес қоршам деп те аталады — кіру "
+"процесінен кейін <cmd>-l</cmd> немесе <cmd>--login</cmd> опциясынсыз және "
+"команда атауының алдында қосымша сызықшасыз іске қосылған қоршам."
+
+#. (itstool) path: page/p
+#: C/pref-login-shell.page:55
+msgid "The general cases for having a login shell include:"
+msgstr "Кіру қоршамының болуының жалпы жағдайлары:"
+
+#. (itstool) path: item/p
+#: C/pref-login-shell.page:58
+msgid "Accessing your computer remotely using <app>ssh</app>."
+msgstr "<app>ssh</app> арқылы компьютеріңізге қашықтан қол жеткізу."
+
+#. (itstool) path: item/p
+#: C/pref-login-shell.page:61
+msgid ""
+"Simulating an initial login shell with <cmd>bash -l</cmd> or <cmd>sh -l</"
+"cmd>."
+msgstr ""
+"<cmd>bash -l</cmd> немесе <cmd>sh -l</cmd> арқылы бастапқы кіру қоршамын "
+"симуляциялау."
+
+#. (itstool) path: item/p
+#: C/pref-login-shell.page:65
+msgid "Simulating an initial root login shell with <cmd>sudo -i</cmd>."
+msgstr "<cmd>sudo -i</cmd> арқылы бастапқы root кіру қоршамын симуляциялау."
+
+#. (itstool) path: section/title
+#: C/pref-login-shell.page:70
+msgid "Start a login shell"
+msgstr "Кіру қоршамын іске қосу"
+
+#. (itstool) path: section/p
+#: C/pref-login-shell.page:72
+msgid ""
+"You can allow <app>Terminal</app> to start a login shell. Your default shell "
+"will be started with a dash character prepended to its name."
+msgstr ""
+"<app>Терминалға</app> кіру қоршамын іске қосуға рұқсат бере аласыз. Әдепкі "
+"қоршамыңыз оның атының алдына сызықша таңбасы қосылып іске қосылады."
+
+#. (itstool) path: item/p
+#: C/pref-login-shell.page:92
+msgid ""
+"Under the <gui>Command</gui> label, select <gui style=\"checkbox\">Run "
+"command as a login shell</gui>."
+msgstr ""
+"<gui>Команда</gui> белгісінің астында <gui style=\"checkbox\">Команданы кіру "
+"қоршамы ретінде орындау</gui> таңдаңыз."
+
+#. (itstool) path: info/desc
+#: C/pref-menubar.page:31
+msgid "Display and hide the menubar."
+msgstr "Мәзір жолағын көрсету және жасыру."
+
+#. (itstool) path: page/title
+#: C/pref-menubar.page:35
+msgid "Menubar visibility"
+msgstr "Мәзір жолағының көрінуі"
+
+#. (itstool) path: page/p
+#: C/pref-menubar.page:37
+msgid ""
+"You can enable or disable the menubar as desired. This may be useful if you "
+"have limited screen space."
+msgstr ""
+"Мәзір жолағын қалауыңызша іске қосуға немесе сөндіруге болады. Экран "
+"кеңістігі шектеулі болса, бұл пайдалы болуы мүмкін."
+
+#. (itstool) path: page/p
+#: C/pref-menubar.page:40
+msgid "To display the menubar:"
+msgstr "Мәзір жолағын көрсету үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-menubar.page:43
+msgid ""
+"Right click in <app>Terminal</app> and select <gui style=\"menuitem\">Show "
+"Menubar</gui>."
+msgstr ""
+"<app>Терминалды</app> оң жақпен шертіп, <gui style=\"menuitem\">Мәзір "
+"жолағын көрсету</gui> таңдаңыз."
+
+#. (itstool) path: page/p
+#: C/pref-menubar.page:48
+msgid "To hide the menubar:"
+msgstr "Мәзір жолағын жасыру үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-menubar.page:51
+msgid ""
+"Right click in <app>Terminal</app> and deselect <gui style=\"checkbox\">Show "
+"Menubar</gui>."
+msgstr ""
+"<app>Терминалды</app> оң жақпен шертіп, <gui style=\"checkbox\">Мәзір "
+"жолағын көрсету</gui> белгісін алып тастаңыз."
+
+#. (itstool) path: note/p
+#: C/pref-menubar.page:71
+msgid ""
+"You can <link xref=\"adv-keyboard-shortcuts\">set a keyboard shortcut</link> "
+"to show and hide the menubar."
+msgstr ""
+"Мәзір жолағын көрсету және жасыру үшін <link xref=\"adv-keyboard-"
+"shortcuts\">пернетақта жарлығын орнатуға</link> болады."
+
+#. (itstool) path: info/desc
+#: C/pref-profiles.page:29
+msgid "Create, rename and delete profiles."
+msgstr "Профильдерді жасау, атын өзгерту және өшіру."
+
+#. (itstool) path: page/title
+#: C/pref-profiles.page:32
+msgid "Manage profiles"
+msgstr "Профильдерді басқару"
+
+#. (itstool) path: page/p
+#: C/pref-profiles.page:40
+msgid ""
+"A profile is a collection of <app>Terminal</app> settings. <app>Terminal</"
+"app> supports multiple profiles. You can configure <app>Terminal</app> "
+"profiles to <link xref=\"pref-custom-command\">run a custom command or "
+"shell</link>, set a profile exclusively to connect to remote computers using "
+"SSH or set a profile that launches a <app>GNU Screen</app> session."
+msgstr ""
+"Профиль — <app>Терминал</app> баптауларының жиынтығы. <app>Терминал</app> "
+"бірнеше профильді қолдайды. <app>Терминал</app> профильдерін <link "
+"xref=\"pref-custom-command\">жеке команданы немесе қоршамды орындауға</"
+"link>, профильді тек SSH арқылы қашықтағы компьютерлерге қосылу үшін немесе "
+"<app>GNU Screen</app> сеансын іске қосатын профильді орнатуға болады."
+
+#. (itstool) path: page/p
+#: C/pref-profiles.page:47
+msgid "The available <app>Terminal</app> settings include:"
+msgstr "Қолжетімді <app>Терминал</app> баптауларына мыналар жатады:"
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:51
+msgid "Profile name."
+msgstr "Профиль атауы."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:54
+msgid "Font and background colors."
+msgstr "Қаріп және фон түстері."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:57
+msgid ""
+"<gui style=\"tab\">Compatibility</gui> with <key>Backspace</key> and "
+"<key>Delete</key> keys."
+msgstr ""
+"<key>Backspace</key> және <key>Delete</key> пернелерімен <gui "
+"style=\"tab\">үйлесімділік</gui>."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:61
+msgid "<gui style=\"tab\">Scrolling</gui>."
+msgstr "<gui style=\"tab\">Айналдыру</gui>."
+
+#. (itstool) path: section/title
+#: C/pref-profiles.page:66
+msgid "Select a profile"
+msgstr "Профильді таңдау"
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:68
+msgid ""
+"If you have two or more profiles defined, you can change the profile in your "
+"current <app>Terminal</app> tab or window by selecting a profile from "
+"<guiseq><gui style=\"menu\">Terminal</gui> <gui style=\"menuitem\">Change "
+"Profile</gui></guiseq>."
+msgstr ""
+"Егер сізде екі немесе одан да көп профиль анықталған болса, <guiseq><gui "
+"style=\"menu\">Терминал</gui> <gui style=\"menuitem\">Профильді өзгерту</"
+"gui></guiseq> ішінен профильді таңдау арқылы ағымдағы <app>Терминал</app> "
+"бетіндегі немесе терезесіндегі профильді өзгерте аласыз."
+
+#. (itstool) path: section/title
+#: C/pref-profiles.page:76
+msgid "Create a new profile"
+msgstr "Жаңа профиль жасау"
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:78
+msgid ""
+"To create a new profile with the default settings of <app>Terminal</app>:"
+msgstr "<app>Терминалдың</app> әдепкі баптауларымен жаңа профиль жасау үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:83 C/pref-profiles.page:112 C/pref-profiles.page:162
+#: C/pref-profiles.page:204 C/pref-profiles.page:233 C/pref-profiles.page:273
+msgid ""
+"Select <guiseq><gui style=\"menu\">Edit</gui> <gui "
+"style=\"menuitem\">Preferences</gui></guiseq>."
+msgstr ""
+"<guiseq><gui style=\"menu\">Түзету</gui> <gui style=\"menuitem\">Баптаулар</"
+"gui></guiseq> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:87
+msgid ""
+"In the sidebar, click on the <gui style=\"button\">+</gui> button next to "
+"the <gui>Profiles</gui> label."
+msgstr ""
+"Бүйірлік панельдегі <gui>Профильдер</gui> белгісінің қасындағы <gui "
+"style=\"button\">+</gui> батырмасын басыңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:91 C/pref-profiles.page:126
+msgid "Enter a name for the new profile. You can change this name later."
+msgstr "Жаңа профиль үшін ат енгізіңіз. Бұл атты кейінірек өзгертуге болады."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:94
+msgid "Click <gui style=\"button\">Create</gui> to create the new profile."
+msgstr "Жаңа профильді жасау үшін <gui style=\"button\">Жасау</gui> басыңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:97 C/pref-profiles.page:132
+msgid ""
+"Set your desired <link xref=\"#edit-profile\">profile preferences</link>. "
+"These will be saved automatically."
+msgstr ""
+"Қажетті <link xref=\"#edit-profile\">профиль баптауларын</link> орнатыңыз. "
+"Олар автоматты түрде сақталады."
+
+#. (itstool) path: section/title
+#: C/pref-profiles.page:105
+msgid "Create a new profile based on an existing profile"
+msgstr "Бар профиль негізінде жаңа профиль жасау"
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:107
+msgid ""
+"You can create a new profile based on settings from an existing profile:"
+msgstr "Бар профильдің баптаулары негізінде жаңа профиль жасауға болады:"
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:116
+msgid ""
+"In the sidebar select the profile on which your new profile should be based."
+msgstr "Бүйірлік панельден жаңа профиліңіз негізделуі тиіс профильді таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:120 C/pref-profiles.page:211 C/pref-profiles.page:240
+#: C/pref-profiles.page:280
+msgid "Click on the arrow next to the profile name."
+msgstr "Профиль атауының қасындағы бағдаршаны басыңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:123
+msgid "Select <gui style=\"menuitem\">Clone…</gui>."
+msgstr "<gui style=\"menuitem\">Клондау…</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:129
+msgid "Click <gui style=\"button\">Clone</gui> to create the new profile."
+msgstr "Жаңа профильді жасау үшін <gui style=\"button\">Клондау</gui> басыңыз."
+
+#. (itstool) path: note/p
+#: C/pref-profiles.page:138
+msgid ""
+"Creating a new profile from an existing profile will not affect settings in "
+"an existing profile. Any changes to settings will be stored in the new "
+"profile."
+msgstr ""
+"Бар профильден жаңа профиль жасау бар профильдегі баптауларға әсер етпейді. "
+"Баптауларға енгізілген кез келген өзгерістер жаңа профильде сақталады."
+
+#. (itstool) path: section/title
+#: C/pref-profiles.page:146
+msgid "Edit a profile"
+msgstr "Профильді түзету"
+
+#. (itstool) path: note/p
+#: C/pref-profiles.page:149
+msgid ""
+"If the default profile is edited, it cannot be restored to its original "
+"settings! If you have not already created any other <app>Terminal</app> "
+"profiles and have customized the default profile, <app>Terminal</app> "
+"<em>may</em> become unusable should any settings cause problems. It is "
+"recommended that you <link xref=\"#create-profile-from-existing\">create a "
+"copy of the default profile</link> then edit the copy to create a custom "
+"profile."
+msgstr ""
+"Егер әдепкі профиль түзетілсе, оны бастапқы баптауларына қайтару мүмкін "
+"емес! Егер сіз әлі басқа <app>Терминал</app> профильдерін жасамаған болсаңыз "
+"және әдепкі профильді өзгертсеңіз, қандай да бір баптаулар қиындық тудырған "
+"жағдайда <app>Терминал</app> жұмыс істемей қалуы <em>мүмкін</em>. <link "
+"xref=\"#create-profile-from-existing\">Әдепкі профильдің көшірмесін жасап</"
+"link>, содан кейін жеке профиль жасау үшін көшірмені түзету ұсынылады."
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:158
+msgid "You can make changes to existing profiles. To edit a profile:"
+msgstr "Бар профильдерге өзгерістер енгізуге болады. Профильді түзету үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:166
+msgid ""
+"Your current profile is selected in the sidebar. If you wish to edit a "
+"different profile, click on its name."
+msgstr ""
+"Ағымдағы профиліңіз бүйірлік панельде таңдалған. Егер басқа профильді "
+"түзеткіңіз келсе, оның атына шертіңіз."
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:171
+msgid "Once the desired profile is selected, you can:"
+msgstr "Қажетті профиль таңдалғаннан кейін:"
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:175
+msgid ""
+"Select <link xref=\"app-fonts\">font</link>, <link xref=\"app-"
+"cursor\">cursor shapes</link> and <link xref=\"app-terminal-"
+"sizes\"><app>Terminal</app> size</link>."
+msgstr ""
+"<link xref=\"app-fonts\">Қаріпті</link>, <link xref=\"app-cursor\">курсор "
+"пішіндерін</link> және <link xref=\"app-terminal-sizes\"><app>Терминал</app> "
+"өлшемін</link> таңдауға болады."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:180
+msgid ""
+"You may also change behavior of <app>Terminal</app> on <link xref=\"pref-"
+"custom-exit\">command exit</link>, set a <link xref=\"pref-login-"
+"shell\">custom login shell</link> or change <link xref=\"pref-"
+"scrolling\">scrollbar preferences</link>."
+msgstr ""
+"Сондай-ақ <app>Терминалдың</app> <link xref=\"pref-custom-exit\">команда "
+"аяқталғандағы</link> әрекетін өзгертуге, <link xref=\"pref-login-"
+"shell\">жеке кіру қоршамын</link> орнатуға немесе <link xref=\"pref-"
+"scrolling\">айналдыру жолағы баптауларын</link> өзгертуге болады."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:186
+msgid ""
+"To change the <app>Terminal</app> background and text colors, see <link "
+"xref=\"app-colors\"><app>Terminal</app> color schemes</link>."
+msgstr ""
+"<app>Терминалдың</app> фон және мәтін түстерін өзгерту үшін <link xref=\"app-"
+"colors\"><app>Терминал</app> түстер схемаларын</link> қараңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:190
+msgid ""
+"Changes to profile are saved immediately. To return to <app>Terminal</app>, "
+"click <gui style=\"button\">Close</gui>."
+msgstr ""
+"Профильдегі өзгерістер бірден сақталады. <app>Терминалға</app> қайту үшін "
+"<gui style=\"button\">Жабу</gui> басыңыз."
+
+#. (itstool) path: section/title
+#: C/pref-profiles.page:198
+msgid "Rename an existing profile"
+msgstr "Бар профильдің атын өзгерту"
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:200
+msgid "You can rename existing profiles, including the default profile:"
+msgstr ""
+"Бар профильдердің, соның ішінде әдепкі профильдің атын өзгертуге болады:"
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:208
+msgid "Select the profile you wish to rename."
+msgstr "Атын өзгерткіңіз келетін профильді таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:214
+msgid "Select <gui style=\"menuitem\">Rename…</gui>."
+msgstr "<gui style=\"menuitem\">Атын өзгерту…</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:217
+msgid "Enter the new profile name."
+msgstr "Профильдің жаңа атын енгізіңіз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:220
+msgid "Click <gui style=\"button\">Rename</gui> to rename."
+msgstr "Атын өзгерту үшін <gui style=\"button\">Атын өзгерту</gui> басыңыз."
+
+#. (itstool) path: section/title
+#: C/pref-profiles.page:227
+msgid "Delete a profile"
+msgstr "Профильді өшіру"
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:229
+msgid "To delete a profile:"
+msgstr "Профильді өшіру үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:237
+msgid "Select the profile you wish to delete."
+msgstr "Өшіргіңіз келетін профильді таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:243
+msgid "Select <gui style=\"menuitem\">Delete…</gui>."
+msgstr "<gui style=\"menuitem\">Өшіру…</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:246
+msgid "Click <gui style=\"button\">Delete</gui> to confirm."
+msgstr "Растау үшін <gui style=\"button\">Өшіру</gui> басыңыз."
+
+#. (itstool) path: note/p
+#: C/pref-profiles.page:251
+msgid ""
+"The default profile cannot be deleted. If you wish to delete that profile, "
+"first set another profile as <link xref=\"#set-default\">default</link>."
+msgstr ""
+"Әдепкі профильді өшіруге болмайды. Егер сіз ол профильді өшіргіңіз келсе, "
+"алдымен басқа профильді <link xref=\"#set-default\">әдепкі</link> ретінде "
+"орнатыңыз."
+
+#. (itstool) path: section/title
+#: C/pref-profiles.page:259
+msgid "Set a default profile"
+msgstr "Әдепкі профильді орнату"
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:261
+msgid ""
+"The default profile is loaded when a new terminal is opened unless you have "
+"selected another profile. Any changes that you make to the settings will be "
+"stored in the currently selected profile."
+msgstr ""
+"Басқа профиль таңдалмаса, жаңа терминал ашылғанда әдепкі профиль жүктеледі. "
+"Баптауларға енгізілген кез келген өзгерістер ағымдағы таңдалған профильде "
+"сақталады."
+
+#. (itstool) path: section/p
+#: C/pref-profiles.page:265
+msgid ""
+"The default profile is used when <app>Terminal</app> could not otherwise "
+"decide which profile to use. For example, <app>Terminal</app> is started up "
+"freshly and opens its first terminal window. In contrast, when you use a "
+"menu entry or keyboard shortcut of <app>Terminal</app> to open a new "
+"terminal, the profile of the existing terminal is used."
+msgstr ""
+"Әдепкі профиль <app>Терминал</app> қай профильді қолдану керектігін шеше "
+"алмаған жағдайда қолданылады. Мысалы, <app>Терминал</app> жаңадан іске "
+"қосылып, өзінің бірінші терминал терезесін ашады. Керісінше, жаңа терминал "
+"ашу үшін <app>Терминалдың</app> мәзір элементін немесе пернетақта жарлығын "
+"қолданғанда, бар терминалдың профилі қолданылады."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:277
+msgid "Select the profile you wish to set as the default."
+msgstr "Әдепкі ретінде орнатқыңыз келетін профильді таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profiles.page:283
+msgid "Select <gui style=\"menuitem\">Set as default</gui>."
+msgstr "<gui style=\"menuitem\">Әдепкі ретінде орнату</gui> таңдаңыз."
+
+#. (itstool) path: note/p
+#: C/pref-profiles.page:288
+msgid "The default profile is marked with a check mark symbol."
+msgstr "Әдепкі профиль құсбелгі таңбасымен белгіленеді."
+
+#. (itstool) path: credit/years
+#: C/pref-profile-char-width.page:14 C/pref-profile-encoding.page:14
+#: C/pref-user-input.page:13
+msgid "2014"
+msgstr "2014"
+
+#. (itstool) path: info/desc
+#: C/pref-profile-char-width.page:24
+msgid "Display ambiguous-width characters as wide instead of narrow."
+msgstr "Ені белгісіз таңбаларды тар емес, кең етіп көрсету."
+
+#. (itstool) path: page/title
+#: C/pref-profile-char-width.page:28
+msgid "Characters look too narrow"
+msgstr "Таңбалар тым тар көрінеді"
+
+#. (itstool) path: page/p
+#: C/pref-profile-char-width.page:30
+msgid ""
+"Some characters, such as some Greek letters and Asian logograms, can take up "
+"either one or two cells in a terminal window. These characters are often "
+"referred to as <em>ambiguous characters</em>. By default, these characters "
+"are displayed with a narrow width in <app>Terminal</app>, which looks better "
+"in situations where perfect layout is important, such as in ASCII art. You "
+"can change your profile preferences to display ambiguous characters as wide, "
+"which can be better if you are reading running prose."
+msgstr ""
+"Кейбір грек әріптері мен азиялық логограммалар сияқты кейбір таңбалар "
+"терминал терезесінде бір немесе екі ұяшықты алуы мүмкін. Бұл таңбалар жиі "
+"<em>ені белгісіз таңбалар</em> деп аталады. Әдепкі бойынша, бұл таңбалар "
+"<app>Терминалда</app> тар енімен көрсетіледі, бұл ASCII өнері сияқты мінсіз "
+"жайма маңызды болатын жағдайларда жақсырақ көрінеді. Ені белгісіз таңбаларды "
+"кең етіп көрсету үшін профиль баптауларын өзгертуге болады, бұл мәтінді оқу "
+"кезінде жақсырақ болуы мүмкін."
+
+#. (itstool) path: item/p
+#: C/pref-profile-char-width.page:48 C/pref-profile-encoding.page:46
+msgid "Open the <gui style=\"tab\">Compatibility</gui> tab."
+msgstr "<gui style=\"tab\">Үйлесімділік</gui> бетін ашыңыз."
+
+#. (itstool) path: item/p
+#: C/pref-profile-char-width.page:51
+msgid "Set <gui>Ambiguous-width characters</gui> to <gui>Wide</gui>."
+msgstr "<gui>Ені белгісіз таңбалар</gui> мәнін <gui>Кең</gui> деп орнатыңыз."
+
+#. (itstool) path: info/desc
+#: C/pref-profile-encoding.page:24
+msgid "Set a different encoding for each saved profile."
+msgstr "Әрбір сақталған профиль үшін басқа кодтауды таңдау."
+
+#. (itstool) path: page/title
+#: C/pref-profile-encoding.page:28
+msgid "Change profile character encoding"
+msgstr "Профиль таңбаларының кодтауын өзгерту"
+
+#. (itstool) path: page/p
+#: C/pref-profile-encoding.page:30
+msgid ""
+"You should normally be able to use the default, UTF-8 encoding for all of "
+"your terminal needs. If you do find that you regularly need to use a "
+"different character encoding for a specific task, you can <link xref=\"pref-"
+"profiles#new-profile\">create a new profile</link> with a different encoding."
+msgstr ""
+"Әдетте терминалдың барлық қажеттіліктері үшін әдепкі UTF-8 кодтауын қолдана "
+"алуыңыз керек. Егер сізге белгілі бір тапсырма үшін басқа таңбалар кодтауын "
+"үнемі қолдану қажет болса, басқа кодтауы бар <link xref=\"pref-profiles#new-"
+"profile\">жаңа профиль жасауға</link> болады."
+
+#. (itstool) path: item/p
+#: C/pref-profile-encoding.page:49
+msgid "Set the character encoding."
+msgstr "Таңбалар кодтауын орнату."
+
+#. (itstool) path: note/p
+#: C/pref-profile-encoding.page:54
+msgid ""
+"Most modern operating systems now support and use UTF-8 character encoding "
+"by default."
+msgstr ""
+"Қазіргі заманғы операциялық жүйелердің көпшілігі қазір әдепкі бойынша UTF-8 "
+"таңбалар кодтауын қолдайды және қолданады."
+
+#. (itstool) path: info/desc
+#: C/pref-scrolling.page:25
+msgid "Change the scroll output and scrollbar behavior."
+msgstr "Шығысты айналдыру және айналдыру жолағының әрекетін өзгерту."
+
+#. (itstool) path: page/title
+#: C/pref-scrolling.page:28
+msgid "Scrollbar preferences"
+msgstr "Айналдыру жолағының баптаулары"
+
+#. (itstool) path: page/p
+#: C/pref-scrolling.page:30
+msgid ""
+"When a lot of output is printed to your terminal screen, it can be helpful "
+"to have your terminal behave in a specific manner so that it is easier to "
+"work with."
+msgstr ""
+"Терминал экранына көп шығыс шығарылғанда, жұмыс істеу ыңғайлы болуы үшін "
+"терминалыңыздың белгілі бір түрде әрекет еткені пайдалы болуы мүмкін."
+
+#. (itstool) path: section/title
+#: C/pref-scrolling.page:35
+msgid "Scrollbar visibility"
+msgstr "Айналдыру жолағының көрінуі"
+
+#. (itstool) path: section/p
+#: C/pref-scrolling.page:37
+msgid "You can disable the scrollbar:"
+msgstr "Айналдыру жолағын сөндіруге болады:"
+
+#. (itstool) path: item/p
+#: C/pref-scrolling.page:49 C/pref-scrolling.page:76 C/pref-scrolling.page:101
+#: C/pref-scrolling.page:125 C/pref-scrolling.page:149
+msgid "Select <gui style=\"tab\">Scrolling</gui>."
+msgstr "<gui style=\"tab\">Айналдыру</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-scrolling.page:52
+msgid "Uncheck <gui>Show scrollbar</gui>."
+msgstr "<gui>Айналдыру жолағын көрсету</gui> белгісін алып тастаңыз."
+
+#. (itstool) path: section/p
+#: C/pref-scrolling.page:56
+msgid "Your preference is saved immediately."
+msgstr "Баптауыңыз бірден сақталады."
+
+#. (itstool) path: section/title
+#: C/pref-scrolling.page:61
+msgid "Scroll on output"
+msgstr "Шығыс кезінде айналдыру"
+
+#. (itstool) path: section/p
+#: C/pref-scrolling.page:63
+msgid ""
+"You can lock scrolling so that it always shows the newest output while a "
+"command executes and produces output."
+msgstr ""
+"Команда орындалып жатқанда және шығыс шығарғанда әрқашан ең жаңа шығысты "
+"көрсетуі үшін айналдыруды құлыптауға болады."
+
+#. (itstool) path: item/p
+#: C/pref-scrolling.page:79
+msgid "Check <gui style=\"checkbox\">Scroll on output</gui>."
+msgstr "<gui style=\"checkbox\">Шығыс кезінде айналдыру</gui> белгілеңіз."
+
+#. (itstool) path: section/title
+#: C/pref-scrolling.page:86
+msgid "Scroll on input"
+msgstr "Енгізу кезінде айналдыру"
+
+#. (itstool) path: section/p
+#: C/pref-scrolling.page:88
+msgid ""
+"You can set the terminal to automatically scroll to the bottom of the window "
+"when you input text into the prompt."
+msgstr ""
+"Шақыруға мәтін енгізген кезде терминалды автоматты түрде терезенің төменгі "
+"жағына айналдыратындай етіп орнатуға болады."
+
+#. (itstool) path: item/p
+#: C/pref-scrolling.page:104
+msgid "Check <gui style=\"checkbox\">Scroll on keystroke</gui>."
+msgstr "<gui style=\"checkbox\">Перне басылғанда айналдыру</gui> белгілеңіз."
+
+#. (itstool) path: section/title
+#: C/pref-scrolling.page:110
+msgid "Scrollback lines"
+msgstr "Айналдыру жолдары"
+
+#. (itstool) path: section/p
+#: C/pref-scrolling.page:112
+msgid ""
+"You can limit the number of lines of terminal output which are remembered."
+msgstr "Есте сақталатын терминал шығысы жолдарының санын шектеуге болады."
+
+#. (itstool) path: item/p
+#: C/pref-scrolling.page:128
+msgid ""
+"Check <gui>Limit scrollback to</gui> and enter a number of lines to limit "
+"scrollback."
+msgstr ""
+"<gui>Айналдыруды шектеу</gui> белгілеңіз және айналдыруды шектеу үшін жолдар "
+"санын енгізіңіз."
+
+#. (itstool) path: item/p
+#: C/pref-scrolling.page:132
+msgid ""
+"Optionally, you can click on <gui style=\"button\">+</gui> to increase and "
+"<gui style=\"button\">-</gui> to decrease lines."
+msgstr ""
+"Қаласаңыз, жолдарды көбейту үшін <gui style=\"button\">+</gui> және азайту "
+"үшін <gui style=\"button\">-</gui> батырмасын басуға болады."
+
+#. (itstool) path: section/p
+#: C/pref-scrolling.page:137
+msgid "You can choose to have unlimited scrollback."
+msgstr "Шектеусіз айналдыруды таңдауға болады."
+
+#. (itstool) path: item/p
+#: C/pref-scrolling.page:152
+msgid "Uncheck <gui>Limit scrollback to</gui>."
+msgstr "<gui>Айналдыруды шектеу</gui> белгісін алып тастаңыз."
+
+#. (itstool) path: note/p
+#: C/pref-scrolling.page:157
+msgid ""
+"Scrollback data is stored in compressed and encrypted files on disk, under "
+"the system’s default location for temporary files (usually <file>/tmp</"
+"file>). These files are unlinked immediately after their creation, and as "
+"such, do not show up in the directory listing. The occupied disk space is "
+"freed up as soon as the corresponding terminal closes."
+msgstr ""
+"Айналдыру деректері дискідегі сығылған және шифрланған файлдарда, уақытша "
+"файлдар үшін жүйенің әдепкі орнында (әдетте <file>/tmp</file>) сақталады. "
+"Бұл файлдар жасалғаннан кейін бірден сілтемесіз болады, сондықтан бума "
+"тізімінде көрінбейді. Тиісті терминал жабылған бойда бос орын босатылады."
+
+#. (itstool) path: note/p
+#: C/pref-scrolling.page:166
+msgid ""
+"Make sure you have sufficient disk space available for these temporary "
+"files. If in doubt, monitor disk usage for example with the command <cmd>du /"
+"tmp</cmd>."
+msgstr ""
+"Бұл уақытша файлдар үшін дискіде жеткілікті орын бар екеніне көз жеткізіңіз. "
+"Күмән туындаған жағдайда, мысалы, <cmd>du /tmp</cmd> командасымен диск "
+"қолданылуын қадағалаңыз."
+
+#. (itstool) path: note/p
+#: C/pref-scrolling.page:172
+msgid ""
+"A giant scrollback buffer makes resizing the terminal window slower. As a "
+"rule of thumb, resizing gets noticeably slow at around 1 million lines."
+msgstr ""
+"Үлкен айналдыру буфері терминал терезесінің өлшемін өзгертуді баяулатады. "
+"Жалпы ереже бойынша, өлшемді өзгерту шамамен 1 миллион жолда айтарлықтай "
+"баяулайды."
+
+#. (itstool) path: credit/years
+#: C/pref-tab-window.page:16
+msgid "2014–2015"
+msgstr "2014–2015"
+
+#. (itstool) path: info/desc
+#: C/pref-tab-window.page:26
+msgid "Choose whether to open a new window or a new tab by default."
+msgstr "Әдепкі бойынша жаңа терезені немесе жаңа бетті ашуды таңдаңыз."
+
+#. (itstool) path: page/title
+#: C/pref-tab-window.page:29
+msgid "Windows and tabs"
+msgstr "Терезелер мен беттер"
+
+#. (itstool) path: note/p
+#: C/pref-tab-window.page:32
+msgid ""
+"This setting only applies when the <link xref=\"pref-menubar\">menubar is "
+"enabled</link>, or when <app>Terminal</app> is started from the command line "
+"and neither the <cmd>--tab</cmd> nor the <cmd>--window</cmd> options are "
+"passed."
+msgstr ""
+"Бұл баптау тек <link xref=\"pref-menubar\">мәзір жолағы іске қосылғанда</"
+"link> немесе <app>Терминал</app> командалық жолдан іске қосылғанда және "
+"<cmd>--tab</cmd> де, <cmd>--window</cmd> де опциялары берілмеген жағдайда "
+"ғана қолданылады."
+
+#. (itstool) path: page/p
+#: C/pref-tab-window.page:37
+msgid ""
+"You can choose whether to open a new tab or a new <app>Terminal</app> window "
+"when you use <gui style=\"menuitem\">New Terminal</gui>."
+msgstr ""
+"<gui style=\"menuitem\">Жаңа терминал</gui> қолданғанда жаңа бетті немесе "
+"жаңа <app>Терминал</app> терезесін ашуды таңдауға болады."
+
+#. (itstool) path: steps/title
+#: C/pref-tab-window.page:41
+msgid "If the menubar is enabled,"
+msgstr "Егер мәзір жолағы іске қосылған болса,"
+
+#. (itstool) path: item/p
+#: C/pref-tab-window.page:43
+msgid ""
+"Select <guiseq><gui style=\"menu\">Edit</gui><gui "
+"style=\"menuitem\">Preferences</gui> <gui style=\"tab\">General</gui></"
+"guiseq>."
+msgstr ""
+"<guiseq><gui style=\"menu\">Түзету</gui><gui style=\"menuitem\">Баптаулар</"
+"gui> <gui style=\"tab\">Жалпы</gui></guiseq> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/pref-tab-window.page:48 C/pref-tab-window.page:63
+msgid ""
+"Set <gui>Open new terminals in:</gui> to <gui>Tab</gui> or <gui>Window</gui>."
+msgstr ""
+"<gui>Жаңа терминалдарды мына жерде ашу:</gui> мәнін <gui>Бет</gui> немесе "
+"<gui>Терезе</gui> деп орнатыңыз."
+
+#. (itstool) path: steps/title
+#: C/pref-tab-window.page:54
+msgid "If the menubar is not enabled,"
+msgstr "Егер мәзір жолағы іске қосылмаған болса,"
+
+#. (itstool) path: page/p
+#: C/pref-tab-window.page:68
+msgid ""
+"Once you have set the preference, you can use <key>Ctrl</key> to invert the "
+"preference. For example, if you have your preferences set to open a new "
+"terminal in a new tab, then pressing <gui style=\"menuitem\">New Terminal</"
+"gui> will open a new tab. On the other hand, if you hold down <key>Ctrl</"
+"key> and then press <gui style=\"menuitem\">New Terminal</gui>, then a new "
+"window will be opened instead."
+msgstr ""
+"Баптауды орнатқаннан кейін, баптауды инверсиялау үшін <key>Ctrl</key> "
+"пернесін қолдануға болады. Мысалы, егер сізде жаңа терминалды жаңа бетте ашу "
+"бапталған болса, онда <gui style=\"menuitem\">Жаңа терминал</gui> басу жаңа "
+"бетті ашады. Екінші жағынан, егер сіз <key>Ctrl</key> пернесін басып тұрып, "
+"содан кейін <gui style=\"menuitem\">Жаңа терминал</gui> бассаңыз, оның "
+"орнына жаңа терезе ашылады."
+
+#. (itstool) path: info/desc
+#: C/pref-user-input.page:18
+msgid "Do not send user input to the application running in the terminal."
+msgstr ""
+"Терминалда жұмыс істеп тұрған қолданбаға пайдаланушы енгізуін жібермеу."
+
+#. (itstool) path: page/title
+#: C/pref-user-input.page:23
+msgid "Disable user input"
+msgstr "Пайдаланушы енгізуін сөндіру"
+
+#. (itstool) path: page/p
+#: C/pref-user-input.page:25
+msgid ""
+"You can prevent user input into the terminal from being passed to the "
+"application which is currently running in the terminal. This will prevent "
+"any keypresses, mouse clicks and mouse movement from affecting the "
+"application. You will still be able to interact with the terminal itself "
+"using the keyboard for scrolling and your mouse for selecting text. You will "
+"also be able to copy selected text from the terminal, but you will not be "
+"able to paste text into the terminal."
+msgstr ""
+"Терминалдағы пайдаланушы енгізуінің қазіргі уақытта терминалда жұмыс істеп "
+"тұрған қолданбаға берілуіне жол бермеуге болады. Бұл кез келген перне "
+"басудың, тышқан шертулерінің және тышқан қозғалысының қолданбаға әсер етуіне "
+"жол бермейді. Сіз әлі де терминалдың өзімен айналдыру үшін пернетақтаны және "
+"мәтінді таңдау үшін тышқанды қолдана отырып әрекеттесе аласыз. Сондай-ақ "
+"терминалдан таңдалған мәтінді көшіре аласыз, бірақ терминалға мәтінді "
+"кірістіре алмайсыз."
+
+#. (itstool) path: page/p
+#: C/pref-user-input.page:33
+msgid "To use the read only mode:"
+msgstr "Тек оқу режимін қолдану үшін:"
+
+#. (itstool) path: item/p
+#: C/pref-user-input.page:37
+msgid ""
+"Right click in the <app>Terminal</app> window or press the menu button in "
+"the top-right corner of the window."
+msgstr ""
+"<app>Терминал</app> терезесін оң жақпен шертіңіз немесе терезенің жоғарғы оң "
+"жақ бұрышындағы мәзір батырмасын басыңыз."
+
+#. (itstool) path: item/p
+#: C/pref-user-input.page:41
+msgid "Select <gui style=\"menuitem\">Read-Only</gui> so that it is checked."
+msgstr ""
+"<gui style=\"menuitem\">Тек оқу үшін</gui> таңдаңыз, сонда оның қасында "
+"белгі пайда болады."
+
+#. (itstool) path: page/p
+#: C/pref-user-input.page:45
+msgid ""
+"You can disable the read only mode by unchecking <gui "
+"style=\"menuitem\">Read-Only</gui>."
+msgstr ""
+"<gui style=\"menuitem\">Тек оқу үшін</gui> белгісін алып тастау арқылы тек "
+"оқу режимін сөндіруге болады."
+
+#. (itstool) path: info/desc
+#: C/prob-reset.page:24
+msgid ""
+"How do I recover my <app>Terminal</app> screen when it becomes stuck or has "
+"lot of strange symbols on it?"
+msgstr ""
+"<app>Терминал</app> экраны қатып қалса немесе онда көптеген түсініксіз "
+"таңбалар пайда болса, оны қалай қалпына келтіруге болады?"
+
+#. (itstool) path: page/title
+#: C/prob-reset.page:28
+msgid "Reset your <app>Terminal</app> state"
+msgstr "<app>Терминал</app> күйін қалпына келтіру"
+
+#. (itstool) path: page/p
+#: C/prob-reset.page:30
+msgid ""
+"After viewing a non-text file by mistake, or launching some command, it can "
+"happen the <app>Terminal</app> screen is unresponsive, has strange letters "
+"printed when you press keys. You can recover your <app>Terminal</app> in the "
+"following ways:"
+msgstr ""
+"Мәтіндік емес файлды қателесіп көргеннен кейін немесе қандай да бір "
+"команданы іске қосқаннан кейін, <app>Терминал</app> экраны жауап бермей "
+"қалуы немесе пернелерді басқанда түсініксіз әріптер шығуы мүмкін. "
+"<app>Терминалды</app> келесі жолдармен қалпына келтіруге болады:"
+
+#. (itstool) path: section/title
+#: C/prob-reset.page:36
+msgid "Reset"
+msgstr "Қалпына келтіру"
+
+#. (itstool) path: section/p
+#: C/prob-reset.page:38
+msgid "Reset <app>Terminal</app> screen."
+msgstr "<app>Терминал</app> экранын қалпына келтіру."
+
+#. (itstool) path: item/p
+#: C/prob-reset.page:42
+msgid ""
+"Press the menu button in the top-right corner of the window and select "
+"<guiseq><gui style=\"menuitem\">Advanced</gui><gui style=\"menuitem\">Reset</"
+"gui></guiseq>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <guiseq><gui "
+"style=\"menuitem\">Кеңейтілген</gui><gui style=\"menuitem\">Қалпына келтіру</"
+"gui></guiseq> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/prob-reset.page:47 C/prob-reset.page:68
+msgid "To obtain the prompt press <key>Enter</key>."
+msgstr "Шақыруды алу үшін <key>Enter</key> басыңыз."
+
+#. (itstool) path: section/title
+#: C/prob-reset.page:54
+msgid "Reset and Clear"
+msgstr "Қалпына келтіру және тазарту"
+
+#. (itstool) path: section/p
+#: C/prob-reset.page:56
+msgid ""
+"In addition to resetting your <app>Terminal</app>, <gui "
+"style=\"menuitem\">Reset and Clear</gui> clears the visible <app>Terminal</"
+"app> screen space and the scrollback contents. To <gui "
+"style=\"menuitem\">Reset and Clear</gui> your <app>Terminal</app>:"
+msgstr ""
+"<app>Терминалды</app> қалпына келтірумен қатар, <gui "
+"style=\"menuitem\">Қалпына келтіру және тазарту</gui> көрінетін "
+"<app>Терминал</app> экранының кеңістігін және айналдыру мазмұнын тазартады. "
+"<app>Терминалды</app> <gui style=\"menuitem\">Қалпына келтіру және тазарту</"
+"gui> үшін:"
+
+#. (itstool) path: item/p
+#: C/prob-reset.page:63
+msgid ""
+"Press the menu button in the top-right corner of the window and select "
+"<guiseq><gui style=\"menuitem\">Advanced</gui><gui style=\"menuitem\">Reset "
+"and Clear</gui></guiseq>."
+msgstr ""
+"Терезенің жоғарғы оң жақ бұрышындағы мәзір батырмасын басып, <guiseq><gui "
+"style=\"menuitem\">Кеңейтілген</gui><gui style=\"menuitem\">Қалпына келтіру "
+"және тазарту</gui></guiseq> таңдаңыз."
+
+#. (itstool) path: note/p
+#: C/prob-reset.page:72
+msgid ""
+"<gui>Reset and Clear</gui> provides similar functionality as the terminal "
+"command <cmd>reset</cmd>."
+msgstr ""
+"<gui>Қалпына келтіру және тазарту</gui> терминалдың <cmd>reset</cmd> "
+"командасы сияқты функцияны орындайды."
+
+#. (itstool) path: info/desc
+#: C/txt-copy-paste.page:29
+msgid "Copy and paste text in <app>Terminal</app>."
+msgstr "<app>Терминалда</app> мәтінді көшіру және кірістіру."
+
+#. (itstool) path: page/title
+#: C/txt-copy-paste.page:33
+msgid "Copy and paste"
+msgstr "Көшіру және кірістіру"
+
+#. (itstool) path: page/p
+#: C/txt-copy-paste.page:35
+msgid ""
+"You can copy and paste text in <app>Terminal</app> in a similar way to other "
+"applications. However, the keyboard shortcuts differ."
+msgstr ""
+"<app>Терминалда</app> мәтінді басқа қолданбалар сияқты көшіруге және "
+"кірістіруге болады. Дегенмен, пернетақта жарлықтары басқаша."
+
+#. (itstool) path: item/title
+#: C/txt-copy-paste.page:40
+msgid "<gui>Copy</gui>"
+msgstr "<gui>Көшіру</gui>"
+
+#. (itstool) path: item/p
+#: C/txt-copy-paste.page:41
+msgid ""
+"Highlight the text portions you wish to copy, then right click on the text "
+"portion and select <gui style=\"menuitem\">Copy</gui>. Alternatively, you "
+"can press <keyseq><key>Shift</key><key>Ctrl</key><key>C</key></keyseq>."
+msgstr ""
+"Көшіргіңіз келетін мәтін бөліктерін ерекшелеңіз, содан кейін мәтін бөлігін "
+"оң жақпен шертіп, <gui style=\"menuitem\">Көшіру</gui> таңдаңыз. Немесе "
+"<keyseq><key>Shift</key><key>Ctrl</key><key>C</key></keyseq> басуға болады."
+
+#. (itstool) path: item/title
+#: C/txt-copy-paste.page:47
+msgid "<gui>Copy as HTML</gui>"
+msgstr "<gui>HTML ретінде көшіру</gui>"
+
+#. (itstool) path: item/p
+#: C/txt-copy-paste.page:48
+msgid ""
+"Highlight the text portions you wish to copy with color and font attributes, "
+"then right click on the text portion and select <gui style=\"menuitem\">Copy "
+"as HTML</gui>."
+msgstr ""
+"Көшіргіңіз келетін мәтін бөліктерін түс және қаріп атрибуттарымен "
+"ерекшелеңіз, содан кейін мәтін бөлігін оң жақпен шертіп, <gui "
+"style=\"menuitem\">HTML ретінде көшіру</gui> таңдаңыз."
+
+#. (itstool) path: item/title
+#: C/txt-copy-paste.page:53
+msgid "<gui>Paste</gui>"
+msgstr "<gui>Кірістіру</gui>"
+
+#. (itstool) path: item/p
+#: C/txt-copy-paste.page:54
+msgid ""
+"Right click in the <app>Terminal</app> and select <gui "
+"style=\"menuitem\">Paste</gui>. Alternatively, you can press "
+"<keyseq><key>Shift</key><key>Ctrl</key><key>V</key></keyseq>."
+msgstr ""
+"<app>Терминалды</app> оң жақпен шертіп, <gui style=\"menuitem\">Кірістіру</"
+"gui> таңдаңыз. Немесе <keyseq><key>Shift</key><key>Ctrl</key><key>V</key></"
+"keyseq> басуға болады."
+
+#. (itstool) path: note/p
+#: C/txt-copy-paste.page:62
+msgid ""
+"The standard keyboard shortcuts, such as <keyseq><key>Ctrl</key><key>C</"
+"key></keyseq>, cannot be used to copy and paste text."
+msgstr ""
+"<keyseq><key>Ctrl</key><key>C</key></keyseq> сияқты стандартты пернетақта "
+"жарлықтарын мәтінді көшіру және кірістіру үшін қолдануға болмайды."
+
+#. (itstool) path: info/desc
+#: C/txt-links.page:27
+msgid "Open links to web and email addresses."
+msgstr "Веб-сайттарға және электрондық пошта адрестеріне сілтемелерді ашу."
+
+#. (itstool) path: page/title
+#: C/txt-links.page:30
+msgid "Hyperlinks and email addresses"
+msgstr "Гиперсілтемелер және электрондық пошта адрестері"
+
+#. (itstool) path: page/p
+#: C/txt-links.page:32
+msgid ""
+"<app>Terminal</app> parses the terminal output and automatically detects "
+"snippets of text that are web addresses or email addresses. Web and email "
+"addresses are automatically highlighted when you point your cursor to the "
+"text, indicating that the link can be opened in an application."
+msgstr ""
+"<app>Терминал</app> терминал шығысын талдайды және веб-адрес немесе "
+"электрондық пошта адресі болып табылатын мәтін үзінділерін автоматты түрде "
+"анықтайды. Курсорды мәтінге апарғанда веб және электрондық пошта адрестері "
+"автоматты түрде ерекшеленеді, бұл сілтемені қолданбада ашуға болатынын "
+"білдіреді."
+
+#. (itstool) path: page/p
+#: C/txt-links.page:37
+msgid ""
+"For example, you may see <output>http://www.gnome.org</output> or "
+"<output>username@example.com</output> generated as a part of terminal output "
+"by programs such as <app>wget</app> or <app>curl</app>."
+msgstr ""
+"Мысалы, <app>wget</app> немесе <app>curl</app> сияқты бағдарламалардың "
+"терминал шығысының бөлігі ретінде жасалған <output>http://www.gnome.org</"
+"output> немесе <output>username@example.com</output> көруіңіз мүмкін."
+
+#. (itstool) path: section/title
+#: C/txt-links.page:42
+msgid "Open or copy web addresses"
+msgstr "Веб-адрестерді ашу немесе көшіру"
+
+#. (itstool) path: section/p
+#: C/txt-links.page:44
+msgid ""
+"Web addresses are also called hyperlinks. They can be copied to the system "
+"clipboard or opened in your preferred web browser."
+msgstr ""
+"Веб-адрестер гиперсілтемелер деп те аталады. Оларды жүйелік алмасу буферіне "
+"көшіруге немесе қалаған веб-браузерде ашуға болады."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:49
+msgid "Copy a hyperlink:"
+msgstr "Гиперсілтемені көшіру:"
+
+#. (itstool) path: item/p
+#: C/txt-links.page:52
+msgid "Right click on the link in <app>Terminal</app>."
+msgstr "<app>Терминалдағы</app> сілтемені оң жақпен шертіңіз."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:55
+msgid "Select <gui style=\"menuitem\">Copy Link</gui>."
+msgstr "<gui style=\"menuitem\">Сілтемені көшіру</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:60
+msgid "Open a hyperlink in your web browser:"
+msgstr "Веб-браузерде гиперсілтемені ашу:"
+
+#. (itstool) path: item/p
+#: C/txt-links.page:63
+msgid "Right click on the hyperlink."
+msgstr "Гиперсілтемені оң жақпен шертіңіз."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:66
+msgid "Select <gui style=\"menuitem\">Open Link</gui>."
+msgstr "<gui style=\"menuitem\">Сілтемені ашу</gui> таңдаңыз."
+
+#. (itstool) path: section/title
+#: C/txt-links.page:75
+msgid "Email or copy email addresses"
+msgstr "Электрондық поштаны жіберу немесе электрондық пошта адрестерін көшіру"
+
+#. (itstool) path: section/p
+#: C/txt-links.page:77
+msgid ""
+"Email addresses can be copied to the system clipboard or opened in your "
+"preferred email client."
+msgstr ""
+"Электрондық пошта адрестерін жүйелік алмасу буферіне көшіруге немесе қалаған "
+"электрондық пошта клиентінде ашуға болады."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:82
+msgid "Copy an email address:"
+msgstr "Электрондық пошта адресін көшіру:"
+
+#. (itstool) path: item/p
+#: C/txt-links.page:85
+msgid "Right click on the email address in <app>Terminal</app>."
+msgstr "<app>Терминалдағы</app> электрондық пошта адресін оң жақпен шертіңіз."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:88
+msgid "Select <gui style=\"menuitem\">Copy Mail Address</gui>."
+msgstr "<gui style=\"menuitem\">Пошта адресін көшіру</gui> таңдаңыз."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:93
+msgid "Send mail to the email address using your email client:"
+msgstr ""
+"Электрондық пошта клиенті арқылы электрондық пошта адресіне хат жіберу:"
+
+#. (itstool) path: item/p
+#: C/txt-links.page:96
+msgid "Right click on the address."
+msgstr "Адресті оң жақпен шертіңіз."
+
+#. (itstool) path: item/p
+#: C/txt-links.page:99
+msgid "Select <gui style=\"menuitem\">Send Mail To…</gui>."
+msgstr "<gui style=\"menuitem\">Мынаған пошта жіберу…</gui> таңдаңыз."
+
+#. (itstool) path: info/desc
+#: C/txt-search.page:29
+msgid "Search the <app>Terminal</app> output."
+msgstr "<app>Терминал</app> шығысын іздеу."
+
+#. (itstool) path: page/title
+#: C/txt-search.page:33
+msgid "Search for text"
+msgstr "Мәтінді іздеу"
+
+#. (itstool) path: page/p
+#: C/txt-search.page:35
+msgid "You can search text in the <app>Terminal</app> output:"
+msgstr "<app>Терминал</app> шығысында мәтінді іздеуге болады:"
+
+#. (itstool) path: item/p
+#: C/txt-search.page:39
+msgid ""
+"Press <_:media-1/> in the top-right corner, or press <keyseq><key>Ctrl</"
+"key><key>Shift</key><key>F</key></keyseq>."
+msgstr ""
+"Жоғарғы оң жақ бұрыштағы <_:media-1/> басыңыз немесе <keyseq><key>Ctrl</"
+"key><key>Shift</key><key>F</key></keyseq> басыңыз."
+
+#. (itstool) path: item/p
+#: C/txt-search.page:44
+msgid ""
+"Type in the search keyword and press <key>Enter</key> to search backwards. "
+"Alternatively, click on the arrows according to the desired search direction."
+msgstr ""
+"Іздеуге арналған кілт сөзді теріңіз және артқа іздеу үшін <key>Enter</key> "
+"басыңыз. Немесе қажетті іздеу бағытына сәйкес бағдаршаларға шертіңіз."
+
+#. (itstool) path: page/p
+#: C/txt-search.page:50
+msgid "You can search using the following options to narrow down your results:"
+msgstr "Нәтижелерді нақтылау үшін келесі опцияларды қолданып іздеуге болады:"
+
+#. (itstool) path: item/title
+#: C/txt-search.page:55
+msgid "<gui style=\"checkbox\">Match case</gui>"
+msgstr "<gui style=\"checkbox\">Регистрді ескеру</gui>"
+
+#. (itstool) path: item/p
+#: C/txt-search.page:56
+msgid ""
+"Make the search case sensitive: this restricts results to only those that "
+"match the case of your search keyword."
+msgstr ""
+"Іздеуді регистрге сезімтал ету: бұл нәтижелерді тек іздеу кілт сөзінің "
+"регистріне сәйкес келетіндермен шектейді."
+
+#. (itstool) path: item/title
+#: C/txt-search.page:60
+msgid "<gui style=\"checkbox\">Match entire word only</gui>"
+msgstr "<gui style=\"checkbox\">Тек толық сөзді сәйкестендіру</gui>"
+
+#. (itstool) path: item/p
+#: C/txt-search.page:61
+msgid ""
+"<app>Terminal</app> will look for the entire keyword and will ignore results "
+"that partially match your search keyword. For example, if you have searched "
+"for “cat”, <app>Terminal</app> will show only results that match this "
+"keyword exactly and omit results such as “bobcat”."
+msgstr ""
+"<app>Терминал</app> бүкіл кілт сөзді іздейді және іздеу кілт сөзіне ішінара "
+"сәйкес келетін нәтижелерді елемейді. Мысалы, егер сіз «cat» сөзін іздеген "
+"болсаңыз, <app>Терминал</app> тек осы кілт сөзге дәл сәйкес келетін "
+"нәтижелерді көрсетеді және «bobcat» сияқты нәтижелерді өткізіп жібереді."
+
+#. (itstool) path: item/title
+#: C/txt-search.page:68
+msgid "<gui style=\"checkbox\">Match as regular expression</gui>"
+msgstr "<gui style=\"checkbox\">Тұрақты өрнек ретінде сәйкестендіру</gui>"
+
+#. (itstool) path: item/p
+#: C/txt-search.page:69
+msgid ""
+"You can use regular expression patterns, also known as regex patterns, in "
+"your search keywords. <app>Terminal</app> will display the results that "
+"match these search terms."
+msgstr ""
+"Іздеу кілт сөздерінде regex үлгілері деп те аталатын тұрақты өрнек үлгілерін "
+"қолдануға болады. <app>Терминал</app> осы іздеу шарттарына сәйкес келетін "
+"нәтижелерді көрсетеді."
+
+#. (itstool) path: item/title
+#: C/txt-search.page:74
+msgid "<gui style=\"checkbox\">Wrap around</gui>"
+msgstr "<gui style=\"checkbox\">Циклдік іздеу</gui>"
+
+#. (itstool) path: item/p
+#: C/txt-search.page:75
+msgid ""
+"<app>Terminal</app> searches from your current location in the scrollback to "
+"the end of available terminal output and then restarts the search."
+msgstr ""
+"<app>Терминал</app> айналдырудағы ағымдағы орныңыздан қолжетімді терминал "
+"шығысының соңына дейін іздейді, содан кейін іздеуді қайта бастайды."
+
+#. (itstool) path: note/p
+#: C/txt-search.page:82
+msgid ""
+"If you expect to work with a lot of <app>Terminal</app> output, increase the "
+"<link xref=\"pref-scrolling#lines\">scrollback lines</link> to a higher "
+"limit to allow <app>Terminal</app> to search further back."
+msgstr ""
+"Егер сіз <app>Терминал</app> шығысының көп мөлшерімен жұмыс істеуді "
+"жоспарласаңыз, <app>Терминалға</app> тереңірек іздеуге мүмкіндік беру үшін "
+"<link xref=\"pref-scrolling#lines\">айналдыру жолдарын</link> жоғарырақ "
+"шекке дейін көбейтіңіз."
+
+#. (itstool) path: credit/years
+#: C/txt-select-text.page:20
+msgid "2013, 2015"
+msgstr "2013, 2015"
+
+#. (itstool) path: info/desc
+#: C/txt-select-text.page:25
+msgid "Select individual words or lines in the terminal."
+msgstr "Терминалдағы жеке сөздерді немесе жолдарды таңдау."
+
+#. (itstool) path: page/title
+#: C/txt-select-text.page:29
+msgid "Text selection"
+msgstr "Мәтінді таңдау"
+
+#. (itstool) path: page/p
+#: C/txt-select-text.page:31
+msgid ""
+"You can select a word or a sentence, or make a rectangular selection from "
+"your terminal output:"
+msgstr ""
+"Терминал шығысынан сөзді немесе сөйлемді таңдауға немесе тікбұрышты таңдау "
+"жасауға болады:"
+
+#. (itstool) path: item/title
+#: C/txt-select-text.page:36
+msgid "Select a word"
+msgstr "Сөзді таңдау"
+
+#. (itstool) path: item/p
+#: C/txt-select-text.page:37
+msgid "Double click on the word."
+msgstr "Сөздің үстіне екі рет шертіңіз."
+
+#. (itstool) path: item/title
+#: C/txt-select-text.page:40
+msgid "Select a line"
+msgstr "Жолды таңдау"
+
+#. (itstool) path: item/p
+#: C/txt-select-text.page:41
+msgid "Triple click on the line."
+msgstr "Жолдың үстіне үш рет шертіңіз."
+
+#. (itstool) path: item/title
+#: C/txt-select-text.page:44
+msgid "Make a rectangular selection"
+msgstr "Тікбұрышты таңдау жасау"
+
+#. (itstool) path: item/p
+#: C/txt-select-text.page:45
+msgid ""
+"Hold down the <key>Ctrl</key>, click and hold down the left mouse button "
+"then drag the mouse."
+msgstr ""
+"<key>Ctrl</key> пернесін басып тұрыңыз, тышқанның сол жақ батырмасын басып "
+"тұрып, тышқанды сүйреңіз."
+
+#. (itstool) path: note/p
+#: C/txt-select-text.page:51
+msgid ""
+"If you are running an application in <app>Terminal</app> which accepts mouse "
+"input, you need to use the <key>Shift</key> modifier for the <app>Terminal</"
+"app> to catch the mouse input."
+msgstr ""
+"Егер сіз <app>Терминалда</app> тышқан енгізуін қабылдайтын қолданбаны іске "
+"қосып жатсаңыз, <app>Терминал</app> тышқан енгізуін ұстап алуы үшін "
+"<key>Shift</key> түрлендіргішін қолдануыңыз керек."

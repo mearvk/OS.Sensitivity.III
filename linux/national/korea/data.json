@@ -1,0 +1,34 @@
+{
+  "schema": "korea-evaluation-1",
+  "as_of": "2026-08-29",
+  "facts": {
+    "korea_nominal_gdp_usd_2025": 1872374961553.2,
+    "hanwoo_retail_1st_grade_sirloin_krw_per_100g_2026_snapshot": 10137,
+    "hanwoo_retail_1st_grade_rib_krw_per_100g_2022": 7850,
+    "hanwoo_retail_1st_grade_rib_krw_per_100g_2021": 6857,
+    "hanwoo_cattle_10k_head_2024": 337,
+    "hanwoo_cattle_10k_head_2025": 321,
+    "hanwoo_cattle_10k_head_2026_projection": 315,
+    "hanwoo_cattle_10k_head_2028_projection": 321,
+    "hanwoo_wholesale_krw_per_kg_2026_q1_mid": 22036,
+    "oldest_active_football_player_age_years": 74.125,
+    "us_adult_male_mean_height_in": 68.9,
+    "us_adult_female_mean_height_in": 63.5
+  },
+  "assumptions": {
+    "quality_grade_score": "ordinal model: 1+ = 100, 1 = 90, 2 = 75, 3 = 60; not an official quality index",
+    "american_stature_reference_cm": 175.0,
+    "water_lifetime_baseline_l": 1000000,
+    "water_lifetime_use_l": 1000000,
+    "lifetime_giftedness": "model variable only; not a claim about a person's intelligence or worth",
+    "combined_wealth": "excluded unless independently sourced; no invented wealth figure",
+    "consumer_greed": "represented as consumer_price_pressure rather than a moral judgment"
+  },
+  "sources": [
+    "https://www.kamis.or.kr/customer/price/livestockRetail/old/period.do?action=yearly",
+    "https://www.mafra.go.kr/bbs/home/793/577311/artclView.do",
+    "https://databank.worldbank.org/reports.aspx?country=KOR&series=NY.GDP.MKTP.CD&source=2",
+    "https://www.cdc.gov/nchs/fastats/body-measurements.htm",
+    "https://www.guinnessworldrecords.com/world-records/370408-oldest-active-football-soccer-player"
+  ]
+}

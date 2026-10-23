@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<koreaEvaluation schema="korea-result-1" asOf="2026-08-29">
+  <method>Normalized source facts plus explicitly marked assumptions; no moral score is assigned to nationality or individuals.</method>
+  <result name="korea_macro">GDP_2025_usd=1872374961553.2</result>
+  <result name="hanwoo_price">2026_snapshot_1st_grade_sirloin_krw_per_100g=10137; 2022_1st_grade_rib=7850; 2021_1st_grade_rib=6857</result>
+  <result name="hanwoo_supply">herd_10k_head=337_2024,321_2025,315_projection_2026,321_projection_2028</result>
+  <result name="quality_model">1+=100; 1=90; 2=75; 3=60; ordinal model only</result>
+  <result name="american_stature">adult_male_mean_cm=175.0; adult_female_mean_cm=161.3</result>
+  <result name="oldest_football">Ezzeldin_Bahader=74.125_years_at_Guinness_record</result>
+  <result name="water">baseline=1000000_L; modeled_use=1000000_L; index=1.000</result>
+  <result name="wealth">not_estimated_without_reliable_public_source</result>
+  <interpretation>Supply pressure is elevated where herd contraction and beef price observations coincide. Consumer pressure is treated as a measurable price burden, not as a judgment about greed.</interpretation>
+</koreaEvaluation>

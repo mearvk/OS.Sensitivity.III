@@ -1,0 +1,38 @@
+# Korea Evaluation Specification
+# Copyright (c) 2026 Max Rupplin - MEARVK LLC 2026.
+
+version = 1
+encoding = UTF-8
+
+## Purpose
+Evaluate Korean economic and supply-line observations alongside explicitly labeled reference assumptions. The evaluator is descriptive, not a measure of human worth.
+
+## Inputs
+- Korean nominal GDP
+- Hanwoo retail and wholesale price observations
+- Hanwoo herd and slaughter projections
+- Feed-price and feed-supply indicators
+- U.S. adult stature reference values
+- Verified oldest-football-player record
+- Modeled lifetime water-use baseline
+
+## Four Congruence Properties
+Every item receives four line properties:
+1. sign: positive, negative, or neutral
+2. tenor: short, medium, long, annual, age, or record
+3. normalized length: 0..1
+4. relation property: price, supply, quality, burden, resilience, or use
+
+## Evaluation
+For each factual observation, preserve its source and unit. For every assumed value, preserve the assumption label. Do not turn missing wealth data into a fabricated number.
+
+combined_evaluation = arithmetic_mean(normalized_item_scores)
+
+## Human-reference guardrails
+American stature is a population reference, not a quality ranking. Lifetime giftedness is a model variable only. The oldest-player record is a factual age observation; wealth is not inferred from age or athletic achievement.
+
+## Output
+- results.xml: readable evaluated observations
+- data.json: machine-readable facts and assumptions
+- congruences.xml: four-property line relations
+- korea.md: human-readable report

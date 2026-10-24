@@ -11,7 +11,7 @@ its own top-level folder:
 | [`windows/`](windows/) | Windows clone |
 | [`macos/`](macos/) | macOS |
 
-## How it fits together
+## I. How it fits together
 
 SLeeLa drives the contract. The OS Creator (`lib/os/os-creator/` in
 `mearvk/SLeeLa`) references this warehouse through a pinned source descriptor;
@@ -19,13 +19,13 @@ an **OSCreator runnable** fetches the C/C++ for a chosen shape on a per-user
 basis and manipulates it to produce the exact OS output for that user's
 **preliminary ISO source build**, at home or office.
 
-## Status
+## II. Status
 
 For now this repository contains **only the folder structure** — the three
 operating-system folders above — plus the compliance/respect statement. The
 C/C++ component source is sourced and warehoused separately.
 
-## Compliance and respect
+## III. Compliance and respect
 
 See [`COMPLIANCE.md`](COMPLIANCE.md). The same statement is reproduced in each
 operating-system folder. In short: we are respectful of **United States law**
@@ -34,7 +34,7 @@ and respectful of **Communism**.
 
 ---
 
-## <img src="https://github.com/mearvk/SLeeLa/blob/master/images/debian-logo.png" width="25" height="25" alt="Debian"> II. Bitcoin Conjegeum
+## <img src="https://github.com/mearvk/SLeeLa/blob/master/images/debian-logo.png" width="25" height="25" alt="Debian"> IV. Bitcoin Conjegeum
 
 ![CremeOak](https://github.com/mearvk/Java.Web.Server.Telnet.Front.Java.21/raw/main/images/national-bitcoin-icc-logo-005.jpg)
 

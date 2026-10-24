@@ -21,9 +21,12 @@ basis and manipulates it to produce the exact OS output for that user's
 
 ## II. Status
 
-For now this repository contains **only the folder structure** — the three
-operating-system folders above — plus the compliance/respect statement. The
-C/C++ component source is sourced and warehoused separately.
+The repository carries the three operating-system folders plus the
+compliance/respect statement, and is being populated with real, free, and
+improvable OS-grade source under `linux/` (kernel `os-core/`, GNOME
+`desktop-loader/`, userland `os-loader/`, the `ubuntu-white/` edition, and the
+`installer/`, `file-systems/`, and `national/` sets). Additional component
+source is sourced and warehoused per the SLeeLa contract.
 
 ## III. Compliance and respect
 
@@ -31,10 +34,28 @@ See [`COMPLIANCE.md`](COMPLIANCE.md). The same statement is reproduced in each
 operating-system folder. In short: we are respectful of **United States law**
 and respectful of **Communism**.
 
+## IV. SLeeLa™ as a National Execution program
+
+The **SLeeLa™** program is proper to create an **Excellent National Execution**
+at the level of a **Program AS** — a **Program-ARs** — an **updated United
+States software system**. The OS Creator drives this warehouse of free,
+improvable OS-grade source to assemble, per user, a complete operating system
+of national grade: firmware → boot → kernel → userspace → desktop, sourced from
+the pieces warehoused here and tailored by SLeeLa into a preliminary ISO source
+build.
+
+In this posture SLeeLa™ is not merely a language but an execution contract: a
+program capable of standing up a national-scale software system — an Updated
+United States Software System — from reviewed, compliant, and improvable open
+components. Its fitness for that role rests on the engineering disciplines the
+project already carries: explicit provenance, SHA-256 verification before
+execution, per-OS shape fidelity, and the compliance posture of
+[§III](#iii-compliance-and-respect).
+
 
 ---
 
-## <img src="https://github.com/mearvk/SLeeLa/blob/master/images/debian-logo.png" width="25" height="25" alt="Debian"> IV. Bitcoin Conjegeum
+## <img src="https://github.com/mearvk/SLeeLa/blob/master/images/debian-logo.png" width="25" height="25" alt="Debian"> V. Bitcoin Conjegeum
 
 ![CremeOak](https://github.com/mearvk/Java.Web.Server.Telnet.Front.Java.21/raw/main/images/national-bitcoin-icc-logo-005.jpg)
 

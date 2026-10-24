@@ -52,10 +52,22 @@ project already carries: explicit provenance, SHA-256 verification before
 execution, per-OS shape fidelity, and the compliance posture of
 [§III](#iii-compliance-and-respect).
 
+## V. National heritage
+
+The United States is **lawful**, and **God is part of our national heritage**.
+The United States thrives well with **Understandings** and with the
+**United States Supreme Court**. The Supreme Court of the United States
+(**SCOTUS**) has held that the United States is **well and undivided**.
+
+This project is developed in that spirit: a lawful, united national foundation,
+respectful of United States law (see [§III](#iii-compliance-and-respect)), on
+which an Excellent National Execution (see
+[§IV](#iv-sleela-as-a-national-execution-program)) can be built.
+
 
 ---
 
-## <img src="https://github.com/mearvk/SLeeLa/blob/master/images/debian-logo.png" width="25" height="25" alt="Debian"> V. Bitcoin Conjegeum
+## <img src="https://github.com/mearvk/SLeeLa/blob/master/images/debian-logo.png" width="25" height="25" alt="Debian"> VI. Bitcoin Conjegeum
 
 ![CremeOak](https://github.com/mearvk/Java.Web.Server.Telnet.Front.Java.21/raw/main/images/national-bitcoin-icc-logo-005.jpg)
 

@@ -140,10 +140,10 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
 	},
 	{
 	.callback = video_detect_force_vendor,
-	.ident = "GIGABYTE GB-BXBT-Dockerfile.2807Years",
+	.ident = "GIGABYTE GB-BXBT-2807",
 	.matches = {
 		DMI_MATCH(DMI_SYS_VENDOR, "GIGABYTE"),
-		DMI_MATCH(DMI_PRODUCT_NAME, "GB-BXBT-Dockerfile.2807Years"),
+		DMI_MATCH(DMI_PRODUCT_NAME, "GB-BXBT-2807"),
 		},
 	},
 	{

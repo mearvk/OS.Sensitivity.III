@@ -1,0 +1,130 @@
+{
+  "$schema": "https://schemas.sleela.dev/os-sensitivity/shapes-1.0.json",
+  "warehouse": "OS.Sensitivity.III",
+  "description": "OS-grade C/C++ source warehouse for the SLeeLa OS Creator. Each shape resolves through the SLeeLa contract (SLOSSensitivitySource / SLOSSensitivityFetch) to the directory named below.",
+  "contractVersion": "1.0",
+  "generated": "2026-11-02",
+  "compliance": "COMPLIANCE.md",
+  "shapes": {
+    "linux": {
+      "title": "Linux",
+      "root": "linux",
+      "status": "populated",
+      "compliance": "linux/COMPLIANCE.md",
+      "components": {
+        "os-core": {
+          "path": "linux/os-core/linux-5.10.254",
+          "role": "kernel",
+          "component": "Linux kernel 5.10.254 (complete, buildable)",
+          "license": "GPL-2.0",
+          "buildEntry": "make",
+          "sources": "linux/os-core/SOURCES.md"
+        },
+        "os-loader": {
+          "path": "linux/os-loader/userland",
+          "role": "userland",
+          "component": "Lean free userland + Ubuntu 24.04.4 base rootfs",
+          "license": "per-file",
+          "sources": "linux/os-loader/SOURCES.md"
+        },
+        "desktop-loader": {
+          "path": "linux/desktop-loader/gnome-source",
+          "role": "desktop",
+          "component": "GNOME desktop source",
+          "license": "per-file",
+          "sources": "linux/desktop-loader/SOURCES.md"
+        },
+        "installer": { "path": "linux/installer", "role": "installer" },
+        "file-systems": { "path": "linux/file-systems", "role": "filesystem" },
+        "ubuntu-white": { "path": "linux/ubuntu-white", "role": "edition" },
+        "national": { "path": "linux/national", "role": "national-sets" }
+      }
+    },
+    "windows": {
+      "title": "Windows-compatible (clean-room)",
+      "root": "windows",
+      "status": "populated",
+      "notMicrosoftWindows": true,
+      "cleanRoom": true,
+      "compliance": "windows/COMPLIANCE.md",
+      "licenses": "windows/LICENSES.md",
+      "sources": "windows/SOURCES.md",
+      "build": "windows/BUILD.md",
+      "paths": {
+        "compat-loader": {
+          "path": "windows/compat-loader/wine",
+          "role": "windows-app-compatibility",
+          "component": "Wine 10.20 (clean-room Win32/Win64 API layer)",
+          "pinnedRef": "wine-10.20",
+          "upstream": "github.com/wine-mirror/wine",
+          "license": "LGPL-2.1-or-later",
+          "runsOn": "linux",
+          "buildEntry": "./configure && make"
+        },
+        "reactos": {
+          "path": "windows/reactos/reactos",
+          "role": "standalone-os",
+          "component": "ReactOS 0.4.16 (clean-room Windows-NT-compatible OS)",
+          "pinnedRef": "0.4.16-release",
+          "upstream": "github.com/reactos/reactos",
+          "license": "GPL-2.0",
+          "buildEntry": "./configure.sh && ninja bootcd"
+        }
+      }
+    },
+    "macos": {
+      "title": "macOS-compatible (Darwin-based)",
+      "root": "macos",
+      "status": "populated",
+      "notAppleMacOS": true,
+      "openSourceDarwin": true,
+      "noAppleEulaDependency": true,
+      "compliance": "macos/COMPLIANCE.md",
+      "licenses": "macos/LICENSES.md",
+      "sources": "macos/SOURCES.md",
+      "build": "macos/BUILD.md",
+      "paths": {
+        "os-core": {
+          "path": "macos/os-core/xnu",
+          "role": "kernel",
+          "component": "XNU kernel (Mach + BSD + IOKit)",
+          "pinnedRef": "xnu-12377.121.6",
+          "upstream": "github.com/apple-oss-distributions/xnu",
+          "license": "APSL-2.0",
+          "buildEntry": "make"
+        },
+        "puredarwin": {
+          "path": "macos/puredarwin/puredarwin",
+          "role": "standalone-os",
+          "component": "PureDarwin (assembles Darwin into a bootable OS)",
+          "upstream": "github.com/PureDarwin/PureDarwin",
+          "license": "APSL-2.0+BSD",
+          "buildEntry": "cmake -G Ninja -B build && ninja -C build image"
+        },
+        "frameworks": {
+          "path": "macos/frameworks",
+          "role": "mac-api-surface",
+          "cleanRoom": true,
+          "members": {
+            "gnustep-libobjc2": { "upstream": "github.com/gnustep/libobjc2", "license": "MIT", "component": "Objective-C runtime" },
+            "gnustep-make": { "upstream": "github.com/gnustep/tools-make", "license": "GPL-3.0", "component": "GNUstep build system" },
+            "gnustep-base": { "upstream": "github.com/gnustep/libs-base", "license": "LGPL/GPL", "component": "Foundation-equivalent" },
+            "gnustep-corebase": { "upstream": "github.com/gnustep/libs-corebase", "license": "LGPL/GPL-3.0", "component": "CoreFoundation-equivalent" },
+            "gnustep-gui": { "upstream": "github.com/gnustep/libs-gui", "license": "LGPL/GPL-3.0", "component": "AppKit/Cocoa-equivalent" },
+            "gnustep-back": { "upstream": "github.com/gnustep/libs-back", "license": "LGPL/GPL-3.0", "component": "GUI rendering backend" },
+            "swift-corelibs-foundation": { "upstream": "github.com/swiftlang/swift-corelibs-foundation", "license": "Apache-2.0", "component": "Cross-platform Foundation" }
+          }
+        },
+        "compat-loader": {
+          "path": "macos/compat-loader/darling",
+          "role": "darwin-runtime",
+          "component": "Darling (Mach-O loader / dyld / launchd)",
+          "pinnedRef": "v0.1.20260608",
+          "upstream": "github.com/darlinghq/darling",
+          "license": "GPL-3.0",
+          "runsOn": "linux"
+        }
+      }
+    }
+  }
+}

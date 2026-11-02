@@ -5,11 +5,16 @@ OS-grade **C and C++ source** warehouse for the SLeeLa **OS Creator**.
 This repository isolates the C/C++ for each target operating-system shape into
 its own top-level folder:
 
-| Folder | Shape |
-|---|---|
-| [`linux/`](linux/) | Linux |
-| [`windows/`](windows/) | Windows clone |
-| [`macos/`](macos/) | macOS |
+| Folder | Shape | Kind |
+|---|---|---|
+| [`linux/`](linux/) | Linux | native Linux OS |
+| [`windows/`](windows/) | Windows-compatible (clean-room) | Wine compat layer + ReactOS standalone OS |
+| [`macos/`](macos/) | macOS-compatible (Darwin-based) | XNU + PureDarwin standalone OS + clean-room Cocoa frameworks |
+
+The Windows and macOS shapes are **compatibility, not copies**: they contain
+**no Microsoft or Apple proprietary code or trademarks** and are built from
+clean-room and openly licensed source (see each shape's `COMPLIANCE.md` and
+`LICENSES.md`).
 
 ## I. How it fits together
 
@@ -19,14 +24,33 @@ an **OSCreator runnable** fetches the C/C++ for a chosen shape on a per-user
 basis and manipulates it to produce the exact OS output for that user's
 **preliminary ISO source build**, at home or office.
 
+The machine-readable descriptor is [`shapes.json`](shapes.json) at the repo
+root: it catalogs every shape, its component paths, pinned upstream refs,
+licenses, and build entry points, so the OSCreator runnable can resolve and
+fetch a chosen shape deterministically.
+
 ## II. Status
 
-The repository carries the three operating-system folders plus the
-compliance/respect statement, and is being populated with real, free, and
-improvable OS-grade source under `linux/` (kernel `os-core/`, GNOME
-`desktop-loader/`, userland `os-loader/`, the `ubuntu-white/` edition, and the
-`installer/`, `file-systems/`, and `national/` sets). Additional component
-source is sourced and warehoused per the SLeeLa contract.
+All three operating-system shapes are now populated with real, free, and
+improvable OS-grade source, catalogued in [`shapes.json`](shapes.json):
+
+- **`linux/`** — native Linux OS: complete buildable kernel `os-core/`
+  (linux-5.10.254), GNOME `desktop-loader/`, userland `os-loader/` (lean free
+  set + Ubuntu 24.04.4 base rootfs), the `ubuntu-white/` edition, and the
+  `installer/`, `file-systems/`, and `national/` sets.
+- **`windows/`** — Windows-compatible (clean-room): **Wine 10.20** compatibility
+  layer (`compat-loader/wine/`) to run Windows apps on the Linux base, and
+  **ReactOS 0.4.16** (`reactos/reactos/`) as a standalone Windows-NT-compatible
+  OS. No Microsoft code. See `windows/BUILD.md`.
+- **`macos/`** — macOS-compatible (Darwin-based): **XNU** kernel
+  (`os-core/xnu/`) assembled by **PureDarwin** (`puredarwin/`) into a standalone
+  bootable Darwin OS, plus clean-room **GNUstep** Cocoa/Foundation frameworks,
+  **swift-corelibs-foundation**, and the **Darling** Darwin runtime
+  (`frameworks/`, `compat-loader/`). No proprietary Apple software; no Apple-EULA
+  dependency. See `macos/BUILD.md`.
+
+Additional component source continues to be sourced and warehoused per the
+SLeeLa contract.
 
 ## III. Compliance and respect
 

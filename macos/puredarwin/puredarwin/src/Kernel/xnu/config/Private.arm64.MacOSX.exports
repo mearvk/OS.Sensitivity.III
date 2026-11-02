@@ -1,0 +1,21 @@
+_aes_decrypt
+_bufattr_delayidlesleep
+_mountroot_post_hook
+_unmountroot_pre_hook
+_cs_vm_supports_4k_translations
+_csfg_get_supplement_platform_binary
+_csfg_get_supplement_cdhash
+_csfg_get_supplement_linkage_cdhash
+_csfg_get_supplement_prod_signed
+_csfg_get_supplement_signer_type
+_csfg_get_supplement_teamid
+_xts_decrypt
+_xts_done
+_xts_encrypt
+_xts_start
+#macOS only codesigning kpi
+_csproc_disable_enforcement
+_csproc_mark_invalid_allowed
+_csproc_check_invalid_allowed
+_csproc_hardened_runtime
+_csproc_forced_lv

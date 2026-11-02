@@ -1,0 +1,229 @@
+// This source file is part of the Swift.org open source project
+//
+// Copyright (c) 2014 - 2016 Apple Inc. and the Swift project authors
+// Licensed under Apache License v2.0 with Runtime Library Exception
+//
+// See http://swift.org/LICENSE.txt for license information
+// See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
+//
+
+class TestURLProtocol : LoopbackServerTest {
+    func test_protocolPropertiesReachCustomProtocol() {
+        let url = URL(string: "https://example.invalid/protocol-properties")!
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [PropertyEchoProtocol.self]
+        let session = URLSession(configuration: configuration)
+        defer { session.invalidateAndCancel() }
+
+        let request = NSMutableURLRequest(url: url)
+        URLProtocol.setProperty("present", forKey: "marker", in: request)
+        let expect = expectation(description: "The protocol receives the request property")
+        let task = session.dataTask(with: request as URLRequest) { data, _, error in
+            defer { expect.fulfill() }
+            XCTAssertNil(error)
+            XCTAssertEqual(String(data: data ?? Data(), encoding: .utf8), "present")
+        }
+
+        task.resume()
+        waitForExpectations(timeout: 5)
+    }
+
+    func test_interceptResponse() {
+        let urlString = "http://127.0.0.1:\(TestURLProtocol.serverPort)/USA"
+        let url = URL(string: urlString)!
+        let config = URLSessionConfiguration.default
+        config.protocolClasses = [CustomProtocol.self]
+        config.timeoutIntervalForRequest = 8
+        let session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
+        let expect = expectation(description: "GET \(urlString): with a custom protocol")
+        let task = session.dataTask(with: url) { data, response, error in
+            defer { expect.fulfill() }
+            if let e = error as? URLError {
+                XCTAssertEqual(e.code, .timedOut, "Unexpected error code")
+                return
+            }
+            let httpResponse = response as! HTTPURLResponse?
+            XCTAssertEqual(429, httpResponse!.statusCode, "HTTP response code is not 429")
+        }
+        task.resume()
+        waitForExpectations(timeout: 12)
+    }
+    
+    func test_interceptRequest() {
+        let urlString = "ssh://127.0.0.1:\(TestURLProtocol.serverPort)/USA"
+        let url = URL(string: urlString)!
+        let config = URLSessionConfiguration.default
+        config.protocolClasses = [InterceptableRequest.self]
+        config.timeoutIntervalForRequest = 8
+        let session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
+        let expect = expectation(description: "GET \(urlString): with a custom protocol")
+        let task = session.dataTask(with: url) { data, response, error in
+            defer { expect.fulfill() }
+            if let e = error as? URLError {
+                XCTAssertEqual(e.code, .timedOut, "Unexpected error code")
+                return
+            }
+            let httpResponse = response as! HTTPURLResponse?
+            let responseURL = URL(string: "http://google.com")
+            XCTAssertEqual(responseURL, httpResponse?.url, "Unexpected url")
+            XCTAssertEqual(200, httpResponse!.statusCode, "HTTP response code is not 200")
+        }
+        task.resume()
+        waitForExpectations(timeout: 12)
+    }
+    
+    func test_multipleCustomProtocols() {
+        let urlString = "http://127.0.0.1:\(TestURLProtocol.serverPort)/Nepal"
+        let url = URL(string: urlString)!
+        let config = URLSessionConfiguration.default
+        config.protocolClasses = [InterceptableRequest.self, CustomProtocol.self]
+        let expect = expectation(description: "GET \(urlString): with a custom protocol")
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: url) { data, response, error in
+            defer { expect.fulfill() }
+            if let e = error as? URLError {
+                XCTAssertEqual(e.code, .timedOut, "Unexpected error code")
+                return
+            }
+            let httpResponse = response as! HTTPURLResponse
+            print(httpResponse.statusCode)
+            XCTAssertEqual(429, httpResponse.statusCode, "Status code is not 429")
+        }
+        task.resume()
+        waitForExpectations(timeout: 12)
+    }
+    
+    func test_customProtocolResponseWithDelegate() {
+        let urlString = "http://127.0.0.1:\(TestURLSession.serverPort)/Peru"
+        let url = URL(string: urlString)!
+        let d = DataTask(with: expectation(description: "GET \(urlString): with a custom protocol and delegate"), protocolClasses: [CustomProtocol.self])
+        d.responseReceivedExpectation = expectation(description: "GET \(urlString): response received")
+        d.run(with: url)
+        waitForExpectations(timeout: 12)
+    }
+    
+    func test_customProtocolSetDataInResponseWithDelegate() {
+        let urlString = "http://127.0.0.1:\(TestURLSession.serverPort)/Nepal"
+        let url = URL(string: urlString)!
+        let d = DataTask(with: expectation(description: "GET \(urlString): with a custom protocol and delegate"), protocolClasses: [CustomProtocol.self])
+        d.run(with: url)
+        waitForExpectations(timeout: 12)
+        if !d.error {
+            XCTAssertEqual(d.capital, "Kathmandu", "test_dataTaskWithURLRequest returned an unexpected result")
+        }
+    }
+
+    func test_finishLoadingWithNoResponse() throws {
+        let url = try XCTUnwrap(URL(string: "https://test/url"))
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [TestURLServer.self]
+        let session = URLSession(configuration: configuration)
+
+        let expect = expectation(description: "GET \(url.absoluteString)")
+        let task = session.dataTask(with: url) { data, response, error in
+            defer { expect.fulfill() }
+            XCTAssertNil(data)
+            XCTAssertNil(response)
+            XCTAssertNotNil(error)
+        }
+
+        task.resume()
+        waitForExpectations(timeout: 2)
+    }
+}
+
+private class PropertyEchoProtocol: URLProtocol {
+    override class func canInit(with request: URLRequest) -> Bool {
+        request.url?.host == "example.invalid"
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+    override func startLoading() {
+        let value = URLProtocol.property(forKey: "marker", in: request) as? String ?? "<missing>"
+        let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: [:])!
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client?.urlProtocol(self, didLoad: Data(value.utf8))
+        client?.urlProtocolDidFinishLoading(self)
+    }
+
+    override func stopLoading() {}
+}
+
+class InterceptableRequest : URLProtocol {
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        return request.url?.scheme == "ssh"
+    }
+    
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+    
+    override func startLoading() {
+        let urlString = "http://google.com"
+        let url = URL(string: urlString)!
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: [:])
+        self.client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
+        self.client?.urlProtocolDidFinishLoading(self)
+        
+    }
+
+    override func stopLoading() {
+        return
+    }
+}
+
+class CustomProtocol : URLProtocol {
+    
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+    
+    func sendResponse(statusCode: Int, headers: [String: String] = [:], data: Data) {
+        let response = HTTPURLResponse(url: self.request.url!, statusCode: statusCode, httpVersion: "HTTP/1.1", headerFields: headers)
+        let capital = "Kathmandu"
+        let data = capital.data(using: .utf8)
+        self.client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
+        self.client?.urlProtocol(self, didLoad: data!)
+        self.client?.urlProtocolDidFinishLoading(self)
+    }
+    
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+    
+    override func startLoading() {
+        sendResponse(statusCode: 429, data: Data())
+    }
+    
+    override func stopLoading() {
+        return
+    }
+}
+
+
+public class TestURLServer: URLProtocol {
+    public override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    public override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    public override func startLoading() {
+        var info: [String: Any] = [:]
+        if let url = request.url {
+            info[NSURLErrorFailingURLStringErrorKey] = url.absoluteString
+            info[NSURLErrorFailingURLErrorKey] = url
+        }
+        let error = URLError(.networkConnectionLost, userInfo: info)
+
+        client?.urlProtocol(self, didFailWithError: error)
+        client?.urlProtocolDidFinishLoading(self)
+    }
+
+    public override func stopLoading() {
+    }
+}

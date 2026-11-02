@@ -1,0 +1,8 @@
+#
+#
+#
+-include $(GNUSTEP_MAKEFILES)/Additional/gui.make
+AUXILIARY_TOOL_LIBS += $(GUI_LIBS)
+
+# Enable the use of uninstalled and private headers from the GUI library.
+ADDITIONAL_OBJCFLAGS += -I../../../Headers -I../../../Source

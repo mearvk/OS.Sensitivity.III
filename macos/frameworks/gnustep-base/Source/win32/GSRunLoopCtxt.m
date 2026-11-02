@@ -1,0 +1,605 @@
+/**
+ * MS-Windows subclass of the GSRunLoopCtxt class.
+ * NB.  This class is private to NSRunLoop
+ */
+
+#import "common.h"
+
+#import "Foundation/NSError.h"
+#import "Foundation/NSNotification.h"
+#import "Foundation/NSNotificationQueue.h"
+#import "Foundation/NSPort.h"
+#import "Foundation/NSStream.h"
+#import "../GSRunLoopCtxt.h"
+#import "../GSRunLoopWatcher.h"
+#import "../GSPrivate.h"
+
+#define	FDCOUNT	1024
+
+@interface	GSRunLoopCtxtWin32: GSRunLoopCtxt
+{
+  NSMapTable    *handleMap;     
+  NSMapTable    *winMsgMap;
+}
+@end
+
+@implementation	GSRunLoopCtxtWin32
+
+- (void) dealloc
+{
+  if (handleMap != 0)
+    {
+      NSFreeMapTable(handleMap);
+    }
+  if (winMsgMap != 0)
+    {
+      NSFreeMapTable(winMsgMap);
+    }
+  DEALLOC
+}
+
+/**
+ * Remove any callback for the specified event which is set for an
+ * uncompleted poll operation.<br />
+ * This is called by nested event loops on contexts in outer loops
+ * when they handle an event ... removing the event from the outer
+ * loop ensures that it won't get handled twice, once by the inner
+ * loop and once by the outer one.
+ */
+- (void) endEvent: (void*)data
+              for: (GSRunLoopWatcher*)watcher
+{
+  if (completed == NO)
+    {
+      [super endEvent: data for: watcher];
+      switch (watcher->type)
+	{
+	  case ET_RPORT:
+	  case ET_HANDLE:
+	    NSMapRemove(handleMap, data);
+	    break;
+	  case ET_WINMSG:
+	    NSMapRemove(winMsgMap, data);
+	    break;
+	  case ET_TRIGGER:
+	    // Already handled
+	    break;
+	  default:
+	    NSLog(@"Ending an event of unexpected type (%d)", watcher->type);
+	    break;
+	}
+    }
+}
+
+- (id) init
+{
+  [NSException raise: NSInternalInconsistencyException
+	      format: @"-init may not be called for GSRunLoopCtxt"];
+  return nil;
+}
+
+- (id) initWithMode: (NSString*)theMode for: (GSRLInternal*)l
+{
+  if (nil != (self = [super initWithMode: theMode for: l]))
+    {
+      handleMap = NSCreateMapTable(NSIntegerMapKeyCallBacks,
+	[self watcherCallbacks], 0);
+      winMsgMap = NSCreateMapTable(NSIntegerMapKeyCallBacks,
+	[self watcherCallbacks], 0);
+    }
+  return self;
+}
+
+/*
+ * If there is a generic watcher (watching hwnd == 0),
+ * loop through all events, and send them to the correct
+ * watcher (if there are any) and then process the rest right here.
+ * Return a flag to say whether any messages were handled.
+ */
+- (BOOL) processAllWindowsMessages:(int)num_winMsgs within: (NSArray*)contexts
+{
+  MSG			msg;
+  GSRunLoopWatcher	*generic = nil;
+  unsigned		i;
+  BOOL			handled = NO;
+
+  if (num_winMsgs > 0)
+    {
+      generic = NSMapGet(winMsgMap,0);
+    }
+  
+  if (generic != nil && generic->_invalidated == NO)
+    {
+      while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+	{
+	  if (num_winMsgs > 0)
+	    {
+	      HANDLE		handle;
+	      GSRunLoopWatcher	*watcher;
+
+	      handle = msg.hwnd;
+	      watcher = (GSRunLoopWatcher*)NSMapGet(winMsgMap,
+		(void*)handle);
+	      if (watcher == nil || watcher->_invalidated == YES)
+		{
+		  handle = 0;	// Generic
+		  watcher
+		    = (GSRunLoopWatcher*)NSMapGet(winMsgMap, (void*)handle);
+		}
+	      if (watcher != nil && watcher->_invalidated == NO)
+		{
+		  i = [contexts count];
+		  while (i-- > 0)
+		    {
+		      GSRunLoopCtxt *c = [contexts objectAtIndex: i];
+
+		      if (c != self)
+			{ 
+			  [c endEvent: (void*)handle for: watcher];
+			}
+		    }
+		  handled = YES;
+		  /*
+		   * The watcher is still valid - so call the
+		   * receiver's event handling method.
+		   */
+		  [watcher->receiver receivedEvent: watcher->data
+					      type: watcher->type
+					     extra: (void*)&msg
+					   forMode: mode];
+		  continue;
+		}
+	    }
+	  TranslateMessage(&msg); 
+	  DispatchMessage(&msg);
+	}
+    }
+  else
+    {
+      if (num_winMsgs > 0)
+	{
+	  unsigned		num = num_winMsgs;
+	  NSMapEnumerator	hEnum;
+	  HANDLE		handle;
+	  GSRunLoopWatcher	*watcher;
+
+	  hEnum = NSEnumerateMapTable(winMsgMap);
+	  while (NSNextMapEnumeratorPair(&hEnum, &handle, (void**)&watcher))
+	    {
+	      if (watcher->_invalidated == NO)
+		{
+		  while (PeekMessage(&msg, handle, 0, 0, PM_REMOVE))
+		    {
+		      i = [contexts count];
+		      while (i-- > 0)
+			{
+			  GSRunLoopCtxt *c = [contexts objectAtIndex: i];
+			      
+			  if (c != self)
+			    {
+			      [c endEvent: (void*)handle for: watcher];
+			    }
+			}
+		      handled = YES;
+		      [watcher->receiver receivedEvent: watcher->data
+						  type: watcher->type
+						 extra: (void*)&msg
+					       forMode: mode];
+		    }
+		}
+	      num--;
+	    }
+	  NSEndMapTableEnumeration(&hEnum);
+	} 
+    }
+  return handled;
+}
+
+- (BOOL) pollUntil: (int64_t)microseconds within: (NSArray*)contexts
+{
+  GSRunLoopThreadInfo   *threadInfo = loop->threadInfo;
+  GSRunLoopCtxtBase     *common = nil;
+  NSMapEnumerator	hEnum;
+  GSRunLoopWatcher	*watcher;
+  HANDLE		handleArray[MAXIMUM_WAIT_OBJECTS-1];
+  int			num_handles;
+  int			num_winMsgs;
+  unsigned		count;
+  unsigned		i;
+  unsigned      	modeWatchersCount;
+  unsigned      	commonWatchersCount;
+  void			*handle;
+  void			*dispatch = NULL;
+  int			special;
+  int			wait_timeout;
+  DWORD			wait_return;
+  BOOL			immediate = NO;
+  BOOL			existingMessages = NO;
+
+  // Set timeout how much time should wait
+  if (microseconds >= 0)
+    {
+      if (microseconds % 1000 == 0)
+	{
+	  wait_timeout = (int)(microseconds/1000);
+	}
+      else
+	{
+	  wait_timeout = (int)(microseconds/1000 + 1);
+	}
+    }
+  else if (0 == microseconds)
+    {
+      wait_timeout = 0;
+    }
+  else
+    {
+      wait_timeout = INFINITE;
+    }
+
+  NSResetMapTable(handleMap);
+  NSResetMapTable(winMsgMap);
+  GSIArrayRemoveAllItems(_trigger);
+
+#if GS_USE_LIBDISPATCH_RUNLOOP
+  if (loop->isMainThread && loop->dispatchHandle != NULL
+    && (loop->commonModeMask & (UINT64_C(1) << modeIndex)))
+    {
+      dispatch = loop->dispatchHandle;
+    }
+#endif
+  // One handle for signals from other threads, possibly a libdispatch one too.
+  special = 1 + (dispatch ? 1 : 0);
+
+  if (loop->commonModeMask & (UINT64_C(1) << modeIndex))
+    {
+      common = loop->contexts[1];
+      commonWatchersCount = GSIArrayCount(common->watchers);
+    }
+  else
+    {
+      commonWatchersCount = 0;
+    }
+  modeWatchersCount = GSIArrayCount(watchers);
+  i = modeWatchersCount + commonWatchersCount;
+
+  num_handles = special;
+  num_winMsgs = 0;
+
+  while (i-- > 0)
+    {
+      GSRunLoopWatcher	*info;
+      BOOL		trigger;
+      GSIArray          table;
+
+      if (i >= modeWatchersCount)
+        {
+          table = common->watchers;
+        }
+      else
+        {
+          table = watchers;
+        }
+      info = GSIArrayItemAtIndex(table, i).obj;
+
+      if (info->_invalidated == YES)
+	{
+	  GSIArrayRemoveItemAtIndex(table, i);
+	}
+      else if ([info runLoopShouldBlock: &trigger] == NO)
+	{
+	  if (trigger == YES)
+	    {
+	      immediate = YES;
+	      GSIArrayAddItem(_trigger, (GSIArrayItem)(id)info);
+	    }
+	}
+      else
+	{
+	  HANDLE	handle;
+
+	  switch (info->type)
+	    {
+	      case ET_HANDLE:
+		handle = (HANDLE)(size_t)info->data;
+		NSMapInsert(handleMap, (void*)handle, info);
+		num_handles++;
+		break;
+	      case ET_RPORT:
+		{
+		  id port = info->receiver;
+		  NSInteger port_hd_size = FDCOUNT;
+		  NSInteger port_hd_count = FDCOUNT;
+		  NSInteger port_hd_buffer[FDCOUNT];
+		  NSInteger *port_hd_array = port_hd_buffer;
+
+		  [port getFds: port_hd_array count: &port_hd_count];
+                  while (port_hd_count > port_hd_size)
+                    {
+                      if (port_hd_array != port_hd_buffer) free(port_hd_array);
+                      port_hd_size = port_hd_count;
+                      port_hd_count = port_hd_size;
+                      port_hd_array = malloc(sizeof(NSInteger)*port_hd_size);
+                      [port getFds: port_hd_array count: &port_hd_count];
+                    }
+		  NSDebugMLLog(@"NSRunLoop", @"listening to %ld port handles",
+		    (long)port_hd_count);
+		  while (port_hd_count--)
+		    {
+		      NSMapInsert(handleMap, 
+			(void*)(size_t) port_hd_array[port_hd_count],
+			info);
+		      num_handles++;
+		    }
+                  if (port_hd_array != port_hd_buffer) free(port_hd_array);
+		}
+		break;
+	      case ET_WINMSG:
+		handle = (HANDLE)(size_t)info->data;
+		NSMapInsert(winMsgMap, (void*)handle, info);
+		num_winMsgs++;
+		break;
+	      case ET_TRIGGER:
+		break;
+	    }
+	}
+    }
+    
+  /*
+   * If there are notifications in the 'idle' queue, we try an
+   * instantaneous select so that, if there is no input pending,
+   * we can service the queue.  Similarly, if a task has completed,
+   * we need to deliver its notifications.
+   */
+  if (GSPrivateCheckTasks() || GSPrivateNotifyMore(mode) || immediate == YES)
+    {
+      wait_timeout = 0;
+    }
+
+  handleArray[0] = threadInfo->event; // Signal from other thread
+  if (dispatch)
+    {
+      handleArray[1] = dispatch;
+    }
+
+  num_handles = NSCountMapTable(handleMap) + special;
+  if (num_handles >= MAXIMUM_WAIT_OBJECTS)
+    {
+      NSLog(@"Too many handles to wait for ... only using %d of %d",
+        MAXIMUM_WAIT_OBJECTS-1, num_handles);
+      num_handles = MAXIMUM_WAIT_OBJECTS-1;
+    }
+  count = num_handles - special;
+  if (count > 0)
+    {
+      i = special + (fairStart++ % count);
+      hEnum = NSEnumerateMapTable(handleMap);
+      while (count-- > 0
+	&& NSNextMapEnumeratorPair(&hEnum, &handle, (void**)&watcher))
+	{
+	  if (i >= num_handles)
+	    {
+	      i = special;
+	    }
+	  handleArray[i++] = (HANDLE)handle;
+	}
+      NSEndMapTableEnumeration(&hEnum);
+    }
+
+  completed = NO;
+
+  /* Clear all the windows messages first before we wait,
+   * since MsgWaitForMultipleObjects only signals on NEW messages
+   */
+  if ([self processAllWindowsMessages: num_winMsgs within: contexts] == YES)
+    {
+      // Processed something ... no need to wait.
+      wait_timeout = 0;
+      num_winMsgs = 0;
+      existingMessages = YES;
+    }
+
+  if (num_winMsgs > 0)
+    {
+      NSDebugMLLog(@"NSRunLoop",
+	@"wait for messages and %d handles for %d milliseconds",
+	num_handles, wait_timeout);
+	
+      /*
+       * Wait for signalled events or window messages.
+       */
+      wait_return = MsgWaitForMultipleObjects(num_handles, handleArray, 
+        NO, wait_timeout, QS_ALLINPUT);
+    }
+  else if (num_handles > 0)
+    {
+      NSDebugMLLog(@"NSRunLoop",
+	@"wait for %d handles for %d milliseconds", num_handles, wait_timeout);
+
+      /*
+       * We are not interested in windows messages ... just wait for
+       * signalled events.
+       */
+      wait_return = WaitForMultipleObjects(num_handles, handleArray, 
+        NO, wait_timeout);
+    }
+  else
+    {
+      NSDebugMLLog(@"NSRunLoop",
+	@"wait for %d milliseconds", wait_timeout);
+      SleepEx(wait_timeout, TRUE);
+      wait_return = WAIT_TIMEOUT;
+    }
+
+  // check wait errors
+  if (WAIT_FAILED == wait_return
+    || (wait_return >= WAIT_ABANDONED_0 
+      && wait_return < WAIT_ABANDONED_0 + num_handles))
+    {
+      int	i;
+      BOOL	found = NO;
+
+      NSDebugMLLog(@"NSRunLoop", @"WaitForMultipleObjects() error in "
+	@"-pollUntil:within: %@", [NSError _last]);
+      /*
+       * Check each handle in turn until either we find one which has an
+       * event signalled, or we find the one which caused the original
+       * wait to fail ... so the callback routine for that handle can
+       * deal with the problem.
+       */
+      for (i = 0; i < num_handles; i++)
+	{
+	  handleArray[0] = handleArray[i];
+	  wait_return = WaitForMultipleObjects(1, handleArray, NO, 0);
+	  if (wait_return != WAIT_TIMEOUT)
+	    {
+	      wait_return = WAIT_OBJECT_0;
+	      found = YES;
+	      break;
+	    }
+	}
+      if (found == NO)
+	{
+	  NSLog(@"WaitForMultipleObjects() error in "
+	    @"-pollUntil:within: %@", [NSError _last]);
+	  abort ();        
+	}
+    }
+
+  /*
+   * Trigger any watchers which are set up to trigger for every runloop wait.
+   */
+  count = GSIArrayCount(_trigger);
+  completed = NO;
+  while (count-- > 0)
+    {
+      GSRunLoopWatcher	*watcher;
+
+      watcher = (GSRunLoopWatcher*)GSIArrayItemAtIndex(_trigger, count).obj;
+      if (watcher->_invalidated == NO)
+	{
+	  NSDebugMLLog(@"NSRunLoop", @"trigger watcher %@", watcher);
+	  i = [contexts count];
+	  while (i-- > 0)
+	    {
+	      GSRunLoopCtxt	*c = [contexts objectAtIndex: i];
+
+	      if (c != self)
+		{
+		  [c endEvent: (void*)watcher for: watcher];
+		}
+	    }
+	  /*
+	   * The watcher is still valid - so call its
+	   * receivers event handling method.
+	   */
+	  [watcher->receiver receivedEvent: watcher->data
+				      type: watcher->type
+				     extra: watcher->data
+				   forMode: mode];
+	}
+      GSPrivateNotifyASAP(mode);
+    }
+
+  if (WAIT_TIMEOUT == wait_return)
+    {
+      // there is no event to handle
+      if (existingMessages)
+	{
+	  NSDebugMLLog(@"NSRunLoop", @"processed windows messages");
+	}
+      else
+	{
+	  NSDebugMLLog(@"NSRunLoop", @"timeout without events");
+	  completed = YES;
+	  return NO;        
+	}
+    }
+  else if (WAIT_OBJECT_0 + num_handles == wait_return)
+    {
+      // one or more windows message
+      NSDebugMLLog(@"NSRunLoop", @"processing windows messages");
+      [self processAllWindowsMessages: num_winMsgs within: contexts];
+    }
+  else if ((i = wait_return - WAIT_OBJECT_0) >= 0 && i < num_handles)
+    {
+      /* Look the event that WaitForMultipleObjects() says is ready;
+       * get the corresponding fd for that handle event and notify
+       * the corresponding object for the ready fd.
+       */
+      NSDebugMLLog(@"NSRunLoop", @"Handle signalled %d", i);
+      
+      handle = handleArray[i];
+
+      if (handle == threadInfo->event)
+	{
+	  watcher = nil;
+	  NSDebugMLLog(@"NSRunLoop", @"Fire perform on thread");
+	  [threadInfo reset];	// consume event
+	  [threadInfo fire];
+	}
+#if GS_USE_LIBDISPATCH_RUNLOOP
+      else if (dispatch && handle == dispatch)
+	{
+	  GSPrivateDispatchDrain(dispatch);
+	  watcher = nil;
+	}
+#endif
+      else
+	{
+	  watcher = (GSRunLoopWatcher*)NSMapGet(handleMap, (void*)handle);
+	  NSDebugMLLog(@"NSRunLoop", @"Fire watcher %@", watcher);
+	}
+      if (watcher != nil && watcher->_invalidated == NO)
+	{
+	  i = [contexts count];
+	  while (i-- > 0)
+	    {
+	      GSRunLoopCtxt *c = [contexts objectAtIndex: i];
+
+	      if (c != self)
+		{ 
+		  [c endEvent: (void*)handle for: watcher];
+		}
+	    }
+	  /*
+	   * The watcher is still valid - so call its receivers
+	   * event handling method.
+	   */
+	  [watcher->receiver receivedEvent: watcher->data
+				      type: watcher->type
+				     extra: (void*)handle
+				   forMode: mode];
+	}
+    }
+  else
+    {
+      NSDebugMLLog(@"NSRunLoop", @"unexpected result %lu", wait_return);
+      GSPrivateNotifyASAP(mode);
+      completed = NO;
+      return NO;        
+    }
+
+  GSPrivateNotifyASAP(mode);
+  completed = YES;
+  return YES;
+}
+
++ (BOOL) awakenedBefore: (NSDate*)when
+{
+  GSRunLoopThreadInfo   *threadInfo = GSRunLoopInfoForThread(nil);
+  NSTimeInterval	ti = (when == nil) ? 0.0 : [when timeIntervalSinceNow];
+  int			milliseconds = (ti <= 0.0) ? 0 : (int)(ti*1000);
+  HANDLE		h = threadInfo->event;
+
+  if (WaitForMultipleObjects(1, &h, NO, milliseconds) != WAIT_TIMEOUT)
+    {
+      NSDebugMLLog(@"NSRunLoop", @"Fire perform on thread");
+      [threadInfo reset];	// consume event
+      [threadInfo fire];
+      return YES;
+    }
+  return NO;
+}
+
+@end

@@ -1,0 +1,6 @@
+#ifndef PUREDARWIN_DYLD_COMPAT_SYSTEM_SYS_REASON_H
+#define PUREDARWIN_DYLD_COMPAT_SYSTEM_SYS_REASON_H
+
+#include "../../../../../Kernel/xnu/bsd/sys/reason.h"
+
+#endif /* PUREDARWIN_DYLD_COMPAT_SYSTEM_SYS_REASON_H */

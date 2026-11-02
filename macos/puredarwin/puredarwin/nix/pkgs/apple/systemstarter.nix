@@ -1,0 +1,71 @@
+{ stdenv
+, lib
+, darwinCrossToolchain
+, nativeLd
+, libSystem
+, corefoundation
+, iokit
+, src
+, targetTriple ? "x86_64-apple-darwin20.4"
+, appleSdk
+}:
+
+let
+in
+stdenv.mkDerivation {
+  pname = "puredarwin-systemstarter";
+  version = "0.1";
+
+  dontUnpack = true;
+
+  buildPhase = ''
+    runHook preBuild
+
+    mkdir -p sdk
+    export DARWIN_SDK_ROOT="${appleSdk}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+
+    ${darwinCrossToolchain}/bin/${targetTriple}-clang \
+      -isysroot "$DARWIN_SDK_ROOT" \
+      -I${src}/src/Libraries/XPC/launchd/SystemStarter \
+      -I${libSystem}/pd-xpc-dev/include \
+      -I${corefoundation}/include \
+      -I${iokit}/include \
+      -fuse-ld=${nativeLd}/bin/ld -nostdlib \
+      -L${libSystem}/usr/lib -L${corefoundation}/usr/lib -L${iokit}/usr/lib \
+      -Wl,-platform_version,macos,11.0,11.5 \
+      -Wl,-force_load,${libSystem}/pd-xpc-dev/lib/libXPC_libxpc_static.a \
+      -Wl,-U,_OBJC_CLASS_\$_NSObject \
+      -Wl,-U,_OBJC_METACLASS_\$_NSObject \
+      -Wl,-U,__objc_empty_cache \
+      -Wl,-force_load,${libSystem}/pd-xpc-dev/lib/libXPC_libinfo_static.a \
+      -Wl,-force_load,${libSystem}/pd-xpc-dev/lib/libXPC_libnv_static.a \
+      -Wl,-fixup_chains \
+      -lCoreFoundation -lIOKitCF -lSystem \
+      ${src}/src/Libraries/XPC/launchd/SystemStarter/SystemStarter.c \
+      ${src}/src/Libraries/XPC/launchd/SystemStarter/StartupItems.c \
+      ${src}/src/Libraries/XPC/launchd/SystemStarter/IPC.c \
+      ${src}/src/Libraries/XPC/launchd/SystemStarter/pd_NSSystemDirectories.c \
+      ${libSystem}/pd-xpc-dev/lib/libXPC_launchd_mig_static.a \
+      -Wl,-force_load,${libSystem}/pd-xpc-dev/lib/libCrashReporterClient.a \
+      -o SystemStarter
+
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/sbin
+    cp SystemStarter $out/sbin/
+    mkdir -p $out/System/Library/LaunchDaemons
+    cp ${src}/src/Libraries/XPC/launchd/SystemStarter/com.apple.SystemStarter.plist \
+      $out/System/Library/LaunchDaemons/
+    runHook postInstall
+  '';
+
+  dontFixup = true;
+
+  meta = with lib; {
+    description = "Real PureDarwin/XPC SystemStarter + classic StartupItems support";
+    platforms = platforms.unix;
+  };
+}

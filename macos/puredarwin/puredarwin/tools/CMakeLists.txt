@@ -1,0 +1,8 @@
+add_subdirectory(cctools)
+add_subdirectory(dtrace_ctf)
+add_subdirectory(mig)
+add_subdirectory(unifdef)
+add_subdirectory(xar)
+if(PUREDARWIN_ENABLE_SELFHOST_CCTOOLS)
+    add_subdirectory(iig-selfhost)
+endif()

@@ -1,0 +1,12 @@
+# GCC runtime has known leaks to suppress for all objc programs
+leak:libobjc.so
+
+# libfontconfig has known leaks to suppress for GUI software
+leak:libfontconfig.so
+
+# libxml2 has known leaks to suppress
+leak:xmlStrdup
+leak:xmlStrndup
+
+# libicns leaks on failure (patch submitted 2026-07-22)
+leak:icns_import_family_data

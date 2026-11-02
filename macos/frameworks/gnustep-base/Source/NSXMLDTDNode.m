@@ -1,0 +1,140 @@
+/* Implementation for NSXMLDTDNode for GNUStep
+   Copyright (C) 2008 Free Software Foundation, Inc.
+
+   Written by:  Richard Frith-Macdonald <rfm@gnu.org>
+   Created: September 2008
+
+   This file is part of the GNUstep Base Library.
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 3 of the License, or (at your option) any later version.
+   
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with this library; if not, write to the Free
+   Software Foundation, Inc., 31 Milk Street #960789 Boston, MA 02196 USA.
+*/
+
+#import "common.h"
+
+#if defined(HAVE_LIBXML)
+
+#define GSInternal	NSXMLDTDNodeInternal
+
+#import	"NSXMLPrivate.h"
+#import "GSInternal.h"
+GS_PRIVATE_INTERNAL(NSXMLDTDNode)
+
+@implementation NSXMLDTDNode
+
+- (void) dealloc
+{
+  if (GS_EXISTS_INTERNAL)
+    {
+    }
+  DEALLOC
+}
+
+- (NSXMLDTDNodeKind) DTDKind
+{
+  return internal->DTDKind;
+}
+
+- (void) _createInternal
+{
+  GS_CREATE_INTERNAL(NSXMLDTDNode);
+}
+
+- (id) initWithKind: (NSXMLNodeKind)theKind options: (NSUInteger)theOptions
+{
+  if (NSXMLEntityDeclarationKind == theKind
+    || NSXMLElementDeclarationKind == theKind
+    || NSXMLNotationDeclarationKind == theKind)
+    {
+      self = [super initWithKind: theKind options: theOptions];
+    }
+  else
+    {
+      RELEASE(self);
+      /* This cast is here to keep clang quite that expects an init* method to 
+       * return an object of the same class, which is not true here.
+       */
+      self = (NSXMLDTDNode*)[[NSXMLNode alloc] initWithKind: theKind
+                                                    options: theOptions];
+    }
+  return self;
+}
+
+- (id) initWithXMLString: (NSString*)string
+{
+  NSError	*error;
+  NSXMLDocument *tempDoc;
+
+  tempDoc = 
+    [[NSXMLDocument alloc] initWithXMLString: string
+                                     options: 0
+                                       error: &error];
+  if (tempDoc)
+    {
+      RELEASE(self);
+      self = (NSXMLDTDNode*)RETAIN([tempDoc childAtIndex: 0]);
+      [self detach]; // detach from document.
+    }
+  RELEASE(tempDoc);
+
+  return self;
+}
+
+- (BOOL) isExternal
+{
+  if ([self systemID])
+    {
+      return YES;
+    }
+  return NO;
+}
+
+- (NSString*) notationName
+{
+  return StringFromXMLStringPtr(internal->node.entity->name);
+}
+
+- (NSString*) publicID
+{
+ return StringFromXMLStringPtr(internal->node.entity->ExternalID);
+}
+
+- (void) setDTDKind: (NSXMLDTDNodeKind)nodeKind
+{
+  internal->DTDKind = nodeKind;
+}
+
+- (void) setNotationName: (NSString*)notationName
+{
+  internal->node.entity->name = XMLStringCopy(notationName);
+}
+
+- (void) setPublicID: (NSString*)publicID
+{
+  internal->node.entity->ExternalID = XMLStringCopy(publicID);
+}
+
+- (void) setSystemID: (NSString*)systemID
+{
+  internal->node.entity->SystemID = XMLStringCopy(systemID);
+}
+
+- (NSString*) systemID
+{
+  return StringFromXMLStringPtr(internal->node.entity->SystemID);
+}
+
+@end
+
+#endif	/* HAVE_LIBXML */

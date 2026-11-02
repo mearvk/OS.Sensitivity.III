@@ -1,0 +1,8 @@
+obj
+*.log
+*.sum
+config.*
+CFBase.h
+Source/GNUmakefile
+Tests/*/GNUmakefile
+*.tmp

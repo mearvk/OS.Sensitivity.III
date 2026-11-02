@@ -1,0 +1,126 @@
+/* Declarations for NSTimer for GNUStep
+   Copyright (C) 1995, 1996, 1999 Free Software Foundation, Inc.
+
+   Written by:  Andrew Kachites McCallum <mccallum@gnu.ai.mit.edu>
+   Date: 1995
+   
+   This file is part of the GNUstep Base Library.
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+   
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+   
+   You should have received a copy of the GNU Lesser General Public
+   License along with this library; if not, write to the Free
+   Software Foundation, Inc., 31 Milk Street #960789 Boston, MA 02196 USA.
+   */ 
+
+#ifndef __NSTimer_h_GNUSTEP_BASE_INCLUDE
+#define __NSTimer_h_GNUSTEP_BASE_INCLUDE
+#import	<GNUstepBase/GSVersionMacros.h>
+
+#import	<Foundation/NSDate.h>
+
+@class NSTimer;
+DEFINE_BLOCK_TYPE(GSTimerBlock, void, NSTimer*);
+
+#if	defined(__cplusplus)
+extern "C" {
+#endif
+
+/*	NB. NSRunLoop is optimised using a hack that knows about the
+ *	class layout for relevant information in NSTimer.
+ *	Other classes must not attempt to use instance variables as
+ *	they are subject to change.
+ */
+GS_EXPORT_CLASS
+@interface NSTimer : NSObject
+{
+#if	GS_EXPOSE(NSTimer)
+@public
+  NSDate 		*_date;		/* Must match NSRunLoop.m */
+  const void		*_loop;		/* Must match NSRunLoop.m */
+  uint64_t		_modeMask;	/* Must match NSRunLoop.m */
+  BOOL		 	_invalidated;	/* Must match NSRunLoop.m */
+  BOOL		 	_repeats;
+  NSTimeInterval 	_interval;
+  id		 	_target;
+  SEL		 	_selector;
+  id		 	_info;
+  GSTimerBlock   	_block;
+#endif
+}
+
+/* Creating timer objects. */
+
++ (NSTimer*) scheduledTimerWithTimeInterval: (NSTimeInterval)ti
+				 invocation: (NSInvocation*)invocation
+				    repeats: (BOOL)f;
+  
++ (NSTimer*) scheduledTimerWithTimeInterval: (NSTimeInterval)ti
+				     target: (id)object
+				   selector: (SEL)selector
+				   userInfo: (id)info
+				    repeats: (BOOL)f;
+  
++ (NSTimer *) scheduledTimerWithTimeInterval: (NSTimeInterval)ti
+                                     repeats: (BOOL)f
+                                       block: (GSTimerBlock)block
+  GS_NON_PORTABLE(use scheduledTimerWithTimeInterval:target:selector:userInfo:repeats: instead);
+
++ (NSTimer*) timerWithTimeInterval: (NSTimeInterval)ti
+		        invocation: (NSInvocation*)invocation
+			   repeats: (BOOL)f;
+
++ (NSTimer*) timerWithTimeInterval: (NSTimeInterval)ti
+			    target: (id)object
+			  selector: (SEL)selector
+			  userInfo: (id)info
+			   repeats: (BOOL)f;
+
++ (NSTimer*) timerWithTimeInterval: (NSTimeInterval)ti
+			   repeats: (BOOL)f
+			     block: (GSTimerBlock)block
+  GS_NON_PORTABLE(use timerWithTimeInterval:target:selector:userInfo:repeats: instead);
+
+- (void) fire;
+- (NSDate*) fireDate;
+- (void) invalidate;
+- (id) userInfo;
+
+#if	OS_API_VERSION(GS_API_MACOSX, GS_API_LATEST)
+- (BOOL) isValid;
+- (NSTimeInterval) timeInterval;
+#endif
+
+#if	OS_API_VERSION(MAC_OS_X_VERSION_10_2, GS_API_LATEST)
+- (id) initWithFireDate: (NSDate*)fd
+	       interval: (NSTimeInterval)ti
+		 target: (id)object
+	       selector: (SEL)selector
+	       userInfo: (id)info
+		repeats: (BOOL)f;
+- (void) setFireDate: (NSDate*)fireDate;
+#endif
+
+#if	OS_API_VERSION(MAC_OS_X_VERSION_10_12, GS_API_LATEST)  
+- (instancetype) initWithFireDate: (NSDate *)date 
+                         interval: (NSTimeInterval)interval 
+                          repeats: (BOOL)repeats 
+                            block: (GSTimerBlock)block
+  GS_NON_PORTABLE(use initWithFireDate:interval:target:selector:userInfo:repeats: instead);
+#endif
+  
+@end
+
+#if	defined(__cplusplus)
+}
+#endif
+
+#endif	/* __NSTimer_h_GNUSTEP_BASE_INCLUDE */

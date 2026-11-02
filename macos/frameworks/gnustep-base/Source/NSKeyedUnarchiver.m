@@ -1,0 +1,1173 @@
+/** Implementation for NSKeyedUnarchiver for GNUstep
+   Copyright (C) 2004 Free Software Foundation, Inc.
+
+   Written by:  Richard Frith-Macdonald <rfm@gnu.org>
+   Date: January 2004
+
+   This file is part of the GNUstep Base Library.
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with this library; if not, write to the Free
+   Software Foundation, Inc., 31 Milk Street #960789 Boston, MA 02196 USA.
+
+   */
+
+#import "common.h"
+#define	EXPOSE_NSKeyedUnarchiver_IVARS	1
+#import "Foundation/NSAutoreleasePool.h"
+#import "Foundation/NSData.h"
+#import "Foundation/NSDictionary.h"
+#import "Foundation/NSError.h"
+#import "Foundation/FoundationErrors.h"
+#import "Foundation/NSException.h"
+#import "Foundation/FoundationErrors.h"
+#import "Foundation/NSMapTable.h"
+#import "Foundation/NSNull.h"
+#import "Foundation/NSValue.h"
+
+#import "GSPrivate.h"
+
+/*
+ *      Setup for inline operation of arrays.
+ */
+#define GSI_ARRAY_RETAIN(A, X)	[(X).obj retain]
+#define GSI_ARRAY_RELEASE(A, X)	[(X).obj release]
+#define GSI_ARRAY_TYPES GSUNION_OBJ
+
+
+#include "GNUstepBase/GSIArray.h"
+
+#define	_IN_NSKEYEDUNARCHIVER_M	1
+#import "Foundation/NSKeyedArchiver.h"
+#undef	_IN_NSKEYEDUNARCHIVER_M
+
+@interface NilMarker: NSObject
+@end
+@implementation NilMarker
+@end
+
+static NSMapTable	*globalClassMap = 0;
+
+static NSError *
+GSNSErrorFromUnarchiverException(NSException *exception)
+{
+  NSDictionary	*info;
+  NSString	*reason = [exception reason];
+
+  if (reason == nil)
+    {
+      reason = @"The archive data could not be decoded.";
+    }
+  info = [NSDictionary dictionaryWithObjectsAndKeys:
+    reason, NSLocalizedDescriptionKey,
+    [exception name], @"NSExceptionName",
+    nil];
+  return [NSError errorWithDomain: NSCocoaErrorDomain
+			     code: NSFileReadCorruptFileError
+			 userInfo: info];
+}
+
+#define	GETVAL \
+  id		o; \
+  \
+  if ([aKey isKindOfClass: [NSString class]] == NO) \
+    { \
+      [NSException raise: NSInvalidArgumentException \
+		  format: @"%@, bad key '%@' in %@", \
+	NSStringFromClass([self class]), aKey, NSStringFromSelector(_cmd)]; \
+    } \
+  if ([aKey hasPrefix: @"$"] == YES) \
+    { \
+      aKey = [@"$" stringByAppendingString: aKey]; \
+    } \
+  o = [_keyMap objectForKey: aKey];
+
+
+
+@interface NSKeyedUnarchiver (Private)
+- (id) _decodeObject: (unsigned)index;
+- (void) _validateSecureClass: (Class)aClass named: (NSString*)aName;
+@end
+
+@implementation NSKeyedUnarchiver (Internal)
+/**
+ * Internal method used to decode an array relatively efficiently.<br />
+ * Some MacOS-X library classes seem to use this.
+ */
+- (id) _decodeArrayOfObjectsForKey: (NSString*)aKey
+{
+  id	o = [_keyMap objectForKey: aKey];
+
+  if (o != nil)
+    {
+      if ([o isKindOfClass: [NSArray class]] == YES)
+	{
+	  unsigned		c = [o count];
+	  NSMutableArray	*m = [NSMutableArray arrayWithCapacity: c];
+	  unsigned		i;
+
+	  for (i = 0; i < c; i++)
+	    {
+	      unsigned	ref;
+	      id	val;
+
+	      ref = [[[o objectAtIndex: i] objectForKey: @"CF$UID"]
+		unsignedIntValue];
+	      val = [self _decodeObject: ref];
+	      if (val == nil)
+		{
+		  [NSException raise:
+		    NSInvalidUnarchiveOperationException
+		    format: @"[%@ +%@]: decoded nil in array",
+		    NSStringFromClass([self class]),
+		    NSStringFromSelector(_cmd)];
+		}
+	      [m addObject: val];
+	    }
+	  o = m;
+	}
+      else
+	{
+	  o = nil;
+	}
+    }
+  return o;
+}
+
+- (id) _decodePropertyListForKey: (NSString*)aKey
+{
+  id	o = [_keyMap objectForKey: aKey];
+
+  return o;
+}
+
+
+/**
+ * This method is used to replace oldObj with newObj
+ * in the map that is maintained in NSKeyedUnarchiver.
+ */
+- (BOOL) replaceObject: (id)oldObj withObject: (id)newObj
+{
+  unsigned int i = 0;
+  unsigned int count = GSIArrayCount(_objMap);
+  for (i = 0; i < count; i++)
+    {
+      id obj = GSIArrayItemAtIndex(_objMap, i).obj;
+      if (obj == oldObj)
+        break;
+    }
+
+  if (i < count)
+    {
+      GSIArraySetItemAtIndex(_objMap, (GSIArrayItem)newObj, i);
+      return YES;
+    }
+
+  return NO;
+}
+@end
+
+@implementation NSKeyedUnarchiver (Private)
+- (void) _validateSecureClass: (Class)aClass named: (NSString*)aName
+{
+  NSEnumerator	*e;
+  Class		a;
+
+  if ([aClass conformsToProtocol: @protocol(NSSecureCoding)] == NO
+    || [aClass supportsSecureCoding] == NO)
+    {
+      [NSException raise: NSInvalidUnarchiveOperationException
+	format: @"secure coding requested, but class '%@' does not support"
+	@" secure coding", aName];
+    }
+  e = [_allowedClasses objectEnumerator];
+  while ((a = [e nextObject]) != nil)
+    {
+      if ([aClass isSubclassOfClass: a] == YES)
+	{
+	  return;	// A kind of an allowed class.
+	}
+    }
+  [NSException raise: NSInvalidUnarchiveOperationException
+    format: @"secure coding requested, but class '%@' is not one of the"
+    @" allowed classes", aName];
+}
+
+- (id) _decodeObject: (unsigned)index
+{
+  id	o;
+  id	obj;
+
+  /*
+   * If the referenced object is already in _objMap
+   * we simply return it (the object at index 0 maps to nil)
+   */
+  /* The index comes from an (untrusted) CF$UID in the archive, and GSIArray
+   * is not bounds checked in release builds, so reject an out-of-range
+   * reference (as -[_objects objectAtIndex:] does below) rather than reading
+   * past the end of the map.
+   */
+  if (index >= GSIArrayCount(_objMap))
+    {
+      [NSException raise: NSRangeException
+		  format: @"[%@ -%@] archive object index out of range",
+	NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+    }
+  obj = GSIArrayItemAtIndex(_objMap, index).obj;
+  if (obj != nil)
+    {
+      if (obj == GSIArrayItemAtIndex(_objMap, 0).obj)
+	{
+	  return nil;
+	}
+      return obj;
+    }
+
+  /*
+   * No mapped object, so we decode from the property list
+   * in _objects
+   */
+  obj = [_objects objectAtIndex: index];
+  if ([obj isKindOfClass: [NSDictionary class]] == YES)
+    {
+      NSString		*classname;
+      NSArray		*classes;
+      Class		c;
+      id		r;
+      NSDictionary	*savedKeyMap;
+      unsigned		savedCursor;
+
+      /*
+       * Fetch the class information from the table.
+       */
+      o = [obj objectForKey: @"$class"];
+      o = [o objectForKey: @"CF$UID"];
+      o = [_objects objectAtIndex: [o intValue]];
+      classname = [o objectForKey: @"$classname"];
+      classes = [o objectForKey: @"$classes"];
+      c = [self classForClassName: classname];
+      if (c == nil)
+	{
+	  c = [[self class] classForClassName: classname];
+	  if (c == nil)
+	    {
+	      c = NSClassFromString(classname);
+	      if (c == nil)
+		{
+		  c = [_delegate unarchiver: self
+		    cannotDecodeObjectOfClassName: classname
+		    originalClasses: classes];
+		  if (c == nil)
+		    {
+		      [NSException raise:
+			NSInvalidUnarchiveOperationException
+			format: @"[%@ +%@]: no class for name '%@'",
+			NSStringFromClass([self class]),
+			NSStringFromSelector(_cmd),
+			classname];
+		    }
+		}
+	    }
+	}
+
+      if (_requiresSecureCoding == YES)
+	{
+	  [self _validateSecureClass: c named: classname];
+	}
+
+      savedCursor = _cursor;
+      savedKeyMap = _keyMap;
+
+      _cursor = 0;			// Starting object decode
+      _keyMap = obj;			// Dictionary describing object
+
+      o = [c allocWithZone: _zone];	// Create instance.
+      // Store object in map so that decoding of it can be self referential.
+      GSIArraySetItemAtIndex(_objMap, (GSIArrayItem)o, index);
+
+      r = [o initWithCoder: self];
+      if (o != r)
+	{
+	  /* The -initWithCoder: method released o when it provided a
+	   * replacement object, but o is still in the array.  When we
+	   * store the replacement the original gets deallocated.
+	   */
+	  [_delegate unarchiver: self
+	      willReplaceObject: o
+		     withObject: r];
+	  GSIArraySetItemAtIndex(_objMap, (GSIArrayItem)r, index);
+	  RELEASE(r);			// Retained in array
+	  o = r;
+	}
+      else
+	{
+	  RELEASE(o);			// Retained in array
+	}
+
+      r = [o awakeAfterUsingCoder: self];
+      if (o != r)
+	{
+	  [_delegate unarchiver: self
+	      willReplaceObject: o
+		     withObject: r];
+	  GSIArraySetItemAtIndex(_objMap, (GSIArrayItem)r, index);
+	  o = r;
+	}
+
+      if (_delegate != nil)
+	{
+	  r = [_delegate unarchiver: self didDecodeObject: o];
+	  /* Apple documentation says that the delegate may return nil to
+	   * indicate that the decoded objects should not be changed.
+	   */
+	  if (o != r && r != nil)
+	    {
+	      [_delegate unarchiver: self
+		  willReplaceObject: o
+			 withObject: r];
+	      GSIArraySetItemAtIndex(_objMap, (GSIArrayItem)r, index);
+	      o = r;
+	    }
+	}
+
+      obj = o;
+      _keyMap = savedKeyMap;
+      _cursor = savedCursor;
+    }
+  else
+    {
+      // Use the decoded object directly
+      GSIArraySetItemAtIndex(_objMap, (GSIArrayItem)obj, index);
+    }
+
+#ifdef  __clang_analyzer__
+  [[clang::suppress]]
+#endif
+  if ((obj == nil) || [@"$null" isEqual: obj])
+    {
+      // Record NilMarker for decoded object.
+      o = GSIArrayItemAtIndex(_objMap, 0).obj;
+      GSIArraySetItemAtIndex(_objMap, (GSIArrayItem)o, index);
+      obj = nil;
+    }
+
+  return obj;
+}
+@end
+
+
+@implementation NSKeyedUnarchiver
+
++ (Class) classForClassName: (NSString*)aString
+{
+  return (Class)NSMapGet(globalClassMap, (void*)aString);
+}
+
++ (void) initialize
+{
+  if (globalClassMap == 0)
+    {
+      globalClassMap =
+	NSCreateMapTable(NSObjectMapKeyCallBacks,
+			  NSNonOwnedPointerMapValueCallBacks, 0);
+      [[NSObject leakAt: &globalClassMap] release];
+    }
+}
+
++ (void) setClass: (Class)aClass forClassName: (NSString*)aString
+{
+  if (aClass == nil)
+    {
+      NSMapRemove(globalClassMap, (void*)aString);
+    }
+  else
+    {
+      NSMapInsert(globalClassMap, (void*)aString, aClass);
+    }
+}
+
+/*
+ * When I tried this on MacOS 10.3 it encoded the object with the key 'root',
+ * so this implementation does the same.
+ */
++ (id) unarchiveObjectWithData: (NSData*)data
+{
+  NSKeyedUnarchiver	*u = nil;
+  id			o = nil;
+
+  NS_DURING
+    {
+      u = [[NSKeyedUnarchiver alloc] initForReadingWithData: data];
+      o = RETAIN([u decodeObjectForKey: @"root"]);
+      [u finishDecoding];
+      DESTROY(u);
+    }
+  NS_HANDLER
+    {
+      DESTROY(u);
+      DESTROY(o);
+      [localException raise];
+    }
+  NS_ENDHANDLER
+  return AUTORELEASE(o);
+}
+
++ (id) unarchiveObjectWithFile: (NSString*)aPath
+{
+  NSData	*d;
+  id		o;
+
+  d = [NSData dataWithContentsOfFile: aPath];
+  o = [self unarchiveObjectWithData: d];
+  return o;
+}
+
+/* Decode the root object of an archive with secure coding enabled and the
+ * given set of allowed classes, converting any failure into a nil result and
+ * an NSError rather than letting the exception escape. */
++ (id) _unarchivedRootFromData: (NSData*)data
+                allowedClasses: (NSSet*)classes
+                         error: (NSError**)error
+{
+  NSKeyedUnarchiver	*u = nil;
+  id			o = nil;
+
+  if (error != NULL)
+    {
+      *error = nil;
+    }
+  NS_DURING
+    {
+      u = [[NSKeyedUnarchiver alloc] initForReadingWithData: data];
+      if (u == nil)
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"The data is not a keyed archive"];
+	}
+      [u setRequiresSecureCoding: YES];
+      u->_allowedClasses = classes;
+      o = RETAIN([u decodeObjectForKey: @"root"]);
+      [u finishDecoding];
+      DESTROY(u);
+    }
+  NS_HANDLER
+    {
+      DESTROY(u);
+      DESTROY(o);
+      if (error != NULL)
+	{
+	  *error = [NSError errorWithDomain: NSCocoaErrorDomain
+	    code: NSCoderReadCorruptError
+	    userInfo: [NSDictionary dictionaryWithObject: [localException reason]
+	                                          forKey: NSLocalizedDescriptionKey]];
+	}
+    }
+  NS_ENDHANDLER
+  return AUTORELEASE(o);
+}
+
++ (id) unarchivedObjectOfClass: (Class)cls
+                      fromData: (NSData*)data
+                         error: (NSError**)error
+{
+  return [self unarchivedObjectOfClasses: [NSSet setWithObject:cls]
+                                fromData: data
+                                   error: error];
+}
+
++ (id) unarchivedObjectOfClasses: (GS_GENERIC_CLASS(NSSet,Class)*)classes
+                        fromData: (NSData*)data
+                           error: (NSError**)error
+{
+  id object = nil;
+
+  NS_DURING
+    {
+      object = RETAIN([self _unarchivedRootFromData: data
+				     allowedClasses: classes
+					      error: error]);
+    }
+  NS_HANDLER
+    {
+      if (error != 0)
+	{
+	  *error = GSNSErrorFromUnarchiverException(localException);
+	}
+      DESTROY(object);
+    }
+  NS_ENDHANDLER
+  return AUTORELEASE(object);
+}
+
++ (NSArray*) unarchivedArrayOfObjectsOfClass: (Class)cls
+                                    fromData: (NSData*)data
+                                       error: (NSError**)error
+{
+  return [self unarchivedArrayOfObjectsOfClasses: [NSSet setWithObject:cls]
+                                        fromData: data
+                                           error: error];
+}
+
++ (NSArray*) unarchivedArrayOfObjectsOfClasses: (GS_GENERIC_CLASS(NSSet,Class)*)classes
+                                      fromData: (NSData*)data
+                                         error: (NSError**)error
+{
+  NSMutableSet	*allowed = [NSMutableSet setWithObject: [NSArray class]];
+
+  if (classes != nil)
+    {
+      [allowed unionSet: classes];
+    }
+  return [self _unarchivedRootFromData: data allowedClasses: allowed error: error];
+}
+
++ (NSDictionary*) unarchivedDictionaryWithKeysOfClass: (Class)keyCls
+                                       objectsOfClass: (Class)valueCls
+                                             fromData: (NSData*)data
+                                                error: (NSError**)error
+{
+  return [self unarchivedDictionaryWithKeysOfClasses: [NSSet setWithObject:keyCls]
+                                    objectsOfClasses: [NSSet setWithObject:valueCls]
+                                            fromData: data
+                                               error: error];
+}
+
++ (NSDictionary*) unarchivedDictionaryWithKeysOfClasses: (GS_GENERIC_CLASS(NSSet,Class)*)keyClasses
+                                       objectsOfClasses: (GS_GENERIC_CLASS(NSSet,Class)*)valueClasses
+                                               fromData: (NSData*)data
+                                                  error: (NSError**)error
+{
+  NSMutableSet	*allowed = [NSMutableSet setWithObject: [NSDictionary class]];
+
+  if (keyClasses != nil)
+    {
+      [allowed unionSet: keyClasses];
+    }
+  if (valueClasses != nil)
+    {
+      [allowed unionSet: valueClasses];
+    }
+  return [self _unarchivedRootFromData: data allowedClasses: allowed error: error];
+}
+
+
+- (BOOL) allowsKeyedCoding
+{
+  return YES;
+}
+
+- (BOOL)requiresSecureCoding
+{
+  return _requiresSecureCoding;
+}
+
+- (void)setRequiresSecureCoding: (BOOL)secure
+{
+  _requiresSecureCoding = secure;
+}
+
+- (Class) classForClassName: (NSString*)aString
+{
+  return _clsMap == 0 ? Nil : (Class)NSMapGet(_clsMap, (void*)aString);
+}
+
+- (BOOL) containsValueForKey: (NSString*)aKey
+{
+  GETVAL
+  if (o != nil)
+    {
+      return YES;
+    }
+  return NO;
+}
+
+- (BOOL) _containsRawKey: (NSString*)aKey
+{
+  /* Look the key up in the current object map without the leading-'$'
+   * escaping that GETVAL applies, so the internal sequential element keys
+   * ("$0", "$1", ...) can be probed.
+   */
+  return (nil == [_keyMap objectForKey: aKey]) ? NO : YES;
+}
+
+- (void) dealloc
+{
+  DESTROY(_archive);
+  if (_clsMap != 0)
+    {
+      NSFreeMapTable(_clsMap);
+      _clsMap = 0;
+    }
+  if (_objMap != 0)
+    {
+      NSZone    *z = _objMap->zone;
+
+      GSIArrayEmpty(_objMap);
+      NSZoneFree(z, (void*)_objMap);
+    }
+  [super dealloc];
+}
+
+- (void) decodeArrayOfObjCType: (const char*)type
+			 count: (NSUInteger)expected
+			    at: (void*)buf
+{
+  id	 	o = [self decodeObject];
+  NSUInteger	size;
+
+  if ([o isKindOfClass: [_NSKeyedCoderOldStyleArray class]] == NO)
+    {
+      [NSException raise: NSInvalidUnarchiveOperationException
+		  format: @"[%@ +%@]: value is '%@'",
+	NSStringFromClass([self class]), NSStringFromSelector(_cmd), o];
+    }
+  if (strcmp([o type], type) != 0)
+    {
+      [NSException raise: NSInvalidUnarchiveOperationException
+		  format: @"[%@ +%@]: type mismatch for %@",
+	NSStringFromClass([self class]), NSStringFromSelector(_cmd), o];
+    }
+  if ([o count] != expected)
+    {
+      [NSException raise: NSInvalidUnarchiveOperationException
+		  format: @"[%@ +%@]: count mismatch for %@",
+	NSStringFromClass([self class]), NSStringFromSelector(_cmd), o];
+    }
+  NSGetSizeAndAlignment(type, &size, NULL);
+  memcpy(buf, [o bytes], expected * size);
+}
+
+- (BOOL) decodeBoolForKey: (NSString*)aKey
+{
+  NSString	*oldKey = aKey;
+  GETVAL
+  if (o != nil)
+    {
+      if ([o isKindOfClass: [NSNumber class]] == YES)
+	{
+	  return [o boolValue];
+	}
+      else
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"[%@ +%@]: value for key(%@) is '%@'",
+	    NSStringFromClass([self class]), NSStringFromSelector(_cmd),
+	    oldKey, o];
+	}
+    }
+  return NO;
+}
+
+- (const uint8_t*) decodeBytesForKey: (NSString*)aKey
+		      returnedLength: (NSUInteger*)length
+{
+  NSString	*oldKey = aKey;
+  GETVAL
+  if (o != nil)
+    {
+      if ([o isKindOfClass: [NSData class]] == YES)
+	{
+	  *length = [o length];
+	  return [o bytes];
+	}
+      else
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"[%@ +%@]: value for key(%@) is '%@'",
+	    NSStringFromClass([self class]), NSStringFromSelector(_cmd),
+	    oldKey, o];
+	}
+    }
+  *length = 0;
+  return 0;
+}
+
+- (double) decodeDoubleForKey: (NSString*)aKey
+{
+  NSString	*oldKey = aKey;
+  GETVAL
+  if (o != nil)
+    {
+      if ([o isKindOfClass: [NSNumber class]] == YES)
+	{
+	  return [o doubleValue];
+	}
+      else
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"[%@ +%@]: value for key(%@) is '%@'",
+	    NSStringFromClass([self class]), NSStringFromSelector(_cmd),
+	    oldKey, o];
+	}
+    }
+  return 0.0;
+}
+
+- (float) decodeFloatForKey: (NSString*)aKey
+{
+  NSString	*oldKey = aKey;
+  GETVAL
+  if (o != nil)
+    {
+      if ([o isKindOfClass: [NSNumber class]] == YES)
+	{
+	  return [o floatValue];
+	}
+      else
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"[%@ +%@]: value for key(%@) is '%@'",
+	    NSStringFromClass([self class]), NSStringFromSelector(_cmd),
+	    oldKey, o];
+	}
+    }
+  return 0.0;
+}
+
+- (int) decodeIntForKey: (NSString*)aKey
+{
+  int64_t	i = [self decodeInt64ForKey: aKey];
+
+#if	(INT_MAX < INT64_MAX)
+  if (i > INT_MAX || i < INT_MIN)
+    {
+      [NSException raise: NSRangeException
+	format: @"[%@ +%@]: value %"PRIu64" for key(%@) is out of range",
+        NSStringFromClass([self class]), NSStringFromSelector(_cmd), i, aKey];
+    }
+#endif
+  return (int)i;
+}
+
+- (NSInteger) decodeIntegerForKey: (NSString*)aKey
+{
+  int64_t	i = [self decodeInt64ForKey: aKey];
+
+/* Older Solaris systems define INTPTR_MAX incorrectly ... so we use the
+ * void pointer size we determined at configure time to decide whether
+ * we need to check for overflow.
+ */
+#if	(GS_SIZEOF_VOIDP < 8)
+  if (i > INT32_MAX || i < INT32_MIN)
+    {
+      [NSException raise: NSRangeException
+	          format: @"[%@ +%@]: value for key(%@) is out of range",
+	NSStringFromClass([self class]), NSStringFromSelector(_cmd), aKey];
+    }
+#endif
+  return (NSInteger)i;
+}
+
+- (int32_t) decodeInt32ForKey: (NSString*)aKey
+{
+  int64_t	i = [self decodeInt64ForKey: aKey];
+
+  if (i > INT32_MAX || i < INT32_MIN)
+    {
+      [NSException raise: NSRangeException
+	format: @"[%@ +%@]: value %"PRIu64" for key(%@) is out of range",
+	NSStringFromClass([self class]), NSStringFromSelector(_cmd), i, aKey];
+    }
+  return (int32_t)i;
+}
+
+- (int64_t) decodeInt64ForKey: (NSString*)aKey
+{
+  NSString	*oldKey = aKey;
+  GETVAL
+  if (o != nil)
+    {
+      if ([o isKindOfClass: [NSNumber class]] == YES)
+	{
+	  long long	l = [o longLongValue];
+
+	  return l;
+	}
+      else
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"[%@ +%@]: value for key(%@) is '%@'",
+	    NSStringFromClass([self class]), NSStringFromSelector(_cmd),
+	    oldKey, o];
+	}
+    }
+  return 0;
+}
+
+- (id) decodeObject
+{
+  NSString	*key = [NSString stringWithFormat: @"$%d", _cursor++];
+  NSNumber	*pos;
+  id		o = [_keyMap objectForKey: key];
+
+  if (o != nil)
+    {
+      if ([o isKindOfClass: [NSDictionary class]] == YES
+	&& (pos = [o objectForKey: @"CF$UID"]) != nil)
+	{
+	  int	index = [pos intValue];
+
+	  return [self _decodeObject: index];
+	}
+      else
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"[%@ +%@]: value for key(%@) is '%@'",
+	    NSStringFromClass([self class]), NSStringFromSelector(_cmd),
+	    key, o];
+	}
+    }
+  return nil;
+}
+
+- (id) decodeObjectForKey: (NSString*)aKey
+{
+  NSString	*oldKey = aKey;
+  GETVAL
+  if (o != nil)
+    {
+      NSNumber	*pos;
+
+      if ([o isKindOfClass: [NSDictionary class]] == YES
+	&& (pos = [o objectForKey: @"CF$UID"]) != nil)
+	{
+	  int	index = [pos intValue];
+
+	  return [self _decodeObject: index];
+	}
+      else
+	{
+	  [NSException raise: NSInvalidUnarchiveOperationException
+		      format: @"[%@ +%@]: value for key(%@) is '%@'",
+	    NSStringFromClass([self class]), NSStringFromSelector(_cmd),
+	    oldKey, o];
+	}
+    }
+  return nil;
+}
+
+- (id) decodeObjectOfClasses: (NSSet *)classes forKey: (NSString *)key
+{
+  NSSet	*saved = _allowedClasses;
+  id	o;
+
+  /* Restrict the allowed classes for this key's subtree, restoring the
+   * enclosing set afterwards (the enforcement itself is in -_decodeObject:
+   * and only applies when secure coding is required). */
+  _allowedClasses = classes;
+  NS_DURING
+    {
+      o = [self decodeObjectForKey: key];
+    }
+  NS_HANDLER
+    {
+      _allowedClasses = saved;
+      [localException raise];
+    }
+  NS_ENDHANDLER
+  _allowedClasses = saved;
+  return o;
+}
+
+- (NSPoint) decodePoint
+{
+  NSPoint	p;
+
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &p.x];
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &p.y];
+  return p;
+}
+
+- (NSRect) decodeRect
+{
+  NSRect	r;
+
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &r.origin.x];
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &r.origin.y];
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &r.size.width];
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &r.size.height];
+  return r;
+}
+
+- (NSSize) decodeSize
+{
+  NSSize	s;
+
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &s.width];
+  [self decodeValueOfObjCType: @encode(CGFloat) at: &s.height];
+  return s;
+}
+
+- (void) decodeValueOfObjCType: (const char*)type
+			    at: (void*)address
+{
+  NSString	*aKey;
+  id		o;
+
+  if (*type == _C_ID || *type == _C_CLASS
+    || *type == _C_SEL || *type == _C_CHARPTR)
+    {
+      o = [self decodeObject];
+      if (*type == _C_ID || *type == _C_CLASS)
+	{
+	  *(id*)address = RETAIN(o);
+	}
+      else if (*type == _C_SEL)
+	{
+	  *(SEL*)address = NSSelectorFromString(o);
+	}
+      else if (*type == _C_CHARPTR)
+	{
+	  *(const char**)address = [o cString];
+	}
+      return;
+    }
+
+  aKey = [NSString stringWithFormat: @"$%u", _cursor++];
+  o = [_keyMap objectForKey: aKey];
+
+  switch (*type)
+    {
+      case _C_CHR:
+	*(char*)address = [o charValue];
+	return;
+
+      case _C_UCHR:
+	*(unsigned char*)address = [o unsignedCharValue];
+	return;
+
+      case _C_SHT:
+	*(short*)address = [o shortValue];
+	return;
+
+      case _C_USHT:
+	*(unsigned short*)address = [o unsignedShortValue];
+	return;
+
+      case _C_INT:
+	*(int*)address = [o intValue];
+	return;
+
+      case _C_UINT:
+	*(unsigned int*)address = [o unsignedIntValue];
+	return;
+
+      case _C_LNG:
+	*(long int*)address = [o longValue];
+	return;
+
+      case _C_ULNG:
+	*(unsigned long int*)address = [o unsignedLongValue];
+	return;
+
+      case _C_LNG_LNG:
+	*(long long int*)address = [o longLongValue];
+	return;
+
+      case _C_ULNG_LNG:
+	*(unsigned long long int*)address = [o unsignedLongLongValue];
+	return;
+
+      case _C_FLT:
+	*(float*)address = [o floatValue];
+	return;
+
+      case _C_DBL:
+	*(double*)address = [o doubleValue];
+	return;
+
+#if defined(_C_BOOL) && (!defined(__GNUC__) || __GNUC__ > 2)
+      case _C_BOOL:
+	*(_Bool*)address = (_Bool)[o unsignedCharValue];
+	return;
+#endif
+
+      case _C_STRUCT_B:
+	[NSException raise: NSInvalidArgumentException
+		    format: @"-[%@ %@]: this archiver cannote decode structs",
+	  NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+	return;
+
+      case _C_ARY_B:
+	{
+	  int		count = atoi(++type);
+
+	  while (isdigit(*type))
+	    {
+	      type++;
+	    }
+	  [self decodeArrayOfObjCType: type count: count at: address];
+	}
+	return;
+
+      default:
+	[NSException raise: NSInvalidArgumentException
+		    format: @"-[%@ %@]: unknown type encoding ('%c')",
+	  NSStringFromClass([self class]), NSStringFromSelector(_cmd), *type];
+	break;
+    }
+}
+
+- (id) delegate
+{
+  return _delegate;
+}
+
+- (NSString*) description
+{
+  if (_archive == nil)
+    {
+      // For consistency with OSX
+      [NSException raise: NSInvalidArgumentException
+		  format: @"method sent to uninitialised unarchiver"];
+    }
+  return [super description];
+}
+
+- (void) finishDecoding
+{
+  [_delegate unarchiverWillFinish: self];
+  DESTROY(_archive);
+  [_delegate unarchiverDidFinish: self];
+}
+
+- (id) init
+{
+  Class c = [self class];
+  DESTROY(self);
+  [NSException raise: NSInvalidArgumentException
+              format: @"-[%@ init]: cannot use -init for initialisation",
+              NSStringFromClass(c)];
+  return nil;
+}
+
+- (id) initForReadingWithData: (NSData*)data
+{
+  self = [super init];
+  if (self)
+    {
+      NSPropertyListFormat	format;
+      NSString			*error;
+
+      _zone = [self zone];
+      _archive = [NSPropertyListSerialization propertyListFromData: data
+	mutabilityOption: NSPropertyListImmutable
+	format: &format
+	errorDescription: &error];
+      if (_archive == nil)
+	{
+	  DESTROY(self);
+	}
+      else
+	{
+	  unsigned	count;
+	  unsigned	i;
+
+	  IF_NO_ARC(RETAIN(_archive);)
+	  NS_DURING
+	  _archiverClass = [_archive objectForKey: @"$archiver"];
+	  _version = [_archive objectForKey: @"$version"];
+
+	  _objects = [_archive objectForKey: @"$objects"];
+	  _keyMap = [_archive objectForKey: @"$top"];
+	  _objMap = NSZoneMalloc(_zone, sizeof(GSIArray_t));
+	  count = [_objects count];
+	  GSIArrayInitWithZoneAndCapacity(_objMap, _zone, count);
+	  // Add marker for nil object
+	  GSIArrayAddItem(_objMap, (GSIArrayItem)((id)[NilMarker class]));
+	  // Add markers for unencoded objects.
+	  for (i = 1; i < count; i++)
+	    {
+	      GSIArrayAddItem(_objMap, (GSIArrayItem)(id)nil);
+	    }
+	  NS_HANDLER
+	  RELEASE(self);
+	  [localException raise];
+	  NS_ENDHANDLER
+	}
+    }
+  return self;
+}
+
+- (void) setClass: (Class)aClass forClassName: (NSString*)aString
+{
+  if (aString == nil)
+    {
+      if (_clsMap != 0)
+	{
+          NSMapRemove(_clsMap, (void*)aString);
+	}
+    }
+  else
+    {
+      if (_clsMap == 0)
+	{
+	  _clsMap = NSCreateMapTable(NSObjectMapKeyCallBacks,
+	    NSNonOwnedPointerMapValueCallBacks, 0);
+	}
+      NSMapInsert(_clsMap, (void*)aString, (void*)aClass);
+    }
+}
+
+- (void) setDelegate: (id)delegate
+{
+  _delegate = delegate;		// Not retained.
+}
+
+- (NSInteger) versionForClassName: (NSString*)className
+{
+  return 0;	// Not used for keyed unarchiving.
+}
+@end
+
+@implementation NSObject (NSKeyedUnarchiverDelegate)
+/** <override-dummy />
+ */
+- (Class) unarchiver: (NSKeyedUnarchiver*)anUnarchiver
+  cannotDecodeObjectOfClassName: (NSString*)aName
+  originalClasses: (NSArray*)classNames
+{
+  return nil;
+}
+/** <override-dummy />
+ */
+- (id) unarchiver: (NSKeyedUnarchiver*)anUnarchiver
+  didDecodeObject: (id)anObject
+{
+  return anObject;
+}
+/** <override-dummy />
+ */
+- (void) unarchiverDidFinish: (NSKeyedUnarchiver*)anUnarchiver
+{
+}
+/** <override-dummy />
+ */
+- (void) unarchiverWillFinish: (NSKeyedUnarchiver*)anUnarchiver
+{
+}
+/** <override-dummy />
+ */
+- (void) unarchiver: (NSKeyedUnarchiver*)anUnarchiver
+  willReplaceObject: (id)anObject
+	 withObject: (id)newObject
+{
+}
+@end
+
+@implementation NSObject (NSKeyedUnarchiverObjectSubstitution)
++ (Class) classForKeyedUnarchiver
+{
+  return self;
+}
+@end

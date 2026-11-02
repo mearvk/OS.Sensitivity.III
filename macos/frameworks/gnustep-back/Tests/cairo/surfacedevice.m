@@ -1,0 +1,86 @@
+/* Tests the cairo backend's current device for an offscreen drawing context.
+ * When an NSImage is focused the backend creates a drawing surface sized to the
+ * image, and GSCurrentDevice reports a non-null device with the drawing offset
+ * that positions the image (its y offset is the image height, from the cairo
+ * y-flip).  This exercises the surface/device set-up that backs offscreen
+ * drawing.
+ *
+ * It needs a window server (to load the backend), so it skips when no display
+ * server can be reached, and it guards on the cairo graphics backend being the
+ * one built.
+ */
+#import <Foundation/NSObject.h>
+#import "Testing.h"
+#include "config.h"
+
+#if defined(BUILD_GRAPHICS) && defined(GRAPHICS_cairo) \
+  && BUILD_GRAPHICS == GRAPHICS_cairo
+
+#import <AppKit/AppKit.h>
+#import <GNUstepGUI/GSDisplayServer.h>
+#include <stdlib.h>
+
+@interface NSObject (CairoDevice)
+- (void) GSCurrentDevice: (void **)device : (int *)x : (int *)y;
+@end
+
+/* Focus an image of the given size and report the current device and offset. */
+static void
+deviceForImage(int w, int h, void **device, int *x, int *y)
+{
+  NSImage *img = [[NSImage alloc] initWithSize: NSMakeSize(w, h)];
+
+  [img lockFocus];
+  [[NSGraphicsContext currentContext] GSCurrentDevice: device : x : y];
+  [img unlockFocus];
+  [img release];
+}
+
+int
+main(int argc, const char **argv)
+{
+  START_SET("surface device")
+  void *device;
+  int x, y;
+
+  NS_DURING
+    {
+      [NSApplication sharedApplication];
+      if (nil == GSCurrentServer())
+	{
+	  SKIP("no window server available")
+	}
+    }
+  NS_HANDLER
+    {
+      SKIP("It looks like GNUstep backend is not yet installed")
+    }
+  NS_ENDHANDLER
+
+  device = NULL; x = -1; y = -1;
+  deviceForImage(37, 21, &device, &x, &y);
+  PASS(device != NULL, "an offscreen image context has a drawing device");
+  PASS(x == 0 && y == 21,
+    "the drawing offset positions the image by its height");
+
+  device = NULL; x = -1; y = -1;
+  deviceForImage(8, 64, &device, &x, &y);
+  PASS(device != NULL && x == 0 && y == 64,
+    "the offset tracks a differently sized image");
+
+  END_SET("surface device")
+  return 0;
+}
+
+#else
+
+int
+main(int argc, const char **argv)
+{
+  START_SET("surface device")
+    SKIP("back is not built with the cairo graphics backend")
+  END_SET("surface device")
+  return 0;
+}
+
+#endif

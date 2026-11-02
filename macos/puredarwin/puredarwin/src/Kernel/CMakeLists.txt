@@ -1,0 +1,8 @@
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Extensions/CMakeLists.txt")
+    add_subdirectory(Extensions)
+endif()
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/libkmod/CMakeLists.txt")
+    add_subdirectory(libkmod)
+endif()
+add_subdirectory(libfirehose_kernel)
+add_subdirectory(xnu)

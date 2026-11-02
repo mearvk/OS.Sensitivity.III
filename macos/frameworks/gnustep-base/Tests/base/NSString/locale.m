@@ -1,0 +1,415 @@
+#include "Foundation/NSObjCRuntime.h"
+#import "ObjectTesting.h"
+#import <Foundation/NSAutoreleasePool.h>
+#import <Foundation/NSString.h>
+#import <Foundation/NSLocale.h>
+
+#if	defined(GS_USE_ICU)
+#define	NSLOCALE_SUPPORTED	GS_USE_ICU
+#else
+#define	NSLOCALE_SUPPORTED	1 /* Assume Apple support */
+#endif
+
+#if !defined(GS_HAVE_ICU_UTRANS)
+# if defined(__has_include)
+#  if __has_include(<unicode/utrans.h>)
+#   define GS_HAVE_ICU_UTRANS 1
+#  else
+#   define GS_HAVE_ICU_UTRANS 0
+#  endif
+# else
+#  define GS_HAVE_ICU_UTRANS 0
+# endif
+#endif
+
+static void testBasic(void)
+{
+  NSComparisonResult compRes;
+  NSRange range;
+
+  range = [@"ababa" rangeOfString: @"b"
+			  options: 0
+			    range: NSMakeRange(2, 3)
+			   locale: [[[NSLocale alloc] initWithLocaleIdentifier: @"en_US"] autorelease]];
+
+  PASS(NSEqualRanges(NSMakeRange(3,1), range), "expected {3,1}, got {%d, %d}", (int)range.location,
+       (int)range.length);
+
+
+  compRes = [@"hello" compare: @"Hello"];		
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+  compRes = [@"H" compare: @"i"];		
+  PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+  
+  compRes = [@"h" compare: @"H"];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+  compRes = [@"hello" compare: @"Hello" options: 0 range: NSMakeRange(0, 5) locale: nil];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+  
+  compRes = [@"h" compare: @"H" options: 0 range: NSMakeRange(0, 1) locale: nil];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+  compRes = [@"hello" compare: @"H" options: 0 range: NSMakeRange(0, 1) locale: nil];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+  compRes = [@"a" compare: @"Z"];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+  compRes = [@"z" compare: @"A"];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+  
+  compRes = [@"a" localizedCompare: @"Z"];
+  PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+  
+  compRes = [@"z" localizedCompare: @"A"];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+  // `localizedStandardCompare` orders file names ending in numbers
+  // by numeric value instead of lexicographically.
+  compRes = [@"Foo 10.txt" localizedCompare: @"Foo 5.txt"];
+  PASS(compRes == NSOrderedAscending, "expected 1 got %d", (int)compRes);
+
+  compRes = [@"Foo 10.txt" localizedStandardCompare: @"Foo 5.txt"];
+  PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+  // `localizedStandardCompare` is case insensitive
+  compRes = [@"foo 50.txt" localizedStandardCompare:@"FOO 5.txt"];
+  PASS(compRes == NSOrderedAscending, "expected 1 got %d", (int)compRes);
+
+  // These two may be considered implementation details
+  {
+    BOOL wasHopeful = testHopeful;
+    testHopeful = YES;
+    
+    compRes = [@"hello" compare: @"Hello" options: 0 range: NSMakeRange(0, 5)
+			 locale: [[[NSLocale alloc] initWithLocaleIdentifier: @"en_US_POSIX"] autorelease]];
+    PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);	
+    
+    
+    compRes = [@"hello" compare: @"Hello" options: 0 range: NSMakeRange(0, 5)
+			 locale: [NSLocale systemLocale]];
+    PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+
+    testHopeful = wasHopeful;
+  }
+
+  compRes = [@"hello" compare: @"Hello" options: 0 range: NSMakeRange(0, 5)
+		       locale: [[[NSLocale alloc] initWithLocaleIdentifier: @"en_US"] autorelease]];
+  PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+
+  compRes = [@"hello" localizedCompare: @"Hello"];
+  PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+
+  compRes = [@"H" localizedCompare: @"i"];
+  PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+}
+
+static void testEszett(void)
+{
+  NSComparisonResult compRes;
+  NSRange range;
+    
+  const unichar EszettChar = 0x00df;
+  NSString *EszettStr = [[[NSString alloc] initWithCharacters: &EszettChar
+						       length: 1] autorelease];
+
+  NSString *EszettPrefixStr = [EszettStr stringByAppendingString: @"abcdef"];
+  NSString *EszettSuffixStr = [@"abcdef" stringByAppendingString: EszettStr];
+  NSString *EszettPrefixSuffixStr = [NSString stringWithFormat: @"%@abcdef%@", EszettStr, EszettStr];
+    
+  // test compare:
+    
+  compRes = [EszettStr compare: @"Ss"
+		       options: NSCaseInsensitiveSearch
+			 range: NSMakeRange(0, 1)];
+
+  PASS(compRes == 0, "Ss compares equal to Eszett character with"
+       " NSCaseInsensitiveSearch. got %d", (int)compRes);
+    
+  compRes = [EszettStr compare: @"S"
+		       options: 0
+			 range: NSMakeRange(0, 1)];
+
+  PASS(compRes == 1, "Eszett compare: S is NSOrderedDescending. got %d", (int)compRes);
+    
+  compRes = [EszettStr compare: @"s"
+		       options: 0
+			 range: NSMakeRange(0, 1)];
+
+  PASS(compRes == 1, "Eszett compare: s is NSOrderedDescending. got %d", (int)compRes);
+    
+  // test rangeOfString:
+    
+  range = [EszettPrefixStr rangeOfString: @"sS"
+				 options: NSCaseInsensitiveSearch
+				   range: NSMakeRange(0, 7)];
+    
+  PASS(NSEqualRanges(range, NSMakeRange(0, 1)), "with NSCaseInsensitiveSearch range of sS"
+       " in <Eszett>abcdef is {0,1}. got {%d,%d}", (int)range.location, (int)range.length);
+    
+  range = [EszettPrefixStr rangeOfString: @"sS"
+				 options: 0
+				   range: NSMakeRange(0, 7)];
+    
+  PASS(NSEqualRanges(range, NSMakeRange(NSNotFound, 0)), "without NSCaseInsensitiveSearch, "
+       "range of sS in <Eszett>abcdef is {NSNotFound, 0}. got {%d,%d}",
+       (int)range.location, (int)range.length);
+    
+  range = [EszettPrefixStr rangeOfString: @"sS"
+				 options: NSCaseInsensitiveSearch | NSAnchoredSearch | NSBackwardsSearch
+				   range: NSMakeRange(0, 7)];
+    
+  PASS(NSEqualRanges(range, NSMakeRange(NSNotFound, 0)), "for anchored backwards search, "
+       "range of sS in <Eszett>abcdef is {NSNotFound, 0}. got {%d,%d}",
+       (int)range.location, (int)range.length);
+
+  range = [EszettPrefixStr rangeOfString: @"sS"
+				 options: NSCaseInsensitiveSearch | NSAnchoredSearch
+				   range: NSMakeRange(0, 7)];
+    
+  PASS(NSEqualRanges(range, NSMakeRange(0, 1)), "for anchored forwards search, "
+       "range of sS in <Eszett>abcdef is {0, 1}. got {%d,%d}",
+       (int)range.location, (int)range.length);
+    
+  range = [EszettSuffixStr rangeOfString: @"sS"
+				 options: NSCaseInsensitiveSearch | NSAnchoredSearch | NSBackwardsSearch
+				   range: NSMakeRange(0, 7)];
+
+  PASS(NSEqualRanges(range, NSMakeRange(6, 1)), "for anchored backwards search, "
+       "range of sS in abcdef<Eszett> is {6, 1}. got {%d,%d}",
+       (int)range.location, (int)range.length);
+    
+  range = [EszettPrefixSuffixStr rangeOfString: @"sS"
+				       options: NSCaseInsensitiveSearch 
+					 range: NSMakeRange(0, 8)];
+    
+  PASS(NSEqualRanges(range, NSMakeRange(0, 1)), "for forward search, "
+       "range of sS in <Eszett>abcdef<Eszett> is {0, 1}. got {%d,%d}",
+       (int)range.location, (int)range.length);    
+
+  range = [EszettPrefixSuffixStr rangeOfString: @"sS"
+				       options: NSCaseInsensitiveSearch | NSBackwardsSearch
+					 range: NSMakeRange(0, 8)];
+    
+  PASS(NSEqualRanges(range, NSMakeRange(7, 1)), "for backward search, "
+       "range of sS in <Eszett>abcdef<Eszett> is {7, 1}. got {%d,%d}",
+       (int)range.location, (int)range.length); 
+}
+
+static void testLithuanian(void)
+{
+  // "in Lithuanian, "y" is sorted between "i" and "k"."
+  //   -- http://userguide.icu-project.org/collation
+
+  NSComparisonResult compRes;
+
+  compRes = [@"y" compare: @"k" options: 0 range: NSMakeRange(0,1) locale: nil];
+
+  PASS(compRes == NSOrderedDescending, "y>k in nil locale. comparison result: %d",
+       (int)compRes);
+
+  compRes = [@"y" compare: @"k" options: 0 range: NSMakeRange(0,1) locale: 
+		[[[NSLocale alloc] initWithLocaleIdentifier: @"lt"] autorelease]];
+  
+  PASS(compRes == NSOrderedAscending, "y<k in 'lt' locale. comparison result: %d",
+       (int)compRes);
+}
+
+static void testDiacritics(void)
+{
+	NSComparisonResult compRes;
+
+	const unichar eAcuteChar = 0x00e9;
+	NSString *eAcuteStr = [[[NSString alloc] initWithCharacters: &eAcuteChar
+														 length: 1] autorelease];
+	const unichar EAcuteChar = 0x00c9;
+	NSString *EAcuteStr = [[[NSString alloc] initWithCharacters: &EAcuteChar
+														 length: 1] autorelease];
+
+	
+	compRes = [@"e" compare: eAcuteStr];
+	PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+
+	compRes = [@"e" compare: EAcuteStr];
+	PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+	
+	compRes = [@"e" localizedCompare: eAcuteStr];
+	PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+	
+	compRes = [@"e" localizedCompare: EAcuteStr];
+	PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+	
+	compRes = [eAcuteStr compare: EAcuteStr];
+	PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);	
+	
+	compRes = [eAcuteStr localizedCompare: EAcuteStr];
+	PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+
+	// test NSCaseInsensitiveSearch
+	
+	compRes = [@"e" compare: eAcuteStr options: NSCaseInsensitiveSearch];
+	PASS(compRes == NSOrderedAscending, "expected -1 got %d", (int)compRes);
+
+	compRes = [eAcuteStr compare: EAcuteStr options: NSCaseInsensitiveSearch];
+	PASS(compRes == NSOrderedSame, "expected 0 got %d", (int)compRes);	
+
+	// test NSDiacriticInsensitiveSearch
+	
+	compRes = [@"e" compare: eAcuteStr options: NSDiacriticInsensitiveSearch];
+	PASS(compRes == NSOrderedSame, "expected 0 got %d", (int)compRes);
+	
+	compRes = [@"e" compare: EAcuteStr options: NSDiacriticInsensitiveSearch];
+	PASS(compRes == NSOrderedDescending, "expected 1 got %d", (int)compRes);
+
+	// test NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch
+	
+	compRes = [@"e" compare: eAcuteStr options: NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
+	PASS(compRes == NSOrderedSame, "expected 0 got %d", (int)compRes);
+	
+	compRes = [@"e" compare: EAcuteStr options: NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
+	PASS(compRes == NSOrderedSame, "expected 0 got %d", (int)compRes);
+	
+	compRes = [@"E" compare: eAcuteStr options: NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
+	PASS(compRes == NSOrderedSame, "expected 0 got %d", (int)compRes);
+	
+	compRes = [@"E" compare: EAcuteStr options: NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
+	PASS(compRes == NSOrderedSame, "expected 0 got %d", (int)compRes);
+	
+	compRes = [EAcuteStr compare: eAcuteStr options: NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
+	PASS(compRes == NSOrderedSame, "expected 0 got %d", (int)compRes);
+}
+
+#if OS_API_VERSION(MAC_OS_X_VERSION_10_5,GS_API_LATEST)
+static void testFolding(void)
+{
+  const unichar eAcute = 0x00e9;
+  const unichar fullWidthA = 0xFF21;
+  const unichar dotlessI = 0x0131;
+  NSString *eAcuteStr = [[[NSString alloc] initWithCharacters: &eAcute
+						       length: 1] autorelease];
+  NSString *fullWidthAStr = [[[NSString alloc] initWithCharacters: &fullWidthA
+							   length: 1] autorelease];
+  NSString *dotlessIStr = [[[NSString alloc] initWithCharacters: &dotlessI
+							length: 1] autorelease];
+  NSLocale *turkish = [[[NSLocale alloc] initWithLocaleIdentifier: @"tr_TR"]
+    autorelease];
+  NSString *folded;
+
+  folded = [@"HELLO" stringByFoldingWithOptions: NSCaseInsensitiveSearch
+					 locale: nil];
+  PASS_EQUAL(folded, @"hello",
+    "NSCaseInsensitiveSearch folds HELLO to hello");
+
+#if GS_HAVE_ICU_UTRANS
+  folded = [eAcuteStr stringByFoldingWithOptions: NSDiacriticInsensitiveSearch
+					   locale: nil];
+  PASS_EQUAL(folded, @"e",
+    "NSDiacriticInsensitiveSearch folds e-acute to e");
+
+  folded = [fullWidthAStr stringByFoldingWithOptions: NSWidthInsensitiveSearch
+					      locale: nil];
+  PASS_EQUAL(folded, @"A",
+    "NSWidthInsensitiveSearch folds fullwidth A to ASCII A");
+
+  folded = [@"ＡＢＣ１２３"
+    stringByFoldingWithOptions: NSWidthInsensitiveSearch
+			 locale: nil];
+  PASS_EQUAL(folded, @"ABC123",
+    "NSWidthInsensitiveSearch folds fullwidth letters and digits");
+
+  folded = [@"Ａ\u0301"
+    stringByFoldingWithOptions: NSWidthInsensitiveSearch
+    | NSDiacriticInsensitiveSearch
+			 locale: nil];
+  PASS_EQUAL(folded, @"A",
+    "Width+diacritic folding removes acute after width fold");
+
+  folded = [@"，．！ＡＢＣ"
+    stringByFoldingWithOptions: NSWidthInsensitiveSearch
+    | NSCaseInsensitiveSearch
+			 locale: nil];
+  PASS_EQUAL(folded, @",.!abc",
+    "NSWidthInsensitiveSearch and NSCaseInsensitiveSearch folds "
+    "fullwidth punctuation and uppercase letters");
+
+  folded = [@"Iİıi"
+    stringByFoldingWithOptions: NSCaseInsensitiveSearch
+			 locale: turkish];
+  PASS_EQUAL(folded, @"ıiıi",
+    "Turkish NSCaseInsensitiveSearch folds I-sequence correctly");
+
+  folded = [@"K"
+    stringByFoldingWithOptions: NSCaseInsensitiveSearch
+			 locale: nil];
+  PASS_EQUAL(folded, @"k",
+    "NSCaseInsensitiveSearch folds Kelvin sign to k");
+
+  folded = [@"ÅÇñöü"
+    stringByFoldingWithOptions: NSDiacriticInsensitiveSearch
+			 locale: nil];
+  PASS_EQUAL(folded, @"ACnou",
+    "NSDiacriticInsensitiveSearch folds multiple accented Latin letters");
+
+  folded = [@"e\u0301"
+    stringByFoldingWithOptions: NSDiacriticInsensitiveSearch
+			 locale: nil];
+  PASS_EQUAL(folded, @"e",
+    "NSDiacriticInsensitiveSearch folds decomposed acute sequence");
+
+  folded = [@"ÉＡI"
+    stringByFoldingWithOptions: NSCaseInsensitiveSearch
+    | NSDiacriticInsensitiveSearch
+    | NSWidthInsensitiveSearch
+			  locale: turkish];
+  PASS_EQUAL(folded, @"eaı",
+    "combined folding applies case, diacritic, and width handling");
+
+  folded = [@"é" stringByFoldingWithOptions: NSWidthInsensitiveSearch
+				     locale: nil];
+  PASS_EQUAL(folded, @"é",
+    "NSWidthInsensitiveSearch does not remove diacritics");
+
+  folded = [@"ø" stringByFoldingWithOptions: NSDiacriticInsensitiveSearch
+					     locale: nil];
+  PASS_EQUAL(folded, @"ø",
+    "NSDiacriticInsensitiveSearch does not fold stroked o");
+#else
+  {
+    BOOL wasHopeful = testHopeful;
+    testHopeful = YES;
+    PASS(YES, "Skipping transliterator-dependent folding checks "
+      "(ICU transliterator support unavailable at compile time)");
+    testHopeful = wasHopeful;
+  }
+#endif
+}
+#endif
+
+int main()
+{
+  START_SET("NSString + locale")
+  
+  if (!NSLOCALE_SUPPORTED)
+    SKIP("NSLocale not supported\nThe ICU library was not available when GNUstep-base was built")
+
+  testHopeful = YES;
+  
+  testBasic();
+  testEszett();
+  testLithuanian();
+  testDiacritics();
+#if OS_API_VERSION(MAC_OS_X_VERSION_10_5,GS_API_LATEST)
+  {
+    BOOL wasHopeful = testHopeful;
+    testHopeful = NO;
+    testFolding();
+    testHopeful = wasHopeful;
+  }
+#endif
+
+  END_SET("NSString + locale")
+
+  return 0;
+}

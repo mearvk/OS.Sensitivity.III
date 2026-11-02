@@ -1,0 +1,101 @@
+{ stdenv
+, lib
+, meson
+, ninja
+, pkg-config
+, bison
+, python3
+, darwinCrossToolchain
+, nativeLd
+, libSystem
+, libxkbcommon
+, libxcb ? null
+  # enable-x11 builds libxkbcommon-x11, which is only used by X clients. The
+  # core library that Wayland compositors and clients use is unaffected.
+, withX11 ? true
+, libXau ? null
+, libXdmcp ? null
+, libxml2
+, xkeyboard-config
+, targetTriple ? "x86_64-apple-darwin20.4"
+, appleSdk
+}:
+
+let
+  targetInfo = import ../../lib/target-info.nix targetTriple;
+
+  # libxml2 is libxkbregistry's only dependency; the Wayland driver in Wine
+  # will not build without libxkbregistry.
+  xDeps = [ libxml2 ] ++ lib.optionals withX11 [ libxcb libXau libXdmcp ];
+  xPkgConfigDeps = map lib.getDev xDeps;
+in
+stdenv.mkDerivation {
+  pname = "puredarwin-libxkbcommon${lib.optionalString (!withX11) "-nox"}";
+  version = libxkbcommon.version;
+
+  src = libxkbcommon.src;
+
+  nativeBuildInputs = [ meson ninja pkg-config bison python3 ];
+  buildInputs = xDeps;
+
+  configurePhase = ''
+    runHook preConfigure
+
+    mkdir -p sdk
+    export DARWIN_SDK_ROOT="${appleSdk}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+
+    cat > puredarwin-cross.ini <<EOF
+[binaries]
+c = '${darwinCrossToolchain}/bin/${targetTriple}-clang'
+ar = '${darwinCrossToolchain}/bin/${targetTriple}-ar'
+strip = '${darwinCrossToolchain}/bin/${targetTriple}-strip'
+pkgconfig = '${pkg-config}/bin/pkg-config'
+
+[built-in options]
+c_args = ['-isysroot', '$DARWIN_SDK_ROOT', '-U_FORTIFY_SOURCE', '-D_FORTIFY_SOURCE=0', '-DHAVE_STRNDUP=1', '-fno-stack-protector', '-I${libSystem}/usr/include']
+c_link_args = ['-isysroot', '$DARWIN_SDK_ROOT', '-fuse-ld=${nativeLd}/bin/ld', '-nostdlib', '-L${libSystem}/usr/lib', '-Wl,-dylib_file,/usr/lib/system/libdyld.dylib:${libSystem}/usr/lib/system/libdyld.dylib', '-Wl,-dylinker_install_name,/usr/lib/dyld', '-Wl,-platform_version,macos,11.0,11.5', '-lSystem', ${lib.optionalString withX11 "'${libxcb}/lib/libxcb.a', '${libXau}/lib/libXau.a', '${libXdmcp}/lib/libXdmcp.a', "}'${libxml2}/lib/libxml2.a']
+
+[host_machine]
+system = 'darwin'
+cpu_family = '${targetInfo.mesonCpuFamily}'
+cpu = '${targetInfo.mesonCpu}'
+endian = '${targetInfo.mesonEndian}'
+EOF
+
+    export PKG_CONFIG_PATH="${lib.makeSearchPath "lib/pkgconfig" xPkgConfigDeps}:${lib.makeSearchPath "share/pkgconfig" xPkgConfigDeps}"
+    meson setup build \
+      --cross-file puredarwin-cross.ini \
+      --prefix=$out \
+      --buildtype=release \
+      -Ddefault_library=static \
+      -Dxkb-config-root=/usr/share/X11/xkb \
+      -Dx-locale-root=/usr/share/X11/locale \
+      -Denable-x11=${lib.boolToString withX11} \
+      -Denable-xkbregistry=true \
+      -Denable-wayland=false \
+      -Denable-docs=false \
+      -Denable-bash-completion=false
+
+    runHook postConfigure
+  '';
+
+  buildPhase = ''
+    runHook preBuild
+    ninja -C build
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+    ninja -C build install
+    runHook postInstall
+  '';
+
+  dontFixup = true;
+  dontStrip = true;
+
+  meta = with lib; {
+    description = "Real cross-built libxkbcommon (+ libxkbcommon-x11), for i3/keyboard-layout consumers";
+    platforms = platforms.linux;
+  };
+}

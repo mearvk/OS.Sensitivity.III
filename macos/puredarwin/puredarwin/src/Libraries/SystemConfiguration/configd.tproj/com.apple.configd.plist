@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnableTransactions</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>com.apple.configd</string>
+	<key>MachServices</key>
+	<dict>
+		<key>com.apple.SystemConfiguration.configd</key>
+		<true/>
+		<!-- Claimed by the builtin IPConfiguration plugin's bootstrap_check_in;
+		     launchd only hands out ports for services this job declares. -->
+		<key>com.apple.network.IPConfiguration</key>
+		<true/>
+	</dict>
+	<key>POSIXSpawnType</key>
+	<string>Interactive</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/libexec/configd</string>
+		<string>-d</string>
+		<string>-v</string>
+	</array>
+	<key>StandardOutPath</key>
+	<string>/dev/console</string>
+	<key>StandardErrorPath</key>
+	<string>/dev/console</string>
+	<key>Umask</key>
+	<integer>18</integer>
+	<key>MinimalBootProfile</key>
+	<true/>
+</dict>
+</plist>

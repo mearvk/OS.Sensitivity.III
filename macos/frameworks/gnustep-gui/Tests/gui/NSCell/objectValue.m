@@ -1,0 +1,48 @@
+#include "Testing.h"
+
+#include <Foundation/NSAutoreleasePool.h>
+#include <Foundation/NSValue.h>
+
+#include <AppKit/NSApplication.h>
+#include <AppKit/NSCell.h>
+#include <AppKit/NSImage.h>
+
+int main()
+{
+  NSCell *cell;
+  NSNumber *num;
+
+  START_SET("NSCell GNUstep objectValue")
+  
+  NS_DURING
+  {
+    [NSApplication sharedApplication];
+  }
+  NS_HANDLER
+  {
+    if ([[localException name] isEqualToString: NSInternalInconsistencyException ])
+       SKIP("It looks like GNUstep backend is not yet installed")
+  }
+  NS_ENDHANDLER
+  cell = AUTORELEASE([[NSCell alloc] init]);
+  num = [NSNumber numberWithFloat:55.0]; 
+  [cell setObjectValue:num];
+  PASS([[cell objectValue] isEqual:num], 
+       "-objectValue with NSNumber works");
+  PASS([cell floatValue] == 55.0, "-floatValue works");
+  PASS([cell intValue] == 55, "-intValue works");
+  PASS([cell doubleValue] == 55.0, "-doubleValue works");
+  
+  [cell setObjectValue:@"foo"];
+
+  pass ([[cell objectValue] isEqual:@"foo"], "-objectValue with NSString works");
+  
+  [cell setObjectValue:[NSImage imageNamed:@"GNUstep"]];
+  pass ([[cell objectValue] isEqual:[NSImage imageNamed:@"GNUstep"]],
+        "-objectValue with NSImage works");
+ 
+  END_SET("NSCell GNUstep objectValue")
+
+  return 0;
+}
+

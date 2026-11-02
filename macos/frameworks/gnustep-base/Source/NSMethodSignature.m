@@ -1,0 +1,984 @@
+/** Implementation of NSMethodSignature for GNUStep
+   Copyright (C) 1994-2015 Free Software Foundation, Inc.
+
+   Written by:  Andrew Kachites McCallum <mccallum@gnu.ai.mit.edu>
+   Date: August 1994
+   Rewritten:   Richard Frith-Macdonald <richard@brainstorm.co.uk>
+   Date: August 1998
+
+   This file is part of the GNUstep Base Library.
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with this library; if not, write to the Free
+   Software Foundation, Inc., 31 Milk Street #960789 Boston, MA 02196 USA.
+
+   <title>NSMethodSignature class reference</title>
+   $Date$ $Revision$
+   */
+
+#import "common.h"
+
+#if !defined (__GNU_LIBOBJC__)
+#  include <objc/encoding.h>
+#endif
+
+#define	EXPOSE_NSMethodSignature_IVARS	1
+
+#import "Foundation/NSMethodSignature.h"
+#import "Foundation/NSAutoreleasePool.h"
+#import "Foundation/NSException.h"
+#import "Foundation/NSCoder.h"
+
+
+static inline unsigned int
+gs_string_hash(const char *s)
+{
+  unsigned int val = 0;
+  while (*s != 0)
+    {
+      val = (val << 5) + val + *s++;
+    }
+  return val;
+}
+
+#define	GSI_MAP_RETAIN_KEY(M, X)
+#define	GSI_MAP_RELEASE_KEY(M, X)	free(X.ptr)
+#define GSI_MAP_HASH(M, X)    (gs_string_hash(X.ptr))
+#define GSI_MAP_EQUAL(M, X,Y) (strcmp(X.ptr, Y.ptr) == 0)
+#define GSI_MAP_KTYPES	GSUNION_PTR
+#define GSI_MAP_VTYPES	GSUNION_OBJ
+#import "GNUstepBase/GSIMap.h"
+
+#import "GSInvocation.h"
+#import "GSPThread.h"
+
+#ifdef HAVE_MALLOC_H
+#if !defined(__OpenBSD__)
+#include <malloc.h>
+#endif
+#endif
+
+#ifdef HAVE_ALLOCA_H
+#include <alloca.h>
+#endif
+
+/* The objc runtime library objc_skip_offset() is buggy on some compiler
+ * versions, so we use our own alternative implementation.
+ */
+static const char *
+skip_offset(const char *ptr)
+{
+  if (*ptr == '+' || *ptr == '-') ptr++;
+  while (isdigit(*ptr)) ptr++;
+  return ptr;
+}
+
+#define ROUND(V, A) \
+  ({ __typeof__(V) __v=(V); __typeof__(A) __a=(A); \
+     __a*((__v+__a-1)/__a); })
+
+/* Step through method encoding information extracting details.
+ * If outTypes is non-nul then we copy the qualified type into
+ * the buffer as a nul terminated string and use the values in
+ * this buffer for the qtype and type in info, rather than pointers
+ * to positions in typePtr
+ */
+static const char *
+next_arg(const char *typePtr, NSArgumentInfo *info, char *outTypes)
+{
+  NSArgumentInfo	local;
+  BOOL			flag;
+  BOOL			negative = NO;
+
+  if (0 == typePtr)
+    {
+      return 0;
+    }
+  if (0 == info)
+    {
+      info = &local;
+    }
+
+  info->qtype = typePtr;
+
+  /*
+   *	Skip past any type qualifiers - if the caller wants them, return them.
+   */
+  flag = YES;
+  info->qual = 0;
+  while (flag)
+    {
+      switch (*typePtr)
+	{
+	  case _C_CONST:  info->qual |= _F_CONST; break;
+	  case _C_IN:     info->qual |= _F_IN; break;
+	  case _C_INOUT:  info->qual |= _F_INOUT; break;
+	  case _C_OUT:    info->qual |= _F_OUT; break;
+	  case _C_BYCOPY: info->qual |= _F_BYCOPY; break;
+#ifdef	_C_BYREF
+	  case _C_BYREF:  info->qual |= _F_BYREF; break;
+#endif
+	  case _C_ONEWAY: info->qual |= _F_ONEWAY; break;
+#ifdef	_C_GCINVISIBLE
+	  case _C_GCINVISIBLE:  info->qual |= _F_GCINVISIBLE; break;
+#endif
+	  default: flag = NO;
+	}
+      if (flag)
+	{
+	  typePtr++;
+	}
+    }
+
+  info->type = typePtr;
+
+  /*
+   *	Scan for size and alignment information.
+   */
+  switch (*typePtr++)
+    {
+      case _C_ID:
+	info->size = sizeof(id);
+	info->align = __alignof__(id);
+	/* Blocks are encoded as @? */
+	if (*(typePtr) == '?')
+	  {
+	    typePtr++;
+	  }
+	break;
+
+      case _C_CLASS:
+	info->size = sizeof(Class);
+	info->align = __alignof__(Class);
+	break;
+
+      case _C_SEL:
+	info->size = sizeof(SEL);
+	info->align = __alignof__(SEL);
+	break;
+
+      case _C_CHR:
+	info->size = sizeof(char);
+	info->align = __alignof__(char);
+	break;
+
+      case _C_UCHR:
+	info->size = sizeof(unsigned char);
+	info->align = __alignof__(unsigned char);
+	break;
+
+      case _C_SHT:
+	info->size = sizeof(short);
+	info->align = __alignof__(short);
+	break;
+
+      case _C_USHT:
+	info->size = sizeof(unsigned short);
+	info->align = __alignof__(unsigned short);
+	break;
+
+      case _C_INT:
+	info->size = sizeof(int);
+	info->align = __alignof__(int);
+	break;
+
+      case _C_UINT:
+	info->size = sizeof(unsigned int);
+	info->align = __alignof__(unsigned int);
+	break;
+
+      case _C_LNG:
+	info->size = sizeof(long);
+	info->align = __alignof__(long);
+	break;
+
+      case _C_ULNG:
+	info->size = sizeof(unsigned long);
+	info->align = __alignof__(unsigned long);
+	break;
+
+      case _C_LNG_LNG:
+	info->size = sizeof(long long);
+	info->align = __alignof__(long long);
+	break;
+
+      case _C_ULNG_LNG:
+	info->size = sizeof(unsigned long long);
+	info->align = __alignof__(unsigned long long);
+	break;
+
+      case _C_FLT:
+	info->size = sizeof(float);
+	info->align = __alignof__(float);
+	break;
+
+      case _C_DBL:
+	info->size = sizeof(double);
+	info->align = __alignof__(double);
+	break;
+
+      case _C_PTR:
+	info->size = sizeof(char*);
+	info->align = __alignof__(char*);
+	if (*typePtr == '?')
+	  {
+	    typePtr++;
+	  }
+	else
+	  {
+	    typePtr = objc_skip_typespec(typePtr);
+	  }
+	break;
+
+      case _C_ATOM:
+      case _C_CHARPTR:
+	info->size = sizeof(char*);
+	info->align = __alignof__(char*);
+	break;
+
+      case _C_ARY_B:
+	{
+	  int	length = atoi(typePtr);
+
+	  while (isdigit(*typePtr))
+	    {
+	      typePtr++;
+	    }
+	  typePtr = next_arg(typePtr, &local, 0);
+	  info->size = length * ROUND(local.size, local.align);
+	  info->align = local.align;
+	  typePtr++;	/* Skip end-of-array	*/
+	}
+	break;
+
+      case _C_STRUCT_B:
+	{
+	  unsigned int	acc_size = 0;
+	  unsigned int	def_align = objc_alignof_type(typePtr-1);
+	  unsigned int	acc_align = def_align;
+	  const char	*ptr = typePtr;
+	  BOOL		hasBitField = NO;
+
+	  /*
+	   *	Skip "<name>=" stuff.
+	   */
+	  while (*ptr != _C_STRUCT_E)
+	    {
+	      if (*ptr == '\0')
+		{
+		  return 0;		/* error	*/
+		}
+	      if (*ptr++ == '=')
+		{
+		  typePtr = ptr;
+		  break;
+		}
+	    }
+
+	  /*
+	   *	Base structure alignment on first element.
+	   */
+	  if (*typePtr != _C_STRUCT_E)
+	    {
+	      typePtr = next_arg(typePtr, &local, 0);
+	      if (typePtr == 0)
+		{
+		  return 0;		/* error	*/
+		}
+	      acc_size = ROUND(acc_size, local.align);
+	      acc_size += local.size;
+	      acc_align = MAX(local.align, def_align);
+#if	defined(_C_BFLD)
+	      if (*local.type == _C_BFLD) hasBitField = YES;
+#endif
+	    }
+	  /*
+	   *	Continue accumulating structure size
+	   *	and adjust alignment if necessary
+	   */
+	  while (*typePtr != _C_STRUCT_E)
+	    {
+	      typePtr = next_arg(typePtr, &local, 0);
+	      if (typePtr == 0)
+		{
+		  return 0;		/* error	*/
+		}
+	      acc_size = ROUND(acc_size, local.align);
+	      acc_size += local.size;
+	      acc_align = MAX(local.align, acc_align);
+#if	defined(_C_BFLD)
+	      if (*local.type == _C_BFLD) hasBitField = YES;
+#endif
+	    }
+	  /*
+	   * Size must be a multiple of alignment
+	   */
+	  if (acc_size % acc_align != 0)
+	    {
+	      acc_size += acc_align - acc_size % acc_align;
+	    }
+	  info->size = acc_size;
+	  info->align = acc_align;
+	  /* Bit-fields share a storage unit, so their individual byte sizes
+	   * cannot be summed; take the whole structure's size from the runtime.
+	   */
+	  if (hasBitField)
+	    {
+	      info->size = objc_sizeof_type(info->type);
+	    }
+	  typePtr++;	/* Skip end-of-struct	*/
+	}
+	break;
+
+      case _C_UNION_B:
+	{
+	  unsigned int	max_size = 0;
+	  unsigned int	max_align = 0;
+	  const char	*ptr = typePtr;
+
+	  /*
+	   *	Skip "<name>=" stuff.
+	   */
+	  while (*ptr != _C_UNION_E)
+	    {
+	      if (*ptr == '\0')
+		{
+		  return 0;		/* error	*/
+		}
+	      if (*ptr++ == '=')
+		{
+		  typePtr = ptr;
+		  break;
+		}
+	    }
+	  while (*typePtr != _C_UNION_E)
+	    {
+	      typePtr = next_arg(typePtr, &local, 0);
+	      if (typePtr == 0)
+		{
+		  return 0;		/* error	*/
+		}
+	      max_size = MAX(max_size, local.size);
+	      max_align = MAX(max_align, local.align);
+	    }
+	  info->size = max_size;
+	  info->align = max_align;
+	  typePtr++;	/* Skip end-of-union	*/
+	}
+	break;
+
+      case _C_VOID:
+	info->size = 0;
+	info->align = __alignof__(char*);
+	break;
+
+#if defined(_C_BOOL) && (!defined(__GNUC__) || __GNUC__ > 2)
+      case _C_BOOL:
+	info->size = sizeof(_Bool);
+	info->align = __alignof__(_Bool);
+	break;
+#endif
+#if     defined(_C_BFLD)
+      case _C_BFLD:
+        /* The gnu runtime encodes a bit-field as b<pos><type><width> and its
+         * objc_alignof_type() aborts on that encoding, so work the alignment
+         * out directly from the field's underlying type.  A bit-field shares
+         * a storage unit with its neighbours and so contributes no separate
+         * byte size of its own; the enclosing structure takes its size from
+         * the runtime once (see the _C_BFLD handling under _C_STRUCT_B).
+         */
+        typePtr--;
+        {
+          const char	*p = typePtr + 1;
+
+          while (isdigit(*p)) p++;	/* skip the starting bit position */
+          switch (*p)
+            {
+              case _C_CHR: case _C_UCHR:
+                info->align = __alignof__(char); break;
+              case _C_SHT: case _C_USHT:
+                info->align = __alignof__(short); break;
+              case _C_LNG: case _C_ULNG:
+                info->align = __alignof__(long); break;
+              case _C_LNG_LNG: case _C_ULNG_LNG:
+                info->align = __alignof__(long long); break;
+              default:
+                info->align = __alignof__(int); break;
+            }
+        }
+        info->size = 0;
+        typePtr = objc_skip_typespec(typePtr);
+        break;
+#endif
+
+#if     defined(_C_COMPLEX)
+      case _C_COMPLEX:
+        switch (*typePtr++)
+          {
+            case _C_CHR:
+              info->size = sizeof(_Complex char);
+              info->align = __alignof__(_Complex char);
+              break;
+
+            case _C_UCHR:
+              info->size = sizeof(_Complex unsigned char);
+              info->align = __alignof__(_Complex unsigned char);
+              break;
+
+            case _C_SHT:
+              info->size = sizeof(_Complex short);
+              info->align = __alignof__(_Complex short);
+              break;
+
+            case _C_USHT:
+              info->size = sizeof(_Complex unsigned short);
+              info->align = __alignof__(_Complex unsigned short);
+              break;
+
+            case _C_INT:
+              info->size = sizeof(_Complex int);
+              info->align = __alignof__(_Complex int);
+              break;
+
+            case _C_UINT:
+              info->size = sizeof(_Complex unsigned int);
+              info->align = __alignof__(_Complex unsigned int);
+              break;
+
+            case _C_LNG:
+              info->size = sizeof(_Complex long);
+              info->align = __alignof__(_Complex long);
+              break;
+
+            case _C_ULNG:
+              info->size = sizeof(_Complex unsigned long);
+              info->align = __alignof__(_Complex unsigned long);
+              break;
+
+            case _C_LNG_LNG:
+              info->size = sizeof(_Complex long long);
+              info->align = __alignof__(_Complex long long);
+              break;
+
+            case _C_ULNG_LNG:
+              info->size = sizeof(_Complex unsigned long long);
+              info->align = __alignof__(_Complex unsigned long long);
+              break;
+
+            case _C_FLT:
+              info->size = sizeof(_Complex float);
+              info->align = __alignof__(_Complex float);
+              break;
+
+            case _C_DBL:
+              info->size = sizeof(_Complex double);
+              info->align = __alignof__(_Complex double);
+              break;
+            
+            default:
+              {
+                NSLog(@"unknown complex type '%s'", typePtr-2);
+                return 0;
+              }
+          }
+        break;
+#endif
+
+      default:
+	return 0;
+    }
+
+  if (typePtr == 0)
+    {		/* Error condition.	*/
+      return 0;
+    }
+
+  /* Copy the type information into the buffer if provided.
+   */
+  if (outTypes != 0)
+    {
+      unsigned	len = typePtr - info->qtype;
+
+      strncpy(outTypes, info->qtype, len);
+      outTypes[len] = '\0';
+      info->qtype = outTypes;
+      info->type = objc_skip_type_qualifiers (outTypes);
+    }
+
+  /*
+   *	May tell the caller if the item is stored in a register.
+   */
+  if (*typePtr == '+')
+    {
+      typePtr++;
+      info->isReg = YES;
+    }
+  else
+    {
+      info->isReg = NO;
+    }
+  /*
+   * Cope with negative offsets.
+   */
+  if (*typePtr == '-')
+    {
+      typePtr++;
+      negative = YES;
+    }
+  /*
+   *	May tell the caller what the stack/register offset is for
+   *	this argument.
+   */
+  info->offset = 0;
+  while (isdigit(*typePtr))
+    {
+      info->offset = info->offset * 10 + (*typePtr++ - '0');
+    }
+  if (negative == YES)
+    {
+      info->offset = -info->offset;
+    }
+
+  return typePtr;
+}
+
+/* A signature is built once for a given set of types and then kept for the
+ * life of the process, so a set of types that has been seen before can be
+ * answered from a small table that is only ever added to.  Each entry is
+ * published with a release and read with an acquire, and neither an entry nor
+ * the key it holds is ever freed, so a reader may hold either.  A set of types
+ * that collides with another simply misses and takes the slower path.
+ */
+#define SIGNATURE_SLOTS 1024
+
+/* An entry is never removed from the cache, so the number of sets of types
+ * which may be cached is limited.  Past the limit a signature is built and
+ * answered without being cached, which is what happened before there was a
+ * cache at all.  The busiest program in the base test suite caches 18.
+ */
+#define SIGNATURE_LIMIT 4096
+
+static unsigned		cachedSignatures = 0;
+
+struct signature_slot
+{
+  const char		*types;
+  NSMethodSignature	*signature;
+};
+
+static struct signature_slot *signatureSlots[SIGNATURE_SLOTS];
+
+static inline unsigned
+signatureSlotFor(const char *types)
+{
+  uintptr_t	hash = 5381;
+  const char	*p = types;
+
+  while (*p != '\0')
+    {
+      hash = (hash << 5) + hash + (unsigned char)*p++;
+    }
+  hash ^= hash >> 15;
+  return (unsigned)(hash & (SIGNATURE_SLOTS - 1));
+}
+
+/* A signature which is not in the cache is owned by whoever asked for it, so
+ * it counts references where a cached one does not.
+ */
+@interface GSUncachedMethodSignature : NSMethodSignature
+@end
+
+@implementation NSMethodSignature
+
+- (id) _initWithObjCTypes: (const char*)t
+{
+  const char	*p = t;
+  
+  if (t == 0 || *t == '\0')
+    {
+      DESTROY(self);
+    }
+  else
+    {
+      const char	*q;
+      char		*args;
+      char		*ret;
+      char		*end;
+      char		*ptr;
+      int		alen;
+      int		blen;
+      int		rlen;
+
+/* In case we have been given a method encoding string without offsets,
+ * we attempt to generate the frame size and offsets in a new copy of
+ * the types string.
+ */
+      blen = (strlen(t) + 1) * 16;	// Total buffer length
+      /* No compiler-emitted type encoding approaches this size, so
+       * reject an excessively long one outright rather than allocating
+       * an arbitrary amount of stack for it.
+       */
+      if (blen > 4096)
+	{
+	  /* Instances of this class are meant to be cached forever,
+	   * so their -release method does nothing.  That means that
+	   * an initialisation failure must deallocate the instance
+	   * to avoid a leak.
+	   */
+	  [self dealloc];
+	  [NSException raise: NSInvalidArgumentException
+		      format: @"Method signature type encoding is too long"];
+	}
+      ret = alloca(blen);
+      end = ret + blen;
+
+      /* Copy the return type (including qualifiers) with ehough room
+       * after it to store the frame size.
+       */
+      p = t;
+      p = objc_skip_typespec (p);
+      rlen = p - t;
+      strncpy(ret, t, rlen);
+      ret[rlen] = '\0';
+      ptr = args = ret + rlen + 10;	// Allow room for a decimal integer
+      *ptr = '\0';
+
+      /* Skip to the first arg type, taking note of where the qualifiers start.
+       * Assume that casting _argFrameLength to int will not lose information.
+       */
+      p = skip_offset (p);
+      q = p;
+      p = objc_skip_type_qualifiers (p);
+      while (p && *p)
+	{
+	  int	size;
+
+	  _numArgs++;
+	  size = objc_promoted_size (p);
+	  p = objc_skip_typespec (p);
+	  memcpy(ptr, q, p - q);
+	  ptr += (p - q);
+	  snprintf(ptr, end - ptr, "%d", (int)_argFrameLength);
+	  ptr += strlen(ptr);
+	  _argFrameLength += size;
+	  p = skip_offset (p);
+	  q = p;
+	  p = objc_skip_type_qualifiers (p);
+	}
+      alen = ptr - args;
+      rlen += sprintf(ret + rlen, "%d", (int)_argFrameLength);
+
+      _methodTypes = NSAllocateCollectable(alen + rlen + 1, 0);
+      strncpy((char*)_methodTypes, ret, rlen);
+      strncpy(((char*)_methodTypes) + rlen, args, alen);
+      ((char*)_methodTypes)[alen + rlen] = '\0';
+    }
+  return self;
+}
+
++ (NSMethodSignature*) signatureWithObjCTypes: (const char*)t
+{
+  GSIMapNode node;
+  NSMethodSignature	*sig;
+  struct signature_slot	*slot;
+  unsigned		index;
+
+  static GSIMapTable_t cacheTable = {};
+  static gs_mutex_t cacheTableLock = GS_MUTEX_INIT_STATIC;
+
+  index = signatureSlotFor(t);
+  slot = __atomic_load_n(&signatureSlots[index], __ATOMIC_ACQUIRE);
+  if (slot != NULL && strcmp(slot->types, t) == 0)
+    {
+      return slot->signature;
+    }
+
+  GS_MUTEX_LOCK(cacheTableLock);
+  NS_DURING
+    {
+      if (cacheTable.zone == 0)
+	{
+	  GSIMapInitWithZoneAndCapacity(&cacheTable, [self zone], 8);
+	}
+
+      node = GSIMapNodeForKey(&cacheTable, (GSIMapKey)t);
+      if (node == 0 && cachedSignatures >= SIGNATURE_LIMIT)
+	{
+	  sig = nil;		// built without the lock below
+	}
+      else if (node == 0)
+	{
+	  char	*buf;
+	  int	len = strlen(t) + 1;
+
+	  sig = [[self alloc] _initWithObjCTypes: t];
+	  buf = malloc(len);
+	  memcpy(buf, t, len);
+	  cachedSignatures++;
+
+	  /* We suppress the static analyser warning about the
+	   * intentional leak (until end of execution) of the cache
+	   * contents.
+	   */
+#ifdef  __clang_analyzer__
+	  [[clang::suppress]]
+#endif
+	  GSIMapAddPair(&cacheTable, (GSIMapKey)buf, (GSIMapVal)(id)sig);
+
+	  /* buf and sig both outlive the process, so the table in front of
+	   * the map may hold them.
+	   */
+	  slot = (struct signature_slot*)
+	    malloc(sizeof(struct signature_slot));
+	  if (slot != NULL)
+	    {
+	      slot->types = buf;
+	      slot->signature = sig;
+	      __atomic_store_n(&signatureSlots[index], slot, __ATOMIC_RELEASE);
+	    }
+	}
+      else
+	{
+	  sig = node->value.obj;
+	}
+    }
+  NS_HANDLER
+    {
+      GS_MUTEX_UNLOCK(cacheTableLock);
+      [localException raise];
+    }
+  NS_ENDHANDLER
+  GS_MUTEX_UNLOCK(cacheTableLock);
+
+  if (sig == nil)
+    {
+      return [self _uncachedSignatureWithObjCTypes: t];
+    }
+  return sig;
+}
+
+- (NSArgumentInfo) argumentInfoAtIndex: (NSUInteger)index
+{
+  if (index >= _numArgs)
+    {
+      [NSException raise: NSInvalidArgumentException
+		  format: @"Index too high."];
+    }
+  if (_inf == 0)
+    {
+      [self methodInfo];
+      NSAssert(0 != _inf, @"Initialising failed");
+    }
+  return _inf[index+1];
+}
+
+- (NSUInteger) frameLength
+{
+  return _argFrameLength;
+}
+
+- (const char*) getArgumentTypeAtIndex: (NSUInteger)index
+{
+  if (index >= _numArgs)
+    {
+      [NSException raise: NSInvalidArgumentException
+		  format: @"Index too high."];
+    }
+  if (_inf == 0)
+    {
+      [self methodInfo];
+      NSAssert(0 != _inf, @"Initialising failed");
+    }
+  return _inf[index+1].qtype;
+}
+
+- (BOOL) isOneway
+{
+  if (_inf == 0)
+    {
+      [self methodInfo];
+      NSAssert(0 != _inf, @"Initialising failed");
+    }
+  return (_inf[0].qual & _F_ONEWAY) ? YES : NO;
+}
+
+- (NSUInteger) methodReturnLength
+{
+  if (_inf == 0)
+    {
+      [self methodInfo];
+      NSAssert(0 != _inf, @"Initialising failed");
+    }
+  return _inf[0].size;
+}
+
+- (const char*) methodReturnType
+{
+  if (_inf == 0)
+    {
+      [self methodInfo];
+      NSAssert(0 != _inf, @"Initialising failed");
+    }
+  return _inf[0].qtype;
+}
+
+- (NSUInteger) numberOfArguments
+{
+  return _numArgs;
+}
+
+/* A signature in the cache is kept for the life of the process, so it is
+ * never deallocated and the count of references to it need not be kept.  One
+ * which is not in the cache is a GSUncachedMethodSignature, which counts them
+ * as any other object does.
+ */
+- (id) retain
+{
+  return self;
+}
+
+- (oneway void) release
+{
+}
+
+- (id) autorelease
+{
+  return self;
+}
+
+- (NSUInteger) retainCount
+{
+  return UINT_MAX;
+}
+
+- (void) dealloc
+{
+  if (_methodTypes)
+    NSZoneFree(NSDefaultMallocZone(), (void*)_methodTypes);
+  if (_inf)
+    NSZoneFree(NSDefaultMallocZone(), (void*)_inf);
+  [super dealloc];
+}
+
+- (BOOL) isEqual: (id)other
+{
+  BOOL isEqual = YES;
+  if (other == nil)
+    {
+      return NO;
+    }
+  if (object_getClass(other) != object_getClass(self))
+    {
+      return NO;
+    }
+  isEqual = ([self numberOfArguments] == [other numberOfArguments]
+    && [self frameLength] == [other frameLength]
+    && *[self methodReturnType] == *[other methodReturnType]
+    && [self isOneway] == [other isOneway]);
+  if (isEqual == NO)
+    {
+      return NO;
+    }
+  else
+    {
+      int i, n;
+      n = [self numberOfArguments];
+      for (i = 0; i < n; i++)
+        {
+          if ((*[self getArgumentTypeAtIndex:i]
+		== *[other getArgumentTypeAtIndex:i]) == NO)
+            {
+              return NO;
+            }
+        }
+    }
+  return isEqual;
+}
+
+@end
+
+@implementation NSMethodSignature(GNUstep)
++ (NSMethodSignature*) _uncachedSignatureWithObjCTypes: (const char*)t
+{
+  NSMethodSignature	*sig;
+
+  sig = [[GSUncachedMethodSignature alloc] _initWithObjCTypes: t];
+  return AUTORELEASE(sig);
+}
+
+- (NSArgumentInfo*) methodInfo
+{
+  if (_inf == 0)
+    {
+      const char	*types = _methodTypes;
+      char		*outTypes;
+      unsigned int	i;
+
+      /* Allocate space enough for an NSArgumentInfo structure for each
+       * argument (including the return type), and enough space to hold
+       * the type information for each argument as a nul terminated
+       * string.
+       */
+      outTypes = NSZoneMalloc(NSDefaultMallocZone(),
+	sizeof(NSArgumentInfo)*(_numArgs+1) + strlen(types)*2);
+      _info = (void*)outTypes;
+      outTypes = outTypes + sizeof(NSArgumentInfo)*(_numArgs+1);
+      /* Fill in the full argment information for each arg.
+       */
+      for (i = 0; i <= _numArgs; i++)
+	{
+	  types = next_arg(types, &_inf[i], outTypes);
+	  outTypes += strlen(outTypes) + 1;
+	}
+    }
+  return _inf;
+}
+
+- (const char*) methodType
+{
+  return _methodTypes;
+}
+@end
+
+@implementation GSUncachedMethodSignature
+
+/* The superclass does not count references, since a signature in the cache is
+ * kept for the life of the process, so this class does the counting itself
+ * rather than by a call to super.
+ */
+- (id) retain
+{
+  NSIncrementExtraRefCount(self);
+  return self;
+}
+
+- (oneway void) release
+{
+  if (NSDecrementExtraRefCountWasZero(self))
+    {
+      [self dealloc];
+    }
+}
+
+- (id) autorelease
+{
+  [NSAutoreleasePool addObject: self];
+  return self;
+}
+
+- (NSUInteger) retainCount
+{
+  return NSExtraRefCount(self) + 1;
+}
+
+@end

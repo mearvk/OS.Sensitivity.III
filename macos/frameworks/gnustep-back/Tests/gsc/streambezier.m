@@ -1,0 +1,121 @@
+/* Tests that GSStreamContext turns an NSBezierPath into PostScript: newpath,
+ * the path line attributes, and then the path elements in order.
+ *
+ * GSStreamContext lives in the backend bundle, so the test needs a backend
+ * loaded (hence a window server); it skips when no display server can be
+ * reached.  The code under test is the same for every backend; it is built for
+ * the cairo backend.
+ */
+#import <Foundation/Foundation.h>
+#import "Testing.h"
+#include "config.h"
+
+#if defined(BUILD_GRAPHICS) && defined(GRAPHICS_cairo) \
+  && BUILD_GRAPHICS == GRAPHICS_cairo
+
+#import <AppKit/AppKit.h>
+#import <GNUstepGUI/GSDisplayServer.h>
+#include <stdlib.h>
+
+@interface NSObject (GSStreamContextBezier)
+- initWithContextInfo: (NSDictionary *)info;
+- (void) GSSendBezierPath: (NSBezierPath *)path;
+@end
+
+static BOOL
+hasLines(NSArray *lines, NSArray *want)
+{
+  NSEnumerator *e = [want objectEnumerator];
+  NSString *w;
+
+  while ((w = [e nextObject]) != nil)
+    if (![lines containsObject: w])
+      {
+        NSLog(@"  missing PostScript line: '%@'", w);
+        return NO;
+      }
+  return YES;
+}
+
+int
+main(int argc, const char **argv)
+{
+  START_SET("stream bezier")
+  Class cls;
+  id x;
+  NSString *path;
+  NSBezierPath *bp;
+  NSArray *lines;
+
+  NS_DURING
+    {
+      [NSApplication sharedApplication];
+      if (nil == GSCurrentServer())
+	{
+	  SKIP("no window server available")
+	}
+    }
+  NS_HANDLER
+    {
+      SKIP("It looks like GNUstep backend is not yet installed")
+    }
+  NS_ENDHANDLER
+  cls = NSClassFromString(@"GSStreamContext");
+  PASS(cls != Nil, "the GSStreamContext class is available");
+  if (cls == Nil)
+    {
+      SKIP("cls could not be created")
+    }
+
+  bp = [NSBezierPath bezierPath];
+  [bp moveToPoint: NSMakePoint(10, 20)];
+  [bp lineToPoint: NSMakePoint(30, 40)];
+  [bp curveToPoint: NSMakePoint(50, 60)
+      controlPoint1: NSMakePoint(11, 12)
+      controlPoint2: NSMakePoint(13, 14)];
+  [bp closePath];
+  [bp setLineWidth: 3.0];
+  [bp setLineJoinStyle: NSRoundLineJoinStyle];
+  [bp setLineCapStyle: NSSquareLineCapStyle];
+  [bp setMiterLimit: 5.0];
+  [bp setFlatness: 2.0];
+
+  path = [NSTemporaryDirectory() stringByAppendingPathComponent: @"gsc_bp.ps"];
+  x = [[cls alloc] initWithContextInfo:
+    [NSDictionary dictionaryWithObject: path forKey: @"NSOutputFile"]];
+  [x GSSendBezierPath: bp];
+  [x release];        /* dealloc closes and flushes the stream */
+
+  {
+    NSString *out = [NSString stringWithContentsOfFile: path
+                                             encoding: NSISOLatin1StringEncoding
+                                                error: NULL];
+    lines = [(out ? out : @"") componentsSeparatedByString: @"\n"];
+  }
+
+  PASS(hasLines(lines, [NSArray arrayWithObjects:
+    @"newpath", @"3 setlinewidth", @"1 setlinejoin", @"2 setlinecap",
+    @"5 setmiterlimit", @"2 setflat", nil]),
+    "GSSendBezierPath emits newpath and the path line attributes");
+
+  PASS(hasLines(lines, [NSArray arrayWithObjects:
+    @"10 20 moveto", @"30 40 lineto", @"11 12 13 14 50 60 curveto",
+    @"closepath", nil]),
+    "GSSendBezierPath emits the path elements in order");
+
+  END_SET("stream bezier")
+  return 0;
+}
+
+#else
+
+int
+main(int argc, const char **argv)
+{
+  START_SET("stream bezier")
+    SKIP("back is not built with the cairo graphics backend")
+  END_SET("stream bezier")
+  return 0;
+}
+
+#endif

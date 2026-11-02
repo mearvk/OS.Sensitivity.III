@@ -11,6 +11,7 @@
       "root": "linux",
       "status": "populated",
       "compliance": "linux/COMPLIANCE.md",
+      "build": "linux/BUILD.md",
       "components": {
         "os-core": {
           "path": "linux/os-core/linux-5.10.254",

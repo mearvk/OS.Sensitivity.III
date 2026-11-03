@@ -52,6 +52,8 @@
       "licenses": "windows/LICENSES.md",
       "sources": "windows/SOURCES.md",
       "build": "windows/BUILD.md",
+      "toolchain": "windows/toolchain/toolchain.json",
+      "orchestrator": "windows/build-shape.sh",
       "paths": {
         "compat-loader": {
           "path": "windows/compat-loader/wine",

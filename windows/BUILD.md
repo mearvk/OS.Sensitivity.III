@@ -10,6 +10,44 @@ Everything is built from the clean-room open source warehoused under `windows/`
 
 ---
 
+## Path 0 — the OS Creator flow (toolchain + orchestrator)
+
+When building **through the SLeeLa OS Creator**, you do not install build
+dependencies by hand. The Creator provisions the **pinned toolchain** described
+by [`toolchain/toolchain.json`](toolchain/toolchain.json) and then invokes the
+orchestrator [`build-shape.sh`](build-shape.sh), which compiles a chosen path
+into a declared artifact.
+
+Provision the toolchain (pick one):
+
+```sh
+# Hermetic (recommended): a pinned ubuntu:24.04 image matching the linux/ base.
+docker build -t ossens-windows-toolchain windows/toolchain/
+
+# Or install the same pinned set on a Debian/Ubuntu host directly:
+sudo windows/toolchain/setup-debian.sh
+```
+
+Then build an artifact:
+
+```sh
+# Wine compatibility layer -> an installed Wine prefix
+windows/build-shape.sh wine    --arch amd64 --out out/wine
+
+# ReactOS standalone OS -> bootcd.iso
+windows/build-shape.sh reactos --arch amd64 --out out/reactos
+```
+
+On a Linux host the ReactOS path uses the **MinGW-w64 cross toolchain** (plus
+CMake, Ninja, flex, bison) that the toolchain provides — **RosBE is not
+required**; `build-shape.sh` exports the `ROS_ARCH` that `configure.sh` needs.
+No Microsoft source, SDK, binaries, or license is used at any step.
+
+The sections below document the underlying component recipes the orchestrator
+wraps, for building a single path by hand.
+
+---
+
 ## Path 1 — Wine compatibility layer — `compat-loader/wine/`
 
 Runs unmodified Windows `.exe` applications on top of the `../linux/` base.

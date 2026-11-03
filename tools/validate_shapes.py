@@ -33,7 +33,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Keys inside a shape (and its components) that name a repo-relative path and
 # therefore must resolve on disk.
-SHAPE_PATH_KEYS = ("root", "compliance", "licenses", "sources", "build")
+SHAPE_PATH_KEYS = ("root", "compliance", "licenses", "sources", "build", "toolchain", "orchestrator")
 COMPONENT_PATH_KEYS = ("path", "sources")
 
 

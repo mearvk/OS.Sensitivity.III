@@ -1,0 +1,63 @@
+{
+  "$schema": "../../schemas/toolchain-1.0.json",
+  "shape": "windows",
+  "description": "Pinned, reproducible build toolchain for the Windows-compatible shape. The SLeeLa OS Creator resolves this manifest to provision a hermetic environment and then invokes windows/build-shape.sh to compile a chosen path into a bootable/installable artifact. Linux host; no Microsoft source, SDK, or license is used.",
+  "toolchainVersion": "1.0",
+  "generated": "2026-11-03",
+  "hostBase": {
+    "image": "ubuntu:24.04",
+    "rationale": "Matches the Ubuntu 24.04.4 base rootfs assembled under linux/os-loader, so the Windows shape builds against the same userland the OS Creator ships.",
+    "dockerfile": "windows/toolchain/Dockerfile",
+    "bareMetalSetup": "windows/toolchain/setup-debian.sh"
+  },
+  "paths": {
+    "wine": {
+      "component": "windows/compat-loader/wine",
+      "pinnedRef": "wine-10.20",
+      "buildEntry": "./configure && make",
+      "artifact": { "type": "prefix", "role": "windows-app-compatibility", "name": "wine-install" },
+      "requires": {
+        "apt": [
+          "gcc", "g++", "gcc-multilib", "g++-multilib",
+          "flex", "bison", "make", "pkg-config",
+          "libx11-dev", "libfreetype-dev", "libfontconfig-dev",
+          "libgl-dev", "libxml2-dev", "libxslt1-dev",
+          "libgnutls28-dev", "libpng-dev", "libjpeg-dev",
+          "libxcursor-dev", "libxrandr-dev", "libxi-dev",
+          "libxrender-dev", "libxext-dev"
+        ],
+        "notes": "gcc-multilib/g++-multilib enable WoW64 (64-bit Wine that also runs 32-bit apps) via ./configure --enable-archs=i386,x86_64. For 64-bit-only, ./configure --enable-win64."
+      }
+    },
+    "reactos": {
+      "component": "windows/reactos/reactos",
+      "pinnedRef": "0.4.16-release",
+      "buildEntry": "./configure.sh && ninja bootcd",
+      "artifact": { "type": "iso", "role": "standalone-os", "name": "bootcd.iso" },
+      "requires": {
+        "apt": [
+          "cmake", "ninja-build", "flex", "bison",
+          "gcc-mingw-w64-x86-64", "g++-mingw-w64-x86-64",
+          "gcc-mingw-w64-i686", "g++-mingw-w64-i686",
+          "binutils-mingw-w64-x86-64", "binutils-mingw-w64-i686",
+          "python3", "git", "p7zip-full"
+        ],
+        "crossToolchain": {
+          "amd64": "x86_64-w64-mingw32-",
+          "i386": "i686-w64-mingw32-"
+        },
+        "rosArch": {
+          "env": "ROS_ARCH",
+          "values": { "amd64": "amd64", "i386": "i386" },
+          "notes": "reactos/reactos/configure.sh fails closed unless ROS_ARCH is set. On a Linux host RosBE is NOT required: the real need is a MinGW-w64 cross toolchain (set above), plus CMake, Ninja, flex and bison. setup-debian.sh installs these and exports ROS_ARCH."
+        },
+        "notes": "ReactOS uses toolchain-gcc.cmake with the MinGW-w64 prefix matching ARCH. Installs onto a FAT16/FAT32 active partition. Minimum ~15 GB free disk recommended for a full build."
+      }
+    }
+  },
+  "orchestrator": {
+    "script": "windows/build-shape.sh",
+    "usage": "windows/build-shape.sh <wine|reactos> [--arch amd64|i386] [--out DIR] [--jobs N]",
+    "emits": "A declared artifact per path (see paths[*].artifact): wine -> an installed Wine prefix; reactos -> bootcd.iso."
+  }
+}

@@ -66,9 +66,28 @@ Two layers:
 Errors fail the run (exit non-zero); warnings are printed but do not fail.
 Standard-library only, no network.
 
+## `validate_toolchain.py`
+
+Validates per-shape **build-toolchain manifests** (`*/toolchain/toolchain.json`)
+against [`schemas/toolchain-1.0.json`](../schemas/toolchain-1.0.json). Under the
+OS-Creator build model the Creator provisions a pinned toolchain and then
+compiles an artifact, so the manifest must resolve:
+
+```sh
+python3 tools/validate_toolchain.py            # discover all manifests
+python3 tools/validate_toolchain.py windows/toolchain/toolchain.json
+```
+
+- **Structure** — conforms to the toolchain schema.
+- **Resolution** — `hostBase.dockerfile`, `hostBase.bareMetalSetup`,
+  `orchestrator.script`, and every `paths[*].component` exist on disk, and the
+  setup/orchestrator scripts are **executable**.
+
+Standard-library only; `jsonschema` used if present.
+
 ## CI
 
-Both validators run automatically on every push and pull request via
+All validators run automatically on every push and pull request via
 [`.github/workflows/validate-shapes.yml`](../.github/workflows/validate-shapes.yml),
 so a descriptor that points at a missing/malformed path, states provenance only
 halfway, or names a dangling build entry point cannot land on `main`.

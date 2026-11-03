@@ -9,13 +9,13 @@ on:
     paths:
       - "shapes.json"
       - "schemas/**"
-      - "tools/validate_shapes.py"
+      - "tools/*.py"
       - ".github/workflows/validate-shapes.yml"
   pull_request:
     paths:
       - "shapes.json"
       - "schemas/**"
-      - "tools/validate_shapes.py"
+      - "tools/*.py"
       - ".github/workflows/validate-shapes.yml"
   workflow_dispatch:
 
@@ -33,3 +33,6 @@ jobs:
 
       - name: Validate shapes.json (structure + path resolution)
         run: python3 tools/validate_shapes.py
+
+      - name: Validate shapes.json (provenance/compliance + build-entry smoke)
+        run: python3 tools/validate_provenance.py

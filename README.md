@@ -39,8 +39,13 @@ python3 tools/validate_shapes.py
 
 This checks two things the contract depends on: (1) the descriptor conforms to
 the schema, and (2) **every declared path resolves on disk**, so a chosen shape
-always points at real, fetchable source. The validator is standard-library only
-(no third-party dependencies required) and runs in CI on every push and pull
+always points at real, fetchable source. A companion check,
+[`tools/validate_provenance.py`](tools/validate_provenance.py), asserts the
+*content* contract: referenced compliance/licenses/sources docs exist, each
+component with an `upstream` also states a `license`, and every `buildEntry`
+points at a real build entry point (`make` → a `Makefile`, `./configure` → a
+`configure`, …; no build is run). Both validators are standard-library only
+(no third-party dependencies required) and run in CI on every push and pull
 request (see [`tools/README.md`](tools/README.md)).
 
 ## II. Status

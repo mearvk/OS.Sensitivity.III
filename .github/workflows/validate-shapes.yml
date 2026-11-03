@@ -1,0 +1,35 @@
+name: validate-shapes
+
+# Keep the OS-shape descriptor trustworthy: shapes.json must conform to its
+# schema and every path it declares must resolve on disk before it lands on
+# main. The SLeeLa OS Creator relies on this guarantee.
+
+on:
+  push:
+    paths:
+      - "shapes.json"
+      - "schemas/**"
+      - "tools/validate_shapes.py"
+      - ".github/workflows/validate-shapes.yml"
+  pull_request:
+    paths:
+      - "shapes.json"
+      - "schemas/**"
+      - "tools/validate_shapes.py"
+      - ".github/workflows/validate-shapes.yml"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate shapes.json (structure + path resolution)
+        run: python3 tools/validate_shapes.py

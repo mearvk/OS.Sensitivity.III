@@ -1,5 +1,6 @@
 {
   "$schema": "https://schemas.sleela.dev/os-sensitivity/shapes-1.0.json",
+  "$schemaLocal": "schemas/shapes-1.0.json",
   "warehouse": "OS.Sensitivity.III",
   "description": "OS-grade C/C++ source warehouse for the SLeeLa OS Creator. Each shape resolves through the SLeeLa contract (SLOSSensitivitySource / SLOSSensitivityFetch) to the directory named below.",
   "contractVersion": "1.0",

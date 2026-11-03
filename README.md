@@ -29,6 +29,20 @@ root: it catalogs every shape, its component paths, pinned upstream refs,
 licenses, and build entry points, so the OSCreator runnable can resolve and
 fetch a chosen shape deterministically.
 
+The descriptor is **self-validating** against its JSON Schema
+[`schemas/shapes-1.0.json`](schemas/shapes-1.0.json). Before trusting
+`shapes.json`, the OSCreator runnable (or a contributor) runs:
+
+```sh
+python3 tools/validate_shapes.py
+```
+
+This checks two things the contract depends on: (1) the descriptor conforms to
+the schema, and (2) **every declared path resolves on disk**, so a chosen shape
+always points at real, fetchable source. The validator is standard-library only
+(no third-party dependencies required) and runs in CI on every push and pull
+request (see [`tools/README.md`](tools/README.md)).
+
 ## II. Status
 
 All three operating-system shapes are now populated with real, free, and

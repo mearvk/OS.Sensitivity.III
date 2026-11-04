@@ -1,0 +1,23 @@
+# systemd one-shot first-boot provisioner for the Windows-compatible (Wine) shape.
+#
+# Alternative to cloud-init for a minimal Ubuntu base that has systemd but no
+# cloud-init. The OS Creator installs this unit into the ISO, enables it, and
+# ships windows/provision/provision-run.sh alongside provision.json. The unit
+# runs once on first boot, then disables itself.
+#
+# No Microsoft code, SDK, binaries, or license is used.
+
+[Unit]
+Description=SLeeLa first-boot provisioner (Windows/Wine shape)
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/sleela/provisioned
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/provision-run.sh /etc/sleela/provision.json
+ExecStartPost=/usr/bin/touch /var/lib/sleela/provisioned
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

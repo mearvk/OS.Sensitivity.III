@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schemas/provision-1.0.json",
+  "shape": "windows",
+  "provisionVersion": "1.0",
+  "generated": "2026-11-03",
+  "status": "stub",
+  "description": "ReactOS path provisioning STUB. ReactOS is a standalone Windows-NT-compatible OS with NO apt; 'minimal OS + first-boot apt-get' does not apply. ReactOS provisions applications through its own package manager (RAPPS) after the system is installed from bootcd.iso. The ISO itself is produced by windows/build-shape.sh reactos (compiled, baked), not by apt. This descriptor records that choice so the OS Creator does not attempt an apt provision on the ReactOS path.",
+  "base": {
+    "kind": "minimal-iso",
+    "ref": "reactos-0.4.16-bootcd",
+    "source": "windows/reactos/reactos"
+  },
+  "provisioner": {
+    "type": "rapps",
+    "reproducibility": { "pinVersions": false },
+    "packages": [],
+    "firstBoot": [
+      "rem ReactOS provisions apps via RAPPS post-install; no apt. See windows/BUILD.md Path 2."
+    ]
+  },
+  "firstBootHook": { "mechanism": "none" }
+}

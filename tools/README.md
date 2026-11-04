@@ -85,6 +85,29 @@ python3 tools/validate_toolchain.py windows/toolchain/toolchain.json
 
 Standard-library only; `jsonschema` used if present.
 
+## `validate_provision.py`
+
+Validates **first-boot provisioning descriptors** (`*/provision/*.json`)
+against [`schemas/provision-1.0.json`](../schemas/provision-1.0.json). These
+drive the "minimal base ISO + first-boot provisioning from an OS-Creator
+config" model.
+
+```sh
+python3 tools/validate_provision.py            # discover all
+python3 tools/validate_provision.py windows/provision/provision.json
+```
+
+- **Structure** — conforms to the provision schema.
+- **Resolution** — `firstBootHook.unit` / `firstBootHook.cloudInit`, when
+  declared, exist on disk.
+- **Coherence** — a non-apt provisioner (`rapps`/`pkg`/`none`) must not declare
+  apt packages (**error**); an apt provisioner with `pinVersions=true` should
+  pin a `snapshotMirror` or per-package versions, else first boot is not
+  reproducible (**warning**).
+
+`apt` is the Linux/Wine-on-Linux provisioner only; ReactOS (`rapps`) and
+Darwin (`pkg`) are not apt-provisionable and are recorded as such.
+
 ## CI
 
 All validators run automatically on every push and pull request via

@@ -48,6 +48,38 @@ wraps, for building a single path by hand.
 
 ---
 
+## Path 0b — minimal base + first-boot provisioning (Wine path, lightweight)
+
+Instead of baking a compiled artifact into the ISO, the OS Creator can ship a
+**minimal Ubuntu base ISO** and provision the Wine layer **on first boot** from
+a declarative config, [`provision/provision.json`](provision/provision.json)
+(schema [`schemas/provision-1.0.json`](../schemas/provision-1.0.json)). This is
+lighter and faster per user; the heavy install happens against the live apt
+archive, pinned to a dated snapshot mirror for a reproducible first boot.
+
+Two interchangeable first-boot mechanisms are provided:
+
+- **cloud-init:** [`provision/user-data.yaml`](provision/user-data.yaml) — the
+  Creator injects it as the ISO's user-data.
+- **systemd one-shot:** [`provision/sleela-provision.service`](provision/sleela-provision.service)
+  + [`provision/provision-run.sh`](provision/provision-run.sh), which reads
+  `provision.json`, pins apt to the snapshot mirror, installs the declared
+  packages (honoring exact version pins), and runs the firstBoot commands once.
+
+The Wine path installs Wine plus **metric-compatible free fonts**
+(Liberation/Carlito/Caladea) — **no Microsoft fonts are shipped**. The
+**ReactOS path is not apt-provisionable** (it is a standalone OS with no apt);
+that choice is recorded in
+[`provision/reactos.provision.json`](provision/reactos.provision.json), and the
+ReactOS ISO is produced by `build-shape.sh reactos` (baked), then apps are
+added post-install via ReactOS's own RAPPS.
+
+> Choose **Path 0b** for a small base + fast per-user provisioning where apt
+> applies (Linux / Wine-on-Linux); choose **Path 0** (toolchain + orchestrator)
+> when you need a fully baked, offline artifact or for the non-apt ReactOS path.
+
+---
+
 ## Path 1 — Wine compatibility layer — `compat-loader/wine/`
 
 Runs unmodified Windows `.exe` applications on top of the `../linux/` base.

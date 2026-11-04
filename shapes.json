@@ -54,6 +54,7 @@
       "build": "windows/BUILD.md",
       "toolchain": "windows/toolchain/toolchain.json",
       "orchestrator": "windows/build-shape.sh",
+      "provision": "windows/provision/provision.json",
       "paths": {
         "compat-loader": {
           "path": "windows/compat-loader/wine",

@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schemas/provision-1.0.json",
+  "shape": "windows",
+  "provisionVersion": "1.0",
+  "generated": "2026-11-03",
+  "status": "active",
+  "description": "First-boot provisioning for the Windows-compatible shape's WINE path: start from a minimal Ubuntu base ISO and install the Wine compatibility layer plus its runtime libraries via apt on first boot. This is the light alternative to baking a compiled artifact into the ISO (see windows/build-shape.sh). Wine runs on the Linux base, so apt is the correct provisioner. The ReactOS path is NOT apt-provisionable (see windows/provision/reactos.provision.json) and must be built/baked.",
+  "base": {
+    "kind": "minimal-iso",
+    "ref": "ubuntu-24.04-minimal",
+    "source": "linux/os-loader/userland"
+  },
+  "provisioner": {
+    "type": "apt",
+    "updateFirst": true,
+    "reproducibility": {
+      "pinVersions": true,
+      "snapshotMirror": "https://snapshot.ubuntu.com/ubuntu/20261103T000000Z"
+    },
+    "packages": [
+      { "name": "wine", "reason": "Windows application compatibility layer (clean-room Win32/Win64 API)." },
+      { "name": "wine64", "reason": "64-bit Wine." },
+      { "name": "wine32", "reason": "32-bit Wine for WoW64 / 32-bit Windows apps." },
+      { "name": "libwine", "reason": "Wine shared runtime." },
+      { "name": "fonts-liberation", "reason": "Metric-compatible free substitute for Arial/Times/Courier (no Microsoft fonts shipped)." },
+      { "name": "fonts-crosextra-carlito", "reason": "Metric-compatible free substitute for Calibri." },
+      { "name": "fonts-crosextra-caladea", "reason": "Metric-compatible free substitute for Cambria." }
+    ],
+    "firstBoot": [
+      "echo 'Windows (Wine) shape provisioned via apt on first boot.'",
+      "wine --version || true"
+    ]
+  },
+  "firstBootHook": {
+    "mechanism": "systemd-oneshot",
+    "unit": "windows/provision/sleela-provision.service",
+    "cloudInit": "windows/provision/user-data.yaml"
+  }
+}

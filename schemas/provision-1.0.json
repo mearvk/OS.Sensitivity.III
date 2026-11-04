@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sleela.dev/os-sensitivity/provision-1.0.json",
+  "title": "OS.Sensitivity shape first-boot provisioning descriptor",
+  "description": "Schema for a per-shape provision.json: the OS-Creator-side declarative config that turns a MINIMAL base ISO into the chosen shape by provisioning packages/commands on first boot. apt is only the Linux provisioner; other shapes declare their own provisioner (rapps for ReactOS, pkg for Darwin). Reproducibility is honored by pinning versions and/or a dated snapshot mirror.",
+  "type": "object",
+  "required": ["shape", "provisionVersion", "base", "provisioner"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": { "type": "string" },
+    "shape": { "type": "string", "minLength": 1 },
+    "provisionVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "generated": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "description": { "type": "string" },
+    "status": { "type": "string", "enum": ["active", "stub", "planned"] },
+    "base": {
+      "type": "object",
+      "required": ["kind", "ref"],
+      "additionalProperties": true,
+      "properties": {
+        "kind": { "type": "string", "enum": ["minimal-iso", "rootfs", "image"] },
+        "ref": { "type": "string", "minLength": 1, "description": "Base image/rootfs identifier the Creator starts from (minimal)." },
+        "source": { "type": "string", "description": "Repo-relative path or upstream the base comes from." }
+      }
+    },
+    "provisioner": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": true,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["apt", "rapps", "pkg", "none"],
+          "description": "apt = Debian/Ubuntu (Linux + Wine-on-Linux); rapps = ReactOS; pkg = Darwin/PureDarwin; none = fully baked, no first-boot provisioning."
+        },
+        "reproducibility": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "pinVersions": { "type": "boolean", "description": "Require exact pkg=version pins for determinism." },
+            "snapshotMirror": { "type": "string", "description": "Dated archive snapshot (e.g. https://snapshot.ubuntu.com/ubuntu/YYYYMMDDTHHMMSSZ) for a deterministic first boot." }
+          }
+        },
+        "updateFirst": { "type": "boolean", "description": "Run the index update (apt-get update) before installing." },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "version": { "type": "string", "description": "Exact version pin; honored when reproducibility.pinVersions is true." },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "firstBoot": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ordered shell commands run once on first boot after package install."
+        }
+      }
+    },
+    "firstBootHook": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "mechanism": { "type": "string", "enum": ["cloud-init", "systemd-oneshot", "none"] },
+        "unit": { "$ref": "#/$defs/relPath" },
+        "cloudInit": { "$ref": "#/$defs/relPath" }
+      }
+    }
+  },
+  "$defs": {
+    "relPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(^|/)\\.\\.(/|$))[^\\\\]+$"
+    }
+  }
+}

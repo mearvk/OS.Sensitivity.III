@@ -1,0 +1,33 @@
+#cloud-config
+# First-boot provisioning for the Windows-compatible shape's WINE path.
+#
+# The SLeeLa OS Creator injects this cloud-init user-data into the minimal
+# Ubuntu base ISO. On first boot cloud-init points apt at the pinned snapshot
+# mirror (deterministic) and installs the Wine compatibility layer plus
+# metric-compatible free fonts. Keep in lockstep with provision.json.
+#
+# No Microsoft code, SDK, binaries, or license is used. Wine is a clean-room
+# Win32/Win64 API layer; the fonts are free metric-compatible substitutes.
+
+# Pin apt to a dated snapshot so first boot is reproducible.
+apt:
+  primary:
+    - arches: [default]
+      uri: "https://snapshot.ubuntu.com/ubuntu/20261103T000000Z"
+
+package_update: true
+
+packages:
+  - wine
+  - wine64
+  - wine32
+  - libwine
+  - fonts-liberation
+  - fonts-crosextra-carlito
+  - fonts-crosextra-caladea
+
+runcmd:
+  - [ "sh", "-c", "echo 'Windows (Wine) shape provisioned via cloud-init on first boot.'" ]
+  - [ "sh", "-c", "wine --version || true" ]
+
+final_message: "Windows-compatible (Wine) shape ready after $UPTIME seconds."

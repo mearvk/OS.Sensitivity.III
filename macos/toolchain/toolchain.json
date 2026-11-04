@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schemas/toolchain-1.0.json",
+  "shape": "macos",
+  "description": "Pinned, reproducible build toolchain for the macOS-compatible (Darwin-based) shape. Built on a LINUX cross-build host; the SLeeLa OS Creator provisions this environment and runs macos/build-shape.sh to compile a chosen path into its artifact. No Apple macOS image, Apple binaries, Apple SDK, or Apple developer account is used (XNU is public APSL-2.0 source).",
+  "toolchainVersion": "1.0",
+  "generated": "2026-11-03",
+  "hostBase": {
+    "image": "ubuntu:24.04",
+    "rationale": "Linux cross-build host matching the Ubuntu 24.04.4 base the OS Creator ships for linux/. PureDarwin/Darling and the GNUstep stack cross-build here; PureDarwin also offers a Nix flake for a fully pinned toolchain.",
+    "dockerfile": "macos/toolchain/Dockerfile",
+    "bareMetalSetup": "macos/toolchain/setup-debian.sh"
+  },
+  "paths": {
+    "darwin-os": {
+      "component": "macos/puredarwin/puredarwin",
+      "pinnedRef": "puredarwin-main",
+      "buildEntry": "cmake -G Ninja -B build && ninja -C build image",
+      "artifact": { "type": "iso", "role": "standalone-os", "name": "puredarwin.iso" },
+      "requires": {
+        "apt": [
+          "clang", "llvm", "lld", "cmake", "ninja-build",
+          "bison", "flex", "python3", "git",
+          "uuid-dev", "libssl-dev", "libxml2-dev", "zlib1g-dev",
+          "libbsd-dev", "libblocksruntime-dev"
+        ],
+        "notes": "PureDarwin (Path 1b) stages the XNU kernel + Darwin userland and emits a bootable image. For a fully pinned build, PureDarwin's flake.nix/build.nix provide a reproducible toolchain ('nix build'). XNU (macos/os-core/xnu, buildEntry 'make') is driven through PureDarwin on a Linux host so companion headers/tools stage in the right order."
+      }
+    },
+    "frameworks": {
+      "component": "macos/frameworks/gnustep-libobjc2",
+      "pinnedRef": "gnustep-stack",
+      "buildEntry": "cmake -B build && make",
+      "artifact": { "type": "prefix", "role": "mac-api-surface", "name": "gnustep-install" },
+      "requires": {
+        "apt": [
+          "clang", "cmake", "ninja-build", "make",
+          "libffi-dev", "libxml2-dev", "libgnutls28-dev",
+          "libicu-dev", "libjpeg-dev", "libtiff-dev",
+          "libpng-dev", "libcairo2-dev", "libx11-dev",
+          "libxt-dev", "libssl-dev", "pkg-config"
+        ],
+        "buildOrder": ["gnustep-libobjc2", "gnustep-make", "gnustep-base", "gnustep-corebase", "gnustep-gui", "gnustep-back"],
+        "notes": "Build in order (runtime -> make -> base -> corebase -> gui -> back); after gnustep-make, source GNUstep.sh. swift-corelibs-foundation additionally needs a Swift toolchain (swift/swiftc) and is optional."
+      }
+    },
+    "darwin-runtime": {
+      "component": "macos/compat-loader/darling",
+      "pinnedRef": "v0.1.20260608",
+      "buildEntry": "cmake -B build && ninja -C build",
+      "artifact": { "type": "prefix", "role": "darwin-runtime", "name": "darling-install" },
+      "requires": {
+        "apt": [
+          "clang", "llvm", "lld", "cmake", "ninja-build",
+          "bison", "flex", "python3", "git",
+          "libfuse-dev", "libudev-dev", "libxml2-dev",
+          "libcairo2-dev", "libgl1-mesa-dev", "libtiff-dev",
+          "libfreetype-dev", "libfontconfig-dev", "libssl-dev",
+          "libbsd-dev", "libxrandr-dev", "libxcursor-dev"
+        ],
+        "notes": "Upstream Darling pulls the bulk Darwin sources via git submodules; this warehouse carries the top-level tree. A full build initializes submodules from the upstream remote first."
+      }
+    }
+  },
+  "orchestrator": {
+    "script": "macos/build-shape.sh",
+    "usage": "macos/build-shape.sh <darwin-os|frameworks|darwin-runtime> [--out DIR] [--jobs N]",
+    "emits": "darwin-os -> puredarwin.iso; frameworks -> installed GNUstep prefix; darwin-runtime -> installed Darling prefix."
+  }
+}

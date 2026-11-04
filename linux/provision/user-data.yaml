@@ -1,0 +1,29 @@
+#cloud-config
+# First-boot provisioning for the native Linux shape.
+#
+# The SLeeLa OS Creator injects this cloud-init user-data into the minimal
+# Ubuntu base. On first boot cloud-init points apt at the pinned snapshot mirror
+# (deterministic) and installs the remaining OS pieces + a lean GNOME desktop.
+# Keep in lockstep with provision.json.
+
+apt:
+  primary:
+    - arches: [default]
+      uri: "https://snapshot.ubuntu.com/ubuntu/20261103T000000Z"
+
+package_update: true
+
+packages:
+  - linux-image-generic
+  - systemd-sysv
+  - grub-pc-bin
+  - grub-efi-amd64-bin
+  - initramfs-tools
+  - network-manager
+  - gnome-core
+
+runcmd:
+  - [ "sh", "-c", "echo 'Linux shape provisioned via cloud-init on first boot.'" ]
+  - [ "sh", "-c", "update-grub || true" ]
+
+final_message: "Linux shape ready after $UPTIME seconds."

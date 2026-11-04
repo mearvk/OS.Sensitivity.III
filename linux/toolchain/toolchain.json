@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schemas/toolchain-1.0.json",
+  "shape": "linux",
+  "description": "Pinned, reproducible build toolchain for the native Linux OS shape. The SLeeLa OS Creator provisions this environment and runs linux/build-shape.sh to compile the kernel and assemble a bootable root filesystem into an installable artifact. Base matches the Ubuntu 24.04.4 rootfs this shape ships.",
+  "toolchainVersion": "1.0",
+  "generated": "2026-11-03",
+  "hostBase": {
+    "image": "ubuntu:24.04",
+    "rationale": "x86_64 Linux host matching the Ubuntu 24.04.4 base rootfs warehoused under os-loader; the kernel and userland build natively here.",
+    "dockerfile": "linux/toolchain/Dockerfile",
+    "bareMetalSetup": "linux/toolchain/setup-debian.sh"
+  },
+  "paths": {
+    "os-core": {
+      "component": "linux/os-core/linux-5.10.254",
+      "pinnedRef": "linux-5.10.254",
+      "buildEntry": "make",
+      "artifact": { "type": "image", "role": "kernel", "name": "bzImage" },
+      "requires": {
+        "apt": [
+          "build-essential", "flex", "bison", "bc",
+          "libssl-dev", "libelf-dev", "libncurses-dev",
+          "cpio", "kmod", "zstd", "make", "gcc"
+        ],
+        "notes": "make defconfig (or x86_64_defconfig) then make -j; output arch/x86/boot/bzImage. Modules install to INSTALL_MOD_PATH."
+      }
+    },
+    "os-loader": {
+      "component": "linux/os-loader/userland",
+      "pinnedRef": "ubuntu-24.04.4-base",
+      "buildEntry": "make",
+      "artifact": { "type": "rootfs", "role": "userland", "name": "rootfs" },
+      "requires": {
+        "apt": [
+          "debootstrap", "squashfs-tools", "xorriso",
+          "grub-pc-bin", "grub-efi-amd64-bin", "mtools", "dosfstools"
+        ],
+        "notes": "The base rootfs tarball (ubuntu-base-24.04.4-base-amd64.tar.gz) is extracted, then the remaining packages (kernel image, systemd, GRUB, initramfs-tools) are apt-installed INSIDE a chroot. This is the native apt step for the Linux shape (see linux/provision/provision.json)."
+      }
+    }
+  },
+  "orchestrator": {
+    "script": "linux/build-shape.sh",
+    "usage": "linux/build-shape.sh <kernel|rootfs|iso> [--out DIR] [--jobs N]",
+    "emits": "kernel -> bzImage; rootfs -> an assembled Ubuntu root filesystem; iso -> a bootable installable image."
+  }
+}

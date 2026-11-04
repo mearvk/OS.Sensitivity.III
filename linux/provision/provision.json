@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schemas/provision-1.0.json",
+  "shape": "linux",
+  "provisionVersion": "1.0",
+  "generated": "2026-11-03",
+  "status": "active",
+  "description": "First-boot provisioning for the native Linux shape -- the native apt case. Start from the minimal Ubuntu 24.04.4 base rootfs this shape ships and install the remaining OS pieces (kernel image, systemd, GRUB, initramfs) plus a lean desktop on first boot, pinned to a dated snapshot mirror for a reproducible boot. This is the first-boot variant of the chroot apt-install documented in linux/BUILD.md; use it for a small base + fast per-user provisioning.",
+  "base": {
+    "kind": "rootfs",
+    "ref": "ubuntu-base-24.04.4-base-amd64",
+    "source": "linux/os-loader/userland"
+  },
+  "provisioner": {
+    "type": "apt",
+    "updateFirst": true,
+    "reproducibility": {
+      "pinVersions": true,
+      "snapshotMirror": "https://snapshot.ubuntu.com/ubuntu/20261103T000000Z"
+    },
+    "packages": [
+      { "name": "linux-image-generic", "reason": "Ubuntu kernel image + modules for the installed system." },
+      { "name": "systemd-sysv", "reason": "init/system manager." },
+      { "name": "grub-pc-bin", "reason": "BIOS GRUB bootloader." },
+      { "name": "grub-efi-amd64-bin", "reason": "UEFI GRUB bootloader." },
+      { "name": "initramfs-tools", "reason": "early userspace / initramfs generation." },
+      { "name": "network-manager", "reason": "networking on the installed system." },
+      { "name": "gnome-core", "reason": "lean GNOME desktop (matches desktop-loader/gnome-source)." }
+    ],
+    "firstBoot": [
+      "echo 'Linux shape provisioned via apt on first boot.'",
+      "update-grub || true"
+    ]
+  },
+  "firstBootHook": {
+    "mechanism": "systemd-oneshot",
+    "unit": "linux/provision/sleela-provision.service",
+    "cloudInit": "linux/provision/user-data.yaml"
+  }
+}

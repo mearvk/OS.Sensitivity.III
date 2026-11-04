@@ -11,6 +11,35 @@ Exact steps to build the native Linux OS shape from the source warehoused under
 
 ---
 
+## Path 0 — the OS Creator flow (toolchain + orchestrator + provisioning)
+
+When building **through the SLeeLa OS Creator**, the Creator provisions the
+pinned toolchain ([`toolchain/toolchain.json`](toolchain/toolchain.json)) and
+invokes the orchestrator [`build-shape.sh`](build-shape.sh).
+
+```sh
+# Provision the toolchain (Linux x86_64 host):
+docker build -t ossens-linux-toolchain linux/toolchain/     # hermetic
+# or: sudo linux/toolchain/setup-debian.sh                   # bare metal
+
+# Build artifacts (boot order):
+linux/build-shape.sh kernel    # -> bzImage (compiled Linux 5.10.254 kernel)
+linux/build-shape.sh rootfs    # -> staged Ubuntu 24.04.4 root filesystem
+```
+
+**This shape is the native apt case.** Instead of apt-installing the kernel,
+systemd, GRUB, and desktop into a chroot at build time (section 2 below), the
+Creator can ship the **minimal base rootfs** and defer that install to **first
+boot** via [`provision/provision.json`](provision/provision.json) (cloud-init
+[`user-data.yaml`](provision/user-data.yaml) or the systemd one-shot
+[`sleela-provision.service`](provision/sleela-provision.service) +
+[`provision-run.sh`](provision/provision-run.sh)), pinned to a dated snapshot
+mirror for a reproducible boot.
+
+The sections below document the component recipes the orchestrator wraps.
+
+---
+
 ## 1. Kernel — `os-core/linux-5.10.254/`
 
 A complete, buildable Linux 5.10.254 tree.

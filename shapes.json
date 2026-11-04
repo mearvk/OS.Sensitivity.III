@@ -13,6 +13,9 @@
       "status": "populated",
       "compliance": "linux/COMPLIANCE.md",
       "build": "linux/BUILD.md",
+      "toolchain": "linux/toolchain/toolchain.json",
+      "orchestrator": "linux/build-shape.sh",
+      "provision": "linux/provision/provision.json",
       "components": {
         "os-core": {
           "path": "linux/os-core/linux-5.10.254",
@@ -88,6 +91,9 @@
       "licenses": "macos/LICENSES.md",
       "sources": "macos/SOURCES.md",
       "build": "macos/BUILD.md",
+      "toolchain": "macos/toolchain/toolchain.json",
+      "orchestrator": "macos/build-shape.sh",
+      "provision": "macos/provision/provision.json",
       "paths": {
         "os-core": {
           "path": "macos/os-core/xnu",

@@ -10,6 +10,36 @@ used (see [`COMPLIANCE.md`](COMPLIANCE.md)).
 
 ---
 
+## Path 0 — the OS Creator flow (toolchain + orchestrator)
+
+When building **through the SLeeLa OS Creator**, you do not install build
+dependencies by hand. The Creator provisions the pinned toolchain described by
+[`toolchain/toolchain.json`](toolchain/toolchain.json) and invokes the
+orchestrator [`build-shape.sh`](build-shape.sh).
+
+```sh
+# Provision the cross-build toolchain (Linux host):
+docker build -t ossens-macos-toolchain macos/toolchain/      # hermetic
+# or: sudo macos/toolchain/setup-debian.sh                    # bare metal
+
+# Build an artifact:
+macos/build-shape.sh darwin-os        # -> puredarwin.iso (bootable Darwin OS)
+macos/build-shape.sh frameworks       # -> installed GNUstep prefix
+macos/build-shape.sh darwin-runtime   # -> installed Darling prefix
+```
+
+No Apple macOS image, Apple binaries, Apple SDK, or Apple developer account is
+used. For a fully pinned Darwin OS build, PureDarwin's `flake.nix` offers a Nix
+toolchain (`nix build`). **Provisioning note:** Darwin is not apt-based, so the
+"minimal base + first-boot apt" model does **not** apply here — the Darwin OS is
+baked by `build-shape.sh darwin-os`; see
+[`provision/provision.json`](provision/provision.json).
+
+The sections below document the underlying component recipes the orchestrator
+wraps, for building a single path by hand.
+
+---
+
 ## Path 1 — the standalone Darwin OS (the built OS)
 
 ### 1a. XNU kernel — `os-core/xnu/`

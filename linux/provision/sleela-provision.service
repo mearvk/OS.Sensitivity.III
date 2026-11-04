@@ -1,0 +1,21 @@
+# systemd one-shot first-boot provisioner for the native Linux shape.
+#
+# Alternative to cloud-init for a minimal base that has systemd but no
+# cloud-init. The OS Creator installs this unit, enables it, and ships
+# provision-run.sh alongside provision.json. Runs once on first boot, then
+# disables itself.
+
+[Unit]
+Description=SLeeLa first-boot provisioner (Linux shape)
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/sleela/provisioned
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/provision-run.sh /etc/sleela/provision.json
+ExecStartPost=/usr/bin/touch /var/lib/sleela/provisioned
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

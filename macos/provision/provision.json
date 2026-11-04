@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schemas/provision-1.0.json",
+  "shape": "macos",
+  "provisionVersion": "1.0",
+  "generated": "2026-11-03",
+  "status": "stub",
+  "description": "macOS-compatible (Darwin) shape provisioning. Darwin is NOT a Debian/apt system, so the 'minimal base + first-boot apt-get' model does not apply. The bootable Darwin OS is produced by macos/build-shape.sh darwin-os (compiled, baked via PureDarwin). Darwin software is provisioned with its own pkg-style tooling (and, where used, a Homebrew-equivalent) post-install, not apt. This descriptor records that choice so the OS Creator does not attempt an apt provision on the macOS shape.",
+  "base": {
+    "kind": "minimal-iso",
+    "ref": "puredarwin-image",
+    "source": "macos/puredarwin/puredarwin"
+  },
+  "provisioner": {
+    "type": "pkg",
+    "reproducibility": { "pinVersions": false },
+    "packages": [],
+    "firstBoot": [
+      "echo 'Darwin OS provisions software via pkg-style tooling post-install; no apt. See macos/BUILD.md.'"
+    ]
+  },
+  "firstBootHook": { "mechanism": "none" }
+}

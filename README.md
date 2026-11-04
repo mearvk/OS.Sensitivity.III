@@ -18,7 +18,14 @@ clean-room and openly licensed source (see each shape's `COMPLIANCE.md` and
 
 ## I. How it fits together
 
-SLeeLa drives the contract. The OS Creator (`lib/os/os-creator/` in
+SLeeLa drives the contract. The OS Creator reads
+[`OS.Creator.md`](OS.Creator.md) — the integration specification that explains,
+in principle, how to connect to this warehouse: resolve `shapes.json`, provision
+a shape's pinned `toolchain` and run its `orchestrator` for a baked artifact, or
+inject a shape's `provision` descriptor for first-boot provisioning, all under
+the clean-room / Darwin-based compliance posture.
+
+The OS Creator (`lib/os/os-creator/` in
 `mearvk/SLeeLa`) references this warehouse through a pinned source descriptor;
 an **OSCreator runnable** fetches the C/C++ for a chosen shape on a per-user
 basis and manipulates it to produce the exact OS output for that user's

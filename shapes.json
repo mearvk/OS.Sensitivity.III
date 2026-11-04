@@ -6,6 +6,7 @@
   "contractVersion": "1.0",
   "generated": "2026-11-02",
   "compliance": "COMPLIANCE.md",
+  "osCreatorGuide": "OS.Creator.md",
   "shapes": {
     "linux": {
       "title": "Linux",
